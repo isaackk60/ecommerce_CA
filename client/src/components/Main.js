@@ -9,7 +9,7 @@ import Logout from "./Logout"
 import {ACCESS_LEVEL_GUEST, ACCESS_LEVEL_ADMIN, SERVER_HOST} from "../config/global_constants"
 
 
-export default class DisplayAllCars extends Component 
+export default class Main extends Component 
 {
     constructor(props) 
     {
@@ -26,12 +26,13 @@ export default class DisplayAllCars extends Component
         axios.get(`${SERVER_HOST}/shirts`)
         .then(res => 
         { 
-            this.setState({cars: res.data})                                         
+            this.setState({shirts: res.data})                                         
         })
         .catch(err =>
         {
             // do nothing
         })
+        console.log(this.state.shirts)
     }
 
   
@@ -56,13 +57,13 @@ export default class DisplayAllCars extends Component
                 }
                 
                 <div className="table-container">
-                    <ShirtBlock cars={this.state.shirts} /> 
-                        
+                
+                    {this.state.shirts.map((shirt)=><ShirtBlock key={shirt._id} shirt={shirt} />)} 
                     {
                         localStorage.accessLevel >= ACCESS_LEVEL_ADMIN 
                         ? <div className="add-new-car">
                             <Link className="blue-button" to={"/AddCar"}>Add New Car</Link>
-                            <Link className="green-button" to={"/AddTShirt"}>Add New Car</Link>
+                            <Link className="green-button" to={"/AddTShirt"}>Add New T-Shirt</Link>
                           </div>
                         : null
                     }

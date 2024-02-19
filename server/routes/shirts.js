@@ -159,7 +159,7 @@ router.get(`/shirts/photo/:filename`, gettShirtPhotoAsBase64)
 router.get(`/shirts/:id`, verifyUsersJWTPassword, gettShirtDocument)
 
 // Add new record
-router.post(`/shirts`, verifyUsersJWTPassword, checkThatUserIsAnAdministrator, upload.array("tShirtPhotos", parseInt(process.env.MAX_NUMBER_OF_UPLOAD_FILES_ALLOWED)), createNewtShirtDocument)
+router.post(`/shirts`, verifyUsersJWTPassword, checkThatUserIsAnAdministrator, upload.array("shirtPhotos", parseInt(process.env.MAX_NUMBER_OF_UPLOAD_FILES_ALLOWED)), createNewtShirtDocument)
 
 // Update one record
 router.put(`/shirts/:id`, verifyUsersJWTPassword, updatetShirtDocument)

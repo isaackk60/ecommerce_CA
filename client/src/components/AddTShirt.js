@@ -74,13 +74,6 @@ export default class AddTShirt extends Component {
     render() {
         let errorMessage = "";
         if (this.state.wasSubmittedAtLeastOnce) {
-            console.log(this.state.name)
-            console.log(this.state.colour)
-            console.log(this.state.size)
-            console.log(this.state.price)
-            console.log(this.state.quantity)
-            console.log(this.state.description)
-            console.log(this.state.shirtPhotoFilename)
             errorMessage = <div className="error">Error: All fields must be filled in<br /></div>;
         }
 
@@ -101,7 +94,7 @@ export default class AddTShirt extends Component {
                         <Form.Control type="text" name="colour" value={this.state.colour} onChange={this.handleChange} />
                     </Form.Group>
 
-                    {/* <Form.Group controlId="size">
+                    <Form.Group controlId="size">
                         <Form.Label>Size</Form.Label>
                         <Form.Control as="fieldset">
                             <Form.Check
@@ -150,12 +143,12 @@ export default class AddTShirt extends Component {
                                 onChange={this.handleChange}
                             />
                         </Form.Control>
-                    </Form.Group> */}
+                    </Form.Group>
 
-<Form.Group controlId="size">
+{/* <Form.Group controlId="size">
                         <Form.Label>Size</Form.Label>
                         <Form.Control type="text" name="size" value={this.state.size} onChange={this.handleChange} />
-                    </Form.Group>
+                    </Form.Group> */}
 
                     <Form.Group controlId="price">
                         <Form.Label>Price</Form.Label>
