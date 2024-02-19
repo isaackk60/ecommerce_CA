@@ -5,13 +5,14 @@ import axios from "axios"
 
 import {ACCESS_LEVEL_GUEST, ACCESS_LEVEL_ADMIN, SERVER_HOST} from "../config/global_constants"
 
-// import BuyCar from "./BuyCar"
+import BuyShirt from "./BuyShirt"
 
-export default class CarTableRow extends Component 
+export default class ShirtBlock extends Component 
 {    
     componentDidMount() 
     {
-        this.props.car.photos.map(photo => 
+        console.log(this.props.shirt)
+        this.props.shirt.shirtPhotoFilename.map(photo => 
         {
             return axios.get(`${SERVER_HOST}/shirts/photo/${photo.filename}`)
             .then(res => 
@@ -31,9 +32,9 @@ export default class CarTableRow extends Component
         let soldOrForSale = null
         if(localStorage.accessLevel <= ACCESS_LEVEL_GUEST)
         {
-            if(this.props.car.sold !== true)
+            if(this.props.shirt.sold !== true)
             {
-                // soldOrForSale = <BuyCar carID={this.props.car._id} price={this.props.car.price} />
+                soldOrForSale = <BuyShirt shirtID={this.props.shirt._id} price={this.props.shirt.price} />
             }
             else
             {
@@ -43,22 +44,26 @@ export default class CarTableRow extends Component
         
         
         return (
-            <tr>
-                <td>{this.props.car.model}</td>
-                <td>{this.props.car.colour}</td>
-                <td>{this.props.car.year}</td>
-                <td>{this.props.car.price}</td>
-                <td className="carPhotos">
-                    {this.props.car.photos.map(photo => <img key={photo._id} id={photo._id} alt=""/>)}
-                </td>           
-                <td>
-                    {localStorage.accessLevel > ACCESS_LEVEL_GUEST ? <Link className="green-button" to={"/EditCar/" + this.props.car._id}>Edit</Link> : null}
+            <div>
+
+                <h2>{this.props.shirt.name}</h2>
+                <div>{this.props.shirt.colour}</div>
+                <div>{this.props.shirt.size}</div>
+                <div>{this.props.shirt.price}</div>
+                <div>{this.props.shirt.description}</div>
+                <div>{this.props.shirt.quantity}</div>
+                <div className="shirtPhotos">
+                    {this.props.shirt.shirtPhotoFilename.map(photo => <img key={photo._id} id={photo._id} alt=""/>)}
+                </div>           
+                <div>
+                    {localStorage.accessLevel > ACCESS_LEVEL_GUEST ? <Link className="green-button" to={"/Editshirt/" + this.props.shirt._id}>Edit</Link> : null}
                     
-                    {localStorage.accessLevel >= ACCESS_LEVEL_ADMIN ? <Link className="red-button" to={"/DeleteCar/" + this.props.car._id}>Delete</Link> : null}                       
+                    {localStorage.accessLevel >= ACCESS_LEVEL_ADMIN ? <Link className="red-button" to={"/Deleteshirt/" + this.props.shirt._id}>Delete</Link> : null}                       
                                        
                     {soldOrForSale}
-                </td>      
-            </tr>
+                </div>      
+
+            </div>
         )
     }
 }
