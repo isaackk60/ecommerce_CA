@@ -16,6 +16,7 @@ import DisplayAllCars from "./components/DisplayAllCars"
 import LoggedInRoute from "./components/LoggedInRoute"
 import BuyCar from "./components/BuyCar"
 import PayPalMessage from "./components/PayPalMessage"
+import Contact from "./components/Contact"
 
 import AddTShirt from "./components/AddTShirt"
 import Main from "./components/Main"
@@ -47,7 +48,8 @@ export default class App extends Component
                     <Route exact path="/" component={DisplayAllCars} />
                     <Route exact path="/Login" component={Login} />
                     <Route exact path="/BuyCar/:id" component={BuyCar} />
-                    <Route exact path="/PayPalMessage/:messageType/:payPalPaymentID" component={PayPalMessage}/>                     
+                    <Route exact path="/PayPalMessage/:messageType/:payPalPaymentID" component={PayPalMessage}/>
+                    <Route exact path="/Contact" component={Contact} />                        
                     <LoggedInRoute exact path="/Logout" component={Logout} />
                     <LoggedInRoute exact path="/AddCar" component={AddCar} />
                     <LoggedInRoute exact path="/EditCar/:id" component={EditCar} />
