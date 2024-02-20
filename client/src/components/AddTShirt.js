@@ -59,15 +59,13 @@ export default class AddTShirt extends Component {
             }
         }
 
-        axios.post(`${SERVER_HOST}/shirts`, formData, {headers:{"authorization":localStorage.token, "Content-type": "multipart/form-data"}})
-        .then(res => 
-        {           
-            this.setState({redirectToDisplayAllShirts:true})
-        })
-        .catch(err =>
-        {
-            this.setState({wasSubmittedAtLeastOnce: true})
-        })
+        axios.post(`${SERVER_HOST}/shirts`, formData, { headers: { "authorization": localStorage.token, "Content-type": "multipart/form-data" } })
+            .then(res => {
+                this.setState({ redirectToDisplayAllShirts: true })
+            })
+            .catch(err => {
+                this.setState({ wasSubmittedAtLeastOnce: true })
+            })
     }
 
 
@@ -145,7 +143,7 @@ export default class AddTShirt extends Component {
                         </Form.Control>
                     </Form.Group>
 
-{/* <Form.Group controlId="size">
+                    {/* <Form.Group controlId="size">
                         <Form.Label>Size</Form.Label>
                         <Form.Control type="text" name="size" value={this.state.size} onChange={this.handleChange} />
                     </Form.Group> */}
@@ -167,9 +165,8 @@ export default class AddTShirt extends Component {
 
                     <Form.Group controlId="shirtPhotoFilename">
                         <Form.Label>Photos</Form.Label>
-                        <Form.Control
-                            type="file" multiple onChange={this.handleFileChange}
-                        /></Form.Group> <br /><br />
+                        <Form.Control type="file" multiple onChange={this.handleFileChange}/>
+                    </Form.Group> <br /><br />
 
                     <LinkInClass value="Add" className="green-button" onClick={this.handleSubmit} />
 
