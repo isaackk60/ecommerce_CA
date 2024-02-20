@@ -15,10 +15,11 @@ export default class AddTShirt extends Component {
 
         this.state = {
             name: "",
-            colour: "",
+            // colour: "",
             size: "",
             price: "",
-            quantity: "",
+            // quantity: "",
+            stock: "",
             description: "",
             shirtPhotoFilename: null,
             redirectToDisplayAllShirts: localStorage.accessLevel < ACCESS_LEVEL_ADMIN,
@@ -47,7 +48,7 @@ export default class AddTShirt extends Component {
 
         let formData = new FormData()
         formData.append("name", this.state.name)
-        formData.append("colour", this.state.colour)
+        // formData.append("colour", this.state.colour)
         formData.append("size", this.state.size)
         formData.append("price", this.state.price)
         formData.append("quantity", this.state.quantity)
@@ -89,10 +90,10 @@ export default class AddTShirt extends Component {
                         <Form.Control ref={(input) => { this.inputToFocus = input }} type="text" name="name" value={this.state.name} onChange={this.handleChange} />
                     </Form.Group>
 
-                    <Form.Group controlId="colour">
+                    {/* <Form.Group controlId="colour">
                         <Form.Label>Colour</Form.Label>
                         <Form.Control type="text" name="colour" value={this.state.colour} onChange={this.handleChange} />
-                    </Form.Group>
+                    </Form.Group> */}
 
                     <Form.Group controlId="size">
                         <Form.Label>Size</Form.Label>
@@ -155,9 +156,13 @@ export default class AddTShirt extends Component {
                         <Form.Control type="text" name="price" value={this.state.price} onChange={this.handleChange} />
                     </Form.Group>
 
-                    <Form.Group controlId="quantity">
+                    {/* <Form.Group controlId="quantity">
                         <Form.Label>Quantity</Form.Label>
                         <Form.Control type="text" name="quantity" value={this.state.quantity} onChange={this.handleChange} />
+                    </Form.Group> */}
+                                        <Form.Group controlId="stock">
+                        <Form.Label>Stock</Form.Label>
+                        <Form.Control type="text" name="stock" value={this.state.stock} onChange={this.handleChange} />
                     </Form.Group>
 
                     <Form.Group controlId="description">
