@@ -34,7 +34,7 @@ export default class Down extends Component {
                 </div>
                 <div class="splitR">
                     <Link to={"/DisplayAllCars"}>SEARCH HERE</Link>
-                    <Link to={"/DisplayAllCars"}>BASKET HERE</Link>
+                    <Link to={"/ShoppingCart"}>BASKET HERE</Link>
                     <Link to={"/DisplayAllCars"}>LOG IN</Link>
                 </div>
             </nav>

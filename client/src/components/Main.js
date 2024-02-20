@@ -42,19 +42,19 @@ export default class Main extends Component
             <div>
                 <NavigationBar />
                 {
-                    localStorage.accessLevel > ACCESS_LEVEL_GUEST 
-                    ? <div className="logout">
-                        {
-                            localStorage.profilePhoto !== "null" 
-                            ? <img id="profilePhoto" src={`data:;base64,${localStorage.profilePhoto}`} alt=""/>
-                            : null
-                        }                        
-                        <Logout/>
-                      </div>
-                    : <div>
-                        <Link className="green-button" to={"/Login"}>Login</Link>
-                        <Link className="blue-button" to={"/Register"}>Register</Link>  
-                        <Link className="red-button" to={"/ResetDatabase"}>Reset Database</Link>  <br/><br/><br/></div>
+                    // localStorage.accessLevel > ACCESS_LEVEL_GUEST 
+                    // ? <div className="logout">
+                    //     {
+                    //         localStorage.profilePhoto !== "null" 
+                    //         ? <img id="profilePhoto" src={`data:;base64,${localStorage.profilePhoto}`} alt=""/>
+                    //         : null
+                    //     }                        
+                    //     <Logout/>
+                    //   </div>
+                    // : <div>
+                    //     <Link className="green-button" to={"/Login"}>Login</Link>
+                    //     <Link className="blue-button" to={"/Register"}>Register</Link>  
+                    //     <Link className="red-button" to={"/ResetDatabase"}>Reset Database</Link>  <br/><br/><br/></div>
                 }
                 
                 <div className="main-container">
