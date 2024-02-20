@@ -45,10 +45,11 @@ const createNewtShirtDocument = (req, res, next) =>
     let tShirtDetails = new Object()
                 
     tShirtDetails.name = req.body.name
-    tShirtDetails.colour = req.body.colour
+    // tShirtDetails.colour = req.body.colour
     tShirtDetails.size = req.body.size
     tShirtDetails.price = req.body.price
-    tShirtDetails.quantity = req.body.quantity
+    // tShirtDetails.quantity = req.body.quantity
+    tShirtDetails.stock = req.body.stock
     tShirtDetails.description = req.body.description
 
     // add the tShirt's photos to the tShirtDetails JSON object

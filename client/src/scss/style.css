@@ -90,4 +90,8 @@
   flex-wrap: wrap;
   justify-content: space-between;
   padding-left: 0;
+}
+
+.subShirtContainer {
+  display: flex;
 }/*# sourceMappingURL=style.css.map */
