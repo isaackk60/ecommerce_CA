@@ -1,3 +1,83 @@
+#footer-container {
+  background-color: #0c405f;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+}
+#footer-container #BiggerSize {
+  font-size: large;
+}
+#footer-container #copyright {
+  background-color: #002134;
+  text-align: center;
+  padding: 20px;
+}
+#footer-container #block {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 20px;
+}
+
+#footer-container a {
+  color: white;
+  font-family: urw-din, sans-serif;
+  font-weight: 400;
+  text-decoration: none;
+  border-left: 3px solid transparent;
+  padding-left: 4px;
+  transition: 0.3s;
+}
+
+#footer-container a:hover {
+  color: rgba(255, 255, 255, 0.767);
+  border-left: 3px solid white;
+}
+
+.form-container {
+  height: 100vh;
+}
+
+#navigationbar-container {
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  background-color: #0c405f;
+  align-items: center;
+}
+
+#navigationbar-container a {
+  color: white;
+  text-decoration: none;
+  border-bottom: 3px solid transparent;
+  padding: 13px 15px;
+  transition: 0.4s;
+}
+
+#navigationbar-container a:hover {
+  color: rgba(255, 255, 255, 0.767);
+  border-bottom: 3px solid white;
+}
+
+#navigationbar-container .splitL {
+  float: left;
+}
+
+#navigationbar-container .splitC {
+  float: center;
+}
+
+#navigationbar-container .splitR {
+  float: right;
+}
+
+#navigationbar-container .splitL, .splitC, .splitR {
+  flex: 1; /* Add this line */
+  text-align: center;
+  padding: 13px 15px;
+}
+
 .shirt-container {
   max-width: 33vw;
 }
