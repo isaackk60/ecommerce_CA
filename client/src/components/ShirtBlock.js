@@ -35,13 +35,16 @@ export default class ShirtBlock extends Component {
 
 
         return (
+
             <div className="shirt-container">
 
 
                 {/* <div>{this.props.shirt.colour}</div>
+
                 <div>{this.props.shirt.size}</div>
                 
                 <div>{this.props.shirt.description}</div>
+
                 <div>{this.props.shirt.quantity}</div> */}
                 <Link     to={{
         pathname: "/SubShirt/" + this.props.shirt._id,
