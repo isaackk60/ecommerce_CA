@@ -1,34 +1,46 @@
 import React, { Component } from "react"
-import { Redirect, Link } from "react-router-dom"
 import Form from "react-bootstrap/Form"
-
+import { Redirect, Link } from "react-router-dom"
 import axios from "axios"
 
 import LinkInClass from "../components/LinkInClass"
 
-import { ACCESS_LEVEL_ADMIN, SERVER_HOST } from "../config/global_constants"
+import { ACCESS_LEVEL_NORMAL_USER, SERVER_HOST } from "../config/global_constants"
 
-
-export default class AddTShirt extends Component {
+export default class EditTShirt extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
-            name: "",
-            colour: "",
-            size: "",
-            price: "",
-            quantity: "",
-            description: "",
-            shirtPhotoFilename: null,
-            redirectToDisplayAllShirts: localStorage.accessLevel < ACCESS_LEVEL_ADMIN,
+            name: ``,
+            colour: ``,
+            size: ``,
+            price: ``,
+            description: ``,
+            quantity: ``,
+            shirtPhotoFilename:null,
+            redirectToDisplayAllShirts: localStorage.accessLevel < ACCESS_LEVEL_NORMAL_USER,
             wasSubmittedAtLeastOnce: false
         }
     }
 
-
     componentDidMount() {
         this.inputToFocus.focus()
+
+        axios.get(`${SERVER_HOST}/shirts/${this.props.match.params.id}`, { headers: { "authorization": localStorage.token } })
+            .then(res => {
+                this.setState({
+                    name: res.data.name,
+                    colour: res.data.colour,
+                    size: res.data.size,
+                    price: res.data.price,
+                    description: res.data.description,
+                    quantity: res.data.quantity
+                })
+            })
+            .catch(err => {
+                // do nothing
+            })
     }
 
 
@@ -37,37 +49,28 @@ export default class AddTShirt extends Component {
     }
 
 
-    handleFileChange = (e) => {
-        this.setState({ shirtPhotoFilename: e.target.files })
-    }
 
 
     handleSubmit = (e) => {
         e.preventDefault()
 
-        let formData = new FormData()
-        formData.append("name", this.state.name)
-        formData.append("colour", this.state.colour)
-        formData.append("size", this.state.size)
-        formData.append("price", this.state.price)
-        formData.append("quantity", this.state.quantity)
-        formData.append("description", this.state.description)
-
-        if (this.state.shirtPhotoFilename) {
-            for (let i = 0; i < this.state.shirtPhotoFilename.length; i++) {
-                formData.append("shirtPhotos", this.state.shirtPhotoFilename[i])
-            }
+        const shirtObject = {
+            name: this.state.name,
+            colour: this.state.colour,
+            size: this.state.size,
+            price: this.state.price,
+            description: this.state.description,
+            quantity: this.state.quantity
         }
 
-        axios.post(`${SERVER_HOST}/shirts`, formData, {headers:{"authorization":localStorage.token, "Content-type": "multipart/form-data"}})
-        .then(res => 
-        {           
-            this.setState({redirectToDisplayAllShirts:true})
-        })
-        .catch(err =>
-        {
-            this.setState({wasSubmittedAtLeastOnce: true})
-        })
+
+        axios.put(`${SERVER_HOST}/shirts/${this.props.match.params.id}`, shirtObject, { headers: { "authorization": localStorage.token } })
+            .then(res => {
+                this.setState({ redirectToDisplayAllShirts: true })
+            })
+            .catch(err => {
+                this.setState({ wasSubmittedAtLeastOnce: true })
+            })
     }
 
 
@@ -79,6 +82,7 @@ export default class AddTShirt extends Component {
 
         return (
             <div className="form-container">
+
                 {this.state.redirectToDisplayAllShirts ? <Redirect to="/main" /> : null}
 
                 {errorMessage}
@@ -145,10 +149,6 @@ export default class AddTShirt extends Component {
                         </Form.Control>
                     </Form.Group>
 
-{/* <Form.Group controlId="size">
-                        <Form.Label>Size</Form.Label>
-                        <Form.Control type="text" name="size" value={this.state.size} onChange={this.handleChange} />
-                    </Form.Group> */}
 
                     <Form.Group controlId="price">
                         <Form.Label>Price</Form.Label>
@@ -165,13 +165,9 @@ export default class AddTShirt extends Component {
                         <Form.Control as="textarea" name="description" value={this.state.description} onChange={this.handleChange} />
                     </Form.Group>
 
-                    <Form.Group controlId="shirtPhotoFilename">
-                        <Form.Label>Photos</Form.Label>
-                        <Form.Control
-                            type="file" multiple onChange={this.handleFileChange}
-                        /></Form.Group> <br /><br />
 
-                    <LinkInClass value="Add" className="green-button" onClick={this.handleSubmit} />
+
+                    <LinkInClass value="Update" className="green-button" onClick={this.handleSubmit} />
 
                     <Link className="red-button" to={"/main"}>Cancel</Link>
                 </Form>
