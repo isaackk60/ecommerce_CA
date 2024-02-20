@@ -55,13 +55,17 @@ export default class Login extends Component
         }
         
         return (
+            <main className="login_main">
+            <div className="outside-form-container">
             <form className="form-container" noValidate = {true} id = "loginOrRegistrationForm">
-                <h2>Login</h2>
+            <div className="loginHeaderContainer">
+                        <h2>Login</h2>
+                        <p className="loginHeaderLink">|</p>
+                        <Link className="anotherLoginHeader" to={"/Register"}>Sign Up</Link>
+                    </div>
                 
                 {this.state.isLoggedIn ? <Redirect to="/DisplayAllCars"/> : null} 
-                
                 {errorMessage}
-                
                 <input 
                     type = "email" 
                     name = "email" 
@@ -79,10 +83,13 @@ export default class Login extends Component
                     value={this.state.password} 
                     onChange={this.handleChange}
                 /><br/><br/>
-                
+                <span>
                 <LinkInClass value="Login" className="green-button" onClick={this.handleSubmit}/> 
-                <Link className="red-button" to={"/DisplayAllCars"}>Cancel</Link>                                      
+                <Link className="red-button" to={"/DisplayAllCars"}>Cancel</Link>  
+                </span>
             </form>
+            </div>
+            </main>
         )
     }
 }
