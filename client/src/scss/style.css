@@ -1,3 +1,22 @@
+.main-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.main-container .shirtPhotos {
+  width: 28vw;
+}
+.main-container .shirtPhotos img {
+  width: 28vw;
+}
+
+.subShirtContainer {
+  display: flex;
+}
+.subShirtContainer img {
+  width: 50vw;
+}
+
 #footer-container {
   background-color: #0c405f;
   color: white;

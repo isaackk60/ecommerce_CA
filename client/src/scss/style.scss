@@ -1,5 +1,23 @@
 
 // *************main*********************
+.main-container{
+    display:flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    .shirtPhotos{
+        width:28vw;
+        img{
+            width:28vw;
+        }
+    }
+}
+//subShirt
+.subShirtContainer{
+    display:flex;
+    img{
+        width:50vw;
+    }
+}
 
 //FOOTER AND NAVIGATION BAR
 #footer-container{ 
