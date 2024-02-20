@@ -22,7 +22,7 @@ export default class Down extends Component {
                     <Link to={"/DisplayAllCars"}>MEN</Link>
                     <Link to={"/DisplayAllCars"}>WOMEN</Link>
                     <Link to={"/DisplayAllCars"}>ABOUT</Link>
-                    <Link to={"/DisplayAllCars"}>CONTACT</Link>
+                    <Link to={"/Contact"}>CONTACT</Link>
 
 
                 </div>
