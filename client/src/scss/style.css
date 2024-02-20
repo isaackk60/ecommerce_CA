@@ -76,22 +76,4 @@
   flex: 1; /* Add this line */
   text-align: center;
   padding: 13px 15px;
-}
-
-.shirt-container {
-  max-width: 33vw;
-}
-.shirt-container img {
-  width: 28vw;
-}
-
-.main-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  padding-left: 0;
-}
-
-.subShirtContainer {
-  display: flex;
 }/*# sourceMappingURL=style.css.map */
