@@ -3,6 +3,7 @@ import {BrowserRouter, Switch, Route} from "react-router-dom"
 
 import "bootstrap/dist/css/bootstrap.css"
 import "./css/App.css"
+import "./scss/style.css"
 
 import Register from "./components/Register"
 import ResetDatabase from "./components/ResetDatabase"
@@ -18,6 +19,8 @@ import PayPalMessage from "./components/PayPalMessage"
 
 import AddTShirt from "./components/AddTShirt"
 import Main from "./components/Main"
+import EditTShirt from "./components/EditTShirt"
+import DeleteTShirt from "./components/DeleteTShirt"
 
 import {ACCESS_LEVEL_GUEST} from "./config/global_constants"
 
@@ -50,6 +53,8 @@ export default class App extends Component
                     <LoggedInRoute exact path="/DeleteCar/:id" component={DeleteCar} />
                     <Route exact path="/DisplayAllCars" component={DisplayAllCars}/> 
                     <Route exact path="/AddTShirt" component={AddTShirt}/> 
+                    <LoggedInRoute exact path="/EditTShirt/:id" component={EditTShirt} />
+                    <LoggedInRoute exact path="/DeleteTShirt/:id" component={DeleteTShirt} />
                     <Route exact path="/main" component={Main}/>
                     <Route path="*" component={DisplayAllCars}/>                            
                 </Switch>

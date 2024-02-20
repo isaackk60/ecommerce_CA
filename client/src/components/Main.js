@@ -39,7 +39,7 @@ export default class Main extends Component
     render() 
     {   
         return (           
-            <div className="form-container">
+            <div>
                 {
                     localStorage.accessLevel > ACCESS_LEVEL_GUEST 
                     ? <div className="logout">
@@ -56,10 +56,12 @@ export default class Main extends Component
                         <Link className="red-button" to={"/ResetDatabase"}>Reset Database</Link>  <br/><br/><br/></div>
                 }
                 
-                <div className="table-container">
+                <div className="main-container">
                 
                     {this.state.shirts.map((shirt)=><ShirtBlock key={shirt._id} shirt={shirt} />)} 
-                    {
+                    
+                </div>
+                {
                         localStorage.accessLevel >= ACCESS_LEVEL_ADMIN 
                         ? <div className="add-new-car">
                             <Link className="blue-button" to={"/AddCar"}>Add New Car</Link>
@@ -67,8 +69,8 @@ export default class Main extends Component
                           </div>
                         : null
                     }
-                </div>
             </div> 
+            
         )
     }
 }
