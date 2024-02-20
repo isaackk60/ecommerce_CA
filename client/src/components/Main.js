@@ -2,7 +2,7 @@ import React, {Component} from "react"
 import {Link} from "react-router-dom"
 
 import axios from "axios"
-
+import NavigationBar from "./NavigationBar"
 import ShirtBlock from "./ShirtBlock"
 import Logout from "./Logout"
 
@@ -40,6 +40,7 @@ export default class Main extends Component
     {   
         return (           
             <div>
+                <NavigationBar />
                 {
                     localStorage.accessLevel > ACCESS_LEVEL_GUEST 
                     ? <div className="logout">
