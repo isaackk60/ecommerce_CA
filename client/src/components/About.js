@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import { Redirect, Link } from "react-router-dom"
 import axios from "axios"
-
+import NavigationBar from "./NavigationBar"
 import LinkInClass from "../components/LinkInClass"
 
 import { SERVER_HOST } from "../config/global_constants"
@@ -14,6 +14,7 @@ export default class About extends Component {
     render() {
         return (
             <div>
+                <NavigationBar/>
                 <main className="about_main">
                     <h1>ABOUT US</h1>
 

@@ -1,14 +1,43 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Protest+Riot&display=swap");
+.wholeMain {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
 .main-container {
   display: flex;
-  justify-content: space-between;
+  flex-direction: row;
+  justify-content: space-evenly;
   flex-wrap: wrap;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 .main-container .shirtPhotos {
   width: 28vw;
 }
 .main-container .shirtPhotos img {
   width: 28vw;
+}
+.main-container .shirt-container {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.main-container .shirt-container .h2-text {
+  padding: 0px;
+  font-size: 30px;
+}
+.main-container .shirt-price {
+  padding-bottom: 3px;
+  text-align: center;
+}
+.main-container .admin-edit-delete-shirt {
+  display: flex;
+  flex-direction: row;
+  margin: auto;
+  width: 50%;
+}
+.main-container a {
+  text-decoration: none;
 }
 
 .subShirtContainer {
@@ -159,7 +188,6 @@ header {
   color: white;
   display: flex;
   flex-direction: column;
-  margin-top: 30px;
 }
 #footer-container #BiggerSize {
   font-size: large;
@@ -193,8 +221,8 @@ header {
 #navigationbar-container {
   overflow: hidden;
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
-  margin-bottom: 30px;
   background-color: #0c405f;
   align-items: center;
 }
@@ -219,6 +247,12 @@ header {
 #navigationbar-container .splitC {
   float: center;
 }
+#navigationbar-container .splitC img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
 
 #navigationbar-container .splitR {
   float: right;
@@ -227,9 +261,14 @@ header {
 #navigationbar-container .splitL, .splitC, .splitR {
   flex: 1; /* Add this line */
   text-align: center;
-  padding: 13px 15px;
+  padding: 11px 15px;
 }
 
+@media screen and (max-width: 1460px) {
+  #navigationbar-container .splitL, .splitC, .splitR {
+    display: inline-grid;
+  }
+}
 /*                Contact Page                */
 .Contactpage {
   background-color: #efe6e6;

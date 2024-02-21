@@ -2,6 +2,7 @@ import React, { Component } from "react"
 import Form from "react-bootstrap/Form"
 import { Redirect, Link } from "react-router-dom"
 import axios from "axios"
+import NavigationBar from "./NavigationBar"
 
 import LinkInClass from "../components/LinkInClass"
 
@@ -18,11 +19,11 @@ export default class SubShirt extends Component {
             price: ``,
             description: ``,
             // quantity: ``,
-            quantity:1,
+            quantity: 1,
             stock: ``,
             shirtPhotoFilename: null,
             wasSubmittedAtLeastOnce: false,
-            itemsInCart:[]
+            itemsInCart: []
         }
     }
 
@@ -83,7 +84,7 @@ export default class SubShirt extends Component {
         const quantity = parseInt(e.target.value);
         this.setState({ quantity });
     };
-    
+
     addToCart = () => {
         // Add the selected shirt to the shopping cart
         const { name, size, price, quantity } = this.state;
@@ -108,45 +109,48 @@ export default class SubShirt extends Component {
         }
         console.log(this.state);
 
-// when you add t-shirt and click add to cart, it can direct to shopping cart.
+        // when you add t-shirt and click add to cart, it can direct to shopping cart.
         if (this.state.redirectToCart) {
             return <Redirect to={{ pathname: "/shoppingCart", state: { itemsInCart: this.state.itemsInCart } }} />;
         }
 
         return (
-            <div className="subShirtContainer">
+            <div>
+                <NavigationBar/>
+                <div className="subShirtContainer">
 
 
-                {errorMessage}
-                <div>
-                    {this.state.shirtPhotoFilename === null ? null : <div className="shirtPhotos">
-                        {this.state.shirtPhotoFilename.map(photo => <img key={photo._id} id={photo._id} alt="" />)}
-                    </div>}
-                </div>
-                <div>
-                <h1>{this.state.name}</h1><br></br>
-                <h4>{this.state.price}</h4><br></br>
-                <h5>Stock:{this.state.stock}</h5>
+                    {errorMessage}
+                    <div>
+                        {this.state.shirtPhotoFilename === null ? null : <div className="shirtPhotos">
+                            {this.state.shirtPhotoFilename.map(photo => <img key={photo._id} id={photo._id} alt="" />)}
+                        </div>}
+                    </div>
+                    <div>
+                        <h1>{this.state.name}</h1><br></br>
+                        <h4>{this.state.price}</h4><br></br>
+                        <h5>Stock:{this.state.stock}</h5>
 
-                <Form>
-                    <Form.Group controlId="size">
-                        <Form.Label>Size</Form.Label>
-                        <Form.Control as="select" name="size" value={this.state.size} onChange={this.handleChange}>
-                            <option value="XS">XS</option>
-                            <option value="S">S</option>
-                            <option value="M">M</option>
-                            <option value="L">L</option>
-                            <option value="XL">XL</option>
-                        </Form.Control>
-                    </Form.Group>
-                    <Form.Group controlId="quantity">
-                        <Form.Label>Quantity</Form.Label>
-                        <Form.Control type="number" name="quantity" value={this.state.quantity} onChange={this.handleQuantityChange} />
-                    </Form.Group>
-                    <button onClick={this.addToCart}>Add to Cart</button>
-                </Form>
-                <p>{this.state.description}</p>
+                        <Form>
+                            <Form.Group controlId="size">
+                                <Form.Label>Size</Form.Label>
+                                <Form.Control as="select" name="size" value={this.state.size} onChange={this.handleChange}>
+                                    <option value="XS">XS</option>
+                                    <option value="S">S</option>
+                                    <option value="M">M</option>
+                                    <option value="L">L</option>
+                                    <option value="XL">XL</option>
+                                </Form.Control>
+                            </Form.Group>
+                            <Form.Group controlId="quantity">
+                                <Form.Label>Quantity</Form.Label>
+                                <Form.Control type="number" name="quantity" value={this.state.quantity} onChange={this.handleQuantityChange} />
+                            </Form.Group>
+                            <button onClick={this.addToCart}>Add to Cart</button>
+                        </Form>
+                        <p>{this.state.description}</p>
 
+                    </div>
                 </div>
             </div>
         )

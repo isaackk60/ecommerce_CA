@@ -1,16 +1,46 @@
 
 // *************main*********************
+.wholeMain{
+    padding-top:10px;
+    padding-bottom:10px;
+}
 .main-container{
     display:flex;
-    justify-content: space-between;
+    flex-direction: row; //ycc added this
+    justify-content: space-evenly; //horizontally
     flex-wrap: wrap;
+    padding-top: 10px;
+    padding-bottom: 10px;
     .shirtPhotos{
         width:28vw;
         img{
             width:28vw;
         }
     }
+    .shirt-container{
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    .shirt-container .h2-text{
+        padding: 0px;
+        font-size: 30px;
+    }
+    .shirt-price{
+        padding-bottom: 3px;
+        text-align: center;
+    }
+    .admin-edit-delete-shirt{
+        display:flex;
+        flex-direction: row;
+        margin:auto;
+        width: 50%;
+    }
+    a {
+        text-decoration: none;
+    }
 }
+
+
 //subShirt
 .subShirtContainer{
     display:flex;
@@ -182,7 +212,6 @@ header {
     color: white;
     display: flex;
     flex-direction: column;
-    margin-top: 30px;
 }
 #footer-container a{
     color: white;
@@ -202,8 +231,8 @@ header {
 #navigationbar-container{
     overflow: hidden; //when scrolled, wont see it
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
-    margin-bottom: 30px;
     background-color: #0c405f;
     align-items: center;
 }
@@ -224,6 +253,12 @@ header {
 }
 #navigationbar-container .splitC{
     float: center;
+    img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%;
+    }
 }
 #navigationbar-container .splitR{
     float: right;
@@ -231,9 +266,14 @@ header {
 #navigationbar-container .splitL, .splitC, .splitR{
     flex: 1; /* Add this line */
     text-align: center;
-    padding: 13px 15px;
+    padding: 11px 15px;
 }
-
+//Nav mobile version
+@media screen and (max-width: 1460px) {
+    #navigationbar-container .splitL, .splitC, .splitR{
+       display: inline-grid; 
+    }
+  }
 
 
 /*                Contact Page                */
