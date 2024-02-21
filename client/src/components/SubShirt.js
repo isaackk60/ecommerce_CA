@@ -18,9 +18,11 @@ export default class SubShirt extends Component {
             price: ``,
             description: ``,
             // quantity: ``,
+            quantity:1,
             stock: ``,
             shirtPhotoFilename: null,
-            wasSubmittedAtLeastOnce: false
+            wasSubmittedAtLeastOnce: false,
+            itemsInCart:[]
         }
     }
 
@@ -77,6 +79,27 @@ export default class SubShirt extends Component {
 
     }
 
+    handleQuantityChange = (e) => {
+        const quantity = parseInt(e.target.value);
+        this.setState({ quantity });
+    };
+    
+    addToCart = () => {
+        // Add the selected shirt to the shopping cart
+        const { name, size, price, quantity } = this.state;
+        const item = {
+            name,
+            size,
+            price,
+            quantity
+        };
+        console.log("Added to cart:", item);
+
+        const updatedItemsInCart = [...this.state.itemsInCart, item];
+        this.setState({ redirectToCart: true, itemsInCart: updatedItemsInCart });
+        // this.setState({ redirectToCart: true });
+    };
+
 
     render() {
         let errorMessage = "";
@@ -84,6 +107,12 @@ export default class SubShirt extends Component {
             errorMessage = <div className="error">Error: All fields must be filled in<br /></div>;
         }
         console.log(this.state);
+
+// when you add t-shirt and click add to cart, it can direct to shopping cart.
+        if (this.state.redirectToCart) {
+            return <Redirect to={{ pathname: "/shoppingCart", state: { itemsInCart: this.state.itemsInCart } }} />;
+        }
+
         return (
             <div className="subShirtContainer">
 
@@ -95,9 +124,9 @@ export default class SubShirt extends Component {
                     </div>}
                 </div>
                 <div>
-                <h1>{this.state.name}</h1>
-                <h3>{this.state.price}</h3>
-                <h5>{this.state.stock}</h5>
+                <h1>{this.state.name}</h1><br></br>
+                <h4>{this.state.price}</h4><br></br>
+                <h5>Stock:{this.state.stock}</h5>
 
                 <Form>
                     <Form.Group controlId="size">
@@ -110,7 +139,11 @@ export default class SubShirt extends Component {
                             <option value="XL">XL</option>
                         </Form.Control>
                     </Form.Group>
-
+                    <Form.Group controlId="quantity">
+                        <Form.Label>Quantity</Form.Label>
+                        <Form.Control type="number" name="quantity" value={this.state.quantity} onChange={this.handleQuantityChange} />
+                    </Form.Group>
+                    <button onClick={this.addToCart}>Add to Cart</button>
                 </Form>
                 <p>{this.state.description}</p>
 
