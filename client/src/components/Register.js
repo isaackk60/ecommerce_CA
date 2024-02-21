@@ -72,61 +72,68 @@ export default class Register extends Component
         }          
     
         return (
-            <form className="form-container" noValidate = {true} id = "loginOrRegistrationForm">
-           
-                {this.state.isRegistered ? <Redirect to="/DisplayAllCars"/> : null} 
+            <main className="login_main">
+            <div className="outside-form-container">
+        <form className="form-container" noValidate = {true} id = "loginOrRegistrationForm">
+       
+            {this.state.isRegistered ? <Redirect to="/DisplayAllCars"/> : null} 
+            {errorMessage}
+            <div className="loginHeaderContainer">
+                        <Link className="anotherLoginHeader" to={"/Login"}>Login</Link>
+                        <p className="loginHeaderLink">|</p>
+                        <h2>Sign Up</h2>
+                    </div>
+       
+            <input  
+                name = "name"              
+                type = "text"
+                placeholder = "Name"
+                autoComplete="name"
+                value = {this.state.name}
+                onChange = {this.handleChange}
+                ref = {(input) => { this.inputToFocus = input }} 
+            /><br/>           
+
+        <input  
+                name = "email"              
+                type = "email"
+                placeholder = "Email"
+                autoComplete="email"
+                value = {this.state.email}
+                onChange = {this.handleChange}
+            /><br/>              
+
+        <input  
+                name = "password"           
+                type = "password"
+                placeholder = "Password"
+                autoComplete="password"
+                title = "Password must be at least ten-digits long and contains at least one lowercase letter, one uppercase letter, one digit and one of the following characters (£!#€$%^&*)"
+                value = {this.state.password}
+                onChange = {this.handleChange}
+            /><br/>           
+
+            <input          
+                name = "confirmPassword"    
+                type = "password"
+                placeholder = "Confirm password"
+                autoComplete="confirmPassword"
+                value = {this.state.confirmPassword}
+                onChange = {this.handleChange}
+            /><br/>
             
-                {errorMessage}
+            <input            
+                type = "file"                    
+                onChange = {this.handleFileChange}
+            /><br/><br/>
             
-                <h2>New User Registration</h2>
-           
-                <input  
-                    name = "name"              
-                    type = "text"
-                    placeholder = "Name"
-                    autoComplete="name"
-                    value = {this.state.name}
-                    onChange = {this.handleChange}
-                    ref = {(input) => { this.inputToFocus = input }} 
-                /><br/>           
-
-	        <input  
-                    name = "email"              
-                    type = "email"
-                    placeholder = "Email"
-                    autoComplete="email"
-                    value = {this.state.email}
-                    onChange = {this.handleChange}
-                /><br/>              
-
-	        <input  
-                    name = "password"           
-                    type = "password"
-                    placeholder = "Password"
-                    autoComplete="password"
-                    title = "Password must be at least ten-digits long and contains at least one lowercase letter, one uppercase letter, one digit and one of the following characters (£!#€$%^&*)"
-                    value = {this.state.password}
-                    onChange = {this.handleChange}
-                /><br/>           
-
-                <input          
-                    name = "confirmPassword"    
-                    type = "password"
-                    placeholder = "Confirm password"
-                    autoComplete="confirmPassword"
-                    value = {this.state.confirmPassword}
-                    onChange = {this.handleChange}
-                /><br/>
-                
-                <input          
-                    name = "profilePhoto"    
-                    type = "file"                    
-                    onChange = {this.handleFileChange}
-                /><br/><br/>
-                
-                <LinkInClass value="Register New User" className="green-button" onClick={this.handleSubmit} />
-                <Link className="red-button" to={"/DisplayAllCars"}>Cancel</Link>   
-            </form>
+            <span>
+            <LinkInClass value="Register New User" className="green-button" onClick={this.handleSubmit} />
+            <Link className="red-button" to={"/DisplayAllCars"}>Cancel</Link>   
+            </span>
+        </form>
+        </div>
+        </main>
         )
     }
 }

@@ -18,11 +18,14 @@ export default class Down extends Component {
         return (
             <nav id="navigationbar-container">
                 <div class="splitL">
-                    <Link to={"/DisplayAllCars"}>BUY T-SHIRT</Link>
+                    <Link to={"/main"}>BUY T-SHIRT</Link>
                     <Link to={"/DisplayAllCars"}>MEN</Link>
                     <Link to={"/DisplayAllCars"}>WOMEN</Link>
-                    <Link to={"/DisplayAllCars"}>ABOUT</Link>
+
+                    <Link to={"/About"}>ABOUT</Link>
                     <Link to={"/Contact"}>CONTACT</Link>
+
+
 
 
                 </div>
@@ -35,7 +38,7 @@ export default class Down extends Component {
                 <div class="splitR">
                     <Link to={"/DisplayAllCars"}>SEARCH HERE</Link>
                     <Link to={"/DisplayAllCars"}>BASKET HERE</Link>
-                    <Link to={"/DisplayAllCars"}>LOG IN</Link>
+                    <Link to={"/Login"}>LOG IN</Link>
                 </div>
             </nav>
         )
