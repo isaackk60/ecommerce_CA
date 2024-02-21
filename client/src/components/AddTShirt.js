@@ -51,7 +51,7 @@ export default class AddTShirt extends Component {
         // formData.append("colour", this.state.colour)
         formData.append("size", this.state.size)
         formData.append("price", this.state.price)
-        formData.append("quantity", this.state.quantity)
+        formData.append("stock", this.state.stock)
         formData.append("description", this.state.description)
 
         if (this.state.shirtPhotoFilename) {
