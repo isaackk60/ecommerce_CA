@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import { Link } from "react-router-dom"
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEnvelope,faMapPin,faPhone} from '@fortawesome/free-solid-svg-icons'
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import { faEnvelope,faMapPin,faPhone} from '@fortawesome/free-solid-svg-icons'
 
 import NavigationBar from "./NavigationBar"
 
@@ -30,7 +30,7 @@ export default class Contact extends Component {
                     <div>
                         <h3>Get In Touch</h3>
                         <p>Got something to share? Fill out our quick and easy contact form. We promise to get back to you promptly.</p>
-                                <div className="FontIcon"> 
+                                {/* <div className="FontIcon"> 
                                 <FontAwesomeIcon icon={faMapPin} className="Icon"/><p>123 T-Shirt Avenue, Dundalk City, Ireland</p>
                                 </div>
                                 <div className="FontIcon"> 
@@ -38,7 +38,7 @@ export default class Contact extends Component {
                                 </div>
                                 <div className="FontIcon"> 
                                 <FontAwesomeIcon icon={faPhone} className="Icon"/><p> +353 (555) 123-4567</p>
-                             </div>
+                             </div> */}
                     </div>
 
                     <div className="fromContainer">

@@ -24,6 +24,7 @@ import EditTShirt from "./components/EditTShirt"
 import DeleteTShirt from "./components/DeleteTShirt"
 import SubShirt from "./components/SubShirt"
 import About from "./components/About"
+import NavigationBar from "./components/NavigationBar"
 
 import {ACCESS_LEVEL_GUEST} from "./config/global_constants"
 
@@ -62,6 +63,7 @@ export default class App extends Component
                     <LoggedInRoute exact path="/SubShirt/:id" component={SubShirt} />
                     <Route exact path="/main" component={Main}/>
                     <Route exact path="/About" component={About}/>
+                    <Route exact path="/NavigationBar" component={NavigationBar}/>
                     <Route path="*" component={DisplayAllCars}/>                            
                 </Switch>
             </BrowserRouter>
