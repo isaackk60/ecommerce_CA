@@ -4,7 +4,6 @@ import { Link } from "react-router-dom"
 import axios from "axios"
 import NavigationBar from "./NavigationBar"
 import ShirtBlock from "./ShirtBlock"
-import Logout from "./Logout"
 
 import { ACCESS_LEVEL_GUEST, ACCESS_LEVEL_ADMIN, SERVER_HOST } from "../config/global_constants"
 
@@ -21,12 +20,14 @@ export default class Main extends Component {
 
     componentDidMount() {
         axios.get(`${SERVER_HOST}/shirts`)
-            .then(res => {
-                this.setState({ shirts: res.data })
-            })
-            .catch(err => {
-                // do nothing
-            })
+        .then(res => 
+        { 
+            this.setState({shirts: res.data})                                         
+        })
+        .catch(err =>
+        {
+            // do nothing
+        })
         console.log(this.state.shirts)
     }
 

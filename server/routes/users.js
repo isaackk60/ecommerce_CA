@@ -209,6 +209,19 @@ const logout = (req, res, next) =>
     return res.json({})
 }
 
+const getUserId = (req, res, next) => 
+{
+    usersModel.findById(req.params.id, (err, data) => 
+    {
+        if(err)
+        {
+            return next(err)
+        }  
+        
+        return res.json(data)
+    })
+}
+
 
 // IMPORTANT
 // Obviously, in a production release, you should never have the code below, as it allows a user to delete a database collection
@@ -220,6 +233,8 @@ router.post(`/users/register/:name/:email/:password`, upload.single("profilePhot
 router.post(`/users/login/:email/:password`, checkThatUserExistsInUsersCollection, checkThatJWTPasswordIsValid, returnUsersDetailsAsJSON)
 
 router.post(`/users/logout`, logout)
+
+router.get(`/users/:id`,checkThatUserExistsInUsersCollection, checkThatJWTPasswordIsValid,getUserId)
 
 
 module.exports = router
