@@ -2,6 +2,7 @@ import React, { Component } from "react"
 
 import { Link } from "react-router-dom"
 import storeLogo from "./images/tshirtstorelogo.jpg"
+import Basket from "./basket"
 
 export default class Down extends Component {
     // constructor(props) 
@@ -37,7 +38,7 @@ export default class Down extends Component {
                 </div>
                 <div class="splitR">
                     <Link to={"/DisplayAllCars"}>SEARCH HERE</Link>
-                    <Link to={"/DisplayAllCars"}>BASKET HERE</Link>
+                    <Link to={"/Basket"}>BASKET HERE</Link>
                     <Link to={"/Login"}>LOG IN</Link>
                 </div>
             </nav>
