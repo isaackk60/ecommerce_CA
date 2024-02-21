@@ -54,11 +54,11 @@ export default class ShirtBlock extends Component {
                     <div className="shirtPhotos">
                         {this.props.shirt.shirtPhotoFilename.map(photo => <img key={photo._id} id={photo._id} alt="" />)}
                     </div>
-                    <h2>{this.props.shirt.name}</h2>
-                    <div>{this.props.shirt.price}</div>
+                    <h2 className="h2-text">{this.props.shirt.name}</h2>
+                    <div className="shirt-price">{this.props.shirt.price}</div>
                 </Link>
 
-                <div>
+                <div className="admin-edit-delete-shirt">
                     {localStorage.accessLevel > ACCESS_LEVEL_GUEST ? <Link className="green-button" to={"/EditTShirt/" + this.props.shirt._id}>Edit</Link> : null}
 
                     {localStorage.accessLevel >= ACCESS_LEVEL_ADMIN ? <Link className="red-button" to={"/DeleteTShirt/" + this.props.shirt._id}>Delete</Link> : null}
