@@ -7,6 +7,7 @@ import { ACCESS_LEVEL_GUEST, ACCESS_LEVEL_ADMIN, SERVER_HOST } from "../config/g
 
 import BuyShirt from "./BuyShirt"
 
+
 export default class ShirtBlock extends Component {
     componentDidMount() {
         console.log(this.props.shirt)
@@ -46,10 +47,10 @@ export default class ShirtBlock extends Component {
                 <div>{this.props.shirt.description}</div>
 
                 <div>{this.props.shirt.quantity}</div> */}
-                <Link     to={{
-        pathname: "/SubShirt/" + this.props.shirt._id,
-        state: { shirt: this.props.shirt }
-    }}>
+                <Link to={{
+                    pathname: "/SubShirt/" + this.props.shirt._id,
+                    state: { shirt: this.props.shirt }
+                }}>
                     <div className="shirtPhotos">
                         {this.props.shirt.shirtPhotoFilename.map(photo => <img key={photo._id} id={photo._id} alt="" />)}
                     </div>
