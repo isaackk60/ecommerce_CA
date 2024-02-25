@@ -31,7 +31,7 @@ export default class Main extends Component
         {
             // do nothing
         })
-        // console.log(this.state.shirts)
+
     }
 
   
