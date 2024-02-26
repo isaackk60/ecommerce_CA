@@ -14,7 +14,8 @@ import EditCar from "./components/EditCar"
 import DeleteCar from "./components/DeleteCar"
 import DisplayAllCars from "./components/DisplayAllCars"
 import LoggedInRoute from "./components/LoggedInRoute"
-import BuyCar from "./components/BuyCar"
+// import BuyCar from "./components/BuyCar"
+import BuyShirt from "./components/BuyShirt"
 import PayPalMessage from "./components/PayPalMessage"
 
 import Contact from "./components/Contact"
@@ -51,7 +52,8 @@ export default class App extends Component
                     <Route exact path="/ResetDatabase" component={ResetDatabase} />                    
                     <Route exact path="/" component={DisplayAllCars} />
                     <Route exact path="/Login" component={Login} />
-                    <Route exact path="/BuyCar/:id" component={BuyCar} />
+                    {/* <Route exact path="/BuyCar/:id" component={BuyCar} /> */}
+                    <Route exact path="/BuyShirt/:id" component={BuyShirt} />
                     <Route exact path="/PayPalMessage/:messageType/:payPalPaymentID" component={PayPalMessage}/>
                     <Route exact path="/Contact" component={Contact} />  
                     <Route exact path="/ShoppingCart" component={ShoppingCart} />                      

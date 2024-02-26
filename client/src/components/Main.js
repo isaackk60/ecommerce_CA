@@ -16,7 +16,8 @@ export default class Main extends Component
         super(props)
         
         this.state = {
-            shirts:[]
+            shirts:[],
+            searchQuery:""
         }
     }
     
@@ -35,9 +36,17 @@ export default class Main extends Component
         console.log(this.state.shirts)
     }
 
+    handleSearchInputChange = (event) => {
+        this.setState({ searchQuery: event.target.value });
+    };
+
   
     render() 
     {   
+        const { shirts, searchQuery } = this.state;
+        const filteredShirts = shirts.filter(shirt =>
+            shirt.name.toLowerCase().includes(searchQuery.toLowerCase())
+        );
         return (           
             <div>
                 <NavigationBar />
@@ -56,10 +65,20 @@ export default class Main extends Component
                     //     <Link className="blue-button" to={"/Register"}>Register</Link>  
                     //     <Link className="red-button" to={"/ResetDatabase"}>Reset Database</Link>  <br/><br/><br/></div>
                 }
+
+                <div className="search-container">
+                    <input
+                        type="text"
+                        placeholder="Search shirts..."
+                        value={searchQuery}
+                        onChange={this.handleSearchInputChange}
+                    />
+                </div>
                 
                 <div className="main-container">
                 
-                    {this.state.shirts.map((shirt)=><ShirtBlock key={shirt._id} shirt={shirt} />)} 
+                    {/* {this.state.shirts.map((shirt)=><ShirtBlock key={shirt._id} shirt={shirt} />)}  */}
+                    {filteredShirts.map((shirt) => <ShirtBlock key={shirt._id} shirt={shirt} />)}
                     
                 </div>
                 {
