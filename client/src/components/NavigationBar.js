@@ -21,8 +21,8 @@ export default class Down extends Component {
             <nav id="navigationbar-container">
                 <div class="splitL">
                     <Link to={"/main"}>BUY T-SHIRT</Link>
-                    {/* <Link to={"/DisplayAllCars"}>MEN</Link>
-                    <Link to={"/DisplayAllCars"}>WOMEN</Link> */}
+                    <Link to={"/DisplayAllCars"}>MEN</Link>
+                    <Link to={"/DisplayAllCars"}>WOMEN</Link>
 
                     <Link to={"/About"}>ABOUT</Link>
                     <Link to={"/Contact"}>CONTACT</Link>
