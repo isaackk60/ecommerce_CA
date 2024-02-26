@@ -68,7 +68,7 @@ export default class App extends Component
                     <Route exact path="/main" component={Main}/>
                     <Route exact path="/About" component={About}/>
                     <Route exact path="/NavigationBar" component={NavigationBar}/>
-                    <Route path="*" component={DisplayAllCars}/>                            
+                    <Route path="*" component={Main}/>                            
                 </Switch>
             </BrowserRouter>
         )
