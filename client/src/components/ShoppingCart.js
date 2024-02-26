@@ -204,6 +204,10 @@ export default class ShoppingCart extends Component {
         super(props);
 
         this.state = {
+            // name:"",
+            // price:"",
+            // quantity:"",
+            // size:"",
             cart: [],
             totalPrice: 0
         };
@@ -212,7 +216,9 @@ export default class ShoppingCart extends Component {
     componentDidMount() {
         // Fetch cart data from the server
         console.log(localStorage.getItem("itemsInCart"))
+
         this.setState({cart:localStorage.getItem("itemsInCart")})
+
         // axios.get(`${SERVER_HOST}/cart`, { headers: { "authorization": localStorage.token } })
         //     .then(res => {
         //         // Update state with fetched cart data
@@ -246,39 +252,42 @@ export default class ShoppingCart extends Component {
         this.setState({ totalPrice: totalPrice });
     }
 
-    loadShirtPhotos() {
-        // Loop through each cart item and load its shirt photos
+    // loadShirtPhotos() {
+    //     // Loop through each cart item and load its shirt photos
         
-        this.state.cart.forEach(item => {
-            item.cartItems[0].shirtPhotoFilename.forEach(photo => {
-                axios.get(`${SERVER_HOST}/shirts/photo/${photo.filename}`)
-                    .then(res => {
-                        // Update shirt photo in DOM
-                        document.getElementById(photo._id).src = `data:;base64,${res.data.image}`;
-                    })
-                    .catch(err => {
-                        // Handle error
-                        console.error("Error loading shirt photo:", err);
-                    });
-            });
-        });
-    }
+    //     this.state.cart.forEach(item => {
+    //         item.cartItems[0].shirtPhotoFilename.forEach(photo => {
+    //             axios.get(`${SERVER_HOST}/shirts/photo/${photo.filename}`)
+    //                 .then(res => {
+    //                     // Update shirt photo in DOM
+    //                     document.getElementById(photo._id).src = `data:;base64,${res.data.image}`;
+    //                 })
+    //                 .catch(err => {
+    //                     // Handle error
+    //                     console.error("Error loading shirt photo:", err);
+    //                 });
+    //         });
+    //     });
+    // }
 
     render() {
-        console.log(this.state.cart.map((item,index) => (item.cartItems[0].name)));
+        // console.log(this.state.cart.map((item,index) => (item.cartItems[0].name)));
         return (
             <div>
                 <NavigationBar />
                 <h2>Shopping Cart</h2>
                 <div>
                     {this.state.cart.map((item, index) => (
+                        // <div key={index}>
+                        //     {item.cartItems[0].name} - Size: {item.cartItems[0].size} - Quantity: {item.cartItems[0].quantity} - Price: €{item.cartItems[0].price * item.cartItems[0].quantity}
+                        //     {/* Display shirt photos for the first item */}
+                        //     {item.cartItems[0].shirtPhotoFilename.map(photo => (
+                        //         <img key={photo._id} id={photo._id} alt="" />
+                        //     ))}
+                        // </div>
                         <div key={index}>
-                            {item.cartItems[0].name} - Size: {item.cartItems[0].size} - Quantity: {item.cartItems[0].quantity} - Price: €{item.cartItems[0].price * item.cartItems[0].quantity}
-                            {/* Display shirt photos for the first item */}
-                            {item.cartItems[0].shirtPhotoFilename.map(photo => (
-                                <img key={photo._id} id={photo._id} alt="" />
-                            ))}
-                        </div>
+{item.name} -size:{item.size}-{item.quantity}--{item.price}
+                    </div>
                     ))}
                 </div>
                 <p>Total Price: €{this.state.totalPrice}</p>

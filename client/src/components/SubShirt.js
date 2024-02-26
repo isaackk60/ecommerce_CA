@@ -126,36 +126,37 @@ export default class SubShirt extends Component {
     
     handleSubmit = (e) => {
 
-        let formData = new FormData()
-        // formData.append("userId", this.state.user)
-        formData.append("name", this.state.name)
-        // formData.append("colour", this.state.colour)
-        formData.append("size", this.state.size)
-        formData.append("price", this.state.price)
-        formData.append("quantity", this.state.quantity)        
-console.log(this.state.shirtPhotoFilename)
-        if (this.state.shirtPhotoFilename) {
-            console.log(1)
-            for (let i = 0; i < this.state.shirtPhotoFilename.length; i++) {
-                formData.append("cartPhotos", this.state.shirtPhotoFilename[i])
-                console.log(2)
-            }
-        }
+//         let formData = new FormData()
+//         // formData.append("userId", this.state.user)
+//         formData.append("name", this.state.name)
+//         // formData.append("colour", this.state.colour)
+//         formData.append("size", this.state.size)
+//         formData.append("price", this.state.price)
+//         formData.append("quantity", this.state.quantity)        
+// console.log(this.state.shirtPhotoFilename)
+//         if (this.state.shirtPhotoFilename) {
+//             console.log(1)
+//             for (let i = 0; i < this.state.shirtPhotoFilename.length; i++) {
+//                 formData.append("cartPhotos", this.state.shirtPhotoFilename[i])
+//                 console.log(2)
+//             }
+//         }
         this.state.itemsInCart.push({name:this.state.name,size:this.state.size,price:this.state.price,quantity:this.state.quantity})
         // console.log(this.state.itemsInCart)
         localStorage.setItem("itemsInCart", JSON.stringify(this.state.itemsInCart));
+        this.setState({ redirectToDisplayAllShirtsInCart: true })
+        // this.setState({ wasSubmittedAtLeastOnce: true })
 
 
-
-        axios.post(`${SERVER_HOST}/cart`, formData, { headers: { "authorization": localStorage.token, "Content-type": "multipart/form-data" } })
-            .then(res => {
-                const cartId = res.data._id;
-                this.setState({ cartId: cartId });
-                this.setState({ redirectToDisplayAllShirtsInCart: true })
-            })
-            .catch(err => {
-                this.setState({ wasSubmittedAtLeastOnce: true })
-            })
+        // axios.post(`${SERVER_HOST}/cart`, formData, { headers: { "authorization": localStorage.token, "Content-type": "multipart/form-data" } })
+        //     .then(res => {
+        //         const cartId = res.data._id;
+        //         this.setState({ cartId: cartId });
+        //         this.setState({ redirectToDisplayAllShirtsInCart: true })
+        //     })
+        //     .catch(err => {
+        //         this.setState({ wasSubmittedAtLeastOnce: true })
+        //     })
     }
 
 
@@ -208,22 +209,20 @@ console.log(this.state.shirtPhotoFilename)
         console.log(this.state.cartId)
 
         return (
-            <div>
-                <NavigationBar/>
-                <div className="subShirtContainer">
-                {/* {this.state.redirectToDisplayAllShirtsInCart ? <Redirect to={{ pathname: `/shoppingCart/`+this.state.cart._id, state: { itemsInCart: this.state.itemsInCart } }}  /> : null} */}
-{this.state.redirectToDisplayAllShirtsInCart ? <Redirect to={"/ShoppingCart/" + this.state.cartId} /> : null}
-
-                    {errorMessage}
-                    <div>
-                        {this.state.shirtPhotoFilename === null ? null : <div className="shirtPhotos">
-                            {this.state.shirtPhotoFilename.map(photo => <img key={photo._id} id={photo._id} alt="" />)}
-                        </div>}
-                    </div>
-                    <div>
-                        <h1>{this.state.name}</h1><br></br>
-                        <h4>{this.state.price}</h4><br></br>
-                        <h5>Stock:{this.state.stock}</h5>
+            <div className="subShirtContainer">
+{/* {this.state.redirectToDisplayAllShirtsInCart ? <Redirect to={{ pathname: `/shoppingCart/`+this.state.cart._id, state: { itemsInCart: this.state.itemsInCart } }}  /> : null} */}
+{/* {this.state.redirectToDisplayAllShirtsInCart ? <Redirect to={"/ShoppingCart/" + this.state.cartId} /> : null} */}
+{this.state.redirectToDisplayAllShirtsInCart ? <Redirect to={"/ShoppingCart/"} /> : null}
+                {errorMessage}
+                <div>
+                    {this.state.shirtPhotoFilename === null ? null : <div className="shirtPhotos">
+                        {this.state.shirtPhotoFilename.map(photo => <img key={photo._id} id={photo._id} alt="" />)}
+                    </div>}
+                </div>
+                <div>
+                <h1>{this.state.name}</h1><br></br>
+                <h4>{this.state.price}</h4><br></br>
+                <h5>Stock:{this.state.stock}</h5>
 
                 <Form>
                     <Form.Group controlId="size">
