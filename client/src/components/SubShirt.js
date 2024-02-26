@@ -143,7 +143,26 @@ export default class SubShirt extends Component {
 //         }
         this.state.itemsInCart.push({name:this.state.name,size:this.state.size,price:this.state.price,quantity:this.state.quantity})
         // console.log(this.state.itemsInCart)
-        localStorage.setItem("itemsInCart", JSON.stringify(this.state.itemsInCart));
+        if (this.state.itemsInCart !== undefined) {
+            const groupedItems = this.state.itemsInCart.reduce((groups, item) => {
+                const group = groups.find(g => g.name === item.name);
+                if (group) {
+                    group.quantity += item.quantity;
+                    group.totalPrice += item.price * item.quantity;
+                } else {
+                    groups.push({
+                        name: item.name,
+                        size: item.size,
+                        quantity: item.quantity,
+                        price: item.price,
+                        totalPrice: item.price * item.quantity
+                    });
+                }
+                return groups;
+            }, []);
+            localStorage.setItem("itemsInCart", JSON.stringify(groupedItems));
+        }
+        // localStorage.setItem("itemsInCart", JSON.stringify(this.state.itemsInCart));
         this.setState({ redirectToDisplayAllShirtsInCart: true })
         // this.setState({ wasSubmittedAtLeastOnce: true })
 

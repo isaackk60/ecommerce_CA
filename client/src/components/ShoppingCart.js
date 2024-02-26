@@ -209,7 +209,7 @@ export default class ShoppingCart extends Component {
             // quantity:"",
             // size:"",
             cart: [],
-            totalPrice: 0
+            // totalPrice: 0
         };
     }
 
@@ -221,10 +221,10 @@ export default class ShoppingCart extends Component {
 
         this.setState({ cart: JSON.parse(localStorage.getItem("itemsInCart")) })
 
-        this.setState({ cart: cartLocalStorage }, () => {
-            // Calculate total price after updating state
-            this.calculateTotalPrice();
-        });
+        // this.setState({ cart: cartLocalStorage }, () => {
+        //     // Calculate total price after updating state
+        //     this.calculateTotalPrice();
+        // });
 
         // console.log(this.state.cart[0])
         //         let totalPrice = 0;
@@ -249,6 +249,27 @@ export default class ShoppingCart extends Component {
         //         console.error("Error fetching cart data:", err);
         //     });
     }
+    // componentDidUpdate(){
+    //     if (this.state.cart !== undefined) {
+    //         const groupedItems = this.state.cart.reduce((groups, item) => {
+    //             const group = groups.find(g => g.name === item.name);
+    //             if (group) {
+    //                 group.quantity += item.quantity;
+    //                 group.totalPrice += item.price * item.quantity;
+    //             } else {
+    //                 groups.push({
+    //                     name: item.name,
+    //                     size: item.size,
+    //                     quantity: item.quantity,
+    //                     price: item.price,
+    //                     totalPrice: item.price * item.quantity
+    //                 });
+    //             }
+    //             return groups;
+    //         }, []);
+    //         localStorage.setItem("itemsInCart", JSON.stringify(groupedItems));
+    //     }
+    // }
 
     calculateTotalPrice() {
         let totalPrice = 0;
@@ -260,14 +281,44 @@ export default class ShoppingCart extends Component {
         // // Update totalPrice state
         // this.setState({ totalPrice: totalPrice });
         this.state.cart.map(item => {
-            console.log(item)
             totalPrice += item.price * item.quantity;
         });
         // Update totalPrice state
         // this.setState({ totalPrice: totalPrice });
-        return totalPrice;
+        return totalPrice.toFixed(2);
     }
-    
+    handleChange = (index, field, value) => {
+        const updatedCart = [...this.state.cart];
+        updatedCart[index][field] = value;
+        this.setState({ cart: updatedCart });
+        
+        // localStorage.setItem("itemsInCart", JSON.stringify(updatedCart));
+        const groupedItems = this.state.cart.reduce((groups, item) => {
+            const group = groups.find(g => g.name === item.name);
+            if (group) {
+                group.quantity += item.quantity;
+                group.totalPrice += item.price * item.quantity;
+            } else {
+                groups.push({
+                    name: item.name,
+                    size: item.size,
+                    quantity: item.quantity,
+                    price: item.price,
+                    totalPrice: item.price * item.quantity
+                });
+            }
+            return groups;
+        }, []);
+        this.setState({cart:groupedItems})
+        localStorage.setItem("itemsInCart", JSON.stringify(groupedItems));
+    };
+
+    handleDelete = (name, size) => {
+        const updatedCart = this.state.cart.filter(item => !(item.name === name && item.size === size));
+        this.setState({ cart: updatedCart });
+        localStorage.setItem("itemsInCart", JSON.stringify(updatedCart));
+    };
+
     // loadShirtPhotos() {
     //     // Loop through each cart item and load its shirt photos
 
@@ -312,15 +363,32 @@ export default class ShoppingCart extends Component {
                 <NavigationBar />
                 <h2>Shopping Cart</h2>
                 <div>
-                    {groupedItems.map((item, index) => (
+                {this.state.cart.map((item, index) => (
                         <div key={index}>
-                            {item.name} - Size: {item.size} - Quantity: {item.quantity} - Price: €{item.totalPrice}
+                            <span>{item.name} - Size:</span>
+                            <select
+                                value={item.size}
+                                onChange={e => this.handleChange(index, 'size', e.target.value)}
+                            >
+                                <option value="XS">XS</option>
+                                <option value="S">S</option>
+                                <option value="M">M</option>
+                                <option value="L">L</option>
+                                <option value="XL">XL</option>
+                            </select>
+                            <span>Quantity:</span>
+                            <button onClick={() => this.handleChange(index, 'quantity', Math.max(1, item.quantity - 1))}>-</button>
+                            <span>{item.quantity}</span>
+                            <button onClick={() => this.handleChange(index, 'quantity', item.quantity + 1)}>+</button>
+                            <span>Price: {item.price}</span>
+                            <button onClick={() => this.handleDelete(item.name, item.size)}>Delete</button>
                         </div>
                     ))}
                 </div>
                 
                 {/* <p>Total Price: €{this.state.totalPrice}</p> */}
                 {this.state.cart !== undefined ? <p>Total Price: {this.calculateTotalPrice()}</p> : null}
+
             </div>
         );
     }
