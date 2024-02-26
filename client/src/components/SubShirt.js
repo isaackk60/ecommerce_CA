@@ -11,7 +11,7 @@ import { SERVER_HOST } from "../config/global_constants"
 export default class SubShirt extends Component {
     constructor(props) {
         super(props)
-
+        const cartLocalStorage = JSON.parse(localStorage.getItem("itemsInCart") || "[]")
         this.state = {
             name: ``,
             // colour: ``,
@@ -26,10 +26,16 @@ export default class SubShirt extends Component {
             redirectToDisplayAllShirtsInCart: false,
             // user:``,
             cart:[], 
-            itemsInCart:[],
+            itemsInCart:cartLocalStorage,
             cartId:``
         }
     }
+    // componentDidUpdate(prevProps, prevState) {
+    //     // Check if cartList has changed
+    //     if (prevState.itemsInCart!== this.state.itemsInCart) {
+    //       localStorage.setItem("itemsInCart", JSON.stringify(this.state.itemsInCart));
+    //     }
+    //   }
 
     componentDidMount() {// use link to hold state
         // this.inputToFocus.focus();
@@ -62,6 +68,7 @@ export default class SubShirt extends Component {
         // .catch(error => {
         //     console.error('Error fetching user data:', error);
         // });
+        // localStorage.setItem("itemsInCart", JSON.stringify(this.state.itemsInCart));
 
         const { state } = this.props.location;
         if (state && state.shirt) {
@@ -134,6 +141,11 @@ console.log(this.state.shirtPhotoFilename)
                 console.log(2)
             }
         }
+        this.state.itemsInCart.push({name:this.state.name,size:this.state.size,price:this.state.price,quantity:this.state.quantity})
+        // console.log(this.state.itemsInCart)
+        localStorage.setItem("itemsInCart", JSON.stringify(this.state.itemsInCart));
+
+
 
         axios.post(`${SERVER_HOST}/cart`, formData, { headers: { "authorization": localStorage.token, "Content-type": "multipart/form-data" } })
             .then(res => {

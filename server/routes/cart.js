@@ -72,7 +72,7 @@ const createNewcartDocument = (req, res, next) => {
         size: req.body.size,
         price: req.body.price,
         quantity: req.body.quantity,
-        shirtPhotoFilename: req.files.map(file => ({ filename: file.filename }))
+        // shirtPhotoFilename: req.files.map(file => ({ filename: file.filename }))
     }
 
     // Add the first cartItem to cartItems array
@@ -87,7 +87,7 @@ const createNewcartDocument = (req, res, next) => {
                 size: item.size,
                 price: item.price,
                 quantity: item.quantity,
-                shirtPhotoFilename: item.shirtPhotoFilename.map(filename => ({ filename }))
+                // shirtPhotoFilename: item.shirtPhotoFilename.map(filename => ({ filename }))
                 // shirtPhotoFilename = []
                 
                 // req.files.map((file, index) =>

@@ -211,28 +211,36 @@ export default class ShoppingCart extends Component {
 
     componentDidMount() {
         // Fetch cart data from the server
-        axios.get(`${SERVER_HOST}/cart`, { headers: { "authorization": localStorage.token } })
-            .then(res => {
-                // Update state with fetched cart data
-                this.setState({ cart: res.data }, () => {
-                    // Calculate total price after updating state
-                    this.calculateTotalPrice();
-                    // Load shirt photos after updating state
-                    // this.loadShirtPhotos();
-                });
-            })
-            .catch(err => {
-                // Handle error
-                console.error("Error fetching cart data:", err);
-            });
+        console.log(localStorage.getItem("itemsInCart"))
+        this.setState({cart:localStorage.getItem("itemsInCart")})
+        // axios.get(`${SERVER_HOST}/cart`, { headers: { "authorization": localStorage.token } })
+        //     .then(res => {
+        //         // Update state with fetched cart data
+        //         this.setState({ cart: res.data }, () => {
+        //             // Calculate total price after updating state
+        //             this.calculateTotalPrice();
+        //             // Load shirt photos after updating state
+        //             // this.loadShirtPhotos();
+        //         });
+        //     })
+        //     .catch(err => {
+        //         // Handle error
+        //         console.error("Error fetching cart data:", err);
+        //     });
     }
 
     calculateTotalPrice() {
         let totalPrice = 0;
         // Calculate total price based on cart items
+        // this.state.cart.forEach(item => {
+        //     const carItem=item.cartItems[0];
+        //     totalPrice += carItem.price * carItem.quantity;
+        // });
+        // // Update totalPrice state
+        // this.setState({ totalPrice: totalPrice });
         this.state.cart.forEach(item => {
-            const carItem=item.cartItems[0];
-            totalPrice += carItem.price * carItem.quantity;
+
+            totalPrice += item.price * item.quantity;
         });
         // Update totalPrice state
         this.setState({ totalPrice: totalPrice });
