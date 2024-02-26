@@ -217,8 +217,18 @@ export default class ShoppingCart extends Component {
         // Fetch cart data from the server
         console.log(localStorage.getItem("itemsInCart"))
 
-        this.setState({cart:localStorage.getItem("itemsInCart")})
+        this.setState({cart:JSON.parse(localStorage.getItem("itemsInCart"))})
 
+
+
+// console.log(this.state.cart[0])
+//         let totalPrice = 0;
+//         this.state.cart.map(item => {
+//             console.log(item)
+//                         totalPrice += item.price * item.quantity;
+//                     });
+//                     // Update totalPrice state
+//                     this.setState({ totalPrice: totalPrice });
         // axios.get(`${SERVER_HOST}/cart`, { headers: { "authorization": localStorage.token } })
         //     .then(res => {
         //         // Update state with fetched cart data
@@ -235,22 +245,22 @@ export default class ShoppingCart extends Component {
         //     });
     }
 
-    calculateTotalPrice() {
-        let totalPrice = 0;
-        // Calculate total price based on cart items
-        // this.state.cart.forEach(item => {
-        //     const carItem=item.cartItems[0];
-        //     totalPrice += carItem.price * carItem.quantity;
-        // });
-        // // Update totalPrice state
-        // this.setState({ totalPrice: totalPrice });
-        this.state.cart.forEach(item => {
-
-            totalPrice += item.price * item.quantity;
-        });
-        // Update totalPrice state
-        this.setState({ totalPrice: totalPrice });
-    }
+//     calculateTotalPrice() {
+//         let totalPrice = 0;
+//         // Calculate total price based on cart items
+//         // this.state.cart.forEach(item => {
+//         //     const carItem=item.cartItems[0];
+//         //     totalPrice += carItem.price * carItem.quantity;
+//         // });
+//         // // Update totalPrice state
+//         // this.setState({ totalPrice: totalPrice });
+//         this.state.cart.map(item => {
+// console.log(item)
+//             totalPrice += item.price * item.quantity;
+//         });
+//         // Update totalPrice state
+//         this.setState({ totalPrice: totalPrice });
+//     }
 
     // loadShirtPhotos() {
     //     // Loop through each cart item and load its shirt photos
@@ -271,6 +281,9 @@ export default class ShoppingCart extends Component {
     // }
 
     render() {
+        console.log(this.state.cart[0])
+        // {this.state.cart !== undefined ? this.calculateTotalPrice() : null}
+
         // console.log(this.state.cart.map((item,index) => (item.cartItems[0].name)));
         return (
             <div>
@@ -290,7 +303,9 @@ export default class ShoppingCart extends Component {
                     </div>
                     ))}
                 </div>
-                <p>Total Price: €{this.state.totalPrice}</p>
+                {/* <p>Total Price: €{this.state.totalPrice}</p> */}
+                {/* {this.state.cart !== undefined ? <p>Total Price: {this.calculateTotalPrice()}</p> : null} */}
+
             </div>
         );
     }
