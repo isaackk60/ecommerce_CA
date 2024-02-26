@@ -76,7 +76,7 @@ export default class Register extends Component
             <div className="outside-form-container">
         <form className="form-container" noValidate = {true} id = "loginOrRegistrationForm">
        
-            {this.state.isRegistered ? <Redirect to="/DisplayAllCars"/> : null} 
+            {this.state.isRegistered ? <Redirect to="/Main"/> : null} 
             {errorMessage}
             <div className="loginHeaderContainer">
                         <Link className="anotherLoginHeader" to={"/Login"}>Login</Link>
@@ -129,7 +129,7 @@ export default class Register extends Component
             
             <span>
             <LinkInClass value="Register New User" className="green-button" onClick={this.handleSubmit} />
-            <Link className="red-button" to={"/DisplayAllCars"}>Cancel</Link>   
+            <Link className="red-button" to={"/Main"}>Cancel</Link>   
             </span>
         </form>
         </div>

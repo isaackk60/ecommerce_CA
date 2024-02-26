@@ -10,7 +10,7 @@ import BuyShirt from "./BuyShirt"
 
 export default class ShirtBlock extends Component {
     componentDidMount() {
-        console.log(this.props.shirt)
+        console.log("All shirt: ",this.props.shirt)// shows all shirt
         this.props.shirt.shirtPhotoFilename.map(photo => {
             return axios.get(`${SERVER_HOST}/shirts/photo/${photo.filename}`)
                 .then(res => {
