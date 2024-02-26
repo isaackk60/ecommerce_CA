@@ -209,7 +209,7 @@ export default class ShoppingCart extends Component {
             // quantity:"",
             // size:"",
             cart: [],
-            totalPrice: 0
+            // totalPrice: 0
         };
     }
 
@@ -245,22 +245,34 @@ export default class ShoppingCart extends Component {
         //     });
     }
 
-//     calculateTotalPrice() {
-//         let totalPrice = 0;
-//         // Calculate total price based on cart items
-//         // this.state.cart.forEach(item => {
-//         //     const carItem=item.cartItems[0];
-//         //     totalPrice += carItem.price * carItem.quantity;
-//         // });
-//         // // Update totalPrice state
-//         // this.setState({ totalPrice: totalPrice });
-//         this.state.cart.map(item => {
-// console.log(item)
-//             totalPrice += item.price * item.quantity;
-//         });
-//         // Update totalPrice state
-//         this.setState({ totalPrice: totalPrice });
-//     }
+    calculateTotalPrice() {
+        let totalPrice = 0;
+        // Calculate total price based on cart items
+        // this.state.cart.forEach(item => {
+        //     const carItem=item.cartItems[0];
+        //     totalPrice += carItem.price * carItem.quantity;
+        // });
+        // // Update totalPrice state
+        // this.setState({ totalPrice: totalPrice });
+        this.state.cart.map(item => {
+            totalPrice += item.price * item.quantity;
+        });
+        // Update totalPrice state
+        // this.setState({ totalPrice: totalPrice });
+        return totalPrice;
+    }
+    handleChange = (index, field, value) => {
+        const updatedCart = [...this.state.cart];
+        updatedCart[index][field] = value;
+        this.setState({ cart: updatedCart });
+        localStorage.setItem("itemsInCart", JSON.stringify(updatedCart));
+    };
+
+    handleDelete = (name, size) => {
+        const updatedCart = this.state.cart.filter(item => !(item.name === name && item.size === size));
+        this.setState({ cart: updatedCart });
+        localStorage.setItem("itemsInCart", JSON.stringify(updatedCart));
+    };
 
     // loadShirtPhotos() {
     //     // Loop through each cart item and load its shirt photos
@@ -290,21 +302,27 @@ export default class ShoppingCart extends Component {
                 <NavigationBar />
                 <h2>Shopping Cart</h2>
                 <div>
-                    {this.state.cart.map((item, index) => (
-                        // <div key={index}>
-                        //     {item.cartItems[0].name} - Size: {item.cartItems[0].size} - Quantity: {item.cartItems[0].quantity} - Price: €{item.cartItems[0].price * item.cartItems[0].quantity}
-                        //     {/* Display shirt photos for the first item */}
-                        //     {item.cartItems[0].shirtPhotoFilename.map(photo => (
-                        //         <img key={photo._id} id={photo._id} alt="" />
-                        //     ))}
-                        // </div>
+                {this.state.cart.map((item, index) => (
                         <div key={index}>
-{item.name} -size:{item.size}-{item.quantity}--{item.price}
-                    </div>
+                            <span>{item.name} - Size:</span>
+                            <input
+                                type="text"
+                                value={item.size}
+                                onChange={e => this.handleChange(index, 'size', e.target.value)}
+                            />
+                            <span>Quantity:</span>
+                            <input
+                                type="text"
+                                value={item.quantity}
+                                onChange={e => this.handleChange(index, 'quantity', e.target.value)}
+                            />
+                            <span>Price: {item.price}</span>
+                            <button onClick={() => this.handleDelete(item.name, item.size)}>Delete</button>
+                        </div>
                     ))}
                 </div>
                 {/* <p>Total Price: €{this.state.totalPrice}</p> */}
-                {/* {this.state.cart !== undefined ? <p>Total Price: {this.calculateTotalPrice()}</p> : null} */}
+                {this.state.cart !== undefined ? <p>Total Price: {this.calculateTotalPrice()}</p> : null}
 
             </div>
         );
