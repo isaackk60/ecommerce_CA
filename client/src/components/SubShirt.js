@@ -246,7 +246,6 @@ export default class SubShirt extends Component {
 
                     </div>
                 </div>
-            </div>
         )
     }
 }

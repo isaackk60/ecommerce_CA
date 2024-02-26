@@ -100,7 +100,7 @@
 
 //         // Update cart state with itemsInCart
 //         // this.setState({ cart: itemsInCart });
-    
+
 //         // Calculate total price
 //         let totalPrice = 0;
 //         // itemsInCart.forEach(item => {
@@ -109,10 +109,10 @@
 //         this.state.cart.forEach(item => {
 //             totalPrice += item.price * item.quantity;
 //         })
-    
+
 //         // Update totalPrice state
 //         this.setState({ totalPrice: totalPrice });
-    
+
 //         // Load shirt photos
 //         this.state.cart.forEach(cartItem => {
 //             cartItem.shirtPhotoFilename.forEach(photo => {
@@ -127,7 +127,7 @@
 //             });
 //         });
 //     }
-    
+
 //     // componentDidMount(){
 //     //     const { itemsInCart } = this.props.location.state || { itemsInCart: [] };
 //     //     this.setState({ cart: itemsInCart });
@@ -152,7 +152,7 @@
 //         // formData.append("size", this.state.size)
 //         // formData.append("price", this.state.price)
 //         // formData.append("quantity", this.state.quantity)
-        
+
 
 //         // if (this.state.cart.shirtPhotoFilename) {
 //         //     for (let i = 0; i < this.state.cart.shirtPhotoFilename.length; i++) {
@@ -215,20 +215,25 @@ export default class ShoppingCart extends Component {
 
     componentDidMount() {
         // Fetch cart data from the server
+        const cartLocalStorage = JSON.parse(localStorage.getItem("itemsInCart") || "[]");
+
         console.log(localStorage.getItem("itemsInCart"))
 
-        this.setState({cart:JSON.parse(localStorage.getItem("itemsInCart"))})
+        this.setState({ cart: JSON.parse(localStorage.getItem("itemsInCart")) })
 
+        this.setState({ cart: cartLocalStorage }, () => {
+            // Calculate total price after updating state
+            this.calculateTotalPrice();
+        });
 
-
-// console.log(this.state.cart[0])
-//         let totalPrice = 0;
-//         this.state.cart.map(item => {
-//             console.log(item)
-//                         totalPrice += item.price * item.quantity;
-//                     });
-//                     // Update totalPrice state
-//                     this.setState({ totalPrice: totalPrice });
+        // console.log(this.state.cart[0])
+        //         let totalPrice = 0;
+        //         this.state.cart.map(item => {
+        //             console.log(item)
+        //                         totalPrice += item.price * item.quantity;
+        //                     });
+        //                     // Update totalPrice state
+        //                     this.setState({ totalPrice: totalPrice });
         // axios.get(`${SERVER_HOST}/cart`, { headers: { "authorization": localStorage.token } })
         //     .then(res => {
         //         // Update state with fetched cart data
@@ -245,26 +250,27 @@ export default class ShoppingCart extends Component {
         //     });
     }
 
-//     calculateTotalPrice() {
-//         let totalPrice = 0;
-//         // Calculate total price based on cart items
-//         // this.state.cart.forEach(item => {
-//         //     const carItem=item.cartItems[0];
-//         //     totalPrice += carItem.price * carItem.quantity;
-//         // });
-//         // // Update totalPrice state
-//         // this.setState({ totalPrice: totalPrice });
-//         this.state.cart.map(item => {
-// console.log(item)
-//             totalPrice += item.price * item.quantity;
-//         });
-//         // Update totalPrice state
-//         this.setState({ totalPrice: totalPrice });
-//     }
+    calculateTotalPrice() {
+        let totalPrice = 0;
+        // Calculate total price based on cart items
+        // this.state.cart.forEach(item => {
+        //     const carItem=item.cartItems[0];
+        //     totalPrice += carItem.price * carItem.quantity;
+        // });
+        // // Update totalPrice state
+        // this.setState({ totalPrice: totalPrice });
+        this.state.cart.map(item => {
+            console.log(item)
+            totalPrice += item.price * item.quantity;
+        });
+        // Update totalPrice state
+        // this.setState({ totalPrice: totalPrice });
+        return totalPrice;
+    }
 
     // loadShirtPhotos() {
     //     // Loop through each cart item and load its shirt photos
-        
+
     //     this.state.cart.forEach(item => {
     //         item.cartItems[0].shirtPhotoFilename.forEach(photo => {
     //             axios.get(`${SERVER_HOST}/shirts/photo/${photo.filename}`)
@@ -285,30 +291,39 @@ export default class ShoppingCart extends Component {
         // {this.state.cart !== undefined ? this.calculateTotalPrice() : null}
 
         // console.log(this.state.cart.map((item,index) => (item.cartItems[0].name)));
+        const groupedItems = this.state.cart.reduce((groups, item) => {
+            const group = groups.find(g => g.name === item.name);
+            if (group) {
+                group.quantity += item.quantity;
+                group.totalPrice += item.price * item.quantity;
+            } else {
+                groups.push({
+                    name: item.name,
+                    size: item.size,
+                    quantity: item.quantity,
+                    price: item.price,
+                    totalPrice: item.price * item.quantity
+                });
+            }
+            return groups;
+        }, []);
         return (
             <div>
                 <NavigationBar />
                 <h2>Shopping Cart</h2>
                 <div>
-                    {this.state.cart.map((item, index) => (
-                        // <div key={index}>
-                        //     {item.cartItems[0].name} - Size: {item.cartItems[0].size} - Quantity: {item.cartItems[0].quantity} - Price: €{item.cartItems[0].price * item.cartItems[0].quantity}
-                        //     {/* Display shirt photos for the first item */}
-                        //     {item.cartItems[0].shirtPhotoFilename.map(photo => (
-                        //         <img key={photo._id} id={photo._id} alt="" />
-                        //     ))}
-                        // </div>
+                    {groupedItems.map((item, index) => (
                         <div key={index}>
-{item.name} -size:{item.size}-{item.quantity}--{item.price}
-                    </div>
+                            {item.name} - Size: {item.size} - Quantity: {item.quantity} - Price: €{item.totalPrice}
+                        </div>
                     ))}
                 </div>
                 {/* <p>Total Price: €{this.state.totalPrice}</p> */}
-                {/* {this.state.cart !== undefined ? <p>Total Price: {this.calculateTotalPrice()}</p> : null} */}
+                {this.state.cart !== undefined ? <p>Total Price: {this.calculateTotalPrice()}</p> : null}
 
             </div>
         );
     }
-    
+
 }
 
