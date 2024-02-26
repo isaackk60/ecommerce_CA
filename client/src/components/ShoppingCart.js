@@ -267,7 +267,7 @@ export default class ShoppingCart extends Component {
         // this.setState({ totalPrice: totalPrice });
         return totalPrice;
     }
-
+    
     // loadShirtPhotos() {
     //     // Loop through each cart item and load its shirt photos
 
@@ -318,9 +318,9 @@ export default class ShoppingCart extends Component {
                         </div>
                     ))}
                 </div>
+                
                 {/* <p>Total Price: €{this.state.totalPrice}</p> */}
                 {this.state.cart !== undefined ? <p>Total Price: {this.calculateTotalPrice()}</p> : null}
-
             </div>
         );
     }
