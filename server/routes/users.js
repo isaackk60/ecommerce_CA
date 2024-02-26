@@ -14,7 +14,16 @@ const upload = multer({dest: `${process.env.UPLOADED_FILES_FOLDER}`})
 
 const emptyFolder = require('empty-folder')
 
+// const verifyUsersJWTPassword = (req, res, next) => {
+//     jwt.verify(req.headers.authorization, JWT_PRIVATE_KEY, { algorithm: "HS256" }, (err, decodedToken) => {
+//         if (err) {
+//             return next(err)
+//         }
 
+//         req.decodedToken = decodedToken
+//         return next()
+//     })
+// }
 
 const checkThatUserExistsInUsersCollection = (req, res, next) =>
 {
@@ -209,18 +218,42 @@ const logout = (req, res, next) =>
     return res.json({})
 }
 
-const getUserId = (req, res, next) => 
-{
-    usersModel.findById(req.params.id, (err, data) => 
-    {
-        if(err)
-        {
-            return next(err)
-        }  
+// const getUserById = (req, res, next) => {
+//     const token = jwt.sign({email: req.data.email, accessLevel:req.data.accessLevel}, JWT_PRIVATE_KEY, {algorithm: 'HS256', expiresIn:process.env.JWT_EXPIRY})     
+
+//     if(req.data.profilePhotoFilename)
+//     {
+//         fs.readFile(`${process.env.UPLOADED_FILES_FOLDER}/${req.data.profilePhotoFilename}`, 'base64', (err, data) => 
+//         {        
+//             if(err)
+//             {
+//                 return next(err)
+//             }
         
-        return res.json(data)
-    })
-}
+//             if(data)
+//             {  
+//                 return res.json({_id:req.data._id,name: req.data.name, accessLevel:req.data.accessLevel, profilePhoto:data, token:token})                           
+//             }   
+//             else
+//             {
+//                 return res.json({_id:req.data._id,name: req.data.name, accessLevel:req.data.accessLevel, profilePhoto:null, token:token})  
+//             }
+//         })     
+//     }
+//     else
+//     {
+//         return res.json({_id:req.data._id,name: req.data.name, accessLevel:req.data.accessLevel, profilePhoto:null, token:token})  
+//     }  
+// }
+// const getUserDocument = (req, res, next) => {
+//     usersModel.findById(req.params.id, (err, data) => {
+//         if (err) {
+//             return next(err)
+//         }
+
+//         return res.json(data)
+//     })
+// }
 
 
 // IMPORTANT
@@ -234,7 +267,27 @@ router.post(`/users/login/:email/:password`, checkThatUserExistsInUsersCollectio
 
 router.post(`/users/logout`, logout)
 
-router.get(`/users/:id`,checkThatUserExistsInUsersCollection, checkThatJWTPasswordIsValid,getUserId)
+// router.get('/users', getUserById);
+// router.get('/users/:id', getUserDocument,verifyUsersJWTPassword);
+// router.get('/users/current', (req, res) => {
+//     // Assuming the JWT token is sent in the Authorization header as a Bearer token
+//     const token = req.headers.authorization.split(' ')[1]; // Extract the token from the header
+    
+//     // Verify the JWT token to ensure it's valid and retrieve the payload (which includes the user ID)
+//     jwt.verify(token, JWT_PRIVATE_KEY, (err, decoded) => {
+//         if (err) {
+//             // Handle token verification error
+//             return res.status(401).json({ message: 'Unauthorized' });
+//         }
+        
+//         // Extract the user ID from the decoded payload
+//         const userId = decoded._id; // Assuming the user ID is stored as 'userId' in the JWT payload
+        
+//         // Now you have the user ID, you can use it as needed (e.g., to fetch user data from the database)
+//         // For demonstration purposes, let's just send the user ID back in the response
+//         res.json({ userId });
+//     });
+// });
 
 
 module.exports = router

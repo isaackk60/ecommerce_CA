@@ -24,13 +24,45 @@ export default class SubShirt extends Component {
             shirtPhotoFilename: null,
             wasSubmittedAtLeastOnce: false,
             redirectToDisplayAllShirtsInCart: false,
-            user:[] 
-            // itemsInCart:[]
+            // user:``,
+            cart:[], 
+            itemsInCart:[],
+            cartId:``
         }
     }
 
     componentDidMount() {// use link to hold state
         // this.inputToFocus.focus();
+        // axios.get(`${SERVER_HOST}/users/:id`)
+        // .then(res => 
+        // { 
+        //     this.setState({user: res.data})                                         
+        // })
+        // .catch(err =>
+        // {
+        //     // do nothing
+        // })
+        // axios.get(`${SERVER_HOST}/cart`)
+        // .then(res => 
+        // { 
+        //     this.setState({cart: res.data})    
+                                   
+        // })
+        // .catch(err =>
+        // {
+        //     // do nothing
+        // })
+        // console.log(this.state.cart._id)
+
+        // axios.get(`${SERVER_HOST}/users`, { headers: { "authorization": localStorage.token } })
+        // .then(res => {
+        //     const userData = res.data._id;
+        //     this.setState({ user: userData });
+        // })
+        // .catch(error => {
+        //     console.error('Error fetching user data:', error);
+        // });
+
         const { state } = this.props.location;
         if (state && state.shirt) {
             const shirtData = state.shirt;
@@ -53,17 +85,10 @@ export default class SubShirt extends Component {
                 });
 
             });
+            
 
         }
-        axios.get(`${SERVER_HOST}/users`)
-        .then(res => 
-        { 
-            this.setState({user: res.data})                                         
-        })
-        .catch(err =>
-        {
-            // do nothing
-        })
+        
     }
 
 
@@ -90,31 +115,40 @@ export default class SubShirt extends Component {
     //     }
 
     // }
+
+    
     handleSubmit = (e) => {
-        e.preventDefault()
 
         let formData = new FormData()
-        formData.append("userId", this.state.user._id)
+        // formData.append("userId", this.state.user)
         formData.append("name", this.state.name)
         // formData.append("colour", this.state.colour)
         formData.append("size", this.state.size)
         formData.append("price", this.state.price)
-        formData.append("quantity", this.state.quantity)
-
+        formData.append("quantity", this.state.quantity)        
+console.log(this.state.shirtPhotoFilename)
         if (this.state.shirtPhotoFilename) {
+            console.log(1)
             for (let i = 0; i < this.state.shirtPhotoFilename.length; i++) {
                 formData.append("cartPhotos", this.state.shirtPhotoFilename[i])
+                console.log(2)
             }
         }
 
-        axios.post(`${SERVER_HOST}/carts`, formData, { headers: { "authorization": localStorage.token, "Content-type": "multipart/form-data" } })
+        axios.post(`${SERVER_HOST}/cart`, formData, { headers: { "authorization": localStorage.token, "Content-type": "multipart/form-data" } })
             .then(res => {
+                const cartId = res.data._id;
+                this.setState({ cartId: cartId });
                 this.setState({ redirectToDisplayAllShirtsInCart: true })
             })
             .catch(err => {
                 this.setState({ wasSubmittedAtLeastOnce: true })
             })
     }
+
+
+
+
 
     // handleQuantityChange = (e) => {
     //     const quantity = parseInt(e.target.value);
@@ -123,12 +157,13 @@ export default class SubShirt extends Component {
     
     // addToCart = () => {
     //     // Add the selected shirt to the shopping cart
-    //     const { name, size, price, quantity } = this.state;
+    //     const { name, size, price, quantity,shirtPhotoFilename } = this.state;
     //     const item = {
     //         name,
     //         size,
     //         price,
-    //         quantity
+    //         quantity,
+    //         shirtPhotoFilename
     //     };
     //     console.log("Added to cart:", item);
 
@@ -136,10 +171,16 @@ export default class SubShirt extends Component {
     //     this.setState({ redirectToCart: true, itemsInCart: updatedItemsInCart });
     //     // this.setState({ redirectToCart: true });
     // };
+    // handleClick=()=>{
+    //     // this.addToCart();
+    //     this.handleSubmit();
+        
+    // }
 
 
     render() {
-        console.log(this.state.user)
+        
+        // console.log(this.state.user)
         let errorMessage = "";
         if (this.state.wasSubmittedAtLeastOnce) {
             errorMessage = <div className="error">Error: All fields must be filled in<br /></div>;
@@ -150,13 +191,16 @@ export default class SubShirt extends Component {
         // if (this.state.redirectToCart) {
         //     return <Link to={{ pathname: "/shoppingCart", state: { itemsInCart: this.state.itemsInCart } }} onclick={this.handleSubmit}/>;
         // }
+        console.log(this.state.itemsInCart )
+        console.log(this.state.shirtPhotoFilename)
+        console.log(this.state.cartId)
 
         return (
             <div>
                 <NavigationBar/>
                 <div className="subShirtContainer">
-                {this.state.redirectToDisplayAllShirtsInCart ? <Redirect to={{ pathname: `/shoppingCart/${this.state.user._id}`, state: { itemsInCart: this.state } }} /> : null}
-
+                {/* {this.state.redirectToDisplayAllShirtsInCart ? <Redirect to={{ pathname: `/shoppingCart/`+this.state.cart._id, state: { itemsInCart: this.state.itemsInCart } }}  /> : null} */}
+{this.state.redirectToDisplayAllShirtsInCart ? <Redirect to={"/ShoppingCart/" + this.state.cartId} /> : null}
 
                     {errorMessage}
                     <div>
