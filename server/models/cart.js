@@ -6,6 +6,7 @@ let cartPhotosSchema = new mongoose.Schema(
     })
 
 let differentItemInCart = new mongoose.Schema({
+    // email: {type: String, required:true},
     name: {type: String, require:true},
     // colour: {type: String, required:true},
     size: {type: String, required:true},
