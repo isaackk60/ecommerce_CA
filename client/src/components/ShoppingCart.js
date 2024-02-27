@@ -367,6 +367,8 @@ export default class ShoppingCart extends Component {
                 <div>
                 {this.state.cart.map((item, index) => (
                         <div key={index}>
+                            {/* Display shirt photo */}
+                            <img src={`${SERVER_HOST}/shirts/photo/${item.shirtPhotoFilename}`} alt="Shirt" />
                             <span>{item.name} - Size:</span>
                             <select
                                 value={item.size}

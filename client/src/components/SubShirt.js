@@ -273,6 +273,7 @@ export default class SubShirt extends Component {
                     </Form>
                     <p>{this.state.description}</p>
                     {soldOrForSale}
+                    <BuyShirt/>
                 </div>
             </div>
         )
