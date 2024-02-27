@@ -45,8 +45,8 @@ export default class Main extends Component
         this.setState({ sortType: event.target.value });
     };
 
-    handleGenderFilterChange = (event) => {
-        this.setState({ genderFilter: event.target.value });
+    handleGenderFilterChange = (value) => {
+        this.setState({ genderFilter: value });
     };
   
     render() 

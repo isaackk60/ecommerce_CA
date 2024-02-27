@@ -338,7 +338,7 @@ export default class ShoppingCart extends Component {
     // }
 
     render() {
-        console.log(this.state.cart[0])
+        // console.log(this.state.cart[0])
         // {this.state.cart !== undefined ? this.calculateTotalPrice() : null}
 
         // console.log(this.state.cart.map((item,index) => (item.cartItems[0].name)));

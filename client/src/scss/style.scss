@@ -1,40 +1,47 @@
-
 // *************main*********************
-.wholeMain{
-    padding-top:10px;
-    padding-bottom:10px;
+.wholeMain {
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
-.main-container{
-    display:flex;
+
+.main-container {
+    display: flex;
     flex-direction: row; //ycc added this
     justify-content: space-evenly; //horizontally
     flex-wrap: wrap;
     padding-top: 10px;
     padding-bottom: 10px;
-    .shirtPhotos{
-        width:28vw;
-        img{
-            width:28vw;
+
+    .shirtPhotos {
+        width: 28vw;
+
+        img {
+            width: 28vw;
         }
     }
-    .shirt-container{
+
+    .shirt-container {
         padding-top: 10px;
         padding-bottom: 10px;
     }
-    .shirt-container .h2-text{
+
+    .shirt-container .h2-text {
         padding: 0px;
         font-size: 30px;
     }
-    .shirt-price{
+
+    .shirt-price {
         padding-bottom: 3px;
         text-align: center;
     }
-    .admin-edit-delete-shirt{
-        display:flex;
+
+    .admin-edit-delete-shirt {
+        display: flex;
         flex-direction: row;
-        margin:auto;
+        margin: auto;
         width: 50%;
     }
+
     a {
         text-decoration: none;
     }
@@ -42,12 +49,14 @@
 
 
 //subShirt
-.subShirtContainer{
-    display:flex;
-    img{
-        width:50vw;
+.subShirtContainer {
+    display: flex;
+
+    img {
+        width: 50vw;
     }
 }
+
 //about
 
 @mixin title($font-size: 32px, $font-weight: 500) {
@@ -71,6 +80,7 @@ p {
     margin: 20px 70px;
     max-width: 800px;
 }
+
 .about_main {
     display: flex;
     flex-direction: column;
@@ -78,8 +88,9 @@ p {
     background-color: #f1f1f1;
     color: #002b45;
     font-family: 'Poppins', sans-serif;
-    p{
-        margin-top:0px;
+
+    p {
+        margin-top: 0px;
     }
 }
 
@@ -116,25 +127,31 @@ p {
     }
 
 }
-.image_container{
+
+.image_container {
     display: flex;
     margin: 20px;
     width: 70vw;
-    img{
-        width:55%;
+
+    img {
+        width: 55%;
     }
 }
-.about_left_text{
+
+.about_left_text {
     display: flex;
     align-items: flex-start;
     flex-direction: column;
-    p{
-        margin-left:0px;
+
+    p {
+        margin-left: 0px;
     }
-    h2{
+
+    h2 {
         padding-left: 0px;
     }
 }
+
 //login and sign up
 
 .login_main {
@@ -194,65 +211,76 @@ header {
 }
 
 //FOOTER AND NAVIGATION BAR
-#footer-container{ 
-    #BiggerSize{
+#footer-container {
+    #BiggerSize {
         font-size: large;
     }
+
     #copyright {
         background-color: #002134;
         text-align: center;
         padding: 20px;
     }
+
     #block {
         display: flex;
         justify-content: space-evenly;
         padding: 20px;
     }
+
     background-color: #0c405f;
     color: white;
     display: flex;
     flex-direction: column;
 }
-#footer-container a{
+
+#footer-container a {
     color: white;
     font-family: urw-din, sans-serif;
     font-weight: 400;
     text-decoration: none;
     border-left: 3px solid transparent;
     padding-left: 4px;
-    transition:  .3s;
+    transition: .3s;
 }
-#footer-container a:hover{
+
+#footer-container a:hover {
     color: rgba(255, 255, 255, 0.767);
     border-left: 3px solid white;
 }
 
 //NAVIGATION BAR
-#navigationbar-container{
-    overflow: hidden; //when scrolled, wont see it
+#navigationbar-container {
+    // overflow: hidden; //when scrolled, wont see it
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     background-color: #0c405f;
     align-items: center;
 }
-#navigationbar-container a{
+
+#navigationbar-container a {
     color: white;
     text-decoration: none;
     border-bottom: 3px solid transparent;
-    padding: 13px 15px;  //padding is needed here too for the hover
-    transition:  .4s;       //try add width if possible
+    padding: 13px 15px; //padding is needed here too for the hover
+    transition: .4s; //try add width if possible
 }
+
 //Nav Hover
-#navigationbar-container a:hover{
+#navigationbar-container a:hover {
     color: rgba(255, 255, 255, 0.767);
     border-bottom: 3px solid white;
 }
-#navigationbar-container .splitL{
+
+#navigationbar-container .splitL {
     float: left;
+    display: flex;
 }
-#navigationbar-container .splitC{
+
+#navigationbar-container .splitC {
     float: center;
+
     img {
         display: block;
         margin-left: auto;
@@ -260,25 +288,35 @@ header {
         width: 50%;
     }
 }
-#navigationbar-container .splitR{
+
+#navigationbar-container .splitR {
     float: right;
 }
-#navigationbar-container .splitL, .splitC, .splitR{
-    flex: 1; /* Add this line */
+
+#navigationbar-container,
+.splitC,
+.splitR {
+    flex: 1;
+    /* Add this line */
     text-align: center;
     padding: 11px 15px;
 }
+
 //Nav mobile version
-@media screen and (max-width: 1460px) {
-    #navigationbar-container .splitL, .splitC, .splitR{
-       display: inline-grid; 
+@media screen and (max-width: 1200px) {
+
+    #navigationbar-container .splitL,
+    .splitC,
+    .splitR {
+        display: inline-grid;
     }
-  }
+}
 
 
 /*                Contact Page                */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Protest+Riot&display=swap');
-.Contactpage{
+
+.Contactpage {
     background-color: #efe6e6;
     display: flex;
     flex-direction: column;
@@ -290,63 +328,64 @@ header {
 //     padding: 30px 10px 0 20px;
 // }
 
-.contact{
+.contact {
     margin-top: 100px;
-    text-align:center;
+    text-align: center;
 
-    h1{
+    h1 {
         font-size: 50px;
         text-decoration: underline;
-        
-        font-family: "Montserrat", sans-serif;  
+
+        font-family: "Montserrat", sans-serif;
     }
-    p{
+
+    p {
         font-size: 20px;
         margin: auto;
         font-family: "Montserrat", sans-serif;
         font-weight: 400;
         font-style: normal;
     }
-    
+
 }
 
-.GetInTouchContainer{
+.GetInTouchContainer {
     display: flex;
     justify-content: space-evenly;
     margin-top: 100px;
 
-    h3{
-        font-family: "Montserrat", sans-serif;  
-        font-size: 35px; 
-    }
-    
-    p{
-        width: 420px;
-    font-size: 12px;
-    // margin: 5px 20px 0px 30px;
-    font-family: "Montserrat", sans-serif;
-    font-optical-sizing: 300;
-    font-weight: 400;
-    font-style: normal;
+    h3 {
+        font-family: "Montserrat", sans-serif;
+        font-size: 35px;
     }
 
-    .FontIcon{
+    p {
+        width: 420px;
+        font-size: 12px;
+        // margin: 5px 20px 0px 30px;
+        font-family: "Montserrat", sans-serif;
+        font-optical-sizing: 300;
+        font-weight: 400;
+        font-style: normal;
+    }
+
+    .FontIcon {
         margin: 10px;
         font-size: 20px;
     }
 
-    .Icon{
+    .Icon {
         padding: 10px;
     }
 }
 
-.fromContainer{
+.fromContainer {
     background-color: #f0d6d6;
     width: 600px;
     display: flex;
 
-    h2{
-        font-family: "Montserrat", sans-serif;  
+    h2 {
+        font-family: "Montserrat", sans-serif;
         font-weight: 600;
         font-size: 40px;
         color: white;
@@ -354,20 +393,20 @@ header {
     }
 }
 
-.input-container{
+.input-container {
     display: flex;
     justify-content: center;
     align-items: center;
     // padding: 20px;
 
-    input{
+    input {
         display: block;
         width: 200px;
-        margin:20px ;
+        margin: 20px;
     }
 }
 
-.map{
+.map {
     margin-top: 50px;
     margin-left: 60px;
     border: 0;
@@ -384,90 +423,129 @@ form {
     // align-items: center;
     // flex-direction: row;
 
-    input{
-    border-radius: 2px;
-    border:0;
-    padding:1em ;
-    width: 100%;
-    margin-top: 10px;
-    // font-family: 'Merriweather', sans-serif;
-    border: 1px solid #ccc;
-    font-family: "Montserrat", sans-serif;  
+    input {
+        border-radius: 2px;
+        border: 0;
+        padding: 1em;
+        width: 100%;
+        margin-top: 10px;
+        // font-family: 'Merriweather', sans-serif;
+        border: 1px solid #ccc;
+        font-family: "Montserrat", sans-serif;
     }
-   textarea {
-    height: 126px;
-    width: 300px;
-    height: 190px;
-    margin-top: 10px;
-    border-radius: 4px;
-    border: 2px solid #ccc;
-    box-sizing: border-box;
-    font-size: 16px;
-    resize: none;
-    font-family: "Montserrat", sans-serif;  
-   }
- }
 
- .ContainerInForm{
+    textarea {
+        height: 126px;
+        width: 300px;
+        height: 190px;
+        margin-top: 10px;
+        border-radius: 4px;
+        border: 2px solid #ccc;
+        box-sizing: border-box;
+        font-size: 16px;
+        resize: none;
+        font-family: "Montserrat", sans-serif;
+    }
+}
+
+.ContainerInForm {
     display: flex;
     align-items: center;
- }
+}
 
-.inputContainer{
+.inputContainer {
     display: flex;
     flex-direction: column;
- }
+}
 
 
- .TextareaMessage{
+.TextareaMessage {
     display: flex;
     margin-left: 70px
- }
+}
+
 /* form end*/
 /*                    Contact Page End                */
 /*                        Cart                    */
-.cart-container{
-display:flex;
-flex-direction: column;
-width: 80vw;
-margin: 0px 10vw;
+.cart-container {
+    display: flex;
+    flex-direction: column;
+    width: 80vw;
+    margin: 0px 10vw;
 }
-.each-item-cart{
+
+.each-item-cart {
     display: flex;
     justify-content: space-between;
     border: solid 2px black;
     border-bottom: none;
-    padding: 20px; 
+    padding: 20px;
 
 }
 
 
 
-.splitL .dropdown {
+// .splitL .dropdown {
+//     position: relative;
+//     display: inline-block;
+// }
+
+// .splitL .dropdown-content {
+//     display: none;
+//     position: absolute;
+//     background-color: #0c405f;
+//     min-width: 160px;
+//     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+//     z-index: 1;
+// }
+
+// .splitL .dropdown:hover .dropdown-content {
+//     display: block;
+// }
+.dropdown {
+    // position: absolute;
     position: relative;
-    display: inline-block;
 }
 
-.splitL .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #700f0f;
-    min-width: 160px;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+/* Dropdown button */
+.dropdown .dropbtn {
+    font-family: inherit;
+    /* Important for vertical align on mobile phones */
+    margin: 0;
+    /* Important for vertical align on mobile phones */
+}
+
+//   /* Add a red background color to navbar links on hover */
+.navbar .select-gender:hover,
+.dropdown:hover .dropbtn {
+    color:#767676;
+}
+
+
+/* Links inside the dropdown */
+.dropdown-content {
+    position: absolute; /* Position the dropdown absolutely */
+    // top: 100%; /* Position it below the dropdown */
+    // left: 0;
+    // position: fixed;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
 }
 
-.splitL .dropdown:hover .dropdown-content {
+.dropdown-content .select-gender {
+    float: none;
+    background-color: #0c405f;
+    padding: 12px 16px;
+    text-decoration: none;
     display: block;
+    text-align: left;
 }
 
-// .splitL .dropdown-content a {
-//     color: black;
-//     padding: 12px 16px;
-//     text-decoration: none;
-//     display: block;
+//   /* Add a grey background color to dropdown links on hover */
+// .dropdown-content .select-gender:hover {
+//     background-color: #;
 // }
 
-// .splitL .dropdown-content a:hover {
-//     background-color: #9a3737;
-// }
+#select-container {
+    display: none;
+}
