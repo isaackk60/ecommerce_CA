@@ -14,7 +14,8 @@ import EditCar from "./components/EditCar"
 import DeleteCar from "./components/DeleteCar"
 import DisplayAllCars from "./components/DisplayAllCars"
 import LoggedInRoute from "./components/LoggedInRoute"
-import BuyCar from "./components/BuyCar"
+// import BuyCar from "./components/BuyCar"
+import BuyShirt from "./components/BuyShirt"
 import PayPalMessage from "./components/PayPalMessage"
 
 import Contact from "./components/Contact"
@@ -52,7 +53,8 @@ export default class App extends Component
                     <Route exact path="/ResetDatabase" component={ResetDatabase} />                    
                     {/* <Route exact path="/" component={DisplayAllCars} /> */}
                     <Route exact path="/Login" component={Login} />
-                    <Route exact path="/BuyCar/:id" component={BuyCar} />
+                    {/* <Route exact path="/BuyCar/:id" component={BuyCar} /> */}
+                    <Route exact path="/BuyShirt/:id" component={BuyShirt} />
                     <Route exact path="/PayPalMessage/:messageType/:payPalPaymentID" component={PayPalMessage}/>
                     <Route exact path="/Contact" component={Contact} />  
                     {/* <Route exact path="/ShoppingCart/:id" component={ShoppingCart} />                       */}
@@ -66,7 +68,7 @@ export default class App extends Component
                     <LoggedInRoute exact path="/EditTShirt/:id" component={EditTShirt} />
                     <LoggedInRoute exact path="/DeleteTShirt/:id" component={DeleteTShirt} />
                     <LoggedInRoute exact path="/SubShirt/:id" component={SubShirt} />
-                    <Route exact path="/Main" component={Main}/>
+                    <Route exact path="/main" component={Main}/>
                     <Route exact path="/About" component={About}/>
                     <Route exact path="/NavigationBar" component={NavigationBar}/>
                     <Route exact path="/BuyShirt" component={BuyShirt}/>

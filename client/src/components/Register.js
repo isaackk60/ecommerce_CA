@@ -1,6 +1,7 @@
 import React, {Component} from "react"
 import {Redirect, Link} from "react-router-dom"
 import axios from "axios"
+import NavigationBar from "./NavigationBar"
 
 import LinkInClass from "../components/LinkInClass"
 
@@ -72,11 +73,13 @@ export default class Register extends Component
         }          
     
         return (
+            <>
+            <NavigationBar />
             <main className="login_main">
             <div className="outside-form-container">
         <form className="form-container" noValidate = {true} id = "loginOrRegistrationForm">
        
-            {this.state.isRegistered ? <Redirect to="/Main"/> : null} 
+            {this.state.isRegistered ? <Redirect to="/main"/> : null} 
             {errorMessage}
             <div className="loginHeaderContainer">
                         <Link className="anotherLoginHeader" to={"/Login"}>Login</Link>
@@ -129,11 +132,12 @@ export default class Register extends Component
             
             <span>
             <LinkInClass value="Register New User" className="green-button" onClick={this.handleSubmit} />
-            <Link className="red-button" to={"/Main"}>Cancel</Link>   
+            <Link className="red-button" to={"/main"}>Cancel</Link>   
             </span>
         </form>
         </div>
         </main>
+        </>
         )
     }
 }

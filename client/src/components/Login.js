@@ -1,6 +1,7 @@
 import React, {Component} from "react"
 import {Redirect, Link} from "react-router-dom"
 import axios from "axios"
+import NavigationBar from "./NavigationBar"
 
 import LinkInClass from "../components/LinkInClass"
 import {SERVER_HOST} from "../config/global_constants"
@@ -47,7 +48,8 @@ export default class Login extends Component
 
 
     render()
-    {         
+    {   
+            
         let errorMessage = "";
         if(this.state.wasSubmittedAtLeastOnce)
         {
@@ -55,6 +57,8 @@ export default class Login extends Component
         }
         
         return (
+            <>
+<NavigationBar />  
             <main className="login_main">
             <div className="outside-form-container">
             <form className="form-container" noValidate = {true} id = "loginOrRegistrationForm">
@@ -64,7 +68,7 @@ export default class Login extends Component
                         <Link className="anotherLoginHeader" to={"/Register"}>Sign Up</Link>
                     </div>
                 
-                {this.state.isLoggedIn ? <Redirect to="/DisplayAllCars"/> : null} 
+                {this.state.isLoggedIn ? <Redirect to="/main"/> : null} 
                 {errorMessage}
                 <input 
                     type = "email" 
@@ -85,11 +89,12 @@ export default class Login extends Component
                 /><br/><br/>
                 <span>
                 <LinkInClass value="Login" className="green-button" onClick={this.handleSubmit}/> 
-                <Link className="red-button" to={"/DisplayAllCars"}>Cancel</Link>  
+                <Link className="red-button" to={"/main"}>Cancel</Link>  
                 </span>
             </form>
             </div>
             </main>
+            </>
         )
     }
 }

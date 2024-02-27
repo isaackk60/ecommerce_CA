@@ -219,7 +219,6 @@ header {
 }
 
 #navigationbar-container {
-  overflow: hidden;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -242,6 +241,7 @@ header {
 
 #navigationbar-container .splitL {
   float: left;
+  display: flex;
 }
 
 #navigationbar-container .splitC {
@@ -258,20 +258,27 @@ header {
   float: right;
 }
 
-#navigationbar-container .splitL, .splitC, .splitR {
-  flex: 1; /* Add this line */
+#navigationbar-container,
+.splitC,
+.splitR {
+  flex: 1;
+  /* Add this line */
   text-align: center;
   padding: 11px 15px;
 }
 
-@media screen and (max-width: 1460px) {
-  #navigationbar-container .splitL, .splitC, .splitR {
+@media screen and (max-width: 1200px) {
+  #navigationbar-container .splitL,
+  .splitC,
+  .splitR {
     display: inline-grid;
   }
 }
 /*                Contact Page                */
 .Contactpage {
   background-color: #efe6e6;
+  display: flex;
+  flex-direction: column;
 }
 
 .contact {
@@ -285,9 +292,8 @@ header {
 }
 .contact p {
   font-size: 20px;
-  margin: 50px 150px 0px 150px;
+  margin: auto;
   font-family: "Montserrat", sans-serif;
-  font-optical-sizing: 300;
   font-weight: 400;
   font-style: normal;
 }
@@ -391,4 +397,56 @@ form textarea {
 }
 
 /* form end*/
-/*                    Contact Page End                *//*# sourceMappingURL=style.css.map */
+/*                    Contact Page End                */
+/*                        Cart                    */
+.cart-container {
+  display: flex;
+  flex-direction: column;
+  width: 80vw;
+  margin: 0px 10vw;
+}
+
+.each-item-cart {
+  display: flex;
+  justify-content: space-between;
+  border: solid 2px black;
+  border-bottom: none;
+  padding: 20px;
+}
+
+.dropdown {
+  position: relative;
+}
+
+/* Dropdown button */
+.dropdown .dropbtn {
+  font-family: inherit;
+  /* Important for vertical align on mobile phones */
+  margin: 0;
+  /* Important for vertical align on mobile phones */
+}
+
+.navbar .select-gender:hover,
+.dropdown:hover .dropbtn {
+  color: #767676;
+}
+
+/* Links inside the dropdown */
+.dropdown-content {
+  position: absolute; /* Position the dropdown absolutely */
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.dropdown-content .select-gender {
+  float: none;
+  background-color: #0c405f;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+#select-container {
+  display: none;
+}/*# sourceMappingURL=style.css.map */

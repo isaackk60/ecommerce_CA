@@ -54,8 +54,9 @@ export default class ShirtBlock extends Component {
                     <div className="shirtPhotos">
                         {this.props.shirt.shirtPhotoFilename.map(photo => <img key={photo._id} id={photo._id} alt="" />)}
                     </div>
-                    <h2 className="h2-text">{this.props.shirt.name}</h2>
-                    <div className="shirt-price">{this.props.shirt.price}</div>
+                    <h2>{this.props.shirt.name}</h2>
+                    <div>{this.props.shirt.price}</div>
+                    <div>{this.props.shirt.gender}</div>
                 </Link>
 
                 <div className="admin-edit-delete-shirt">

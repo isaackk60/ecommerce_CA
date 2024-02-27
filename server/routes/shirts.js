@@ -51,7 +51,7 @@ const createNewtShirtDocument = (req, res, next) =>
     // tShirtDetails.quantity = req.body.quantity
     tShirtDetails.stock = req.body.stock
     tShirtDetails.description = req.body.description
-
+    tShirtDetails.gender = req.body.gender
     // add the tShirt's photos to the tShirtDetails JSON object
     tShirtDetails.shirtPhotoFilename = []
                 

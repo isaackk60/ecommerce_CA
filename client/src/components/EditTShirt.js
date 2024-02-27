@@ -19,6 +19,7 @@ export default class EditTShirt extends Component {
             description: ``,
             // quantity: ``,
             stock: ``,
+            gender:``,
             shirtPhotoFilename: null,
             redirectToDisplayAllShirts: localStorage.accessLevel < ACCESS_LEVEL_NORMAL_USER,
             wasSubmittedAtLeastOnce: false
@@ -37,7 +38,8 @@ export default class EditTShirt extends Component {
                     price: res.data.price,
                     description: res.data.description,
                     // quantity: res.data.quantity
-                    stock: res.data.stock
+                    stock: res.data.stock,
+                    gender:res.data.gender
                 })
             })
             .catch(err => {
@@ -63,7 +65,8 @@ export default class EditTShirt extends Component {
             price: this.state.price,
             description: this.state.description,
             // quantity: this.state.quantity
-            stock: this.state.stock
+            stock: this.state.stock,
+            gender:this.state.gender
         }
 
 
@@ -152,6 +155,15 @@ export default class EditTShirt extends Component {
                         </Form.Control>
                     </Form.Group>
 
+                    <Form.Group controlId="gender">
+                        <Form.Label>Gender</Form.Label>
+                        <Form.Control as="select" name="gender" value={this.state.gender} onChange={this.handleChange}>
+                            <option value="">Select Gender</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="unisex">UniSex</option>
+                        </Form.Control>
+                    </Form.Group>
 
                     <Form.Group controlId="price">
                         <Form.Label>Price</Form.Label>

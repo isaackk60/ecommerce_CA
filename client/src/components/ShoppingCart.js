@@ -340,7 +340,7 @@ export default class ShoppingCart extends Component {
     // }
 
     render() {
-        console.log(this.state.cart[0])
+        // console.log(this.state.cart[0])
         // {this.state.cart !== undefined ? this.calculateTotalPrice() : null}
 
         // console.log(this.state.cart.map((item,index) => (item.cartItems[0].name)));
@@ -364,12 +364,13 @@ export default class ShoppingCart extends Component {
             <div>
                 <NavigationBar />
                 <h2>Shopping Cart</h2>
-                <div>
+                <div className="cart-container">
                 {this.state.cart.map((item, index) => (
-                        <div key={index}>
+                        <div key={index} className="each-item-cart">
+                            <div>
                             {/* Display shirt photo */}
                             <img src={`${SERVER_HOST}/shirts/photo/${item.shirtPhotoFilename}`} alt="Shirt" />
-                            <span>{item.name} - Size:</span>
+                            <h3>{item.name} </h3>
                             <select
                                 value={item.size}
                                 onChange={e => this.handleChange(index, 'size', e.target.value)}
@@ -380,13 +381,20 @@ export default class ShoppingCart extends Component {
                                 <option value="L">L</option>
                                 <option value="XL">XL</option>
                             </select>
-                            <span>Quantity:</span>
+                            {/* <span>Quantity:</span> */}
+                            
+                            <div>{item.price}</div>
+
                             <button onClick={() => this.handleChange(index, 'quantity', Math.max(1, item.quantity - 1))}>-</button>
                             <span>{item.quantity}</span>
                             <button onClick={() => this.handleChange(index, 'quantity', item.quantity + 1)}>+</button>
-                            <span>Price: {item.price}</span>
+                            </div>
+                            <div>
                             <button onClick={() => this.handleDelete(item.name, item.size)}>Delete</button>
+                            </div>
+                            
                         </div>
+                        
                     ))}
                     <BuyShirt price={this.calculateTotalPrice()}/>
                 </div>
