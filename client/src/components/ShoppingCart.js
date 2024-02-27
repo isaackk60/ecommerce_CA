@@ -198,6 +198,7 @@ import React, { Component } from "react";
 import NavigationBar from "./NavigationBar";
 import { SERVER_HOST } from "../config/global_constants";
 import axios from "axios";
+import BuyShirt from "./BuyShirt";
 
 export default class ShoppingCart extends Component {
     constructor(props) {
@@ -384,6 +385,7 @@ export default class ShoppingCart extends Component {
                             <button onClick={() => this.handleDelete(item.name, item.size)}>Delete</button>
                         </div>
                     ))}
+                    <BuyShirt price={this.calculateTotalPrice()}/>
                 </div>
                 
                 {/* <p>Total Price: €{this.state.totalPrice}</p> */}
