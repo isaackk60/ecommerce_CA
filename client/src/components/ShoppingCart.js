@@ -137,14 +137,16 @@
 //     }
 // }
 
-
 import React, { Component } from "react";
-import axios from "axios";
 import { Redirect } from "react-router-dom";
 import { SANDBOX_CLIENT_ID, SERVER_HOST } from "../config/global_constants";
 import PayPalMessage from "./PayPalMessage";
 import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
-import NavigationBar from "./NavigationBar";
+import Form from "react-bootstrap/Form"
+import NavigationBar from "./NavigationBar"
+
+import { SERVER_HOST } from "../config/global_constants";
+import axios from "axios"
 
 export default class ShoppingCart extends Component {
     constructor(props) {
@@ -156,98 +158,54 @@ export default class ShoppingCart extends Component {
             payPalOrderID: null,
             totalPrice: 0,
             itemsInCart: [],
+            cart: [],
         };
     }
 
-    componentDidMount() {
+    render() {
         const { itemsInCart } = this.props.location.state || { itemsInCart: [] };
+
         let totalPrice = 0;
-        itemsInCart.forEach((item) => {
+        // Calculate total price based on cart items
+        // this.state.cart.forEach(item => {
+        //     const carItem=item.cartItems[0];
+        //     totalPrice += carItem.price * carItem.quantity;
+        // });
+        // // Update totalPrice state
+        // this.setState({ totalPrice: totalPrice });
+        this.state.cart.map(item => {
             totalPrice += item.price * item.quantity;
         });
-        this.setState({ itemsInCart, totalPrice }); // Update itemsInCart and totalPrice in state
-    }
-
-    createOrder = (data, actions) => {
-        return actions.order.create({
-            purchase_units: [
-                {
-                    amount: {
-                        value: this.state.totalPrice.toFixed(2), // Ensure total price is formatted properly
-                        currency_code: "EUR",
-                    },
-                },
-            ],
-        });
-    };
-
-    onApprove = (paymentData) => {
-        const { itemsInCart } = this.state;
-        console.log("Items in cart:", itemsInCart);
-        console.log("Payment data:", paymentData);
-        console.log("Data sent to server:", {
-          orderID: paymentData.orderID,
-          items: itemsInCart.map((item) => ({
-              shirtID: item.id,
-              price: item.price,
-          })),
-      });
-        axios
-            .post(
-                `${SERVER_HOST}/shirtsales`,
-                {
-                    orderID: paymentData.orderID,
-                    items: itemsInCart.map((item) => ({
-                        shirtID: item.id,
-                        price: item.price,
-                    })),
-                },
-                { headers: { authorization: localStorage.token } }
-            )
-            .then((res) => {
-                this.setState({
-                    payPalMessageType: PayPalMessage.messageType.SUCCESS,
-                    payPalOrderID: paymentData.orderID,
-                    redirectToPayPalMessage: true,
-                });
-            })
-            .catch((errorData) => {
-                this.setState({
-                    payPalMessageType: PayPalMessage.messageType.ERROR,
-                    redirectToPayPalMessage: true,
-                });
-            });
-    };
-
-    onError = (errorData) => {
-        this.setState({
-            payPalMessageType: PayPalMessage.messageType.ERROR,
-            redirectToPayPalMessage: true,
-        });
-    };
-
-    onCancel = (cancelData) => {
-        this.setState({
-            payPalMessageType: PayPalMessage.messageType.CANCEL,
-            redirectToPayPalMessage: true,
-        });
-    };
-
-    render() {
-        const { itemsInCart } = this.state;
 
         return (
             <div>
                 <NavigationBar />
                 <h2>Shopping Cart</h2>
-                <ul>
-                    {itemsInCart.map((item, index) => (
-                        <li key={index}>
-                            {item.name} - Quantity: {item.quantity} - Price: €{item.price * item.quantity}
-                        </li>
+                <div>
+                {this.state.cart.map((item, index) => (
+                        <div key={index}>
+                            <span>{item.name} - Size:</span>
+                            <select
+                                value={item.size}
+                                onChange={e => this.handleChange(index, 'size', e.target.value)}
+                            >
+                                <option value="XS">XS</option>
+                                <option value="S">S</option>
+                                <option value="M">M</option>
+                                <option value="L">L</option>
+                                <option value="XL">XL</option>
+                            </select>
+                            <span>Quantity:</span>
+                            <button onClick={() => this.handleChange(index, 'quantity', Math.max(1, item.quantity - 1))}>-</button>
+                            <span>{item.quantity}</span>
+                            <button onClick={() => this.handleChange(index, 'quantity', item.quantity + 1)}>+</button>
+                            <span>Price: {item.price}</span>
+                            <button onClick={() => this.handleDelete(item.name, item.size)}>Delete</button>
+                        </div>
                     ))}
-                </ul>
-                <p>Total Price: €{this.state.totalPrice}</p>
+                </div>
+                {/* <p>Total Price: €{this.state.totalPrice}</p> */}
+                {this.state.cart !== undefined ? <p>Total Price: {this.calculateTotalPrice()}</p> : null}
                 <div>
                     {this.state.redirectToPayPalMessage ? (
                         <Redirect
@@ -260,8 +218,10 @@ export default class ShoppingCart extends Component {
                     </PayPalScriptProvider>
                 </div>
             </div>
+            
         );
     }
+    
 }
 
 

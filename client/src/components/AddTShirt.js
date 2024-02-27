@@ -55,8 +55,7 @@ export default class AddTShirt extends Component {
         formData.append("stock", this.state.stock)
         formData.append("description", this.state.description)
         formData.append("gender", this.state.gender)
-
-
+        console.log(this.state.shirtPhotoFilename)
         if (this.state.shirtPhotoFilename) {
             for (let i = 0; i < this.state.shirtPhotoFilename.length; i++) {
                 formData.append("shirtPhotos", this.state.shirtPhotoFilename[i])

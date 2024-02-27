@@ -4,7 +4,6 @@ import {Link} from "react-router-dom"
 import axios from "axios"
 import NavigationBar from "./NavigationBar"
 import ShirtBlock from "./ShirtBlock"
-import Logout from "./Logout"
 
 import {ACCESS_LEVEL_GUEST, ACCESS_LEVEL_ADMIN, SERVER_HOST} from "../config/global_constants"
 
@@ -35,7 +34,7 @@ export default class Main extends Component
         {
             // do nothing
         })
-        console.log(this.state.shirts)
+
     }
 
     handleSearchInputChange = (event) => {

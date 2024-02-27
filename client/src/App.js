@@ -56,7 +56,8 @@ export default class App extends Component
                     <Route exact path="/BuyShirt/:id" component={BuyShirt} />
                     <Route exact path="/PayPalMessage/:messageType/:payPalPaymentID" component={PayPalMessage}/>
                     <Route exact path="/Contact" component={Contact} />  
-                    <Route exact path="/ShoppingCart" component={ShoppingCart} />                      
+                    {/* <Route exact path="/ShoppingCart/:id" component={ShoppingCart} />                       */}
+                    <Route exact path="/ShoppingCart/" component={ShoppingCart} />  
                     <LoggedInRoute exact path="/Logout" component={Logout} />
                     <LoggedInRoute exact path="/AddCar" component={AddCar} />
                     <LoggedInRoute exact path="/EditCar/:id" component={EditCar} />
@@ -69,7 +70,7 @@ export default class App extends Component
                     <Route exact path="/main" component={Main}/>
                     <Route exact path="/About" component={About}/>
                     <Route exact path="/NavigationBar" component={NavigationBar}/>
-                    <Route path="*" component={DisplayAllCars}/>                            
+                    <Route path="*" component={Main}/>                            
                 </Switch>
             </BrowserRouter>
         )
