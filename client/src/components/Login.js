@@ -1,6 +1,7 @@
 import React, {Component} from "react"
 import {Redirect, Link} from "react-router-dom"
 import axios from "axios"
+import NavigationBar from "./NavigationBar"
 
 import LinkInClass from "../components/LinkInClass"
 import {SERVER_HOST} from "../config/global_constants"
@@ -47,7 +48,8 @@ export default class Login extends Component
 
 
     render()
-    {         
+    {   
+            
         let errorMessage = "";
         if(this.state.wasSubmittedAtLeastOnce)
         {
@@ -55,6 +57,8 @@ export default class Login extends Component
         }
         
         return (
+            <>
+<NavigationBar />  
             <main className="login_main">
             <div className="outside-form-container">
             <form className="form-container" noValidate = {true} id = "loginOrRegistrationForm">
@@ -90,6 +94,7 @@ export default class Login extends Component
             </form>
             </div>
             </main>
+            </>
         )
     }
 }

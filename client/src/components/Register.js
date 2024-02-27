@@ -1,6 +1,7 @@
 import React, {Component} from "react"
 import {Redirect, Link} from "react-router-dom"
 import axios from "axios"
+import NavigationBar from "./NavigationBar"
 
 import LinkInClass from "../components/LinkInClass"
 
@@ -72,6 +73,8 @@ export default class Register extends Component
         }          
     
         return (
+            <>
+            <NavigationBar />
             <main className="login_main">
             <div className="outside-form-container">
         <form className="form-container" noValidate = {true} id = "loginOrRegistrationForm">
@@ -134,6 +137,7 @@ export default class Register extends Component
         </form>
         </div>
         </main>
+        </>
         )
     }
 }

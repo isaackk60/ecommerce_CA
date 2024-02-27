@@ -384,6 +384,21 @@ form {
  }
 /* form end*/
 /*                    Contact Page End                */
+/*                        Cart                    */
+.cart-container{
+display:flex;
+flex-direction: column;
+width: 80vw;
+margin: 0px 10vw;
+}
+.each-item-cart{
+    display: flex;
+    justify-content: space-between;
+    border: solid 2px black;
+    border-bottom: none;
+    padding: 20px; 
+
+}
 
 
 
