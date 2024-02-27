@@ -101,7 +101,7 @@ export default class BuyShirt extends Component
     onApprove = paymentData =>
     {      
         console.log("PayPal payment successful") 
-        axios.post(`${SERVER_HOST}/sales/${paymentData.orderID}/${this.props.carID}/${this.props.price}`, {headers:{"authorization":localStorage.token, "Content-type": "multipart/form-data"}})
+        axios.post(`${SERVER_HOST}/sales/${paymentData.orderID}/${this.props.shirtID}/${this.props.price}`, {headers:{"authorization":localStorage.token, "Content-type": "multipart/form-data"}})
         .then(res => 
         {                   
             this.setState({payPalMessageType:PayPalMessage.messageType.SUCCESS, 
