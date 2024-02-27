@@ -1,7 +1,7 @@
 const router = require(`express`).Router()
 
 const salesModel = require(`../models/sales`)
-const carsModel = require(`../models/cars`)
+const carsModel = require(`../models/shirts`)
 
 
 const createNewSaleDocument = (req, res, next) => 
@@ -9,11 +9,17 @@ const createNewSaleDocument = (req, res, next) =>
     // Use the PayPal details to create a new sale document                
     let saleDetails = new Object()
            
-    saleDetails.paypalPaymentID = req.params.orderID
-    saleDetails.carID = req.params.carID
+    // saleDetails.paypalPaymentID = req.params.orderID
+    // saleDetails.carID = req.params.carID
+    // saleDetails.price = req.params.price
+
+    saleDetails.paypalPaymentID = req.params.paymentID
+    saleDetails.shirtID = req.params.shirtID
     saleDetails.price = req.params.price
+    saleDetails.customerName = req.params.customerName
+    saleDetails.customerEmail = req.params.customerEmail
         
-    carsModel.findByIdAndUpdate({_id:req.params.carID}, {sold: true}, (err, data) => 
+    shirtsModel.findByIdAndUpdate({_id:req.params.shirtID}, {sold: true}, (err, data) => 
     {
         if(err)
         {
@@ -34,7 +40,8 @@ const createNewSaleDocument = (req, res, next) =>
 
 
 // Save a record of each Paypal payment
-router.post('/sales/:orderID/:carID/:price', createNewSaleDocument)
+// router.post('/sales/:orderID/:carID/:price', createNewSaleDocument)
+router.post('/sales/:paymentID/:shirtID/:price/:customerName/:customerEmail', createNewSaleDocument)
 
 
 module.exports = router

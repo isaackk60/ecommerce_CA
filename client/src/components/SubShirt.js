@@ -1,12 +1,11 @@
 import React, { Component } from "react"
 import Form from "react-bootstrap/Form"
-import {Redirect, Link } from "react-router-dom"
+import { Redirect, Link } from "react-router-dom"
 import axios from "axios"
 import NavigationBar from "./NavigationBar"
-
+import { ACCESS_LEVEL_GUEST, ACCESS_LEVEL_ADMIN, SERVER_HOST } from "../config/global_constants"
 import LinkInClass from "../components/LinkInClass"
-
-import { SERVER_HOST } from "../config/global_constants"
+import BuyShirt from "./BuyShirt"
 
 export default class SubShirt extends Component {
     constructor(props) {
@@ -25,9 +24,9 @@ export default class SubShirt extends Component {
             wasSubmittedAtLeastOnce: false,
             redirectToDisplayAllShirtsInCart: false,
             // user:``,
-            cart:[], 
-            itemsInCart:cartLocalStorage,
-            cartId:``
+            cart: [],
+            itemsInCart: cartLocalStorage,
+            cartId: ``
         }
     }
     // componentDidUpdate(prevProps, prevState) {
@@ -52,7 +51,7 @@ export default class SubShirt extends Component {
         // .then(res => 
         // { 
         //     this.setState({cart: res.data})    
-                                   
+
         // })
         // .catch(err =>
         // {
@@ -92,10 +91,10 @@ export default class SubShirt extends Component {
                 });
 
             });
-            
+
 
         }
-        
+
     }
 
 
@@ -123,25 +122,25 @@ export default class SubShirt extends Component {
 
     // }
 
-    
+
     handleSubmit = (e) => {
 
-//         let formData = new FormData()
-//         // formData.append("userId", this.state.user)
-//         formData.append("name", this.state.name)
-//         // formData.append("colour", this.state.colour)
-//         formData.append("size", this.state.size)
-//         formData.append("price", this.state.price)
-//         formData.append("quantity", this.state.quantity)        
-// console.log(this.state.shirtPhotoFilename)
-//         if (this.state.shirtPhotoFilename) {
-//             console.log(1)
-//             for (let i = 0; i < this.state.shirtPhotoFilename.length; i++) {
-//                 formData.append("cartPhotos", this.state.shirtPhotoFilename[i])
-//                 console.log(2)
-//             }
-//         }
-        this.state.itemsInCart.push({name:this.state.name,size:this.state.size,price:this.state.price,quantity:this.state.quantity})
+        //         let formData = new FormData()
+        //         // formData.append("userId", this.state.user)
+        //         formData.append("name", this.state.name)
+        //         // formData.append("colour", this.state.colour)
+        //         formData.append("size", this.state.size)
+        //         formData.append("price", this.state.price)
+        //         formData.append("quantity", this.state.quantity)        
+        // console.log(this.state.shirtPhotoFilename)
+        //         if (this.state.shirtPhotoFilename) {
+        //             console.log(1)
+        //             for (let i = 0; i < this.state.shirtPhotoFilename.length; i++) {
+        //                 formData.append("cartPhotos", this.state.shirtPhotoFilename[i])
+        //                 console.log(2)
+        //             }
+        //         }
+        this.state.itemsInCart.push({ name: this.state.name, size: this.state.size, price: this.state.price, quantity: this.state.quantity })
         // console.log(this.state.itemsInCart)
         if (this.state.itemsInCart !== undefined) {
             const groupedItems = this.state.itemsInCart.reduce((groups, item) => {
@@ -186,7 +185,7 @@ export default class SubShirt extends Component {
     //     const quantity = parseInt(e.target.value);
     //     this.setState({ quantity });
     // };
-    
+
     // addToCart = () => {
     //     // Add the selected shirt to the shopping cart
     //     const { name, size, price, quantity,shirtPhotoFilename } = this.state;
@@ -206,12 +205,12 @@ export default class SubShirt extends Component {
     // handleClick=()=>{
     //     // this.addToCart();
     //     this.handleSubmit();
-        
+
     // }
 
 
     render() {
-        
+
         // console.log(this.state.user)
         let errorMessage = "";
         if (this.state.wasSubmittedAtLeastOnce) {
@@ -219,19 +218,29 @@ export default class SubShirt extends Component {
         }
         // console.log(this.state);
 
-// when you add t-shirt and click add to cart, it can direct to shopping cart.
+        // when you add t-shirt and click add to cart, it can direct to shopping cart.
         // if (this.state.redirectToCart) {
         //     return <Link to={{ pathname: "/shoppingCart", state: { itemsInCart: this.state.itemsInCart } }} onclick={this.handleSubmit}/>;
         // }
-        console.log(this.state.itemsInCart )
+        console.log(this.state.itemsInCart)
         console.log(this.state.shirtPhotoFilename)
         console.log(this.state.cartId)
 
+        let soldOrForSale = null
+        if (localStorage.accessLevel <= ACCESS_LEVEL_GUEST) {
+            if (this.props.shirt.sold !== true) {
+                soldOrForSale = <BuyShirt shirtID={this.props.shirt._id} price={this.props.shirt.price} />
+            }
+            else {
+                soldOrForSale = "SOLD"
+            }
+        }
+
         return (
             <div className="subShirtContainer">
-{/* {this.state.redirectToDisplayAllShirtsInCart ? <Redirect to={{ pathname: `/shoppingCart/`+this.state.cart._id, state: { itemsInCart: this.state.itemsInCart } }}  /> : null} */}
-{/* {this.state.redirectToDisplayAllShirtsInCart ? <Redirect to={"/ShoppingCart/" + this.state.cartId} /> : null} */}
-{this.state.redirectToDisplayAllShirtsInCart ? <Redirect to={"/ShoppingCart/"} /> : null}
+                {/* {this.state.redirectToDisplayAllShirtsInCart ? <Redirect to={{ pathname: `/shoppingCart/`+this.state.cart._id, state: { itemsInCart: this.state.itemsInCart } }}  /> : null} */}
+                {/* {this.state.redirectToDisplayAllShirtsInCart ? <Redirect to={"/ShoppingCart/" + this.state.cartId} /> : null} */}
+                {this.state.redirectToDisplayAllShirtsInCart ? <Redirect to={"/ShoppingCart/"} /> : null}
                 {errorMessage}
                 <div>
                     {this.state.shirtPhotoFilename === null ? null : <div className="shirtPhotos">
@@ -239,32 +248,32 @@ export default class SubShirt extends Component {
                     </div>}
                 </div>
                 <div>
-                <h1>{this.state.name}</h1><br></br>
-                <h4>{this.state.price}</h4><br></br>
-                <h5>Stock:{this.state.stock}</h5>
+                    <h1>{this.state.name}</h1><br></br>
+                    <h4>{this.state.price}</h4><br></br>
+                    <h5>Stock:{this.state.stock}</h5>
 
-                <Form>
-                    <Form.Group controlId="size">
-                        <Form.Label>Size</Form.Label>
-                        <Form.Control as="select" name="size" value={this.state.size} onChange={this.handleChange}>
-                            <option value="XS">XS</option>
-                            <option value="S">S</option>
-                            <option value="M">M</option>
-                            <option value="L">L</option>
-                            <option value="XL">XL</option>
-                        </Form.Control>
-                    </Form.Group>
-                    <Form.Group controlId="quantity">
-                        <Form.Label>Quantity</Form.Label>
-                        {/* <Form.Control type="number" name="quantity" value={this.state.quantity} onChange={this.handleQuantityChange} /> */}
-                        <Form.Control type="number" name="quantity" value={this.state.quantity} onChange={this.handleChange} />
-                    </Form.Group>
-                    <LinkInClass value="Add to Cart" className="green-button" onClick={this.handleSubmit} />
-                </Form>
-                <p>{this.state.description}</p>
-
-                    </div>
+                    <Form>
+                        <Form.Group controlId="size">
+                            <Form.Label>Size</Form.Label>
+                            <Form.Control as="select" name="size" value={this.state.size} onChange={this.handleChange}>
+                                <option value="XS">XS</option>
+                                <option value="S">S</option>
+                                <option value="M">M</option>
+                                <option value="L">L</option>
+                                <option value="XL">XL</option>
+                            </Form.Control>
+                        </Form.Group>
+                        <Form.Group controlId="quantity">
+                            <Form.Label>Quantity</Form.Label>
+                            {/* <Form.Control type="number" name="quantity" value={this.state.quantity} onChange={this.handleQuantityChange} /> */}
+                            <Form.Control type="number" name="quantity" value={this.state.quantity} onChange={this.handleChange} />
+                        </Form.Group>
+                        <LinkInClass value="Add to Cart" className="green-button" onClick={this.handleSubmit} />
+                    </Form>
+                    <p>{this.state.description}</p>
+                    {soldOrForSale}
                 </div>
+            </div>
         )
     }
 }
