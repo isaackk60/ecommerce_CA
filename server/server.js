@@ -26,7 +26,7 @@ app.use(require(`./routes/users`))
 app.use(require(`./routes/sales`))
 app.use(require(`./routes/shirts`))
 app.use(require(`./routes/cart`))
-
+app.use(require(`./routes/shirtsales`))
 // Port
 app.listen(process.env.SERVER_PORT, () => 
 {

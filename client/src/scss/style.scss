@@ -280,6 +280,8 @@ header {
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Protest+Riot&display=swap');
 .Contactpage{
     background-color: #efe6e6;
+    display: flex;
+    flex-direction: column;
 }
 
 // .Nav{
@@ -300,9 +302,8 @@ header {
     }
     p{
         font-size: 20px;
-        margin: 50px 150px 0px 150px;
+        margin: auto;
         font-family: "Montserrat", sans-serif;
-        font-optical-sizing: 300;
         font-weight: 400;
         font-style: normal;
     }
@@ -442,3 +443,31 @@ margin: 0px 10vw;
 
 
 
+.splitL .dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.splitL .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #700f0f;
+    min-width: 160px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.splitL .dropdown:hover .dropdown-content {
+    display: block;
+}
+
+// .splitL .dropdown-content a {
+//     color: black;
+//     padding: 12px 16px;
+//     text-decoration: none;
+//     display: block;
+// }
+
+// .splitL .dropdown-content a:hover {
+//     background-color: #9a3737;
+// }

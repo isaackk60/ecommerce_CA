@@ -22,6 +22,7 @@ export default class AddTShirt extends Component {
             stock: "",
             description: "",
             shirtPhotoFilename: null,
+            gender:"",
             redirectToDisplayAllShirts: localStorage.accessLevel < ACCESS_LEVEL_ADMIN,
             wasSubmittedAtLeastOnce: false
         }
@@ -53,7 +54,8 @@ export default class AddTShirt extends Component {
         formData.append("price", this.state.price)
         formData.append("stock", this.state.stock)
         formData.append("description", this.state.description)
-console.log(this.state.shirtPhotoFilename)
+        formData.append("gender", this.state.gender)
+        console.log(this.state.shirtPhotoFilename)
         if (this.state.shirtPhotoFilename) {
             for (let i = 0; i < this.state.shirtPhotoFilename.length; i++) {
                 formData.append("shirtPhotos", this.state.shirtPhotoFilename[i])
@@ -141,6 +143,16 @@ console.log(this.state.shirtPhotoFilename)
                                 checked={this.state.size === "XL"}
                                 onChange={this.handleChange}
                             />
+                        </Form.Control>
+                    </Form.Group>
+
+                    <Form.Group controlId="gender">
+                        <Form.Label>Gender</Form.Label>
+                        <Form.Control as="select" name="gender" value={this.state.gender} onChange={this.handleChange}>
+                            <option value="">Select Gender</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="unisex">UniSex</option>
                         </Form.Control>
                     </Form.Group>
 
