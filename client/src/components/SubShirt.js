@@ -2,6 +2,7 @@ import React, { Component } from "react"
 import Form from "react-bootstrap/Form"
 import {Redirect, Link } from "react-router-dom"
 import axios from "axios"
+import NavigationBar from "./NavigationBar"
 
 import LinkInClass from "../components/LinkInClass"
 
@@ -18,7 +19,7 @@ export default class SubShirt extends Component {
             price: ``,
             description: ``,
             // quantity: ``,
-            quantity:1,
+            quantity: 1,
             stock: ``,
             shirtPhotoFilename: null,
             wasSubmittedAtLeastOnce: false,
@@ -262,8 +263,8 @@ export default class SubShirt extends Component {
                 </Form>
                 <p>{this.state.description}</p>
 
+                    </div>
                 </div>
-            </div>
         )
     }
 }

@@ -49,7 +49,7 @@ export default class App extends Component
                 <Switch>
                     <Route exact path="/Register" component={Register} />
                     <Route exact path="/ResetDatabase" component={ResetDatabase} />                    
-                    <Route exact path="/" component={DisplayAllCars} />
+                    {/* <Route exact path="/" component={DisplayAllCars} /> */}
                     <Route exact path="/Login" component={Login} />
                     <Route exact path="/BuyCar/:id" component={BuyCar} />
                     <Route exact path="/PayPalMessage/:messageType/:payPalPaymentID" component={PayPalMessage}/>
@@ -60,12 +60,12 @@ export default class App extends Component
                     <LoggedInRoute exact path="/AddCar" component={AddCar} />
                     <LoggedInRoute exact path="/EditCar/:id" component={EditCar} />
                     <LoggedInRoute exact path="/DeleteCar/:id" component={DeleteCar} />
-                    <Route exact path="/DisplayAllCars" component={DisplayAllCars}/> 
+                    {/* <Route exact path="/DisplayAllCars" component={DisplayAllCars}/>  */}
                     <Route exact path="/AddTShirt" component={AddTShirt}/> 
                     <LoggedInRoute exact path="/EditTShirt/:id" component={EditTShirt} />
                     <LoggedInRoute exact path="/DeleteTShirt/:id" component={DeleteTShirt} />
                     <LoggedInRoute exact path="/SubShirt/:id" component={SubShirt} />
-                    <Route exact path="/main" component={Main}/>
+                    <Route exact path="/Main" component={Main}/>
                     <Route exact path="/About" component={About}/>
                     <Route exact path="/NavigationBar" component={NavigationBar}/>
                     <Route path="*" component={Main}/>                            
