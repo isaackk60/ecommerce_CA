@@ -16,7 +16,8 @@ let shirtsSchema = new mongoose.Schema(
         stock: {type: Number, require:true},
         description: {type: String, require: true},
         shirtPhotoFilename:[shirtPhotosSchema],
-        sold: {type: Boolean, default:false}
+        sold: {type: Boolean, default:false},
+        gender:{type: String, require:true}
     },
     {
        collection: `shirts`

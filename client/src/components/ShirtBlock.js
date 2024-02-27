@@ -24,15 +24,15 @@ export default class ShirtBlock extends Component {
 
 
     render() {
-        let soldOrForSale = null
-        if (localStorage.accessLevel <= ACCESS_LEVEL_GUEST) {
-            if (this.props.shirt.sold !== true) {
-                soldOrForSale = <BuyShirt shirtID={this.props.shirt._id} price={this.props.shirt.price} />
-            }
-            else {
-                soldOrForSale = "SOLD"
-            }
-        }
+        // let soldOrForSale = null
+        // if (localStorage.accessLevel <= ACCESS_LEVEL_GUEST) {
+        //     if (this.props.shirt.sold !== true) {
+        //         soldOrForSale = <BuyShirt shirtID={this.props.shirt._id} price={this.props.shirt.price} />
+        //     }
+        //     else {
+        //         soldOrForSale = "SOLD"
+        //     }
+        // }
 
 
         return (
@@ -56,6 +56,7 @@ export default class ShirtBlock extends Component {
                     </div>
                     <h2>{this.props.shirt.name}</h2>
                     <div>{this.props.shirt.price}</div>
+                    <div>{this.props.shirt.gender}</div>
                 </Link>
 
                 <div>
@@ -63,7 +64,7 @@ export default class ShirtBlock extends Component {
 
                     {localStorage.accessLevel >= ACCESS_LEVEL_ADMIN ? <Link className="red-button" to={"/DeleteTShirt/" + this.props.shirt._id}>Delete</Link> : null}
 
-                    {soldOrForSale}
+                    {/* {soldOrForSale} */}
                 </div>
 
             </div>

@@ -17,7 +17,9 @@ export default class Main extends Component
         
         this.state = {
             shirts:[],
-            searchQuery:""
+            searchQuery:"",
+            sortType: "default",
+            genderFilter: "",
         }
     }
     
@@ -40,17 +42,39 @@ export default class Main extends Component
         this.setState({ searchQuery: event.target.value });
     };
 
+    handleSortChange = event => {
+        this.setState({ sortType: event.target.value });
+    };
+
+    handleGenderFilterChange = (event) => {
+        this.setState({ genderFilter: event.target.value });
+    };
   
     render() 
     {   
-        const { shirts, searchQuery } = this.state;
-        const filteredShirts = shirts.filter(shirt =>
+        const { shirts, searchQuery,sortType,genderFilter } = this.state;
+        let filteredShirtsName = shirts.filter(shirt =>
             shirt.name.toLowerCase().includes(searchQuery.toLowerCase())
         );
-        return (           
+        if (sortType === "PriceHighToLow") {
+            filteredShirtsName.sort((a, b) => b.price - a.price);
+        } else if (sortType === "PriceLowToHigh") {
+            filteredShirtsName.sort((a, b) => a.price - b.price);
+        }
+
+
+        if (genderFilter === "male") {
+            filteredShirtsName = filteredShirtsName.filter(shirt => shirt.gender === "male");
+        } else if (genderFilter === "female") {
+            filteredShirtsName = filteredShirtsName.filter(shirt => shirt.gender === "female");
+        } else if (genderFilter === "unisex") {
+            filteredShirtsName = filteredShirtsName.filter(shirt => shirt.gender === "unisex");
+        }
+            return (           
             <div>
-                <NavigationBar />
+                <NavigationBar genderFilter={genderFilter}  handleGenderFilterChange={this.handleGenderFilterChange.bind(this)}/>
                 {
+                    
                     // localStorage.accessLevel > ACCESS_LEVEL_GUEST 
                     // ? <div className="logout">
                     //     {
@@ -67,18 +91,30 @@ export default class Main extends Component
                 }
 
                 <div className="search-container">
-                    <input
-                        type="text"
-                        placeholder="Search shirts..."
-                        value={searchQuery}
-                        onChange={this.handleSearchInputChange}
-                    />
+                    <input type="text"  placeholder="Search shirts..." value={searchQuery} onChange={this.handleSearchInputChange} />
                 </div>
+
+
+                <div className="sort-container">
+                    <select value={sortType} onChange={this.handleSortChange}>
+                        <option value="default">Default Sorting</option>
+                        <option value="PriceHighToLow">Price: High to Low</option>
+                        <option value="PriceLowToHigh">Price: Low to High</option>
+                    </select>
+                    {/* <select value={genderFilter} onChange={this.handleGenderFilterChange}>
+                        <option value="">All Genders</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="unisex">Unisex</option>
+                    </select> */}
+                </div>
+
+                
                 
                 <div className="main-container">
                 
                     {/* {this.state.shirts.map((shirt)=><ShirtBlock key={shirt._id} shirt={shirt} />)}  */}
-                    {filteredShirts.map((shirt) => <ShirtBlock key={shirt._id} shirt={shirt} />)}
+                    {filteredShirtsName.map((shirt) => <ShirtBlock key={shirt._id} shirt={shirt} gender={shirt.gender}/>)}
                     
                 </div>
                 {
@@ -89,6 +125,7 @@ export default class Main extends Component
                           </div>
                         : null
                     }
+                    
             </div> 
             
         )
