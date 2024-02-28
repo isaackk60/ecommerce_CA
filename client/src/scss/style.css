@@ -274,7 +274,7 @@ header {
     display: inline-grid;
   }
 }
-/*                Contact Page                */
+/* Contact Page CSS */
 .Contactpage {
   background-color: #efe6e6;
   display: flex;
@@ -285,49 +285,60 @@ header {
   margin-top: 100px;
   text-align: center;
 }
+
 .contact h1 {
   font-size: 50px;
   text-decoration: underline;
   font-family: "Montserrat", sans-serif;
 }
+
 .contact p {
   font-size: 20px;
   margin: auto;
   font-family: "Montserrat", sans-serif;
   font-weight: 400;
-  font-style: normal;
 }
 
 .GetInTouchContainer {
   display: flex;
   justify-content: space-evenly;
-  margin-top: 100px;
+  margin-top: 80px;
 }
+
+.GetInTouchContainer .TouchContainer {
+  width: 50vw;
+}
+
 .GetInTouchContainer h3 {
   font-family: "Montserrat", sans-serif;
   font-size: 35px;
 }
+
 .GetInTouchContainer p {
-  width: 420px;
   font-size: 12px;
   font-family: "Montserrat", sans-serif;
-  font-optical-sizing: 300;
   font-weight: 400;
   font-style: normal;
 }
+
 .GetInTouchContainer .FontIcon {
   margin: 10px;
   font-size: 20px;
 }
+
 .GetInTouchContainer .Icon {
   padding: 10px;
 }
 
 .fromContainer {
   background-color: #f0d6d6;
-  width: 600px;
+  width: 40vw;
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
 }
+
 .fromContainer h2 {
   font-family: "Montserrat", sans-serif;
   font-weight: 600;
@@ -336,43 +347,20 @@ header {
   text-align: center;
 }
 
-.input-container {
+.inputContainer {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-}
-.input-container input {
-  display: block;
-  width: 200px;
-  margin: 20px;
+  margin-bottom: 20px;
 }
 
-.map {
-  margin-top: 50px;
-  margin-left: 60px;
-  border: 0;
-}
-
-/* form */
-form {
-  max-width: 600px;
-  text-align: center;
-  margin: 20px auto;
-}
-form input {
-  border-radius: 2px;
-  border: 0;
-  padding: 1em;
-  width: 100%;
-  margin-top: 10px;
-  border: 1px solid #ccc;
+.inputContainer input,
+.TextareaMessage textarea {
+  margin: 10px 0;
+  padding: 10px;
   font-family: "Montserrat", sans-serif;
-}
-form textarea {
-  height: 126px;
-  width: 300px;
-  height: 190px;
-  margin-top: 10px;
+  width: 20vw;
+  height: 2.5vw;
   border-radius: 4px;
   border: 2px solid #ccc;
   box-sizing: border-box;
@@ -381,23 +369,40 @@ form textarea {
   font-family: "Montserrat", sans-serif;
 }
 
-.ContainerInForm {
-  display: flex;
-  align-items: center;
-}
-
-.inputContainer {
-  display: flex;
-  flex-direction: column;
-}
-
 .TextareaMessage {
   display: flex;
-  margin-left: 70px;
+  justify-content: center;
 }
 
-/* form end*/
-/*                    Contact Page End                */
+.TextareaMessage textarea {
+  height: 150px;
+  resize: vertical;
+}
+
+.submit {
+  justify-content: center;
+  display: flex;
+}
+
+#input-submit {
+  width: 15vw;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+/* Map */
+.map {
+  margin-top: 50px;
+  width: 100vw;
+  border: 0;
+  margin-bottom: 20px;
+}
+
 /*                        Cart                    */
 .cart-container {
   display: flex;
@@ -449,4 +454,64 @@ form textarea {
 
 #select-container {
   display: none;
+}
+
+/* */
+/* Carousel CSS */
+.carousel {
+  position: relative;
+  overflow: hidden;
+}
+
+.slides {
+  display: flex;
+  transition: transform 0.5s ease;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 50px;
+  height: 50px;
+  background-color: rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+}
+
+.prev {
+  left: 0;
+}
+
+.next {
+  right: 0;
+}
+
+/* Hide arrows on hover */
+.arrow:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Adjust arrow styling */
+.arrow:before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  padding: 5px;
+}
+
+.prev:before {
+  transform: translate(-50%, -50%) rotate(135deg);
+}
+
+.next:before {
+  transform: translate(-50%, -50%) rotate(-45deg);
 }/*# sourceMappingURL=style.css.map */
