@@ -41,7 +41,7 @@ export default class Logout extends Component
         return (
             <>   
         
-                {!this.state.isLoggedIn ? <Redirect to="/DisplayAllCars"/> : null} 
+                {!this.state.isLoggedIn ? <Redirect to="/Main"/> : null} 
                   
                 <LinkInClass value="LOG OUT" onClick={this.handleSubmit}/> 
             </>

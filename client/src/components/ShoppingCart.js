@@ -199,6 +199,7 @@ import NavigationBar from "./NavigationBar";
 import { ACCESS_LEVEL_NORMAL_USER, SERVER_HOST } from "../config/global_constants"
 import axios from "axios";
 import BuyShirt from "./BuyShirt";
+import {Link} from "react-router-dom"
 
 
 export default class ShoppingCart extends Component {
@@ -211,13 +212,15 @@ export default class ShoppingCart extends Component {
             // quantity:"",
             // size:"",
             cart: [],
+            user:{},
             guestName: "",
             guestEmail: "",
             guestAddress: "",
             guestPhone: "",
             isGuest: localStorage.accessLevel < ACCESS_LEVEL_NORMAL_USER,
-            redirectToPaypalButton: false
-            // redirectToPaypalButton: true
+            redirectToPaypalButton: false,
+            // redirectToPaypalButton: true,
+            haveEnoughData:false
             // totalPrice: 0
         };
     }
@@ -232,6 +235,22 @@ export default class ShoppingCart extends Component {
             // Load shirt photos after updating state
             this.loadShirtPhotos();
         });
+
+
+        let userEmail = JSON.parse(localStorage.getItem("userEmail") || null);
+
+        axios.get(`${SERVER_HOST}/users/email?email=${userEmail}`)
+            .then(res => {
+                this.setState({ user: res.data});
+            })
+            .catch(err => {
+                console.error("Error fetching user data:", err);
+            });
+
+            const { state } = this.props.location;
+            if (state && state.haveEnoughData === true) {
+                this.setState({haveEnoughData:true})
+            }
 
         // this.props.shirt.shirtPhotoFilename.map(photo => {
         //     return axios.get(`${SERVER_HOST}/shirts/photo/${photo.filename}`)
@@ -460,11 +479,17 @@ export default class ShoppingCart extends Component {
     //         });
     //     });
     // }
-    // handleChange = (field, value) => {
-    //     this.setState({ [field]: value });
-    // };
+    handleGuest = (field, value) => {
+        this.setState({ [field]: value });
+    };
+    submitGuestDetail=()=>{
+        if(this.state.guestName&&this.state.guestEmail&&this.state.guestAddress&&this.state.guestEmail){
+            this.setState({haveEnoughData:true})
+        }
+    }
 
     render() {
+        console.log(this.state.user)
         // console.log(this.state.cart[0])
         // {this.state.cart !== undefined ? this.calculateTotalPrice() : null}
 
@@ -488,7 +513,7 @@ export default class ShoppingCart extends Component {
             }
             return groups;
         }, []);
-        console.log(this.state.cart.map(item => item.shirtPhotoFilename[0]))
+        // console.log(this.state.cart.map(item => item.shirtPhotoFilename[0]))
 
         // this.state.cart.map(item =>
         //     item.shirtPhotoFilename[0].forEach(photo => { // Use forEach to iterate over each object
@@ -579,17 +604,26 @@ export default class ShoppingCart extends Component {
                                 onChange={e => this.handleChange('guestPhone', e.target.value)}
                                 required
                             />
-                        </div>
+                            <button onClick={this.submitGuestDetail}>Submit</button>
+                 </div>
                         : null}
 
 
-                    {/* paypalbutton */}
+{this.state.isGuest?(this.state.haveEnoughData)?<BuyShirt customerEmail={this.state.guestEmail} customerName={this.state.guestName} address={this.state.guestAddress} phone={this.state.guestPhone} items={this.getIdAndQuantity()} price={this.calculateTotalPrice()}/>
+:<h6>You have to fill in personal detail</h6>:((this.state.user.name&&this.state.user.email&&this.state.user.phone&&this.state.user.address)|| this.state.haveEnoughData)?<BuyShirt customerEmail={this.state.user.email} customerName={this.state.user.name} address={this.state.user.address} phone={this.state.user.phone} items={this.getIdAndQuantity()} price={this.calculateTotalPrice()}/>
+:<Link className="green-button" to={{pathname: "/Dashboard", state: { from: "cart" }}}>Please finish your profile</Link>}
+
+{/* {this.state.haveEnoughData?
+{/* paypalbutton */}
                     {/* <BuyShirt customerEmail={this.state.guestEmail} customerName={this.state.guestName} address={this.state.guestAddress} phone={this.state.guestPhone} items={this.getIdAndQuantity()} price={this.calculateTotalPrice()} /> */}
                     <div className="totalPriceShoppingCart">
                         {this.state.cart !== undefined ? <p>Total Price: ${this.calculateTotalPrice()}</p> : null}
                     </div>
                     <button onClick={this.handlePayment}>Proceed to Payment</button>
                     {this.state.redirectToPaypalButton ? <BuyShirt customerEmail={this.state.guestEmail} customerName={this.state.guestName} address={this.state.guestAddress} phone={this.state.guestPhone} items={this.getIdAndQuantity()} price={this.calculateTotalPrice()} /> : null}
+:null
+
+                    
                 </div>
 
                 {/* <p>Total Price: €{this.state.totalPrice}</p> */}

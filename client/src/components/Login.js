@@ -44,6 +44,7 @@ export default class Login extends Component
         {
             this.setState({wasSubmittedAtLeastOnce: true})
         })
+        localStorage.setItem("userEmail", JSON.stringify(this.state.email));
     }
 
 

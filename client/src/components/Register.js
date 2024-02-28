@@ -209,6 +209,7 @@ export default class Register extends Component
         {
             this.setState({wasSubmittedAtLeastOnce: true})            
         })
+        localStorage.setItem("userEmail", JSON.stringify(this.state.email));
     }
 
 
