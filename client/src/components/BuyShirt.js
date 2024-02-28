@@ -100,8 +100,43 @@ export default class BuyShirt extends Component
     
     onApprove = paymentData =>
     {      
-        console.log("PayPal payment successful") 
-        axios.post(`${SERVER_HOST}/sales/${paymentData.orderID}/${this.props.carID}/${this.props.price}`, {headers:{"authorization":localStorage.token, "Content-type": "multipart/form-data"}})
+        // console.log("PayPal payment successful") 
+        // let formData = new FormData()
+        // formData.append("items", this.props.items)
+        // formData.append("customerName", this.props.customerName)
+        // formData.append("customerEmail", this.props.customerEmail)
+        // formData.append("address", this.props.address)
+        // formData.append("phone", this.props.phone)
+console.log(this.props.items)
+console.log(this.props.customerName)
+console.log(this.props.customerEmail)
+console.log(this.props.address)
+console.log(this.props.phone)
+// console.log(formData);
+let inputData={items:this.props.items,customerName:this.props.customerName,customerEmail:this.props.customerEmail,address:this.props.address,phone:this.props.phone}
+console.log(inputData)
+        // axios.post(`${SERVER_HOST}/sales/${paymentData.orderID}/${this.props.price}/${this.props.items}/${this.props.customerName}/${this.props.customerEmail}/${this.props.address}/${this.props.phone}`, {headers:{"authorization":localStorage.token, "Content-type": "multipart/form-data"}})
+        // .then(res => 
+        // {                   
+        //     this.setState({payPalMessageType:PayPalMessage.messageType.SUCCESS, 
+        //                    payPalOrderID:paymentData.orderID, 
+        //                    redirectToPayPalMessage:true}) 
+        // })
+        // axios.post(`${SERVER_HOST}/sales/${paymentData.orderID}/${this.props.price}`, {headers:{"authorization":localStorage.token, "Content-type": "multipart/form-data"}})
+        // .then(res => 
+        // {                   
+        //     this.setState({payPalMessageType:PayPalMessage.messageType.SUCCESS, 
+        //                    payPalOrderID:paymentData.orderID, 
+        //                    redirectToPayPalMessage:true}) 
+        // })
+        // axios.post(`${SERVER_HOST}/sales/${paymentData.orderID}/${this.props.price}`,formData, {headers:{"authorization":localStorage.token, "Content-type": "multipart/form-data"}})
+        // .then(res => 
+        // {                   
+        //     this.setState({payPalMessageType:PayPalMessage.messageType.SUCCESS, 
+        //                    payPalOrderID:paymentData.orderID, 
+        //                    redirectToPayPalMessage:true}) 
+        // })
+        axios.post(`${SERVER_HOST}/sales/${paymentData.orderID}/${this.props.price}`,{items:this.props.items,customerName:this.props.customerName,customerEmail:this.props.customerEmail,address:this.props.address,phone:this.props.phone}, {headers:{"authorization":localStorage.token, "Content-type": "application/json"}})
         .then(res => 
         {                   
             this.setState({payPalMessageType:PayPalMessage.messageType.SUCCESS, 
