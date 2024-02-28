@@ -217,6 +217,7 @@ export default class ShoppingCart extends Component {
             guestPhone: "",
             isGuest: localStorage.accessLevel < ACCESS_LEVEL_NORMAL_USER,
             redirectToPaypalButton: false
+            // redirectToPaypalButton: true
             // totalPrice: 0
         };
     }
@@ -531,7 +532,7 @@ export default class ShoppingCart extends Component {
                                     </select>
                                     {/* <span>Quantity:</span> */}
 
-                                    <div>{item.price}</div>
+                                    <div>€{item.price}</div>
 
                                     <div className="buttonDivShoppingCart">
                                         <button onClick={() => this.handleChange(index, 'quantity', Math.max(1, item.quantity - 1))}>-</button>
@@ -584,12 +585,15 @@ export default class ShoppingCart extends Component {
 
                     {/* paypalbutton */}
                     {/* <BuyShirt customerEmail={this.state.guestEmail} customerName={this.state.guestName} address={this.state.guestAddress} phone={this.state.guestPhone} items={this.getIdAndQuantity()} price={this.calculateTotalPrice()} /> */}
+                    <div className="totalPriceShoppingCart">
+                        {this.state.cart !== undefined ? <p>Total Price: ${this.calculateTotalPrice()}</p> : null}
+                    </div>
                     <button onClick={this.handlePayment}>Proceed to Payment</button>
                     {this.state.redirectToPaypalButton ? <BuyShirt customerEmail={this.state.guestEmail} customerName={this.state.guestName} address={this.state.guestAddress} phone={this.state.guestPhone} items={this.getIdAndQuantity()} price={this.calculateTotalPrice()} /> : null}
                 </div>
 
                 {/* <p>Total Price: €{this.state.totalPrice}</p> */}
-                {this.state.cart !== undefined ? <p>Total Price: {this.calculateTotalPrice()}</p> : null}
+
 
             </div>
         );

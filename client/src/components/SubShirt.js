@@ -147,7 +147,7 @@ export default class SubShirt extends Component {
         //                 console.log(2)
         //             }
         //         }
-        this.state.itemsInCart.push({ shirtId: this.state.shirtId, name: this.state.name, size: this.state.size, price: this.state.price, quantity: this.state.quantity, shirtPhotoFilename: this.state.shirtPhotoFilename, shirtPhotoFilename:this.state.shirtPhotoFilename})
+        this.state.itemsInCart.push({ shirtId: this.state.shirtId, name: this.state.name, size: this.state.size, price: this.state.price, quantity: this.state.quantity, shirtPhotoFilename: this.state.shirtPhotoFilename, shirtPhotoFilename: this.state.shirtPhotoFilename })
         // console.log(this.state.itemsInCart)
         if (this.state.itemsInCart !== undefined) {
             const groupedItems = this.state.itemsInCart.reduce((groups, item) => {
@@ -164,7 +164,7 @@ export default class SubShirt extends Component {
                         price: item.price,
                         totalPrice: item.price * item.quantity,
                         shirtPhotoFilename: item.shirtPhotoFilename,
-                        shirtPhotoFilename:item.shirtPhotoFilename
+                        shirtPhotoFilename: item.shirtPhotoFilename
                     });
                 }
                 return groups;
@@ -249,7 +249,7 @@ export default class SubShirt extends Component {
 
         return (
             <div>
-                <NavigationBar/>
+                <NavigationBar />
                 <div className="subShirtContainer">
                     {/* {this.state.redirectToDisplayAllShirtsInCart ? <Redirect to={{ pathname: `/shoppingCart/`+this.state.cart._id, state: { itemsInCart: this.state.itemsInCart } }}  /> : null} */}
                     {/* {this.state.redirectToDisplayAllShirtsInCart ? <Redirect to={"/ShoppingCart/" + this.state.cartId} /> : null} */}
@@ -260,12 +260,12 @@ export default class SubShirt extends Component {
                             {this.state.shirtPhotoFilename.map(photo => <img key={photo._id} id={photo._id} alt="" />)}
                         </div>}
                     </div>
-                    <div>
+                    <div className="subshirtdetails">
                         <h1>{this.state.name}</h1><br></br>
-                        <h4>{this.state.price}</h4><br></br>
-                        <h5>Stock:{this.state.stock}</h5>
+                        <h4>€{this.state.price}</h4><br></br>
+                        <h5>Stock: {this.state.stock}</h5>
 
-                        <Form>
+                        <Form className="subshirtform">
                             <Form.Group controlId="size">
                                 <Form.Label>Size</Form.Label>
                                 <Form.Control as="select" name="size" value={this.state.size} onChange={this.handleChange}>
@@ -281,9 +281,10 @@ export default class SubShirt extends Component {
                                 {/* <Form.Control type="number" name="quantity" value={this.state.quantity} onChange={this.handleQuantityChange} /> */}
                                 <Form.Control type="number" name="quantity" value={this.state.quantity} onChange={this.handleChange} />
                             </Form.Group>
+                            <p>{this.state.description}</p>
                             <LinkInClass value="Add to Cart" className="green-button" onClick={this.handleSubmit} />
                         </Form>
-                        <p>{this.state.description}</p>
+
                         {/* {soldOrForSale}
                         <BuyShirt /> */}
                     </div>

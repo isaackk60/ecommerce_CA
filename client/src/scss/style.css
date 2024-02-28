@@ -42,9 +42,31 @@
 
 .subShirtContainer {
   display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin: 5%;
 }
 .subShirtContainer img {
-  width: 50vw;
+  width: 40vw;
+}
+
+.subshirtdetails {
+  font-family: "Montserrat", sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-left: 2%;
+}
+.subshirtdetails h1, .subshirtdetails h4, .subshirtdetails h5 {
+  font-weight: 300;
+  padding-left: 0%;
+}
+
+.subshirtform {
+  display: flex;
+  flex-direction: column;
+  font-weight: 300;
 }
 
 h1 {
@@ -407,9 +429,11 @@ form textarea {
   flex-direction: column;
   width: 80vw;
   margin: 0px 10vw;
+  margin-bottom: 5%;
 }
 
 .each-item-cart {
+  font-family: "Montserrat", sans-serif;
   display: flex;
   justify-content: space-between;
   border-bottom: solid 1px white;
@@ -490,4 +514,11 @@ form textarea {
 .shoppingcarth2 {
   font-size: 2.5em;
   color: #0C405F;
+}
+
+.totalPriceShoppingCart {
+  font-family: "Montserrat", sans-serif;
+  font-size: 2em;
+  display: flex;
+  flex-direction: row-reverse;
 }/*# sourceMappingURL=style.css.map */

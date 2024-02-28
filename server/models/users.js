@@ -4,8 +4,8 @@
 //    {
 //         name: {type: String, required:true},
 //         email: {type: String, required:true},
-//         address: {type: String, required:true}, //added this and phone
-//         phone: {type: String, required:true},
+//         address: {type: String, required:false}, //added this and phone
+//         phone: {type: String, required:false},
 //         password: {type: String,required:true},        
 //         accessLevel: {type: Number, default:parseInt(process.env.ACCESS_LEVEL_NORMAL_USER)},
 //         profilePhotoFilename: {type:String, default:""}
