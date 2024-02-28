@@ -85,6 +85,7 @@ export default class SubShirt extends Component {
                 stock: shirtData.stock,
                 shirtPhotoFilename: shirtData.shirtPhotoFilename
             }, () => {
+                console.log(this.state.shirtPhotoFilename)
                 this.state.shirtPhotoFilename.map(photo => {
                     return axios.get(`${SERVER_HOST}/shirts/photo/${photo.filename}`)
                         .then(res => {
@@ -146,7 +147,7 @@ export default class SubShirt extends Component {
         //                 console.log(2)
         //             }
         //         }
-        this.state.itemsInCart.push({ shirtId: this.state.shirtId, name: this.state.name, size: this.state.size, price: this.state.price, quantity: this.state.quantity, shirtPhotoFilename: this.state.shirtPhotoFilename })
+        this.state.itemsInCart.push({ shirtId: this.state.shirtId, name: this.state.name, size: this.state.size, price: this.state.price, quantity: this.state.quantity, shirtPhotoFilename: this.state.shirtPhotoFilename, shirtPhotoFilename:this.state.shirtPhotoFilename})
         // console.log(this.state.itemsInCart)
         if (this.state.itemsInCart !== undefined) {
             const groupedItems = this.state.itemsInCart.reduce((groups, item) => {
@@ -162,7 +163,8 @@ export default class SubShirt extends Component {
                         quantity: item.quantity,
                         price: item.price,
                         totalPrice: item.price * item.quantity,
-                        shirtPhotoFilename: item.shirtPhotoFilename
+                        shirtPhotoFilename: item.shirtPhotoFilename,
+                        shirtPhotoFilename:item.shirtPhotoFilename
                     });
                 }
                 return groups;

@@ -225,9 +225,32 @@ export default class ShoppingCart extends Component {
         // Fetch cart data from the server
         const cartLocalStorage = JSON.parse(localStorage.getItem("itemsInCart") || "[]");
 
-        console.log("itemsInCart: ",localStorage.getItem("itemsInCart"))
+        // console.log("itemsInCart: ",localStorage.getItem("itemsInCart").forEach(item=>{item.shirtPhotoFilename}))
 
-        this.setState({ cart: JSON.parse(localStorage.getItem("itemsInCart")) })
+        this.setState({ cart: cartLocalStorage }, () => {
+            // Load shirt photos after updating state
+            this.loadShirtPhotos();
+        });
+
+        // this.props.shirt.shirtPhotoFilename.map(photo => {
+        //     return axios.get(`${SERVER_HOST}/shirts/photo/${photo.filename}`)
+        //         .then(res => {
+        //             document.getElementById(photo._id).src = `data:;base64,${res.data.image}`
+        //         })
+        //         .catch(err => {
+        //             // do nothing
+        //         })
+        // })
+
+        // this.state.cart.map(item=>{item.shirtPhotoFilename.map(photo => {
+        //     return axios.get(`${SERVER_HOST}/shirts/photo/${photo.filename}`)
+        //         .then(res => {
+        //             document.getElementById(photo._id).src = `data:;base64,${res.data.image}`
+        //         })
+        //         .catch(err => {
+        //             // do nothing
+        //         })
+        // })})
 
         // this.setState({ cart: cartLocalStorage }, () => {
         //     // Calculate total price after updating state
@@ -278,7 +301,22 @@ export default class ShoppingCart extends Component {
     //         localStorage.setItem("itemsInCart", JSON.stringify(groupedItems));
     //     }
     // }
-
+    loadShirtPhotos() {
+        // Loop through each cart item and load its shirt photos
+        this.state.cart.forEach(item => {
+            item.shirtPhotoFilename.forEach(photo => {
+                axios.get(`${SERVER_HOST}/shirts/photo/${photo.filename}`)
+                    .then(res => {
+                        // Update shirt photo in DOM
+                        document.getElementById(photo._id).src = `data:;base64,${res.data.image}`;
+                    })
+                    .catch(err => {
+                        // Handle error
+                        console.error("Error loading shirt photo:", err);
+                    });
+            });
+        });
+    }
     calculateTotalPrice() {
         let totalPrice = 0;
         // Calculate total price based on cart items
@@ -322,19 +360,54 @@ export default class ShoppingCart extends Component {
                     quantity: item.quantity,
                     price: item.price,
                     totalPrice: item.price * item.quantity,
-                    shirtPhotoFilename: item.shirtPhotoFilename
+                    shirtPhotoFilename: item.shirtPhotoFilename,
+                    shirtPhotoFilename:item.shirtPhotoFilename
                 });
             }
             return groups;
         }, []);
         this.setState({ cart: groupedItems })
         localStorage.setItem("itemsInCart", JSON.stringify(groupedItems));
+        // this.loadShirtPhotos();
     };
 
     handleDelete = (name, size) => {
         const updatedCart = this.state.cart.filter(item => !(item.name === name && item.size === size));
         this.setState({ cart: updatedCart });
         localStorage.setItem("itemsInCart", JSON.stringify(updatedCart));
+        this.loadShirtPhotos();
+    };
+    handlePayment = () => {
+        // Check if all guest details are provided
+        const { guestName, guestEmail, guestAddress, guestPhone } = this.state;
+        const errors = {};
+        if (!guestName.trim()) {
+            errors.guestName = "Name is required";
+        }
+        if (!guestEmail.trim()) {
+            errors.guestEmail = "Email is required";
+        } else if (!/\S+@\S+\.\S+/.test(guestEmail)) {
+            errors.guestEmail = "Email is invalid";
+        }
+        if (!guestAddress.trim()) {
+            errors.guestAddress = "Address is required";
+        }
+        if (!guestPhone.trim()) {
+            errors.guestPhone = "Phone number is required";
+        } else if (!/^\d{10}$/.test(guestPhone)) {
+            errors.guestPhone = "Phone number must be 10 digits";
+        }
+        // if (Object.keys(errors).length === 0) {
+        // if (guestName && guestEmail && guestAddress && guestPhone {
+        if (guestName && guestEmail && guestAddress && guestPhone && Object.keys(errors).length === 0) {
+            // Proceed with payment
+            console.log("Guest details provided. Proceeding with payment...");
+            // Call your payment function or component here
+            this.setState({redirectToPaypalButton:true})
+        } else {
+            // Display error message or handle accordingly
+            console.log("Please provide all guest details before proceeding with payment.");
+        }
     };
     handlePayment = () => {
         // Check if all guest details are provided
@@ -408,11 +481,27 @@ export default class ShoppingCart extends Component {
                     quantity: item.quantity,
                     price: item.price,
                     totalPrice: item.price * item.quantity,
-                    shirtPhotoFilename: item.shirtPhotoFilename
+                    shirtPhotoFilename: item.shirtPhotoFilename,
+                    shirtPhotoFilename:item.shirtPhotoFilename
                 });
             }
             return groups;
         }, []);
+console.log(this.state.cart.map(item=>item.shirtPhotoFilename[0]))
+
+// this.state.cart.map(item =>
+//     item.shirtPhotoFilename[0].forEach(photo => { // Use forEach to iterate over each object
+//         axios.get(`${SERVER_HOST}/shirts/photo/${photo.filename}`)
+//             .then(res => {
+//                 document.getElementById(photo._id).src = `data:;base64,${res.data.image}`
+//             })
+//             .catch(err => {
+//                 // Handle error
+//                 console.error("Error loading shirt photo:", err);
+//             });
+//     })
+// );
+
         return (
             <div>
                 <NavigationBar />
@@ -420,6 +509,9 @@ export default class ShoppingCart extends Component {
                 <div className="cart-container">
                     {this.state.cart.map((item, index) => (
                         <div key={index} className="each-item-cart">
+{item.shirtPhotoFilename.map(photo => (
+                                <img key={photo._id} id={photo._id} alt="" />
+                            ))}
                             <div>
                                 {/* Display shirt photo */}
                                 <img src={`${SERVER_HOST}/shirts/photo/${item.shirtPhotoFilename}`} alt="Shirt" />
