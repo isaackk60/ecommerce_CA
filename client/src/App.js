@@ -30,6 +30,7 @@ import About from "./components/About"
 import NavigationBar from "./components/NavigationBar"
 // import BuyShirt from "./components/BuyShirt"
 import Dashboard from "./components/Dashboard"
+import ViewAllUsers from "./components/ViewAllUsers"
 
 import {ACCESS_LEVEL_GUEST} from "./config/global_constants"
 
@@ -73,6 +74,7 @@ export default class App extends Component
                     <Route exact path="/main" component={Main}/>
                     <Route exact path="/About" component={About}/>
                     <Route exact path="/NavigationBar" component={NavigationBar}/>
+                    <Route exact path="/ViewAllUsers" component={ViewAllUsers}/>
                     <Route exact path="/BuyShirt" component={BuyShirt}/>
                     <Route path="*" component={Main}/>                            
                 </Switch>

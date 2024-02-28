@@ -302,23 +302,7 @@ const getUserByEmail = (req, res) => {
     });
 };
 
-
-// IMPORTANT
-// Obviously, in a production release, you should never have the code below, as it allows a user to delete a database collection
-// The code below is for development testing purposes only 
-router.post(`/users/reset_user_collection`, emptyUsersCollection, addAdminUserToUsersCollection)
-
-router.post(`/users/register/:name/:email/:password`, upload.single("profilePhoto"), checkThatFileIsUploaded, checkThatFileIsAnImageFile, checkThatUserIsNotAlreadyInUsersCollection, addNewUserToUsersCollection)
-
-router.post(`/users/login/:email/:password`, checkThatUserExistsInUsersCollection, checkThatJWTPasswordIsValid, returnUsersDetailsAsJSON)
-
-router.post(`/users/logout`, logout)
-
-// router.get(`/users/email/:email`,verifyUsersJWTPassword,checkThatUserExistsInUsersCollection, getUserByEmail)
-
-router.get('/users/email', getUserByEmail)
-
-router.put('/users/update', (req, res, next) => {
+const updateUserData=(req, res, next) => {
     const { email, newName, newPhone, newAddress } = req.body;
 
     usersModel.findOneAndUpdate(
@@ -337,7 +321,65 @@ router.put('/users/update', (req, res, next) => {
             res.json({ message: 'User updated successfully', user: user });
         }
     );
-});
+};
+
+const getAllUserData=(req, res, next) => {
+    // Retrieve all users from the database
+    usersModel.find({}, (err, users) => {
+        if (err) {
+            // Handle database error
+            console.error('Error fetching users:', err);
+            return res.status(500).json({ error: 'Internal Server Error' });
+        }
+        // Send the retrieved users as the response
+        res.json(users);
+    });
+};
+
+const deleteUser=(req, res, next) => {
+    const userId = req.params.id;
+
+    // Find the user by ID and delete it
+    usersModel.findByIdAndDelete(userId, (err, deletedUser) => {
+        if (err) {
+            // Handle database error
+            console.error('Error deleting user:', err);
+            return res.status(500).json({ error: 'Internal Server Error' });
+        }
+
+        if (!deletedUser) {
+            // User with the specified ID not found
+            return res.status(404).json({ error: 'User not found' });
+        }
+
+        // User deleted successfully
+        res.json({ message: 'User deleted successfully', deletedUser: deletedUser });
+    });
+};
+
+
+// IMPORTANT
+// Obviously, in a production release, you should never have the code below, as it allows a user to delete a database collection
+// The code below is for development testing purposes only 
+router.post(`/users/reset_user_collection`, emptyUsersCollection, addAdminUserToUsersCollection)
+
+router.post(`/users/register/:name/:email/:password`, upload.single("profilePhoto"), checkThatFileIsUploaded, checkThatFileIsAnImageFile, checkThatUserIsNotAlreadyInUsersCollection, addNewUserToUsersCollection)
+
+router.post(`/users/login/:email/:password`, checkThatUserExistsInUsersCollection, checkThatJWTPasswordIsValid, returnUsersDetailsAsJSON)
+
+router.post(`/users/logout`, logout)
+
+// router.get(`/users/email/:email`,verifyUsersJWTPassword,checkThatUserExistsInUsersCollection, getUserByEmail)
+
+router.get('/users/email', getUserByEmail)
+
+router.put('/users/update', updateUserData);
+
+
+router.get('/users', getAllUserData);
+
+router.delete('/users/:id', deleteUser);
+
 
 // router.get('/users', getUserById);
 // router.get('/users/:id', getUserDocument,verifyUsersJWTPassword);
