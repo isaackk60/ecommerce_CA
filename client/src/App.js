@@ -15,7 +15,6 @@ import DeleteCar from "./components/DeleteCar"
 import DisplayAllCars from "./components/DisplayAllCars"
 import LoggedInRoute from "./components/LoggedInRoute"
 // import BuyCar from "./components/BuyCar"
-import BuyShirt from "./components/BuyShirt"
 import PayPalMessage from "./components/PayPalMessage"
 
 import Contact from "./components/Contact"
