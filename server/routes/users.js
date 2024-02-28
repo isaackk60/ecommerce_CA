@@ -247,15 +247,60 @@ const logout = (req, res, next) =>
 //         return res.json({_id:req.data._id,name: req.data.name, accessLevel:req.data.accessLevel, profilePhoto:null, token:token})  
 //     }  
 // }
-// const getUserDocument = (req, res, next) => {
-//     usersModel.findById(req.params.id, (err, data) => {
+// const getUserByEmail = (req, res, next) => {
+//     // Extract email from request parameters
+//     const email = req.params.email;
+
+//     // Find user by email in the database
+//     usersModel.findOne({ email: email }, (err, data) => {
 //         if (err) {
-//             return next(err)
+//             return next(err);
 //         }
 
-//         return res.json(data)
-//     })
-// }
+//         // If user not found, return appropriate response
+//         if (!data) {
+//             return res.status(404).json({ message: 'User not found' });
+//         }
+
+//         // If user found, return user details
+//         const token = jwt.sign({ email: data.email, accessLevel: data.accessLevel }, JWT_PRIVATE_KEY, { algorithm: 'HS256', expiresIn: process.env.JWT_EXPIRY });
+
+//         // Read profile photo from file and send as base64 string
+//         if (data.profilePhotoFilename) {
+//             fs.readFile(`${process.env.UPLOADED_FILES_FOLDER}/${data.profilePhotoFilename}`, 'base64', (err, photoData) => {
+//                 if (err) {
+//                     return next(err);
+//                 }
+
+//                 return res.json({ name: data.name, accessLevel: data.accessLevel, profilePhoto: photoData, token: token });
+//             });
+//         } else {
+//             // If no profile photo, return user details without photo
+//             return res.json({ name: data.name, accessLevel: data.accessLevel, profilePhoto: null, token: token });
+//         }
+//     });
+// };
+
+const getUserByEmail = (req, res) => {
+    const userEmail = req.query.email; // Extract email from query parameters
+
+    // Find user by email in the database
+    usersModel.findOne({ email: userEmail }, (err, userData) => {
+        if (err) {
+            // Handle database error
+            console.error('Error fetching user data:', err);
+            return res.status(500).json({ error: 'Internal Server Error' });
+        }
+
+        if (!userData) {
+            // User not found
+            return res.status(404).json({ error: 'User not found' });
+        }
+
+        // User found, send user data in response
+        return res.json(userData);
+    });
+};
 
 
 // IMPORTANT
@@ -269,7 +314,30 @@ router.post(`/users/login/:email/:password`, checkThatUserExistsInUsersCollectio
 
 router.post(`/users/logout`, logout)
 
-router.get(`/users/:email`,verifyUsersJWTPassword)
+// router.get(`/users/email/:email`,verifyUsersJWTPassword,checkThatUserExistsInUsersCollection, getUserByEmail)
+
+router.get('/users/email', getUserByEmail)
+
+router.put('/users/update', (req, res, next) => {
+    const { email, newName, newPhone, newAddress } = req.body;
+
+    usersModel.findOneAndUpdate(
+        { email: email },
+        { name: newName, phone: newPhone, address: newAddress },
+        { new: true },
+        (err, user) => {
+            if (err) {
+                return next(err);
+            }
+
+            if (!user) {
+                return res.status(404).json({ message: 'User not found' });
+            }
+
+            res.json({ message: 'User updated successfully', user: user });
+        }
+    );
+});
 
 // router.get('/users', getUserById);
 // router.get('/users/:id', getUserDocument,verifyUsersJWTPassword);

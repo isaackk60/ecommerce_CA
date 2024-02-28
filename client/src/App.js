@@ -29,6 +29,7 @@ import SubShirt from "./components/SubShirt"
 import About from "./components/About"
 import NavigationBar from "./components/NavigationBar"
 // import BuyShirt from "./components/BuyShirt"
+import Dashboard from "./components/Dashboard"
 
 import {ACCESS_LEVEL_GUEST} from "./config/global_constants"
 
@@ -59,6 +60,7 @@ export default class App extends Component
                     <Route exact path="/Contact" component={Contact} />  
                     {/* <Route exact path="/ShoppingCart/:id" component={ShoppingCart} />                       */}
                     <Route exact path="/ShoppingCart/" component={ShoppingCart} />  
+                    <Route exact path="/Dashboard" component={Dashboard} />  
                     <LoggedInRoute exact path="/Logout" component={Logout} />
                     <LoggedInRoute exact path="/AddCar" component={AddCar} />
                     <LoggedInRoute exact path="/EditCar/:id" component={EditCar} />
