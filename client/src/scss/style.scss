@@ -231,6 +231,8 @@ header {
 
 //FOOTER AND NAVIGATION BAR
 #footer-container {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 300;
     #BiggerSize {
         font-size: large;
     }
@@ -254,9 +256,9 @@ header {
 }
 
 #footer-container a {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 300;
     color: white;
-    font-family: urw-din, sans-serif;
-    font-weight: 400;
     text-decoration: none;
     border-left: 3px solid transparent;
     padding-left: 4px;
@@ -270,6 +272,8 @@ header {
 
 //NAVIGATION BAR
 #navigationbar-container {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 300;
     // overflow: hidden; //when scrolled, wont see it
     display: flex;
     flex-direction: row;

@@ -206,6 +206,8 @@ header {
 }
 
 #footer-container {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 300;
   background-color: #0c405f;
   color: white;
   display: flex;
@@ -226,9 +228,9 @@ header {
 }
 
 #footer-container a {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 300;
   color: white;
-  font-family: urw-din, sans-serif;
-  font-weight: 400;
   text-decoration: none;
   border-left: 3px solid transparent;
   padding-left: 4px;
@@ -241,6 +243,8 @@ header {
 }
 
 #navigationbar-container {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 300;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
