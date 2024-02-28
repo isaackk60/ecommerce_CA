@@ -400,6 +400,9 @@ form textarea {
 /*                    Contact Page End                */
 /*                        Cart                    */
 .cart-container {
+  background-color: #126291;
+  color: white;
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
   width: 80vw;
@@ -409,8 +412,7 @@ form textarea {
 .each-item-cart {
   display: flex;
   justify-content: space-between;
-  border: solid 2px black;
-  border-bottom: none;
+  border-bottom: solid 1px white;
   padding: 20px;
 }
 
@@ -453,8 +455,39 @@ form textarea {
 
 .each-item-cart img {
   width: 40vh;
+  border-radius: 8px;
 }
 
 .photoanddetailsSC {
   display: flex;
+}
+
+.detailsShoppingCart {
+  display: flex;
+  flex-direction: column;
+  margin-left: 5%;
+}
+.detailsShoppingCart select {
+  border-radius: 10px;
+}
+.detailsShoppingCart button {
+  border-radius: 10px;
+}
+.detailsShoppingCart span {
+  padding-left: 2%;
+  padding-right: 2%;
+}
+
+.buttonDivShoppingCart {
+  display: flex;
+}
+
+.shoppingcartdeletebutton button {
+  color: white;
+  background-color: red;
+}
+
+.shoppingcarth2 {
+  font-size: 2.5em;
+  color: #0C405F;
 }/*# sourceMappingURL=style.css.map */

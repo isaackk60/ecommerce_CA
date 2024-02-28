@@ -505,7 +505,7 @@ export default class ShoppingCart extends Component {
         return (
             <div>
                 <NavigationBar />
-                <h2>Shopping Cart</h2>
+                <h2 className="shoppingcarth2">Shopping Cart</h2>
                 <div className="cart-container">
                     {this.state.cart.map((item, index) => (
                         <div key={index} className="each-item-cart">
@@ -514,7 +514,7 @@ export default class ShoppingCart extends Component {
                                 {item.shirtPhotoFilename.map(photo => (
                                     <img key={photo._id} id={photo._id} alt="" />
                                 ))}
-                                <div>
+                                <div className="detailsShoppingCart">
                                     {/* <img src={`${SERVER_HOST}/shirts/photo/${item.shirtPhotoFilename}`} alt="Shirt" style={{ width: '100px', height: '100px' }} /> */}
                                     {/* <img src={`${SERVER_HOST}/shirts/photo/${item.shirtPhotoFilename}`} alt="Shirt" /> */}
                                     {/* {console.log("shirtPhotoFilename: ", item.shirtPhotoFilename)} */}
@@ -533,12 +533,14 @@ export default class ShoppingCart extends Component {
 
                                     <div>{item.price}</div>
 
-                                    <button onClick={() => this.handleChange(index, 'quantity', Math.max(1, item.quantity - 1))}>-</button>
-                                    <span>{item.quantity}</span>
-                                    <button onClick={() => this.handleChange(index, 'quantity', item.quantity + 1)}>+</button>
+                                    <div className="buttonDivShoppingCart">
+                                        <button onClick={() => this.handleChange(index, 'quantity', Math.max(1, item.quantity - 1))}>-</button>
+                                        <span>{item.quantity}</span>
+                                        <button onClick={() => this.handleChange(index, 'quantity', item.quantity + 1)}>+</button>
+                                    </div>
                                 </div>
                             </div>
-                            <div>
+                            <div className="shoppingcartdeletebutton">
                                 <button onClick={() => this.handleDelete(item.name, item.size)}>Delete</button>
                             </div>
 
