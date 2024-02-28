@@ -25,6 +25,7 @@ export default class SubShirt extends Component {
             shirtPhotoFilename: null,
             wasSubmittedAtLeastOnce: false,
             redirectToDisplayAllShirtsInCart: false,
+            redirectBackToMain: false,
             // user:``,
             cart: [],
             itemsInCart: cartLocalStorage,
@@ -127,7 +128,9 @@ export default class SubShirt extends Component {
 
     // }
 
-
+    handleBack = (e) => {
+        this.setState({ redirectBackToMain: true })
+    }
     handleSubmit = (e) => {
 
 
@@ -250,6 +253,10 @@ export default class SubShirt extends Component {
         return (
             <div>
                 <NavigationBar />
+                {this.state.redirectBackToMain ? <Redirect to={"/Main/"} /> : null}
+                <div className="subshirtbacktomain">
+                <LinkInClass value="Back" className="grey-button" onClick={this.handleBack} />
+                </div>
                 <div className="subShirtContainer">
                     {/* {this.state.redirectToDisplayAllShirtsInCart ? <Redirect to={{ pathname: `/shoppingCart/`+this.state.cart._id, state: { itemsInCart: this.state.itemsInCart } }}  /> : null} */}
                     {/* {this.state.redirectToDisplayAllShirtsInCart ? <Redirect to={"/ShoppingCart/" + this.state.cartId} /> : null} */}
