@@ -23,6 +23,10 @@ export default class Down extends Component {
         selectContainer.style.display = "none";
     }
 
+    handleSearchInputChange = (event) => { 
+        this.props.handleSearchInputChange(event) 
+    }
+
 
     render() {
         console.log("down")
@@ -62,7 +66,9 @@ export default class Down extends Component {
                     {/* <Link to={"/DisplayAllCars"}>test</Link> */}
                 </div>
                 <div class="splitR">
-                    <Link to={"/main"}>SEARCH HERE</Link>
+                    {/* <Link to={"/main"}>SEARCH HERE</Link> */}
+                    <input type="text" placeholder="Search shirts..." onChange={this.handleSearchInputChange}
+                    />
                     <Link to={"/ShoppingCart"}>SHOPPING CART</Link>
                     {/* <Link to={"/Login"}>LOG IN</Link> */}
                     {
