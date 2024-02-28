@@ -25,7 +25,6 @@ export default class Down extends Component {
 
 
     render() {
-        console.log("down")
         return (
             <nav id="navigationbar-container">
                 <div class="splitL">

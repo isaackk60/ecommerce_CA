@@ -13,7 +13,7 @@ export default class SubShirt extends Component {
         super(props)
         const cartLocalStorage = JSON.parse(localStorage.getItem("itemsInCart") || "[]")
         this.state = {
-            shirtId:``,
+            shirtId: ``,
             name: ``,
             // colour: ``,
             size: ``,
@@ -75,9 +75,9 @@ export default class SubShirt extends Component {
         // console.log(this.props.location)
         if (state && state.shirt) {
             const shirtData = state.shirt;
-            console.log(shirtData);
+            console.log("shirtData: ", shirtData);
             this.setState({
-                shirtId:shirtData._id,
+                shirtId: shirtData._id,
                 name: shirtData.name,
                 size: shirtData.size,
                 price: shirtData.price,
@@ -129,7 +129,7 @@ export default class SubShirt extends Component {
 
     handleSubmit = (e) => {
 
-      
+
 
         //         let formData = new FormData()
         //         // formData.append("userId", this.state.user)
@@ -146,7 +146,7 @@ export default class SubShirt extends Component {
         //                 console.log(2)
         //             }
         //         }
-        this.state.itemsInCart.push({ shirtId:this.state.shirtId,name: this.state.name, size: this.state.size, price: this.state.price, quantity: this.state.quantity })
+        this.state.itemsInCart.push({ shirtId: this.state.shirtId, name: this.state.name, size: this.state.size, price: this.state.price, quantity: this.state.quantity, shirtPhotoFilename: this.state.shirtPhotoFilename })
         // console.log(this.state.itemsInCart)
         if (this.state.itemsInCart !== undefined) {
             const groupedItems = this.state.itemsInCart.reduce((groups, item) => {
@@ -156,12 +156,13 @@ export default class SubShirt extends Component {
                     group.totalPrice += item.price * item.quantity;
                 } else {
                     groups.push({
-                        shirtId:item.shirtId,
+                        shirtId: item.shirtId,
                         name: item.name,
                         size: item.size,
                         quantity: item.quantity,
                         price: item.price,
-                        totalPrice: item.price * item.quantity
+                        totalPrice: item.price * item.quantity,
+                        shirtPhotoFilename: item.shirtPhotoFilename
                     });
                 }
                 return groups;
@@ -169,6 +170,7 @@ export default class SubShirt extends Component {
             localStorage.setItem("itemsInCart", JSON.stringify(groupedItems));
         }
         // localStorage.setItem("itemsInCart", JSON.stringify(this.state.itemsInCart));
+        console.log("aboveRedirect: ", this.state.redirectToDisplayAllShirtsInCart)
         this.setState({ redirectToDisplayAllShirtsInCart: true })
         // this.setState({ wasSubmittedAtLeastOnce: true })
 
@@ -217,7 +219,7 @@ export default class SubShirt extends Component {
 
 
     render() {
-console.log(this.state.shirtId)
+        console.log("shirtId", this.state.shirtId)
         // console.log(this.state.user)
         let errorMessage = "";
         if (this.state.wasSubmittedAtLeastOnce) {
@@ -229,9 +231,9 @@ console.log(this.state.shirtId)
         // if (this.state.redirectToCart) {
         //     return <Link to={{ pathname: "/shoppingCart", state: { itemsInCart: this.state.itemsInCart } }} onclick={this.handleSubmit}/>;
         // }
-        console.log(this.state.itemsInCart)
-        console.log(this.state.shirtPhotoFilename)
-        console.log(this.state.cartId)
+        console.log("itemsInCart", this.state.itemsInCart)
+        console.log("shirtPhotosFilename", this.state.shirtPhotoFilename)
+        console.log("cartId", this.state.cartId)
 
         let soldOrForSale = null
         // if (localStorage.accessLevel <= ACCESS_LEVEL_GUEST) {
@@ -244,42 +246,45 @@ console.log(this.state.shirtId)
         // }
 
         return (
-            <div className="subShirtContainer">
-                {/* {this.state.redirectToDisplayAllShirtsInCart ? <Redirect to={{ pathname: `/shoppingCart/`+this.state.cart._id, state: { itemsInCart: this.state.itemsInCart } }}  /> : null} */}
-                {/* {this.state.redirectToDisplayAllShirtsInCart ? <Redirect to={"/ShoppingCart/" + this.state.cartId} /> : null} */}
-                {this.state.redirectToDisplayAllShirtsInCart ? <Redirect to={"/ShoppingCart/"} /> : null}
-                {errorMessage}
-                <div>
-                    {this.state.shirtPhotoFilename === null ? null : <div className="shirtPhotos">
-                        {this.state.shirtPhotoFilename.map(photo => <img key={photo._id} id={photo._id} alt="" />)}
-                    </div>}
-                </div>
-                <div>
-                    <h1>{this.state.name}</h1><br></br>
-                    <h4>{this.state.price}</h4><br></br>
-                    <h5>Stock:{this.state.stock}</h5>
+            <div>
+                <NavigationBar/>
+                <div className="subShirtContainer">
+                    {/* {this.state.redirectToDisplayAllShirtsInCart ? <Redirect to={{ pathname: `/shoppingCart/`+this.state.cart._id, state: { itemsInCart: this.state.itemsInCart } }}  /> : null} */}
+                    {/* {this.state.redirectToDisplayAllShirtsInCart ? <Redirect to={"/ShoppingCart/" + this.state.cartId} /> : null} */}
+                    {this.state.redirectToDisplayAllShirtsInCart ? <Redirect to={"/ShoppingCart/"} /> : null}
+                    {errorMessage}
+                    <div>
+                        {this.state.shirtPhotoFilename === null ? null : <div className="shirtPhotos">
+                            {this.state.shirtPhotoFilename.map(photo => <img key={photo._id} id={photo._id} alt="" />)}
+                        </div>}
+                    </div>
+                    <div>
+                        <h1>{this.state.name}</h1><br></br>
+                        <h4>{this.state.price}</h4><br></br>
+                        <h5>Stock:{this.state.stock}</h5>
 
-                    <Form>
-                        <Form.Group controlId="size">
-                            <Form.Label>Size</Form.Label>
-                            <Form.Control as="select" name="size" value={this.state.size} onChange={this.handleChange}>
-                                <option value="XS">XS</option>
-                                <option value="S">S</option>
-                                <option value="M">M</option>
-                                <option value="L">L</option>
-                                <option value="XL">XL</option>
-                            </Form.Control>
-                        </Form.Group>
-                        <Form.Group controlId="quantity">
-                            <Form.Label>Quantity</Form.Label>
-                            {/* <Form.Control type="number" name="quantity" value={this.state.quantity} onChange={this.handleQuantityChange} /> */}
-                            <Form.Control type="number" name="quantity" value={this.state.quantity} onChange={this.handleChange} />
-                        </Form.Group>
-                        <LinkInClass value="Add to Cart" className="green-button" onClick={this.handleSubmit} />
-                    </Form>
-                    <p>{this.state.description}</p>
-                    {soldOrForSale}
-                    <BuyShirt/>
+                        <Form>
+                            <Form.Group controlId="size">
+                                <Form.Label>Size</Form.Label>
+                                <Form.Control as="select" name="size" value={this.state.size} onChange={this.handleChange}>
+                                    <option value="XS">XS</option>
+                                    <option value="S">S</option>
+                                    <option value="M">M</option>
+                                    <option value="L">L</option>
+                                    <option value="XL">XL</option>
+                                </Form.Control>
+                            </Form.Group>
+                            <Form.Group controlId="quantity">
+                                <Form.Label>Quantity</Form.Label>
+                                {/* <Form.Control type="number" name="quantity" value={this.state.quantity} onChange={this.handleQuantityChange} /> */}
+                                <Form.Control type="number" name="quantity" value={this.state.quantity} onChange={this.handleChange} />
+                            </Form.Group>
+                            <LinkInClass value="Add to Cart" className="green-button" onClick={this.handleSubmit} />
+                        </Form>
+                        <p>{this.state.description}</p>
+                        {/* {soldOrForSale}
+                        <BuyShirt /> */}
+                    </div>
                 </div>
             </div>
         )

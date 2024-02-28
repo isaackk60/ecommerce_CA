@@ -215,7 +215,8 @@ export default class ShoppingCart extends Component {
             guestEmail: "",
             guestAddress: "",
             guestPhone: "",
-            isGuest:localStorage.accessLevel < ACCESS_LEVEL_NORMAL_USER
+            isGuest: localStorage.accessLevel < ACCESS_LEVEL_NORMAL_USER,
+            redirectToPaypalButton: false
             // totalPrice: 0
         };
     }
@@ -224,7 +225,7 @@ export default class ShoppingCart extends Component {
         // Fetch cart data from the server
         const cartLocalStorage = JSON.parse(localStorage.getItem("itemsInCart") || "[]");
 
-        console.log(localStorage.getItem("itemsInCart"))
+        console.log("itemsInCart: ",localStorage.getItem("itemsInCart"))
 
         this.setState({ cart: JSON.parse(localStorage.getItem("itemsInCart")) })
 
@@ -294,19 +295,19 @@ export default class ShoppingCart extends Component {
         // this.setState({ totalPrice: totalPrice });
         return totalPrice.toFixed(2);
     }
-    getIdAndQuantity(){
-let items=[]
-this.state.cart.map(cartItem=>{
-    items.push({shirtID:cartItem.shirtId,quantity:cartItem.quantity})
-});
-return items;
+    getIdAndQuantity() {
+        let items = []
+        this.state.cart.map(cartItem => {
+            items.push({ shirtID: cartItem.shirtId, quantity: cartItem.quantity })
+        });
+        return items;
 
     }
     handleChange = (index, field, value) => {
         const updatedCart = [...this.state.cart];
         updatedCart[index][field] = value;
         this.setState({ cart: updatedCart });
-        
+
         // localStorage.setItem("itemsInCart", JSON.stringify(updatedCart));
         const groupedItems = this.state.cart.reduce((groups, item) => {
             const group = groups.find(g => g.name === item.name);
@@ -315,17 +316,18 @@ return items;
                 group.totalPrice += item.price * item.quantity;
             } else {
                 groups.push({
-                    shirtId:item.shirtId,
+                    shirtId: item.shirtId,
                     name: item.name,
                     size: item.size,
                     quantity: item.quantity,
                     price: item.price,
-                    totalPrice: item.price * item.quantity
+                    totalPrice: item.price * item.quantity,
+                    shirtPhotoFilename: item.shirtPhotoFilename
                 });
             }
             return groups;
         }, []);
-        this.setState({cart:groupedItems})
+        this.setState({ cart: groupedItems })
         localStorage.setItem("itemsInCart", JSON.stringify(groupedItems));
     };
 
@@ -333,6 +335,38 @@ return items;
         const updatedCart = this.state.cart.filter(item => !(item.name === name && item.size === size));
         this.setState({ cart: updatedCart });
         localStorage.setItem("itemsInCart", JSON.stringify(updatedCart));
+    };
+    handlePayment = () => {
+        // Check if all guest details are provided
+        const { guestName, guestEmail, guestAddress, guestPhone } = this.state;
+        const errors = {};
+        if (!guestName.trim()) {
+            errors.guestName = "Name is required";
+        }
+        if (!guestEmail.trim()) {
+            errors.guestEmail = "Email is required";
+        } else if (!/\S+@\S+\.\S+/.test(guestEmail)) {
+            errors.guestEmail = "Email is invalid";
+        }
+        if (!guestAddress.trim()) {
+            errors.guestAddress = "Address is required";
+        }
+        if (!guestPhone.trim()) {
+            errors.guestPhone = "Phone number is required";
+        } else if (!/^\d{10}$/.test(guestPhone)) {
+            errors.guestPhone = "Phone number must be 10 digits";
+        }
+        // if (Object.keys(errors).length === 0) {
+        // if (guestName && guestEmail && guestAddress && guestPhone {
+        if (guestName && guestEmail && guestAddress && guestPhone && Object.keys(errors).length === 0) {
+            // Proceed with payment
+            console.log("Guest details provided. Proceeding with payment...");
+            // Call your payment function or component here
+            this.setState({redirectToPaypalButton:true})
+        } else {
+            // Display error message or handle accordingly
+            console.log("Please provide all guest details before proceeding with payment.");
+        }
     };
 
     // loadShirtPhotos() {
@@ -352,9 +386,9 @@ return items;
     //         });
     //     });
     // }
-    handleChange = (field, value) => {
-        this.setState({ [field]: value });
-    };
+    // handleChange = (field, value) => {
+    //     this.setState({ [field]: value });
+    // };
 
     render() {
         // console.log(this.state.cart[0])
@@ -368,12 +402,13 @@ return items;
                 group.totalPrice += item.price * item.quantity;
             } else {
                 groups.push({
-                    shirtId:item.shirtId,
+                    shirtId: item.shirtId,
                     name: item.name,
                     size: item.size,
                     quantity: item.quantity,
                     price: item.price,
-                    totalPrice: item.price * item.quantity
+                    totalPrice: item.price * item.quantity,
+                    shirtPhotoFilename: item.shirtPhotoFilename
                 });
             }
             return groups;
@@ -383,69 +418,79 @@ return items;
                 <NavigationBar />
                 <h2>Shopping Cart</h2>
                 <div className="cart-container">
-                {this.state.cart.map((item, index) => (
+                    {this.state.cart.map((item, index) => (
                         <div key={index} className="each-item-cart">
                             <div>
-                            {/* Display shirt photo */}
-                            <img src={`${SERVER_HOST}/shirts/photo/${item.shirtPhotoFilename}`} alt="Shirt" />
-                            <h3>{item.name} </h3>
-                            <select
-                                value={item.size}
-                                onChange={e => this.handleChange(index, 'size', e.target.value)}
-                            >
-                                <option value="XS">XS</option>
-                                <option value="S">S</option>
-                                <option value="M">M</option>
-                                <option value="L">L</option>
-                                <option value="XL">XL</option>
-                            </select>
-                            {/* <span>Quantity:</span> */}
-                            
-                            <div>{item.price}</div>
+                                {/* Display shirt photo */}
+                                <img src={`${SERVER_HOST}/shirts/photo/${item.shirtPhotoFilename}`} alt="Shirt" />
+                                {console.log("shirtPhotoFilename: ",item.shirtPhotoFilename)}
+                                <h3>{item.name} </h3>
+                                <select
+                                    value={item.size}
+                                    onChange={e => this.handleChange(index, 'size', e.target.value)}
+                                >
+                                    <option value="XS">XS</option>
+                                    <option value="S">S</option>
+                                    <option value="M">M</option>
+                                    <option value="L">L</option>
+                                    <option value="XL">XL</option>
+                                </select>
+                                {/* <span>Quantity:</span> */}
 
-                            <button onClick={() => this.handleChange(index, 'quantity', Math.max(1, item.quantity - 1))}>-</button>
-                            <span>{item.quantity}</span>
-                            <button onClick={() => this.handleChange(index, 'quantity', item.quantity + 1)}>+</button>
+                                <div>{item.price}</div>
+
+                                <button onClick={() => this.handleChange(index, 'quantity', Math.max(1, item.quantity - 1))}>-</button>
+                                <span>{item.quantity}</span>
+                                <button onClick={() => this.handleChange(index, 'quantity', item.quantity + 1)}>+</button>
                             </div>
                             <div>
-                            <button onClick={() => this.handleDelete(item.name, item.size)}>Delete</button>
+                                <button onClick={() => this.handleDelete(item.name, item.size)}>Delete</button>
                             </div>
-                            
+
                         </div>
-                        
+
                     ))}
-                    {this.state.isGuest?
-                     <div className="guest-details">
-                     <h3>Guest Details</h3>
-                     <input
-                         type="text"
-                         placeholder="Name"
-                         value={this.state.guestName}
-                         onChange={e => this.handleChange('guestName', e.target.value)}
-                     />
-                     <input
-                         type="email"
-                         placeholder="Email"
-                         value={this.state.guestEmail}
-                         onChange={e => this.handleChange('guestEmail', e.target.value)}
-                     />
-                     <input
-                         type="text"
-                         placeholder="Address"
-                         value={this.state.guestAddress}
-                         onChange={e => this.handleChange('guestAddress', e.target.value)}
-                     />
-                     <input
-                         type="text"
-                         placeholder="Phone"
-                         value={this.state.guestPhone}
-                         onChange={e => this.handleChange('guestPhone', e.target.value)}
-                     />
-                 </div>
-                    :null}
-                    <BuyShirt customerEmail={this.state.guestEmail} customerName={this.state.guestName} address={this.state.guestAddress} phone={this.state.guestPhone} items={this.getIdAndQuantity()} price={this.calculateTotalPrice()}/>
+                    {this.state.isGuest ?
+                        <div className="guest-details">
+                            <h3>Guest Details</h3>
+                            <input
+                                type="text"
+                                placeholder="Name"
+                                value={this.state.guestName}
+                                onChange={e => this.handleChange('guestName', e.target.value)}
+                                required //required
+                            />
+                            <input
+                                type="email"
+                                placeholder="Email"
+                                value={this.state.guestEmail}
+                                onChange={e => this.handleChange('guestEmail', e.target.value)}
+                                required
+                            />
+                            <input
+                                type="text"
+                                placeholder="Address"
+                                value={this.state.guestAddress}
+                                onChange={e => this.handleChange('guestAddress', e.target.value)}
+                                required
+                            />
+                            <input
+                                type="text"
+                                placeholder="Phone"
+                                value={this.state.guestPhone}
+                                onChange={e => this.handleChange('guestPhone', e.target.value)}
+                                required
+                            />
+                        </div>
+                        : null}
+
+
+                    {/* paypalbutton */}
+                    {/* <BuyShirt customerEmail={this.state.guestEmail} customerName={this.state.guestName} address={this.state.guestAddress} phone={this.state.guestPhone} items={this.getIdAndQuantity()} price={this.calculateTotalPrice()} /> */}
+                    <button onClick={this.handlePayment}>Proceed to Payment</button>
+                    {this.state.redirectToPaypalButton ? <BuyShirt customerEmail={this.state.guestEmail} customerName={this.state.guestName} address={this.state.guestAddress} phone={this.state.guestPhone} items={this.getIdAndQuantity()} price={this.calculateTotalPrice()} /> : null}  
                 </div>
-                
+
                 {/* <p>Total Price: €{this.state.totalPrice}</p> */}
                 {this.state.cart !== undefined ? <p>Total Price: {this.calculateTotalPrice()}</p> : null}
 
