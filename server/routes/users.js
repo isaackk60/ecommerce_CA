@@ -14,16 +14,18 @@ const upload = multer({dest: `${process.env.UPLOADED_FILES_FOLDER}`})
 
 const emptyFolder = require('empty-folder')
 
-// const verifyUsersJWTPassword = (req, res, next) => {
-//     jwt.verify(req.headers.authorization, JWT_PRIVATE_KEY, { algorithm: "HS256" }, (err, decodedToken) => {
-//         if (err) {
-//             return next(err)
-//         }
+const verifyUsersJWTPassword = (req, res, next) => {
+    jwt.verify(req.headers.authorization, JWT_PRIVATE_KEY, { algorithm: "HS256" }, (err, decodedToken) => {
+        if (err) {
+            return next(err)
+        }
 
-//         req.decodedToken = decodedToken
-//         return next()
-//     })
-// }
+        req.decodedToken = decodedToken
+        return next()
+    })
+}
+
+
 
 const checkThatUserExistsInUsersCollection = (req, res, next) =>
 {
@@ -266,6 +268,8 @@ router.post(`/users/register/:name/:email/:password`, upload.single("profilePhot
 router.post(`/users/login/:email/:password`, checkThatUserExistsInUsersCollection, checkThatJWTPasswordIsValid, returnUsersDetailsAsJSON)
 
 router.post(`/users/logout`, logout)
+
+router.get(`/users/:email`,verifyUsersJWTPassword)
 
 // router.get('/users', getUserById);
 // router.get('/users/:id', getUserDocument,verifyUsersJWTPassword);

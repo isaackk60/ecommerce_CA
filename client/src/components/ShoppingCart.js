@@ -196,7 +196,7 @@
 
 import React, { Component } from "react";
 import NavigationBar from "./NavigationBar";
-import { SERVER_HOST } from "../config/global_constants";
+import { ACCESS_LEVEL_NORMAL_USER, SERVER_HOST } from "../config/global_constants"
 import axios from "axios";
 import BuyShirt from "./BuyShirt";
 
@@ -211,6 +211,11 @@ export default class ShoppingCart extends Component {
             // quantity:"",
             // size:"",
             cart: [],
+            guestName: "",
+            guestEmail: "",
+            guestAddress: "",
+            guestPhone: "",
+            isGuest:localStorage.accessLevel < ACCESS_LEVEL_NORMAL_USER
             // totalPrice: 0
         };
     }
@@ -289,6 +294,14 @@ export default class ShoppingCart extends Component {
         // this.setState({ totalPrice: totalPrice });
         return totalPrice.toFixed(2);
     }
+    getIdAndQuantity(){
+let items=[]
+this.state.cart.map(cartItem=>{
+    items.push({shirtID:cartItem.shirtId,quantity:cartItem.quantity})
+});
+return items;
+
+    }
     handleChange = (index, field, value) => {
         const updatedCart = [...this.state.cart];
         updatedCart[index][field] = value;
@@ -302,6 +315,7 @@ export default class ShoppingCart extends Component {
                 group.totalPrice += item.price * item.quantity;
             } else {
                 groups.push({
+                    shirtId:item.shirtId,
                     name: item.name,
                     size: item.size,
                     quantity: item.quantity,
@@ -338,6 +352,9 @@ export default class ShoppingCart extends Component {
     //         });
     //     });
     // }
+    handleChange = (field, value) => {
+        this.setState({ [field]: value });
+    };
 
     render() {
         // console.log(this.state.cart[0])
@@ -351,6 +368,7 @@ export default class ShoppingCart extends Component {
                 group.totalPrice += item.price * item.quantity;
             } else {
                 groups.push({
+                    shirtId:item.shirtId,
                     name: item.name,
                     size: item.size,
                     quantity: item.quantity,
@@ -396,7 +414,36 @@ export default class ShoppingCart extends Component {
                         </div>
                         
                     ))}
-                    <BuyShirt price={this.calculateTotalPrice()}/>
+                    {this.state.isGuest?
+                     <div className="guest-details">
+                     <h3>Guest Details</h3>
+                     <input
+                         type="text"
+                         placeholder="Name"
+                         value={this.state.guestName}
+                         onChange={e => this.handleChange('guestName', e.target.value)}
+                     />
+                     <input
+                         type="email"
+                         placeholder="Email"
+                         value={this.state.guestEmail}
+                         onChange={e => this.handleChange('guestEmail', e.target.value)}
+                     />
+                     <input
+                         type="text"
+                         placeholder="Address"
+                         value={this.state.guestAddress}
+                         onChange={e => this.handleChange('guestAddress', e.target.value)}
+                     />
+                     <input
+                         type="text"
+                         placeholder="Phone"
+                         value={this.state.guestPhone}
+                         onChange={e => this.handleChange('guestPhone', e.target.value)}
+                     />
+                 </div>
+                    :null}
+                    <BuyShirt customerEmail={this.state.guestEmail} customerName={this.state.guestName} address={this.state.guestAddress} phone={this.state.guestPhone} items={this.getIdAndQuantity()} price={this.calculateTotalPrice()}/>
                 </div>
                 
                 {/* <p>Total Price: €{this.state.totalPrice}</p> */}

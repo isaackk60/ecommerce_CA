@@ -13,6 +13,7 @@ export default class SubShirt extends Component {
         super(props)
         const cartLocalStorage = JSON.parse(localStorage.getItem("itemsInCart") || "[]")
         this.state = {
+            shirtId:``,
             name: ``,
             // colour: ``,
             size: ``,
@@ -71,10 +72,12 @@ export default class SubShirt extends Component {
         // localStorage.setItem("itemsInCart", JSON.stringify(this.state.itemsInCart));
 
         const { state } = this.props.location;
+        // console.log(this.props.location)
         if (state && state.shirt) {
             const shirtData = state.shirt;
             console.log(shirtData);
             this.setState({
+                shirtId:shirtData._id,
                 name: shirtData.name,
                 size: shirtData.size,
                 price: shirtData.price,
@@ -126,6 +129,8 @@ export default class SubShirt extends Component {
 
     handleSubmit = (e) => {
 
+      
+
         //         let formData = new FormData()
         //         // formData.append("userId", this.state.user)
         //         formData.append("name", this.state.name)
@@ -141,7 +146,7 @@ export default class SubShirt extends Component {
         //                 console.log(2)
         //             }
         //         }
-        this.state.itemsInCart.push({ name: this.state.name, size: this.state.size, price: this.state.price, quantity: this.state.quantity })
+        this.state.itemsInCart.push({ shirtId:this.state.shirtId,name: this.state.name, size: this.state.size, price: this.state.price, quantity: this.state.quantity })
         // console.log(this.state.itemsInCart)
         if (this.state.itemsInCart !== undefined) {
             const groupedItems = this.state.itemsInCart.reduce((groups, item) => {
@@ -151,6 +156,7 @@ export default class SubShirt extends Component {
                     group.totalPrice += item.price * item.quantity;
                 } else {
                     groups.push({
+                        shirtId:item.shirtId,
                         name: item.name,
                         size: item.size,
                         quantity: item.quantity,
@@ -211,7 +217,7 @@ export default class SubShirt extends Component {
 
 
     render() {
-
+console.log(this.state.shirtId)
         // console.log(this.state.user)
         let errorMessage = "";
         if (this.state.wasSubmittedAtLeastOnce) {
@@ -228,14 +234,14 @@ export default class SubShirt extends Component {
         console.log(this.state.cartId)
 
         let soldOrForSale = null
-        if (localStorage.accessLevel <= ACCESS_LEVEL_GUEST) {
-            if (this.props.shirt.sold !== true) {
-                soldOrForSale = <BuyShirt shirtID={this.props.shirt._id} price={this.props.shirt.price} />
-            }
-            else {
-                soldOrForSale = "SOLD"
-            }
-        }
+        // if (localStorage.accessLevel <= ACCESS_LEVEL_GUEST) {
+        //     if (this.props.shirt.sold !== true) {
+        //         soldOrForSale = <BuyShirt shirtID={this.props.shirt._id} price={this.props.shirt.price} />
+        //     }
+        //     else {
+        //         soldOrForSale = "SOLD"
+        //     }
+        // }
 
         return (
             <div className="subShirtContainer">

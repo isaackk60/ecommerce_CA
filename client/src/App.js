@@ -27,7 +27,7 @@ import DeleteTShirt from "./components/DeleteTShirt"
 import SubShirt from "./components/SubShirt"
 import About from "./components/About"
 import NavigationBar from "./components/NavigationBar"
-import BuyShirt from "./components/BuyShirt"
+// import BuyShirt from "./components/BuyShirt"
 
 import {ACCESS_LEVEL_GUEST} from "./config/global_constants"
 
