@@ -1,4 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Protest+Riot&display=swap");
+.add-new-shirt {
+  margin-top: 4%;
+  margin-bottom: 2%;
+  margin-left: 4%;
+}
+
 .wholeMain {
   padding-top: 10px;
   padding-bottom: 10px;
@@ -21,20 +27,31 @@
 .main-container .shirt-container {
   padding-top: 10px;
   padding-bottom: 10px;
+  display: flex;
+  flex-direction: column;
 }
-.main-container .shirt-container .h2-text {
-  padding: 0px;
-  font-size: 30px;
+.main-container .mainshirtnameprice {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: black;
+  font-weight: 300;
+  font-family: "Montserrat", sans-serif;
 }
-.main-container .shirt-price {
-  padding-bottom: 3px;
-  text-align: center;
+.main-container .mainshirtnameprice h2 {
+  font-weight: 300;
+  padding-top: 1%;
+  padding-bottom: 1%;
+  margin-bottom: 0%;
 }
 .main-container .admin-edit-delete-shirt {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 300;
+  margin-top: 2%;
   display: flex;
   flex-direction: row;
-  margin: auto;
-  width: 50%;
+  justify-content: center;
 }
 .main-container a {
   text-decoration: none;
@@ -271,7 +288,9 @@ header {
 }
 
 #navigationbar-container .splitC {
+  font-family: "Lora", serif;
   float: center;
+  color: white;
 }
 #navigationbar-container .splitC img {
   display: block;

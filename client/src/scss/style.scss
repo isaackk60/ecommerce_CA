@@ -1,4 +1,9 @@
 // *************main*********************
+.add-new-shirt{
+    margin-top: 4%;
+    margin-bottom: 2%;
+    margin-left: 4%;
+}
 .wholeMain {
     padding-top: 10px;
     padding-bottom: 10px;
@@ -23,23 +28,49 @@
     .shirt-container {
         padding-top: 10px;
         padding-bottom: 10px;
+        display: flex;
+        flex-direction: column;
+    }
+    // .mainlinktosubshirt a:hover{
+    //     text-decoration: none;
+    //     color: white;
+    // }
+    
+    .mainshirtnameprice{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-decoration: none;
+        color: black;
+        font-weight: 300;
+        font-family: "Montserrat", sans-serif;
+        h2{
+            font-weight: 300;
+            padding-top: 1%;
+            padding-bottom: 1%;
+            margin-bottom: 0%;
+        }
     }
 
-    .shirt-container .h2-text {
-        padding: 0px;
-        font-size: 30px;
-    }
+    // .shirt-container .h2-text {
+    //     padding: 0px;
+    //     font-size: 30px;
+    // }
 
-    .shirt-price {
-        padding-bottom: 3px;
-        text-align: center;
-    }
+    // .shirt-price {
+    //     padding-bottom: 3px;
+    //     text-align: center;
+    // }
 
     .admin-edit-delete-shirt {
+        font-family: "Montserrat", sans-serif;
+        font-weight: 300;
+        margin-top: 2%;
         display: flex;
         flex-direction: row;
-        margin: auto;
-        width: 50%;
+        justify-content: center;
+        // margin: auto;
+        // width: 50%;
     }
 
     a {
@@ -302,8 +333,10 @@ header {
 }
 
 #navigationbar-container .splitC {
+    font-family: "Lora", serif;
     float: center;
-
+    color: white;
+    // font-style: italic;
     img {
         display: block;
         margin-left: auto;

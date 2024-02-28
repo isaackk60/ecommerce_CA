@@ -57,7 +57,8 @@ export default class Down extends Component {
                 <div class="splitC">
                     {/* <Link to={"/DisplayAllCars"} img src={require('./.public/tshirtstorelogo.jpg')}>test</Link> */}
                     {/* <Link to={"/DisplayAllCars"} img src="../tshirtstorelogo.jpg"></Link> */}
-                    <img id="logo" src={storeLogo} />
+                    {/* <img id="logo" src={storeLogo} /> */}
+                    <h1>T-SHIRT STORE</h1>
                     {/* <Link to={"/DisplayAllCars"}>test</Link> */}
                 </div>
                 <div class="splitR">
