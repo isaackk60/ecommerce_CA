@@ -449,4 +449,12 @@ form textarea {
 
 #select-container {
   display: none;
+}
+
+.each-item-cart img {
+  width: 40vh;
+}
+
+.photoanddetailsSC {
+  display: flex;
 }/*# sourceMappingURL=style.css.map */

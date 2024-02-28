@@ -361,7 +361,7 @@ export default class ShoppingCart extends Component {
                     price: item.price,
                     totalPrice: item.price * item.quantity,
                     shirtPhotoFilename: item.shirtPhotoFilename,
-                    shirtPhotoFilename:item.shirtPhotoFilename
+                    shirtPhotoFilename: item.shirtPhotoFilename
                 });
             }
             return groups;
@@ -403,7 +403,7 @@ export default class ShoppingCart extends Component {
             // Proceed with payment
             console.log("Guest details provided. Proceeding with payment...");
             // Call your payment function or component here
-            this.setState({redirectToPaypalButton:true})
+            this.setState({ redirectToPaypalButton: true })
         } else {
             // Display error message or handle accordingly
             console.log("Please provide all guest details before proceeding with payment.");
@@ -435,7 +435,7 @@ export default class ShoppingCart extends Component {
             // Proceed with payment
             console.log("Guest details provided. Proceeding with payment...");
             // Call your payment function or component here
-            this.setState({redirectToPaypalButton:true})
+            this.setState({ redirectToPaypalButton: true })
         } else {
             // Display error message or handle accordingly
             console.log("Please provide all guest details before proceeding with payment.");
@@ -482,25 +482,25 @@ export default class ShoppingCart extends Component {
                     price: item.price,
                     totalPrice: item.price * item.quantity,
                     shirtPhotoFilename: item.shirtPhotoFilename,
-                    shirtPhotoFilename:item.shirtPhotoFilename
+                    shirtPhotoFilename: item.shirtPhotoFilename
                 });
             }
             return groups;
         }, []);
-console.log(this.state.cart.map(item=>item.shirtPhotoFilename[0]))
+        console.log(this.state.cart.map(item => item.shirtPhotoFilename[0]))
 
-// this.state.cart.map(item =>
-//     item.shirtPhotoFilename[0].forEach(photo => { // Use forEach to iterate over each object
-//         axios.get(`${SERVER_HOST}/shirts/photo/${photo.filename}`)
-//             .then(res => {
-//                 document.getElementById(photo._id).src = `data:;base64,${res.data.image}`
-//             })
-//             .catch(err => {
-//                 // Handle error
-//                 console.error("Error loading shirt photo:", err);
-//             });
-//     })
-// );
+        // this.state.cart.map(item =>
+        //     item.shirtPhotoFilename[0].forEach(photo => { // Use forEach to iterate over each object
+        //         axios.get(`${SERVER_HOST}/shirts/photo/${photo.filename}`)
+        //             .then(res => {
+        //                 document.getElementById(photo._id).src = `data:;base64,${res.data.image}`
+        //             })
+        //             .catch(err => {
+        //                 // Handle error
+        //                 console.error("Error loading shirt photo:", err);
+        //             });
+        //     })
+        // );
 
         return (
             <div>
@@ -509,31 +509,34 @@ console.log(this.state.cart.map(item=>item.shirtPhotoFilename[0]))
                 <div className="cart-container">
                     {this.state.cart.map((item, index) => (
                         <div key={index} className="each-item-cart">
-{item.shirtPhotoFilename.map(photo => (
-                                <img key={photo._id} id={photo._id} alt="" />
-                            ))}
-                            <div>
-                                {/* Display shirt photo */}
-                                <img src={`${SERVER_HOST}/shirts/photo/${item.shirtPhotoFilename}`} alt="Shirt" />
-                                {console.log("shirtPhotoFilename: ",item.shirtPhotoFilename)}
-                                <h3>{item.name} </h3>
-                                <select
-                                    value={item.size}
-                                    onChange={e => this.handleChange(index, 'size', e.target.value)}
-                                >
-                                    <option value="XS">XS</option>
-                                    <option value="S">S</option>
-                                    <option value="M">M</option>
-                                    <option value="L">L</option>
-                                    <option value="XL">XL</option>
-                                </select>
-                                {/* <span>Quantity:</span> */}
+                            <div className="photoanddetailsSC">
+                                {/* display shirt photo */}
+                                {item.shirtPhotoFilename.map(photo => (
+                                    <img key={photo._id} id={photo._id} alt="" />
+                                ))}
+                                <div>
+                                    {/* <img src={`${SERVER_HOST}/shirts/photo/${item.shirtPhotoFilename}`} alt="Shirt" style={{ width: '100px', height: '100px' }} /> */}
+                                    {/* <img src={`${SERVER_HOST}/shirts/photo/${item.shirtPhotoFilename}`} alt="Shirt" /> */}
+                                    {/* {console.log("shirtPhotoFilename: ", item.shirtPhotoFilename)} */}
+                                    <h3>{item.name} </h3>
+                                    <select
+                                        value={item.size}
+                                        onChange={e => this.handleChange(index, 'size', e.target.value)}
+                                    >
+                                        <option value="XS">XS</option>
+                                        <option value="S">S</option>
+                                        <option value="M">M</option>
+                                        <option value="L">L</option>
+                                        <option value="XL">XL</option>
+                                    </select>
+                                    {/* <span>Quantity:</span> */}
 
-                                <div>{item.price}</div>
+                                    <div>{item.price}</div>
 
-                                <button onClick={() => this.handleChange(index, 'quantity', Math.max(1, item.quantity - 1))}>-</button>
-                                <span>{item.quantity}</span>
-                                <button onClick={() => this.handleChange(index, 'quantity', item.quantity + 1)}>+</button>
+                                    <button onClick={() => this.handleChange(index, 'quantity', Math.max(1, item.quantity - 1))}>-</button>
+                                    <span>{item.quantity}</span>
+                                    <button onClick={() => this.handleChange(index, 'quantity', item.quantity + 1)}>+</button>
+                                </div>
                             </div>
                             <div>
                                 <button onClick={() => this.handleDelete(item.name, item.size)}>Delete</button>
@@ -580,7 +583,7 @@ console.log(this.state.cart.map(item=>item.shirtPhotoFilename[0]))
                     {/* paypalbutton */}
                     {/* <BuyShirt customerEmail={this.state.guestEmail} customerName={this.state.guestName} address={this.state.guestAddress} phone={this.state.guestPhone} items={this.getIdAndQuantity()} price={this.calculateTotalPrice()} /> */}
                     <button onClick={this.handlePayment}>Proceed to Payment</button>
-                    {this.state.redirectToPaypalButton ? <BuyShirt customerEmail={this.state.guestEmail} customerName={this.state.guestName} address={this.state.guestAddress} phone={this.state.guestPhone} items={this.getIdAndQuantity()} price={this.calculateTotalPrice()} /> : null}  
+                    {this.state.redirectToPaypalButton ? <BuyShirt customerEmail={this.state.guestEmail} customerName={this.state.guestName} address={this.state.guestAddress} phone={this.state.guestPhone} items={this.getIdAndQuantity()} price={this.calculateTotalPrice()} /> : null}
                 </div>
 
                 {/* <p>Total Price: €{this.state.totalPrice}</p> */}
