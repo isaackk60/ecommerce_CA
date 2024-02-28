@@ -29,7 +29,6 @@ export default class Down extends Component {
 
 
     render() {
-        console.log("down")
         return (
             <nav id="navigationbar-container">
                 <div class="splitL">
@@ -37,7 +36,7 @@ export default class Down extends Component {
                     <Link to={"/main"} >BUY T-SHIRT</Link></div>
                     <div>
                     <div className="dropdown" onMouseOver={this.showSelect} onMouseLeave={this.closeSelect}> {/* onMouseLeave={this.closeSelect} */}
-                        <Link to={"/main"} className="dropbtn">All Genders</Link>
+                        <Link to={"/main"} className="dropbtn">CATEGORIES</Link>
                         {/* <div id="select-container"> */}
                             {/* <select value={this.props.genderFilter} onChange={this.props.handleGenderFilterChange}>
                                 <option value="">All Genders</option>
@@ -46,10 +45,10 @@ export default class Down extends Component {
                                 <option value="unisex">Unisex</option>
                             </select> */}
                             <div className="dropdown-content" id="select-container">
-                            <Link className="select-gender" to={"/main"} onClick={() => this.handleGenderFilterChange("")}>All Genders</Link>
-                            <Link className="select-gender" to={"/main"} onClick={() => this.handleGenderFilterChange("male")}>Male</Link>
-                            <Link className="select-gender" to={"/main"} onClick={() => this.handleGenderFilterChange("female")}>Female</Link>
-                            <Link className="select-gender" to={"/main"} onClick={() => this.handleGenderFilterChange("unisex")}>Unisex</Link>
+                            <Link className="select-gender" to={"/main"} onClick={() => this.handleGenderFilterChange("")}>ALL GENDERS</Link>
+                            <Link className="select-gender" to={"/main"} onClick={() => this.handleGenderFilterChange("male")}>MALE</Link>
+                            <Link className="select-gender" to={"/main"} onClick={() => this.handleGenderFilterChange("female")}>FEMALE</Link>
+                            <Link className="select-gender" to={"/main"} onClick={() => this.handleGenderFilterChange("unisex")}>UNISEX</Link>
                             </div>
                         {/* </div> */}
                     </div>
@@ -62,7 +61,8 @@ export default class Down extends Component {
                 <div class="splitC">
                     {/* <Link to={"/DisplayAllCars"} img src={require('./.public/tshirtstorelogo.jpg')}>test</Link> */}
                     {/* <Link to={"/DisplayAllCars"} img src="../tshirtstorelogo.jpg"></Link> */}
-                    <img id="logo" src={storeLogo} />
+                    {/* <img id="logo" src={storeLogo} /> */}
+                    <h1>T-SHIRT STORE</h1>
                     {/* <Link to={"/DisplayAllCars"}>test</Link> */}
                 </div>
                 <div class="splitR">

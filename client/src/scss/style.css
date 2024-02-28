@@ -1,4 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Protest+Riot&display=swap");
+.add-new-shirt {
+  margin-top: 4%;
+  margin-bottom: 2%;
+  margin-left: 4%;
+}
+
 .wholeMain {
   padding-top: 10px;
   padding-bottom: 10px;
@@ -21,20 +27,31 @@
 .main-container .shirt-container {
   padding-top: 10px;
   padding-bottom: 10px;
+  display: flex;
+  flex-direction: column;
 }
-.main-container .shirt-container .h2-text {
-  padding: 0px;
-  font-size: 30px;
+.main-container .mainshirtnameprice {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: black;
+  font-weight: 300;
+  font-family: "Montserrat", sans-serif;
 }
-.main-container .shirt-price {
-  padding-bottom: 3px;
-  text-align: center;
+.main-container .mainshirtnameprice h2 {
+  font-weight: 300;
+  padding-top: 1%;
+  padding-bottom: 1%;
+  margin-bottom: 0%;
 }
 .main-container .admin-edit-delete-shirt {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 300;
+  margin-top: 2%;
   display: flex;
   flex-direction: row;
-  margin: auto;
-  width: 50%;
+  justify-content: center;
 }
 .main-container a {
   text-decoration: none;
@@ -42,9 +59,31 @@
 
 .subShirtContainer {
   display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin: 5%;
 }
 .subShirtContainer img {
-  width: 50vw;
+  width: 40vw;
+}
+
+.subshirtdetails {
+  font-family: "Montserrat", sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-left: 2%;
+}
+.subshirtdetails h1, .subshirtdetails h4, .subshirtdetails h5 {
+  font-weight: 300;
+  padding-left: 0%;
+}
+
+.subshirtform {
+  display: flex;
+  flex-direction: column;
+  font-weight: 300;
 }
 
 h1 {
@@ -184,6 +223,8 @@ header {
 }
 
 #footer-container {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 300;
   background-color: #0c405f;
   color: white;
   display: flex;
@@ -204,9 +245,9 @@ header {
 }
 
 #footer-container a {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 300;
   color: white;
-  font-family: urw-din, sans-serif;
-  font-weight: 400;
   text-decoration: none;
   border-left: 3px solid transparent;
   padding-left: 4px;
@@ -219,6 +260,8 @@ header {
 }
 
 #navigationbar-container {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 300;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -245,7 +288,9 @@ header {
 }
 
 #navigationbar-container .splitC {
+  font-family: "Lora", serif;
   float: center;
+  color: white;
 }
 #navigationbar-container .splitC img {
   display: block;
@@ -405,17 +450,21 @@ header {
 
 /*                        Cart                    */
 .cart-container {
+  background-color: #126291;
+  color: white;
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
   width: 80vw;
   margin: 0px 10vw;
+  margin-bottom: 5%;
 }
 
 .each-item-cart {
+  font-family: "Montserrat", sans-serif;
   display: flex;
   justify-content: space-between;
-  border: solid 2px black;
-  border-bottom: none;
+  border-bottom: solid 1px white;
   padding: 20px;
 }
 
@@ -454,64 +503,4 @@ header {
 
 #select-container {
   display: none;
-}
-
-/* */
-/* Carousel CSS */
-.carousel {
-  position: relative;
-  overflow: hidden;
-}
-
-.slides {
-  display: flex;
-  transition: transform 0.5s ease;
-}
-
-img {
-  max-width: 100%;
-  height: auto;
-}
-
-.arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 50px;
-  height: 50px;
-  background-color: rgba(0, 0, 0, 0.5);
-  cursor: pointer;
-}
-
-.prev {
-  left: 0;
-}
-
-.next {
-  right: 0;
-}
-
-/* Hide arrows on hover */
-.arrow:hover {
-  background-color: rgba(0, 0, 0, 0.8);
-}
-
-/* Adjust arrow styling */
-.arrow:before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border: solid white;
-  border-width: 0 3px 3px 0;
-  padding: 5px;
-}
-
-.prev:before {
-  transform: translate(-50%, -50%) rotate(135deg);
-}
-
-.next:before {
-  transform: translate(-50%, -50%) rotate(-45deg);
 }/*# sourceMappingURL=style.css.map */

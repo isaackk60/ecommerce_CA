@@ -119,8 +119,8 @@ export default class Main extends Component
                 </div>
                 {
                         localStorage.accessLevel >= ACCESS_LEVEL_ADMIN 
-                        ? <div className="add-new-car">
-                            <Link className="blue-button" to={"/AddCar"}>Add New Car</Link>
+                        ? <div className="add-new-shirt">
+                            {/* <Link className="blue-button" to={"/AddCar"}>Add New Car</Link> */}
                             <Link className="green-button" to={"/AddTShirt"}>Add New T-Shirt</Link>
                           </div>
                         : null

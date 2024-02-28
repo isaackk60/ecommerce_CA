@@ -1,7 +1,7 @@
 const router = require(`express`).Router()
 
 const salesModel = require(`../models/sales`)
-const carsModel = require(`../models/shirts`)
+const shirtsModel = require(`../models/shirts`)
 
 
 const createNewSaleDocument = (req, res, next) => 
