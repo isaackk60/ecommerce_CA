@@ -224,9 +224,32 @@ export default class ShoppingCart extends Component {
         // Fetch cart data from the server
         const cartLocalStorage = JSON.parse(localStorage.getItem("itemsInCart") || "[]");
 
-        console.log(localStorage.getItem("itemsInCart"))
+        // console.log(localStorage.getItem("itemsInCart").forEach(item=>{item.shirtPhotoFilename}))
 
-        this.setState({ cart: JSON.parse(localStorage.getItem("itemsInCart")) })
+        this.setState({ cart: cartLocalStorage }, () => {
+            // Load shirt photos after updating state
+            this.loadShirtPhotos();
+        });
+
+        // this.props.shirt.shirtPhotoFilename.map(photo => {
+        //     return axios.get(`${SERVER_HOST}/shirts/photo/${photo.filename}`)
+        //         .then(res => {
+        //             document.getElementById(photo._id).src = `data:;base64,${res.data.image}`
+        //         })
+        //         .catch(err => {
+        //             // do nothing
+        //         })
+        // })
+
+        // this.state.cart.map(item=>{item.shirtPhotoFilename.map(photo => {
+        //     return axios.get(`${SERVER_HOST}/shirts/photo/${photo.filename}`)
+        //         .then(res => {
+        //             document.getElementById(photo._id).src = `data:;base64,${res.data.image}`
+        //         })
+        //         .catch(err => {
+        //             // do nothing
+        //         })
+        // })})
 
         // this.setState({ cart: cartLocalStorage }, () => {
         //     // Calculate total price after updating state
@@ -277,7 +300,22 @@ export default class ShoppingCart extends Component {
     //         localStorage.setItem("itemsInCart", JSON.stringify(groupedItems));
     //     }
     // }
-
+    loadShirtPhotos() {
+        // Loop through each cart item and load its shirt photos
+        this.state.cart.forEach(item => {
+            item.shirtPhotoFilename.forEach(photo => {
+                axios.get(`${SERVER_HOST}/shirts/photo/${photo.filename}`)
+                    .then(res => {
+                        // Update shirt photo in DOM
+                        document.getElementById(photo._id).src = `data:;base64,${res.data.image}`;
+                    })
+                    .catch(err => {
+                        // Handle error
+                        console.error("Error loading shirt photo:", err);
+                    });
+            });
+        });
+    }
     calculateTotalPrice() {
         let totalPrice = 0;
         // Calculate total price based on cart items
@@ -320,19 +358,22 @@ return items;
                     size: item.size,
                     quantity: item.quantity,
                     price: item.price,
-                    totalPrice: item.price * item.quantity
+                    totalPrice: item.price * item.quantity,
+                    shirtPhotoFilename:item.shirtPhotoFilename
                 });
             }
             return groups;
         }, []);
         this.setState({cart:groupedItems})
         localStorage.setItem("itemsInCart", JSON.stringify(groupedItems));
+        // this.loadShirtPhotos();
     };
 
     handleDelete = (name, size) => {
         const updatedCart = this.state.cart.filter(item => !(item.name === name && item.size === size));
         this.setState({ cart: updatedCart });
         localStorage.setItem("itemsInCart", JSON.stringify(updatedCart));
+        this.loadShirtPhotos();
     };
 
     // loadShirtPhotos() {
@@ -352,7 +393,7 @@ return items;
     //         });
     //     });
     // }
-    handleChange = (field, value) => {
+    handleGuest = (field, value) => {
         this.setState({ [field]: value });
     };
 
@@ -373,11 +414,27 @@ return items;
                     size: item.size,
                     quantity: item.quantity,
                     price: item.price,
-                    totalPrice: item.price * item.quantity
+                    totalPrice: item.price * item.quantity,
+                    shirtPhotoFilename:item.shirtPhotoFilename
                 });
             }
             return groups;
         }, []);
+console.log(this.state.cart.map(item=>item.shirtPhotoFilename[0]))
+
+// this.state.cart.map(item =>
+//     item.shirtPhotoFilename[0].forEach(photo => { // Use forEach to iterate over each object
+//         axios.get(`${SERVER_HOST}/shirts/photo/${photo.filename}`)
+//             .then(res => {
+//                 document.getElementById(photo._id).src = `data:;base64,${res.data.image}`
+//             })
+//             .catch(err => {
+//                 // Handle error
+//                 console.error("Error loading shirt photo:", err);
+//             });
+//     })
+// );
+
         return (
             <div>
                 <NavigationBar />
@@ -385,6 +442,9 @@ return items;
                 <div className="cart-container">
                 {this.state.cart.map((item, index) => (
                         <div key={index} className="each-item-cart">
+{item.shirtPhotoFilename.map(photo => (
+                                <img key={photo._id} id={photo._id} alt="" />
+                            ))}
                             <div>
                             <h3>{item.name} </h3>
                             <select
@@ -419,25 +479,25 @@ return items;
                          type="text"
                          placeholder="Name"
                          value={this.state.guestName}
-                         onChange={e => this.handleChange('guestName', e.target.value)}
+                         onChange={e => this.handleGuest('guestName', e.target.value)}
                      />
                      <input
                          type="email"
                          placeholder="Email"
                          value={this.state.guestEmail}
-                         onChange={e => this.handleChange('guestEmail', e.target.value)}
+                         onChange={e => this.handleGuest('guestEmail', e.target.value)}
                      />
                      <input
                          type="text"
                          placeholder="Address"
                          value={this.state.guestAddress}
-                         onChange={e => this.handleChange('guestAddress', e.target.value)}
+                         onChange={e => this.handleGuest('guestAddress', e.target.value)}
                      />
                      <input
                          type="text"
                          placeholder="Phone"
                          value={this.state.guestPhone}
-                         onChange={e => this.handleChange('guestPhone', e.target.value)}
+                         onChange={e => this.handleGuest('guestPhone', e.target.value)}
                      />
                  </div>
                     :null}
