@@ -218,7 +218,7 @@ export default class ShoppingCart extends Component {
             guestAddress: "",
             guestPhone: "",
             isGuest: localStorage.accessLevel < ACCESS_LEVEL_NORMAL_USER,
-            redirectToPaypalButton: false
+            redirectToPaypalButton: false,
             // redirectToPaypalButton: true,
             haveEnoughData:false
             // totalPrice: 0
@@ -622,7 +622,7 @@ export default class ShoppingCart extends Component {
                     <button onClick={this.handlePayment}>Proceed to Payment</button>
                     {this.state.redirectToPaypalButton ? <BuyShirt customerEmail={this.state.guestEmail} customerName={this.state.guestName} address={this.state.guestAddress} phone={this.state.guestPhone} items={this.getIdAndQuantity()} price={this.calculateTotalPrice()} /> : null}
 :null
-} */}
+
                     
                 </div>
 

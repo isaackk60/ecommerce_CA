@@ -367,7 +367,7 @@ header {
     // overflow: hidden; //when scrolled, wont see it
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
     background-color: #0c405f;
     align-items: center;
 }
@@ -387,28 +387,23 @@ header {
 }
 
 #navigationbar-container .splitL {
-    float: left;
+    // float: left;
     display: flex;
+    justify-content: flex-start
 }
 
 #navigationbar-container .splitC {
     font-family: "Lora", serif;
-    float: center;
+    // float: center;
     color: white;
-    // font-style: italic;
-    img {
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        width: 50%;
-    }
+    display: flex;
+    justify-content: center;
 }
-
 #navigationbar-container .splitR {
-    float: right;
+    // float: right;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: flex-end;
 }
 .navsearchbar {
     display: flex;
@@ -420,14 +415,14 @@ header {
     padding-left: 10px;
 }
 
-#navigationbar-container,
-.splitC,
-.splitR {
-    flex: 1;
-    /* Add this line */
-    text-align: center;
-    padding: 11px 15px;
-}
+// #navigationbar-container,
+// .splitC,
+// .splitR {
+//     flex: 1;
+//     /* Add this line */
+//     text-align: center;
+//     padding: 11px 15px;
+// }
 
 //Nav mobile version
 @media screen and (max-width: 1200px) {
@@ -725,4 +720,10 @@ form {
     font-size: 2em; 
     display: flex;
     flex-direction: row-reverse;
+}
+.logoutButton{
+    display: flex;
+    flex-direction: row-reverse;
+    margin-right: 10%;
+    margin-bottom: 2%;
 }

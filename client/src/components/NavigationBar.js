@@ -81,13 +81,13 @@ export default class Down extends Component {
                     {/* <Link to={"/Login"}>LOG IN</Link> */}
                     {
                         localStorage.accessLevel > ACCESS_LEVEL_GUEST
-                            ? <Link to="/main">
+                            ? <Link to="/dashboard">
                                 {
                                     localStorage.profilePhoto !== "null"
                                         ? <img id="profilePhoto" src={`data:;base64,${localStorage.profilePhoto}`} alt="" />
                                         : null
                                 }
-                                <Logout />
+                                {/* <Logout /> */}
                             </Link>
                             : <Link to={"/Login"}>LOG IN</Link>
                     }

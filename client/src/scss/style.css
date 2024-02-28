@@ -328,7 +328,7 @@ header {
   font-weight: 300;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
   background-color: #0c405f;
   align-items: center;
 }
@@ -347,27 +347,21 @@ header {
 }
 
 #navigationbar-container .splitL {
-  float: left;
   display: flex;
+  justify-content: flex-start;
 }
 
 #navigationbar-container .splitC {
   font-family: "Lora", serif;
-  float: center;
   color: white;
-}
-#navigationbar-container .splitC img {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 50%;
+  display: flex;
+  justify-content: center;
 }
 
 #navigationbar-container .splitR {
-  float: right;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-end;
 }
 
 .navsearchbar {
@@ -379,15 +373,6 @@ header {
 .navsearchbar input {
   border-radius: 7px;
   padding-left: 10px;
-}
-
-#navigationbar-container,
-.splitC,
-.splitR {
-  flex: 1;
-  /* Add this line */
-  text-align: center;
-  padding: 11px 15px;
 }
 
 @media screen and (max-width: 1200px) {
@@ -622,4 +607,11 @@ form textarea {
   font-size: 2em;
   display: flex;
   flex-direction: row-reverse;
+}
+
+.logoutButton {
+  display: flex;
+  flex-direction: row-reverse;
+  margin-right: 10%;
+  margin-bottom: 2%;
 }/*# sourceMappingURL=style.css.map */
