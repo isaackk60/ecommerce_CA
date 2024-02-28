@@ -166,7 +166,9 @@ export default class Dashboard extends Component {
             newName: "",
             newPhone: "",
             newAddress: "",
-            redirectToMain:false
+            redirectToMain:false,
+            redirectToCart:false,
+            from:"",
         };
     }
 
@@ -180,6 +182,11 @@ export default class Dashboard extends Component {
             .catch(err => {
                 console.error("Error fetching user data:", err);
             });
+
+            const { state } = this.props.location;
+            if (state && state.from === "cart") {
+                this.setState({from:"cart"})
+            }
     }
 
     handleInputChange = (e) => {
@@ -203,7 +210,11 @@ export default class Dashboard extends Component {
                 // Handle error
                 console.error("Error updating user:", err);
             });
+            if(this.state.from=="cart"&&newName&&newPhone&&newAddress){
+                this.setState({redirectToCart:true})
+            }else if(this.state.from!="cart"){
             this.setState({redirectToMain:true})
+        }
     }
 
     render() {
@@ -213,6 +224,7 @@ export default class Dashboard extends Component {
             
             <div>
                 {this.state.redirectToMain?<Redirect to={"/main"}/>:null}
+                {this.state.redirectToCart?<Redirect to={{ pathname: "/ShoppingCart/", state: { haveEnoughData: true } }}/>:null}
                 <NavigationBar />
                 <h2>Welcome, {user.name}</h2>
                 <form onSubmit={this.updateUser}>
