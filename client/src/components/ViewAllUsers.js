@@ -76,8 +76,9 @@ export default class ViewAllUsers extends Component {
                     </tbody>
                 </table>
                 <div className="logoutButton">
-                    <button className="red-button"><Logout /></button>
+                    <button className="logoutbutton"><Logout /></button>
                 </div>
+                
             </div>
         );
     }

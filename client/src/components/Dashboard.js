@@ -250,7 +250,7 @@ export default class Dashboard extends Component {
                     <button type="submit">Save</button>
                 </form>
                 <div className="logoutButton">
-                    <button className="red-button"><Logout /></button>
+                    <button className="logoutbutton"><Logout /></button>
                 </div>
             </div>
         );
