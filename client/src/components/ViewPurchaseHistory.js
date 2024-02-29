@@ -95,7 +95,12 @@ export default class ViewAllUsers extends Component {
 
     componentDidMount() {
         if (localStorage.accessLevel > ACCESS_LEVEL_GUEST) {
-            let userEmail = JSON.parse(localStorage.getItem("userEmail"));
+            let userEmail;
+            if(localStorage.accessLevel == ACCESS_LEVEL_NORMAL_USER){
+            userEmail = JSON.parse(localStorage.getItem("userEmail"));
+            }else if(localStorage.accessLevel ==ACCESS_LEVEL_ADMIN){
+                userEmail=this.props.match.params.email
+            }
             axios.get(`${SERVER_HOST}/sales/email?email=${userEmail}`)
                 .then(res => {
 

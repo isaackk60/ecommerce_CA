@@ -72,6 +72,7 @@ export default class ViewAllUsers extends Component {
                                 <td>{user.address}</td>
                                 <td>
                                     <button onClick={() => this.handleDelete(user._id)}>Delete</button>
+                                    <Link className="green-button" to={`/ViewPurchaseHistory/${user.email}`}>View Purchase History</Link>
                                 </td>
                             </tr>
                         ))}

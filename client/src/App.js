@@ -78,6 +78,7 @@ export default class App extends Component
                     <Route exact path="/ViewAllUsers" component={ViewAllUsers}/>
                     <Route exact path="/BuyShirt" component={BuyShirt}/>
                     <Route exact path="/ViewPurchaseHistory" component={ViewPurchaseHistory}/>
+                    <Route exact path="/ViewPurchaseHistory/:email" component={ViewPurchaseHistory}/>
                     <Route path="*" component={Main}/>                            
                 </Switch>
             </BrowserRouter>
