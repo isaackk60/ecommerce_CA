@@ -567,7 +567,7 @@ export default class ShoppingCart extends Component {
                                 </div>
                             </div>
                             <div className="shoppingcartdeletebutton">
-                                <button onClick={() => this.handleDelete(item.name, item.size)}>Delete</button>
+                                <button onClick={() => this.handleDelete(item.name, item.size)}>Remove</button>
                             </div>
 
                         </div>

@@ -320,6 +320,9 @@ header {
 
 //FOOTER AND NAVIGATION BAR
 #footer-container {
+    // position: fixed;
+    // bottom: 0px;
+    // width: 100%;
     font-family: "Montserrat", sans-serif;
     font-weight: 300;
     #BiggerSize {
@@ -696,14 +699,18 @@ header {
     flex-direction: column;
     margin-left: 5%;
     select{
-        border-radius: 10px;
+        // border-radius: 10px;
+        border: none;
     }
     button{
-        border-radius: 10px;
+        border-radius: 5px;
+        border: none;
+        color: black;
+        background: white;
     }
     span{
-        padding-left:2%;
-        padding-right:2%;
+        padding-left:20%;
+        padding-right:20%;
     }
 }
 .detailsShoppingCart h3{
@@ -761,3 +768,96 @@ header {
   .logoutbutton:hover{
     background-color: #a01020;
   }
+
+  //viewallusers
+  .viewallusertable{
+    font-family: "Montserrat", sans-serif;
+    font-weight: 300;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    color: white;
+    text-align: left;
+  }
+  .viewallusertable table{
+    background-color: #7192A3;
+    width:70%;
+    border-collapse:collapse; //can take this away if broken   
+  }
+  .viewallusertable th,td{
+    text-transform: capitalize;
+    // border-right: 1px double white;
+    border-bottom: 1px solid white;
+  }
+  .viewallusertable thead th,
+.viewallusertable tbody td
+{
+    padding:1%;
+    padding-left: 2%;
+}
+.viewallusertable tr{
+    border-radius: 10px;
+}
+.viewallusertable tr:hover{
+    background-color: #8FB9CF;
+}
+
+
+//dashboard
+.userdashboardform{
+    font-family: "Montserrat", sans-serif;
+    font-weight: 300;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+// .dashboardformlabel{
+//     display: flex;
+//     flex-direction: column;
+//     margin-right: 2%;
+//     text-align: center;
+//     padding-top: 4%;
+//     padding-bottom: 2%;
+// }
+// .wholedashboardformdiv{
+//     display: flex;
+//     background-color: #7192A3;
+//     padding: 1%;
+//     color: white;
+// }
+// .individualdashboarduserinput{
+//     padding-top: 2%;
+//     padding-bottom: 2%;
+// }
+.biggestdashboard{
+    color: white;
+    background-color: #7192A3;
+    padding: 0.5%;
+}
+// .labelinputdiv{
+//     display: flex;
+// }
+// .biggestdashboard{
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+// }
+.dashboardsavebutton{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding-top: 5%;
+}
+.dashboardsavebutton button{
+    border-radius: 5px;
+    border: 107020;
+    color: white;
+    background-color: #28a745;
+}
+.dashboardsavebutton button:hover{
+    background-color: #107020;
+}
+.labelinputdiv label{
+    margin-bottom: 0%;
+    margin-top: 2%;
+}

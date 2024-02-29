@@ -233,21 +233,38 @@ export default class Dashboard extends Component {
                 {this.state.redirectToMain ? <Redirect to={"/main"} /> : null}
                 {this.state.redirectToCart ? <Redirect to={{ pathname: "/ShoppingCart/", state: { haveEnoughData: true } }} /> : null}
                 <NavigationBar />
-                <h2>Welcome, {user.name}</h2>
-                <form onSubmit={this.updateUser}>
-                    <div>
-                        <label>Name:</label>
-                        <input type="text" name="newName" value={newName || user.name} onChange={this.handleInputChange} />
+                <h2 className="shoppingcarth2">Welcome, {user.name}</h2>
+                <form onSubmit={this.updateUser} className="userdashboardform">
+                    <div className="biggestdashboard">
+                        <div className="labelinputdiv">
+                            <div>
+                                <label>Name: </label>
+                            </div>
+                            <div>
+                                <input type="text" placeholder="Name" name="newName" value={newName || user.name} onChange={this.handleInputChange} />
+                            </div>
+                        </div>
+                        <div className="labelinputdiv">
+                            <div>
+                                <label>Phone: </label>
+                            </div>
+                            <div>
+                                <input type="text" placeholder="Phone" name="newPhone" value={newPhone || user.phone} onChange={this.handleInputChange} />
+                            </div>
+                        </div>
+                        <div className="labelinputdiv">
+                            <div>
+                                <label>Address: </label>
+                            </div>
+                            <div>
+                                <input type="text" placeholder="Address" name="newAddress" value={newAddress || user.address} onChange={this.handleInputChange} />
+                            </div>
+                        </div>
+                        <div className="dashboardsavebutton">
+                            <button type="submit">Save</button>
+                        </div>
                     </div>
-                    <div>
-                        <label>Phone:</label>
-                        <input type="text" name="newPhone" value={newPhone || user.phone} onChange={this.handleInputChange} />
-                    </div>
-                    <div>
-                        <label>Address:</label>
-                        <input type="text" name="newAddress" value={newAddress || user.address} onChange={this.handleInputChange} />
-                    </div>
-                    <button type="submit">Save</button>
+
                 </form>
                 <div className="logoutButton">
                     <button className="logoutbutton"><Logout /></button>
