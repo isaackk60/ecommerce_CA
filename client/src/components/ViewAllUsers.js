@@ -1,9 +1,12 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import Logout from "./Logout";
-import axios from "axios";
-import NavigationBar from "./NavigationBar";
-import { ACCESS_LEVEL_GUEST, ACCESS_LEVEL_ADMIN, ACCESS_LEVEL_NORMAL_USER, SERVER_HOST } from "../config/global_constants";
+import React, { Component } from "react"
+import { Link } from "react-router-dom"
+
+import axios from "axios"
+
+import NavigationBar from "./NavigationBar"
+
+import { ACCESS_LEVEL_GUEST, ACCESS_LEVEL_ADMIN,ACCESS_LEVEL_NORMAL_USER, SERVER_HOST } from "../config/global_constants"
+
 
 export default class ViewAllUsers extends Component {
     constructor(props) {
@@ -91,6 +94,8 @@ export default class ViewAllUsers extends Component {
         }
 
         return (
+            <>
+            {localStorage.accessLevel > ACCESS_LEVEL_NORMAL_USER?
             <div>
                 <NavigationBar />
                 <h2>All Users</h2>
@@ -136,6 +141,7 @@ export default class ViewAllUsers extends Component {
                                 <td>{user.address}</td>
                                 <td>
                                     <button onClick={() => this.handleDelete(user._id)}>Delete</button>
+                                    <Link className="green-button" to={`/ViewPurchaseHistory/${user.email}`}>View Purchase History</Link>
                                 </td>
                             </tr>
                         ))}
@@ -145,6 +151,8 @@ export default class ViewAllUsers extends Component {
                     <button className="logoutbutton"><Logout /></button>
                 </div>
             </div>
+            :<Redirect to={"/main"} />}
+            </>
         );
     }
 }

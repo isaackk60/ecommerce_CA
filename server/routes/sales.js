@@ -52,6 +52,22 @@ const createNewSaleDocument = (req, res, next) =>
     
     return res.json({success:true})
 }
+const getPurchaseHistoryByEmail = (req, res, next) => {
+    const userEmail = req.query.email; // Extract email from query parameters
+
+    // Find purchase history by user email in the database
+    salesModel.find({ customerEmail: userEmail }, (err, purchaseHistory) => {
+        if (err) {
+            // Handle database error
+            console.error('Error fetching purchase history:', err);
+            return res.status(500).json({ error: 'Internal Server Error' });
+        }
+
+        // Send the retrieved purchase history as the response
+        res.json(purchaseHistory);
+    });
+};
+
 
 
 // Save a record of each Paypal payment
@@ -60,4 +76,5 @@ const createNewSaleDocument = (req, res, next) =>
 // router.post('/sales/:paymentID/:price', createNewSaleDocument)
 // router.post('/sales/:orderID/:price/:items/:customerName/:customerEmail/:address/:phone', createNewSaleDocument)
 router.post('/sales/:orderID/:price', createNewSaleDocument)
+router.get('/sales/email', getPurchaseHistoryByEmail);
 module.exports = router

@@ -237,15 +237,15 @@ export default class Dashboard extends Component {
                 <form onSubmit={this.updateUser}>
                     <div>
                         <label>Name:</label>
-                        <input type="text" name="newName" value={newName || user.name} onChange={this.handleInputChange} />
+                        <input type="text" name="newName" value={newName !== null ? newName : user.name} onChange={this.handleInputChange} />
                     </div>
                     <div>
                         <label>Phone:</label>
-                        <input type="text" name="newPhone" value={newPhone || user.phone} onChange={this.handleInputChange} />
+                        <input type="text" name="newPhone" value={newPhone !== null ? newPhone : user.phone} onChange={this.handleInputChange} />
                     </div>
                     <div>
                         <label>Address:</label>
-                        <input type="text" name="newAddress" value={newAddress || user.address} onChange={this.handleInputChange} />
+                        <input type="text" name="newAddress" value={newAddress !== null ? newAddress : user.address} onChange={this.handleInputChange} />
                     </div>
                     <button type="submit">Save</button>
                 </form>
