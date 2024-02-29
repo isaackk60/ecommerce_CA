@@ -208,6 +208,7 @@ export default class ViewAllUsers extends Component {
                                             <th>Size</th>
                                             <th>Quantity</th>
                                             <th>Total Price for this t-shirt</th>
+                                            <th>TShirt Photo</th>
                                         </tr>
                                     </thead>
                                     <tbody>
