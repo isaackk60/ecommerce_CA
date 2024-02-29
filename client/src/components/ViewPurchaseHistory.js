@@ -96,65 +96,64 @@ export default class ViewAllUsers extends Component {
     componentDidMount() {
         if (localStorage.accessLevel > ACCESS_LEVEL_GUEST) {
             let userEmail;
+            // const currentUrl = window.location.pathname;
             if(localStorage.accessLevel == ACCESS_LEVEL_NORMAL_USER){
             userEmail = JSON.parse(localStorage.getItem("userEmail"));
             }else if(localStorage.accessLevel ==ACCESS_LEVEL_ADMIN){
-                userEmail=this.props.match.params.email
+                // if (currentUrl === "/ViewPurchaseHistory") {
+                //     userEmail = JSON.parse(localStorage.getItem("userEmail"));
+                // } else if (currentUrl.startsWith("/ViewPurchaseHistory/")) {
+                //     userEmail = this.props.match.params.email;
+                // }
+                userEmail = this.props.match.params.email;
             }
+
             axios.get(`${SERVER_HOST}/sales/email?email=${userEmail}`)
-                .then(res => {
-
-                    this.setState({ purchaseHistory: res.data }, () => {
-
-                        this.state.purchaseHistory.forEach((itemsInArray, index) => {
-
-                            let eachItemsInOrder = [];
-                            itemsInArray.items.forEach(item => {
-                                axios.get(`${SERVER_HOST}/shirts/${item.shirtID}`, { headers: { "authorization": localStorage.token } })
-                                    .then(res => {
-                                        const updatedItem = { ...res.data, quantity: item.quantity };
-                                        eachItemsInOrder.push(updatedItem);
+            .then(res => {
+                // Update purchase history state
+                this.setState({ purchaseHistory: res.data }, () => {
+                    // Iterate over each purchase history item
+                    this.state.purchaseHistory.forEach((itemsInArray, index) => {
+                        let eachItemsInOrder = [];
+                        let totalPrice = 0; // Initialize total price for the order
+                        itemsInArray.items.forEach(item => {
+                            // Fetch shirt details and calculate total price for each item
+                            axios.get(`${SERVER_HOST}/shirts/${item.shirtID}`, { headers: { "authorization": localStorage.token } })
+                                .then(res => {
+                                    const updatedItem = { ...res.data, quantity: item.quantity };
+                                    eachItemsInOrder.push(updatedItem);
+                                    
+                                    // Check if all items are fetched
+                                    if (eachItemsInOrder.length === itemsInArray.items.length) {
+                                        // Add the price of the item to the total price
+                                        eachItemsInOrder.map(item=>totalPrice += item.price * item.quantity)
+                                    
                                         // Update state after all items are fetched
-                                        if (eachItemsInOrder.length === itemsInArray.items.length) {
-                                            this.setState(prevState => ({
-                                                allOrders: [
-                                                    ...prevState.allOrders,
-                                                    {
-                                                        orderId: itemsInArray._id, // Store item._id into allOrders
-                                                        eachItemsInOrder: eachItemsInOrder
-                                                    }
-                                                ]
-                                            }));
-                                        }
-                                    })
-                                    .catch(err => {
-                                        console.error("Error fetching shirt data:", err);
-                                    });
-                            });
+                                        this.setState(prevState => ({
+                                            allOrders: [
+                                                ...prevState.allOrders,
+                                                {
+                                                    orderId: itemsInArray._id,
+                                                    eachItemsInOrder: eachItemsInOrder,
+                                                    totalPrice: totalPrice 
+                                                }
+                                            ]
+                                        }));
+                                    }
+                                })
+                                .catch(err => {
+                                    console.error("Error fetching shirt data:", err);
+                                });
                         });
                     });
-                })
-                .catch(err => {
-                    console.error("Error fetching user data:", err);
                 });
-        }
+            })
+            .catch(err => {
+                console.error("Error fetching user data:", err);
+            });
+    }
     }
 
-
-
-    // handleDelete = (userId) => {
-    //     axios.delete(`${SERVER_HOST}/users/${userId}`)
-    //         .then(res => {
-    //             // Update state after successful deletion
-    //             this.setState(prevState => ({
-    //                 users: prevState.users.filter(user => user._id !== userId)
-    //             }));
-    //         })
-    //         .catch(err => {
-    //             // Handle error
-    //             console.error("Error deleting user:", err);
-    //         });
-    // };
 
 
     render() {
@@ -165,7 +164,11 @@ export default class ViewAllUsers extends Component {
                     <div>
                         <NavigationBar />
                         <h2>Ordered Items</h2>
-                        {this.state.allOrders.map(order => (
+{this.state.allOrders.length === 0 ? <h4>The User didn't purchase anything yet</h4>
+
+                       : 
+                       <div>
+                       {this.state.allOrders.map(order => (
                             <div key={order.orderId}>
                                 <h3>Order ID: {order.orderId}</h3>
                                 <table>
@@ -175,6 +178,7 @@ export default class ViewAllUsers extends Component {
                                             <th>Price</th>
                                             <th>Size</th>
                                             <th>Quantity</th>
+                                            <th>Total Price for this t-shirt</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -185,12 +189,20 @@ export default class ViewAllUsers extends Component {
                                                 <td>{item.price}</td>
                                                 <td>{item.size}</td>
                                                 <td>{item.quantity}</td>
+                                                <td>{item.price*item.quantity}</td>
                                             </tr>
                                         ))}
+                                        <tr>
+                                                <td >Total Of The Order Price:</td>
+                                                <td>{order.totalPrice}</td>
+                                            </tr>
                                     </tbody>
                                 </table>
                             </div>
                         ))}
+                        </div>
+
+                                        }
                     </div>
                 ) : (
                     <Redirect to={"/main"} />
