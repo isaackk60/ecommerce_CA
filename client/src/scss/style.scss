@@ -190,16 +190,22 @@ p {
 }
 
 .about_main {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 400;
     display: flex;
     flex-direction: column;
     align-items: center;
     background-color: #f1f1f1;
-    color: #002b45;
-    font-family: 'Poppins', sans-serif;
+    // color: #002b45;
+    color: #7192A3;
+    // font-family: 'Poppins', sans-serif;
 
     p {
         margin-top: 0px;
     }
+}
+.about_main h1{
+    color: #002b45;
 }
 
 .about_background_image {
@@ -214,6 +220,7 @@ p {
     min-height: 450px;
     overflow: auto;
     background-attachment: fixed;
+    margin-top: 5%;
 
 
     .about_left_title {
@@ -240,6 +247,8 @@ p {
     display: flex;
     margin: 20px;
     width: 70vw;
+    margin-top: 5%;
+    margin-bottom: 5%;
 
     img {
         width: 55%;
@@ -248,16 +257,16 @@ p {
 
 .about_left_text {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
+    justify-content: center;
     flex-direction: column;
+    // p {
+    //     margin-left: 0px;
+    // }
 
-    p {
-        margin-left: 0px;
-    }
-
-    h2 {
-        padding-left: 0px;
-    }
+    // h2 {
+    //     padding-left: 0px;
+    // }
 }
 
 //login and sign up
@@ -833,6 +842,7 @@ header {
     color: white;
     background-color: #7192A3;
     padding: 0.5%;
+    border-radius: 5px;
 }
 // .labelinputdiv{
 //     display: flex;
@@ -860,4 +870,16 @@ header {
 .labelinputdiv label{
     margin-bottom: 0%;
     margin-top: 2%;
+}
+.dashboardimage{
+    display: flex;
+    justify-content: center;
+}
+.theotherhalfdashboard{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.myphoto{
+    width: 100px;
 }

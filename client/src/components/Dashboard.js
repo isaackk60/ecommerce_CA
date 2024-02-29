@@ -236,32 +236,37 @@ export default class Dashboard extends Component {
                 <h2 className="shoppingcarth2">Welcome, {user.name}</h2>
                 <form onSubmit={this.updateUser} className="userdashboardform">
                     <div className="biggestdashboard">
-                        <div className="labelinputdiv">
-                            <div>
-                                <label>Name: </label>
-                            </div>
-                            <div>
-                                <input type="text" placeholder="Name" name="newName" value={newName || user.name} onChange={this.handleInputChange} />
-                            </div>
+                        <div className="dashboardimage">
+                            <img id="myphoto" src={`data:;base64,${localStorage.profilePhoto}`} alt="" />
                         </div>
-                        <div className="labelinputdiv">
-                            <div>
-                                <label>Phone: </label>
+                        <div className="theotherhalfdashboard">
+                            <div className="labelinputdiv">
+                                <div>
+                                    <label>Name: </label>
+                                </div>
+                                <div>
+                                    <input type="text" placeholder="Name" name="newName" value={newName || user.name} onChange={this.handleInputChange} />
+                                </div>
                             </div>
-                            <div>
-                                <input type="text" placeholder="Phone" name="newPhone" value={newPhone || user.phone} onChange={this.handleInputChange} />
+                            <div className="labelinputdiv">
+                                <div>
+                                    <label>Phone: </label>
+                                </div>
+                                <div>
+                                    <input type="text" placeholder="Phone" name="newPhone" value={newPhone || user.phone} onChange={this.handleInputChange} />
+                                </div>
                             </div>
-                        </div>
-                        <div className="labelinputdiv">
-                            <div>
-                                <label>Address: </label>
+                            <div className="labelinputdiv">
+                                <div>
+                                    <label>Address: </label>
+                                </div>
+                                <div>
+                                    <input type="text" placeholder="Address" name="newAddress" value={newAddress || user.address} onChange={this.handleInputChange} />
+                                </div>
                             </div>
-                            <div>
-                                <input type="text" placeholder="Address" name="newAddress" value={newAddress || user.address} onChange={this.handleInputChange} />
+                            <div className="dashboardsavebutton">
+                                <button type="submit">Save</button>
                             </div>
-                        </div>
-                        <div className="dashboardsavebutton">
-                            <button type="submit">Save</button>
                         </div>
                     </div>
 

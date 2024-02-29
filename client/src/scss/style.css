@@ -168,15 +168,20 @@ p {
 }
 
 .about_main {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
   display: flex;
   flex-direction: column;
   align-items: center;
   background-color: #f1f1f1;
-  color: #002b45;
-  font-family: "Poppins", sans-serif;
+  color: #7192A3;
 }
 .about_main p {
   margin-top: 0px;
+}
+
+.about_main h1 {
+  color: #002b45;
 }
 
 .about_background_image {
@@ -190,6 +195,7 @@ p {
   min-height: 450px;
   overflow: auto;
   background-attachment: fixed;
+  margin-top: 5%;
 }
 .about_background_image .about_left_title {
   display: flex;
@@ -211,6 +217,8 @@ p {
   display: flex;
   margin: 20px;
   width: 70vw;
+  margin-top: 5%;
+  margin-bottom: 5%;
 }
 .image_container img {
   width: 55%;
@@ -218,14 +226,9 @@ p {
 
 .about_left_text {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
+  justify-content: center;
   flex-direction: column;
-}
-.about_left_text p {
-  margin-left: 0px;
-}
-.about_left_text h2 {
-  padding-left: 0px;
 }
 
 .login_main {
@@ -722,6 +725,7 @@ header {
   color: white;
   background-color: #7192A3;
   padding: 0.5%;
+  border-radius: 5px;
 }
 
 .dashboardsavebutton {
@@ -745,4 +749,19 @@ header {
 .labelinputdiv label {
   margin-bottom: 0%;
   margin-top: 2%;
+}
+
+.dashboardimage {
+  display: flex;
+  justify-content: center;
+}
+
+.theotherhalfdashboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.myphoto {
+  width: 100px;
 }/*# sourceMappingURL=style.css.map */
