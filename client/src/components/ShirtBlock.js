@@ -60,9 +60,9 @@ export default class ShirtBlock extends Component {
                         <div>{this.props.shirt.gender}</div>
                     </div>
                 </Link>
-
+                
                 <div className="admin-edit-delete-shirt">
-                    {localStorage.accessLevel > ACCESS_LEVEL_GUEST ? <Link className="green-button" to={"/EditTShirt/" + this.props.shirt._id}>Edit</Link> : null}
+                    {localStorage.accessLevel >= ACCESS_LEVEL_ADMIN ? <Link className="green-button" to={"/EditTShirt/" + this.props.shirt._id}>Edit</Link> : null}
                     
                     {localStorage.accessLevel >= ACCESS_LEVEL_ADMIN ? <Link className="red-button" to={"/DeleteTShirt/" + this.props.shirt._id}>Delete</Link> : null}
 

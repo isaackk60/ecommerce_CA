@@ -523,9 +523,8 @@ form textarea {
 /*                    Contact Page End                */
 /*                        Cart                    */
 .cart-container {
-  background-color: #126291;
+  background-color: #7192A3;
   color: white;
-  border-radius: 10px;
   display: flex;
   flex-direction: column;
   width: 80vw;
@@ -603,18 +602,31 @@ form textarea {
   padding-right: 2%;
 }
 
+.detailsShoppingCart h3 {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 300;
+}
+
 .buttonDivShoppingCart {
   display: flex;
 }
 
 .shoppingcartdeletebutton button {
   color: white;
-  background-color: red;
+  background-color: #dc3545;
+  border: none;
+  border-radius: 10px;
+}
+
+.shoppingcartdeletebutton button:hover {
+  background-color: #A82935;
 }
 
 .shoppingcarth2 {
-  font-size: 2.5em;
-  color: #0C405F;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 300;
+  font-size: 3em;
+  color: #7192A3;
 }
 
 .totalPriceShoppingCart {
