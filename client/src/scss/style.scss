@@ -894,3 +894,37 @@ header {
     margin-top: 5%;
     margin-right: 5%;
 }
+//purchasehistory
+.purchasehistorydiv{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    // background-color: #7192A3;
+}
+.purchasehistorydiv img{
+    width: 300px;
+    height: 300px;
+}
+.individualpurchasehistorydiv{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #7192A3;
+}
+.tablediv{
+    display: flex;
+}
+.firstdiv{
+    display: flex;
+}
+.seconddiv{
+    display: flex;
+    flex-direction: column;
+}
+.thirddiv{
+    display: flex;
+}
+.tablerowpurchasehistory{
+    display: flex;
+    flex-direction: row;
+}

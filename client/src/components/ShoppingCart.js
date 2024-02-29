@@ -199,7 +199,7 @@ import NavigationBar from "./NavigationBar";
 import { ACCESS_LEVEL_NORMAL_USER, SERVER_HOST } from "../config/global_constants"
 import axios from "axios";
 import BuyShirt from "./BuyShirt";
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom"
 
 
 export default class ShoppingCart extends Component {
@@ -212,7 +212,7 @@ export default class ShoppingCart extends Component {
             // quantity:"",
             // size:"",
             cart: [],
-            user:{},
+            user: {},
             guestName: "",
             guestEmail: "",
             guestAddress: "",
@@ -220,7 +220,7 @@ export default class ShoppingCart extends Component {
             isGuest: localStorage.accessLevel < ACCESS_LEVEL_NORMAL_USER,
             redirectToPaypalButton: false,
             // redirectToPaypalButton: true,
-            haveEnoughData:false
+            haveEnoughData: false
             // totalPrice: 0
         };
     }
@@ -241,16 +241,16 @@ export default class ShoppingCart extends Component {
 
         axios.get(`${SERVER_HOST}/users/email?email=${userEmail}`)
             .then(res => {
-                this.setState({ user: res.data});
+                this.setState({ user: res.data });
             })
             .catch(err => {
                 console.error("Error fetching user data:", err);
             });
 
-            const { state } = this.props.location;
-            if (state && state.haveEnoughData === true) {
-                this.setState({haveEnoughData:true})
-            }
+        const { state } = this.props.location;
+        if (state && state.haveEnoughData === true) {
+            this.setState({ haveEnoughData: true })
+        }
 
         // this.props.shirt.shirtPhotoFilename.map(photo => {
         //     return axios.get(`${SERVER_HOST}/shirts/photo/${photo.filename}`)
@@ -429,38 +429,38 @@ export default class ShoppingCart extends Component {
             console.log("Please provide all guest details before proceeding with payment.");
         }
     };
-    handlePayment = () => {
-        // Check if all guest details are provided
-        const { guestName, guestEmail, guestAddress, guestPhone } = this.state;
-        const errors = {};
-        if (!guestName.trim()) {
-            errors.guestName = "Name is required";
-        }
-        if (!guestEmail.trim()) {
-            errors.guestEmail = "Email is required";
-        } else if (!/\S+@\S+\.\S+/.test(guestEmail)) {
-            errors.guestEmail = "Email is invalid";
-        }
-        if (!guestAddress.trim()) {
-            errors.guestAddress = "Address is required";
-        }
-        if (!guestPhone.trim()) {
-            errors.guestPhone = "Phone number is required";
-        } else if (!/^\d{10}$/.test(guestPhone)) {
-            errors.guestPhone = "Phone number must be 10 digits";
-        }
-        // if (Object.keys(errors).length === 0) {
-        // if (guestName && guestEmail && guestAddress && guestPhone {
-        if (guestName && guestEmail && guestAddress && guestPhone && Object.keys(errors).length === 0) {
-            // Proceed with payment
-            console.log("Guest details provided. Proceeding with payment...");
-            // Call your payment function or component here
-            this.setState({ redirectToPaypalButton: true })
-        } else {
-            // Display error message or handle accordingly
-            console.log("Please provide all guest details before proceeding with payment.");
-        }
-    };
+    // handlePayment = () => {
+    //     // Check if all guest details are provided
+    //     const { guestName, guestEmail, guestAddress, guestPhone } = this.state;
+    //     const errors = {};
+    //     if (!guestName.trim()) {
+    //         errors.guestName = "Name is required";
+    //     }
+    //     if (!guestEmail.trim()) {
+    //         errors.guestEmail = "Email is required";
+    //     } else if (!/\S+@\S+\.\S+/.test(guestEmail)) {
+    //         errors.guestEmail = "Email is invalid";
+    //     }
+    //     if (!guestAddress.trim()) {
+    //         errors.guestAddress = "Address is required";
+    //     }
+    //     if (!guestPhone.trim()) {
+    //         errors.guestPhone = "Phone number is required";
+    //     } else if (!/^\d{10}$/.test(guestPhone)) {
+    //         errors.guestPhone = "Phone number must be 10 digits";
+    //     }
+    //     // if (Object.keys(errors).length === 0) {
+    //     // if (guestName && guestEmail && guestAddress && guestPhone {
+    //     if (guestName && guestEmail && guestAddress && guestPhone && Object.keys(errors).length === 0) {
+    //         // Proceed with payment
+    //         console.log("Guest details provided. Proceeding with payment...");
+    //         // Call your payment function or component here
+    //         this.setState({ redirectToPaypalButton: true })
+    //     } else {
+    //         // Display error message or handle accordingly
+    //         console.log("Please provide all guest details before proceeding with payment.");
+    //     }
+    // };
 
     // loadShirtPhotos() {
     //     // Loop through each cart item and load its shirt photos
@@ -482,9 +482,9 @@ export default class ShoppingCart extends Component {
     handleGuest = (field, value) => {
         this.setState({ [field]: value });
     };
-    submitGuestDetail=()=>{
-        if(this.state.guestName&&this.state.guestEmail&&this.state.guestAddress&&this.state.guestEmail){
-            this.setState({haveEnoughData:true})
+    submitGuestDetail = () => {
+        if (this.state.guestName && this.state.guestEmail && this.state.guestAddress && this.state.guestEmail) {
+            this.setState({ haveEnoughData: true })
         }
     }
 
@@ -605,25 +605,25 @@ export default class ShoppingCart extends Component {
                                 required
                             />
                             <button onClick={this.submitGuestDetail}>Submit</button>
-                 </div>
+                        </div>
                         : null}
 
 
-{this.state.isGuest?(this.state.haveEnoughData)?<BuyShirt customerEmail={this.state.guestEmail} customerName={this.state.guestName} address={this.state.guestAddress} phone={this.state.guestPhone} items={this.getIdAndQuantity()} price={this.calculateTotalPrice()}/>
-:<h6>You have to fill in personal detail</h6>:((this.state.user.name&&this.state.user.email&&this.state.user.phone&&this.state.user.address)|| this.state.haveEnoughData)?<BuyShirt customerEmail={this.state.user.email} customerName={this.state.user.name} address={this.state.user.address} phone={this.state.user.phone} items={this.getIdAndQuantity()} price={this.calculateTotalPrice()}/>
-:<Link className="green-button" to={{pathname: "/Dashboard", state: { from: "cart" }}}>Please finish your profile</Link>}
+                    {this.state.isGuest ? (this.state.haveEnoughData) ? <BuyShirt customerEmail={this.state.guestEmail} customerName={this.state.guestName} address={this.state.guestAddress} phone={this.state.guestPhone} items={this.getIdAndQuantity()} price={this.calculateTotalPrice()} />
+                        : <h6>You have to fill in personal detail</h6> : ((this.state.user.name && this.state.user.email && this.state.user.phone && this.state.user.address) || this.state.haveEnoughData) ? <BuyShirt customerEmail={this.state.user.email} customerName={this.state.user.name} address={this.state.user.address} phone={this.state.user.phone} items={this.getIdAndQuantity()} price={this.calculateTotalPrice()} />
+                        : <Link className="green-button" to={{ pathname: "/Dashboard", state: { from: "cart" } }}>Please finish your profile</Link>}
 
-{/* {this.state.haveEnoughData?
+                    {/* {this.state.haveEnoughData?
 {/* paypalbutton */}
                     {/* <BuyShirt customerEmail={this.state.guestEmail} customerName={this.state.guestName} address={this.state.guestAddress} phone={this.state.guestPhone} items={this.getIdAndQuantity()} price={this.calculateTotalPrice()} /> */}
                     <div className="totalPriceShoppingCart">
                         {this.state.cart !== undefined ? <p>Total Price: ${this.calculateTotalPrice()}</p> : null}
                     </div>
-                    <button onClick={this.handlePayment}>Proceed to Payment</button>
+                    {/* <button onClick={this.handlePayment}>Proceed to Payment</button> */}
                     {this.state.redirectToPaypalButton ? <BuyShirt customerEmail={this.state.guestEmail} customerName={this.state.guestName} address={this.state.guestAddress} phone={this.state.guestPhone} items={this.getIdAndQuantity()} price={this.calculateTotalPrice()} /> : null}
-:null
-
                     
+
+
                 </div>
 
                 {/* <p>Total Price: €{this.state.totalPrice}</p> */}
