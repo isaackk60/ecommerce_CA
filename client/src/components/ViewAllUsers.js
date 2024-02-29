@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { Link } from "react-router-dom"
+import { Redirect, Link } from "react-router-dom"
 
 import axios from "axios"
 
@@ -48,6 +48,8 @@ export default class ViewAllUsers extends Component {
     render() {
         console.log(this.state.users)
         return (
+            <>
+            {localStorage.accessLevel > ACCESS_LEVEL_NORMAL_USER?
             <div>
                 <NavigationBar/>
                 <h2>All Users</h2>
@@ -76,6 +78,8 @@ export default class ViewAllUsers extends Component {
                     </tbody>
                 </table>
             </div>
+            :<Redirect to={"/main"} />}
+            </>
         );
     }
     

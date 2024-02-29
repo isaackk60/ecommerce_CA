@@ -31,6 +31,7 @@ import NavigationBar from "./components/NavigationBar"
 // import BuyShirt from "./components/BuyShirt"
 import Dashboard from "./components/Dashboard"
 import ViewAllUsers from "./components/ViewAllUsers"
+import ViewPurchaseHistory from "./components/ViewPurchaseHistory"
 
 import {ACCESS_LEVEL_GUEST} from "./config/global_constants"
 
@@ -76,6 +77,7 @@ export default class App extends Component
                     <Route exact path="/NavigationBar" component={NavigationBar}/>
                     <Route exact path="/ViewAllUsers" component={ViewAllUsers}/>
                     <Route exact path="/BuyShirt" component={BuyShirt}/>
+                    <Route exact path="/ViewPurchaseHistory" component={ViewPurchaseHistory}/>
                     <Route path="*" component={Main}/>                            
                 </Switch>
             </BrowserRouter>
