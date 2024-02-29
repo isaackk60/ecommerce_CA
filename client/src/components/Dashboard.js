@@ -170,7 +170,7 @@ export default class Dashboard extends Component {
             newAddress: "",
             redirectToMain: false,
             redirectToCart: false,
-            redirectToLogout: false,
+            // redirectToLogout: false,
             from: "",
         };
     }
@@ -219,9 +219,9 @@ export default class Dashboard extends Component {
             this.setState({ redirectToMain: true })
         }
     }
-    handleLogout = (e) => {
-        this.setState({ redirectToLogout: true })
-    }
+    // handleLogout = (e) => {
+    //     this.setState({ redirectToLogout: true })
+    // }
 
     render() {
         const { user, newName, newPhone, newAddress } = this.state;
@@ -229,7 +229,7 @@ export default class Dashboard extends Component {
         return (
 
             <div>
-                {this.state.redirectToLogout ? <Redirect to={"/Logout"} /> : null}
+                {/* {this.state.redirectToLogout ? <Redirect to={"/Logout"} /> : null} */}
                 {this.state.redirectToMain ? <Redirect to={"/main"} /> : null}
                 {this.state.redirectToCart ? <Redirect to={{ pathname: "/ShoppingCart/", state: { haveEnoughData: true } }} /> : null}
                 <NavigationBar />

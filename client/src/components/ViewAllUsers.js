@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import { Link } from "react-router-dom"
-
+import Logout from "./Logout"
 import axios from "axios"
 
 import NavigationBar from "./NavigationBar"
@@ -75,6 +75,9 @@ export default class ViewAllUsers extends Component {
                         ))}
                     </tbody>
                 </table>
+                <div className="logoutButton">
+                    <button className="red-button"><Logout /></button>
+                </div>
             </div>
         );
     }

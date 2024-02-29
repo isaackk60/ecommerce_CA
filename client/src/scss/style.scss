@@ -358,6 +358,14 @@ header {
 }
 
 //NAVIGATION BAR
+.navadminorusericon{
+    display: flex;
+    align-items: center;
+}
+.navbasket{
+    display: flex;
+    align-items: center;
+}
 .navbasket img{
     width: 50px;
 }
@@ -409,6 +417,10 @@ header {
     display: flex;
     flex-direction: row;
     align-items: center;
+}
+.navsearchbar .input{
+    font-family: "Montserrat", sans-serif;
+    font-weight: 300;
 }
 .navsearchbar input{
     border-radius: 7px;
