@@ -48,6 +48,8 @@ export default class ViewAllUsers extends Component {
     render() {
         console.log(this.state.users)
         return (
+            <>
+            {localStorage.accessLevel > ACCESS_LEVEL_NORMAL_USER?
             <div>
                 <NavigationBar />
                 <h2 className="shoppingcarth2">All Users</h2>
@@ -82,6 +84,8 @@ export default class ViewAllUsers extends Component {
                 </div>
 
             </div>
+            :<Redirect to={"/main"} />}
+            </>
         );
     }
 
