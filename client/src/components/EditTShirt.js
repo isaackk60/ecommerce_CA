@@ -58,7 +58,7 @@ export default class EditTShirt extends Component {
     handleSubmit = (e) => {
         e.preventDefault()
 
-        const shirtObject = {
+        let shirtObject = {
             name: this.state.name,
             // colour: this.state.colour,
             size: this.state.size,
@@ -67,6 +67,13 @@ export default class EditTShirt extends Component {
             // quantity: this.state.quantity
             stock: this.state.stock,
             gender:this.state.gender
+        }
+
+        if (this.state.stock> 0) {
+            shirtObject = {
+                ...shirtObject,
+                sold: false
+            };
         }
 
 
