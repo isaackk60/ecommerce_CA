@@ -619,9 +619,9 @@ export default class ShoppingCart extends Component {
                     <div className="totalPriceShoppingCart">
                         {this.state.cart !== undefined ? <p>Total Price: ${this.calculateTotalPrice()}</p> : null}
                     </div>
-                    <button onClick={this.handlePayment}>Proceed to Payment</button>
+
                     {this.state.redirectToPaypalButton ? <BuyShirt customerEmail={this.state.guestEmail} customerName={this.state.guestName} address={this.state.guestAddress} phone={this.state.guestPhone} items={this.getIdAndQuantity()} price={this.calculateTotalPrice()} /> : null}
-:null
+
 
                     
                 </div>

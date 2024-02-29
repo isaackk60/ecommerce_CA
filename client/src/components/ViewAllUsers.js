@@ -66,6 +66,8 @@ export default class ViewAllUsers extends Component {
                         </thead>
                         <tbody>
                             {this.state.users.map(user => (
+                                user.accessLevel==ACCESS_LEVEL_ADMIN?null:
+
                                 <tr key={user._id}>
                                     <td>{user.name}</td>
                                     <td>{user.email}</td>
@@ -76,6 +78,7 @@ export default class ViewAllUsers extends Component {
                                         <Link className="green-button" to={`/ViewPurchaseHistory/${user.email}`}>View Purchase History</Link>
                                     </td>
                                 </tr>
+
                             ))}
                         </tbody>
                     </table>
