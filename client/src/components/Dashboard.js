@@ -13,16 +13,16 @@
 //     constructor(props) 
 //     {
 //         super(props)
-        
+
 //         this.state = {
 //             user:[]
 //         }
 //     }
-    
-    
+
+
 //     componentDidMount() {
 //         let userEmail = JSON.parse(localStorage.getItem("userEmail") || null);
-    
+
 //         // axios.get(`${SERVER_HOST}/users/email`,{email:userEmail},)
 //         //     .then(res => {
 //         //         this.setState({ user: res.data });
@@ -47,12 +47,12 @@
 
 
 //     }
-    
 
 
 
 
-  
+
+
 //     render() 
 //     {   
 // console.log(this.state.user)
@@ -62,7 +62,7 @@
 
 
 //             </div>
-            
+
 //         )
 //     }
 // }
@@ -119,7 +119,7 @@
 //     }
 
 //     render() {
-        
+
 //         const { user, newName, newPhone, newAddress } = this.state;
 //         console.log(user)
 // console.log(newName)
@@ -153,9 +153,11 @@
 
 import React, { Component } from "react";
 import axios from "axios";
-import { Redirect,Link } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import NavigationBar from "./NavigationBar";
 import { SERVER_HOST } from "../config/global_constants";
+import Logout from "./Logout"
+import LinkInClass from "../components/LinkInClass"
 
 export default class Dashboard extends Component {
     constructor(props) {
@@ -166,9 +168,10 @@ export default class Dashboard extends Component {
             newName: "",
             newPhone: "",
             newAddress: "",
-            redirectToMain:false,
-            redirectToCart:false,
-            from:"",
+            redirectToMain: false,
+            redirectToCart: false,
+            // redirectToLogout: false,
+            from: "",
         };
     }
 
@@ -177,16 +180,16 @@ export default class Dashboard extends Component {
 
         axios.get(`${SERVER_HOST}/users/email?email=${userEmail}`)
             .then(res => {
-                this.setState({ user: res.data,newName:res.data.name,newPhone:res.data.phone,newAddress:res.data.address });
+                this.setState({ user: res.data, newName: res.data.name, newPhone: res.data.phone, newAddress: res.data.address });
             })
             .catch(err => {
                 console.error("Error fetching user data:", err);
             });
 
-            const { state } = this.props.location;
-            if (state && state.from === "cart") {
-                this.setState({from:"cart"})
-            }
+        const { state } = this.props.location;
+        if (state && state.from === "cart") {
+            this.setState({ from: "cart" })
+        }
     }
 
     handleInputChange = (e) => {
@@ -210,38 +213,62 @@ export default class Dashboard extends Component {
                 // Handle error
                 console.error("Error updating user:", err);
             });
-            if(this.state.from=="cart"&&newName&&newPhone&&newAddress){
-                this.setState({redirectToCart:true})
-            }else if(this.state.from!="cart"){
-            this.setState({redirectToMain:true})
+        if (this.state.from == "cart" && newName && newPhone && newAddress) {
+            this.setState({ redirectToCart: true })
+        } else if (this.state.from != "cart") {
+            this.setState({ redirectToMain: true })
         }
     }
+    // handleLogout = (e) => {
+    //     this.setState({ redirectToLogout: true })
+    // }
 
     render() {
         const { user, newName, newPhone, newAddress } = this.state;
 
         return (
-            
+
             <div>
-                {this.state.redirectToMain?<Redirect to={"/main"}/>:null}
-                {this.state.redirectToCart?<Redirect to={{ pathname: "/ShoppingCart/", state: { haveEnoughData: true } }}/>:null}
+                {/* {this.state.redirectToLogout ? <Redirect to={"/Logout"} /> : null} */}
+                {this.state.redirectToMain ? <Redirect to={"/main"} /> : null}
+                {this.state.redirectToCart ? <Redirect to={{ pathname: "/ShoppingCart/", state: { haveEnoughData: true } }} /> : null}
                 <NavigationBar />
-                <h2>Welcome, {user.name}</h2>
-                <form onSubmit={this.updateUser}>
-                    <div>
-                        <label>Name:</label>
-                        <input type="text" name="newName" value={newName !== null ? newName : user.name} onChange={this.handleInputChange} />
+                <h2 className="shoppingcarth2">Welcome, {user.name}</h2>
+                <form onSubmit={this.updateUser} className="userdashboardform">
+                    <div className="biggestdashboard">
+                        <div className="labelinputdiv">
+                            <div>
+                                <label>Name: </label>
+                            </div>
+                            <div>
+                                <input type="text" placeholder="Name" name="newName"  value={newName !== null ? newName : user.name} onChange={this.handleInputChange} />
+                            </div>
+                        </div>
+                        <div className="labelinputdiv">
+                            <div>
+                                <label>Phone: </label>
+                            </div>
+                            <div>
+                                <input type="text" placeholder="Phone" name="newPhone" value={newPhone !== null ? newPhone : user.phone} onChange={this.handleInputChange} />
+                            </div>
+                        </div>
+                        <div className="labelinputdiv">
+                            <div>
+                                <label>Address: </label>
+                            </div>
+                            <div>
+                                <input type="text" placeholder="Address" name="newAddress" value={newAddress !== null ? newAddress : user.address} onChange={this.handleInputChange} />
+                            </div>
+                        </div>
+                        <div className="dashboardsavebutton">
+                            <button type="submit">Save</button>
+                        </div>
                     </div>
-                    <div>
-                        <label>Phone:</label>
-                        <input type="text" name="newPhone" value={newPhone !== null ? newPhone : user.phone} onChange={this.handleInputChange} />
-                    </div>
-                    <div>
-                        <label>Address:</label>
-                        <input type="text" name="newAddress" value={newAddress !== null ? newAddress : user.address} onChange={this.handleInputChange} />
-                    </div>
-                    <button type="submit">Save</button>
+
                 </form>
+                <div className="logoutButton">
+                    <button className="logoutbutton"><Logout /></button>
+                </div>
             </div>
         );
     }

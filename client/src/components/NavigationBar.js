@@ -1,8 +1,9 @@
 import React, { Component } from "react"
 
 import { Link } from "react-router-dom"
-import storeLogo from "./images/tshirtstorelogo.jpg"
-import { ACCESS_LEVEL_GUEST, ACCESS_LEVEL_ADMIN, SERVER_HOST } from "../config/global_constants"
+import basketpng from "./images/icons8-basket-100.png"
+import adminpng from "./images/icons8-admin-48.png"
+import { ACCESS_LEVEL_GUEST, ACCESS_LEVEL_ADMIN, SERVER_HOST, ACCESS_LEVEL_NORMAL_USER } from "../config/global_constants"
 import Logout from "./Logout"
 import ShoppingCart from "./ShoppingCart"
 export default class Down extends Component {
@@ -23,18 +24,22 @@ export default class Down extends Component {
         selectContainer.style.display = "none";
     }
 
+    handleSearchInputChange = (event) => {
+        this.props.handleSearchInputChange(event)
+    }
+
 
     render() {
-        console.log("down")
         return (
             <nav id="navigationbar-container">
                 <div class="splitL">
                     <div>
-                    <Link to={"/main"} >BUY T-SHIRT</Link></div>
+                        <Link to={"/main"} >BUY T-SHIRT</Link>
+                    </div>
                     <div>
-                    <div className="dropdown" onMouseOver={this.showSelect} onMouseLeave={this.closeSelect}> {/* onMouseLeave={this.closeSelect} */}
-                        <Link to={"/main"} className="dropbtn">All Genders</Link>
-                        {/* <div id="select-container"> */}
+                        <div className="dropdown" onMouseOver={this.showSelect} onMouseLeave={this.closeSelect}> {/* onMouseLeave={this.closeSelect} */}
+                            <Link to={"/main"} className="dropbtn">CATEGORIES</Link>
+                            {/* <div id="select-container"> */}
                             {/* <select value={this.props.genderFilter} onChange={this.props.handleGenderFilterChange}>
                                 <option value="">All Genders</option>
                                 <option value="male">Male</option>
@@ -42,41 +47,56 @@ export default class Down extends Component {
                                 <option value="unisex">Unisex</option>
                             </select> */}
                             <div className="dropdown-content" id="select-container">
-                            <Link className="select-gender" to={"/main"} onClick={() => this.handleGenderFilterChange("")}>All Genders</Link>
-                            <Link className="select-gender" to={"/main"} onClick={() => this.handleGenderFilterChange("male")}>Male</Link>
-                            <Link className="select-gender" to={"/main"} onClick={() => this.handleGenderFilterChange("female")}>Female</Link>
-                            <Link className="select-gender" to={"/main"} onClick={() => this.handleGenderFilterChange("unisex")}>Unisex</Link>
+                                <Link className="select-gender" to={"/main"} onClick={() => this.handleGenderFilterChange("")}>ALL GENDERS</Link>
+                                <Link className="select-gender" to={"/main"} onClick={() => this.handleGenderFilterChange("male")}>MALE</Link>
+                                <Link className="select-gender" to={"/main"} onClick={() => this.handleGenderFilterChange("female")}>FEMALE</Link>
+                                <Link className="select-gender" to={"/main"} onClick={() => this.handleGenderFilterChange("unisex")}>UNISEX</Link>
                             </div>
-                        {/* </div> */}
-                    </div>
+                            {/* </div> */}
+                        </div>
                     </div>
                     <div>
-                    <Link to={"/About"}>ABOUT</Link></div>
+                        <Link to={"/About"}>ABOUT</Link></div>
                     <div> <Link to={"/Contact"}>CONTACT</Link></div>
 
                 </div>
                 <div class="splitC">
                     {/* <Link to={"/DisplayAllCars"} img src={require('./.public/tshirtstorelogo.jpg')}>test</Link> */}
                     {/* <Link to={"/DisplayAllCars"} img src="../tshirtstorelogo.jpg"></Link> */}
-                    <img id="logo" src={storeLogo} />
-                    {/* <Link to={"/DisplayAllCars"}>test</Link> */}
+                    {/* <img id="logo" src={storeLogo} /> */}
+                    <Link to={"/main"} className="linktomainpagestorelogo"><h1>T-SHIRT STORE</h1></Link>
+                    {/* <h1>T-SHIRT STORE</h1> */}
+                    {/* <Link to={"/main"}>T-SHIRT STORE</Link> */}
                 </div>
                 <div class="splitR">
-                    <Link to={"/main"}>SEARCH HERE</Link>
-                    <Link to={"/ShoppingCart"}>SHOPPING CART</Link>
-                    {/* <Link to={"/Login"}>LOG IN</Link> */}
-                    {
-                        localStorage.accessLevel > ACCESS_LEVEL_GUEST
-                            ? <Link to="/main">
-                                {
-                                    localStorage.profilePhoto !== "null"
-                                        ? <img id="profilePhoto" src={`data:;base64,${localStorage.profilePhoto}`} alt="" />
-                                        : null
-                                }
-                                <Logout />
-                            </Link>
-                            : <Link to={"/Login"}>LOG IN</Link>
-                    }
+                    <div className="navsearchbar">
+                        {/* <Link to={"/main"}>SEARCH HERE</Link> */}
+                        <input type="text" placeholder="Search shirts..." onChange={this.handleSearchInputChange}
+                        />
+                    </div>
+                    <div className="navbasket">
+                        {/* <Link to={"/ShoppingCart"}>SHOPPING CART</Link> */}
+                        <Link to={"/ShoppingCart"}><img src={basketpng} /></Link>
+                    </div>
+                    <div className="navadminorusericon">
+                        {/* if statement in an if statement */}
+                        {
+                            localStorage.accessLevel > ACCESS_LEVEL_NORMAL_USER
+                                ? <Link to={"/viewallusers"}>
+                                    <img src={adminpng} />
+                                </Link>
+                                : (localStorage.accessLevel > ACCESS_LEVEL_GUEST)
+                                    ? <Link to="/dashboard">
+                                        {
+                                            localStorage.profilePhoto !== "null"
+                                                ? <img id="profilePhoto" src={`data:;base64,${localStorage.profilePhoto}`} alt="" />
+                                                : null
+                                        }
+                                        {/* <Logout /> */}
+                                    </Link>
+                                    : <Link to={"/Login"}>LOG IN</Link>
+                        }
+                    </div>
                 </div>
             </nav>
         )

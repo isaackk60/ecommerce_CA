@@ -71,7 +71,7 @@ export default class Main extends Component
         }
             return (           
             <div>
-                <NavigationBar genderFilter={genderFilter}  handleGenderFilterChange={this.handleGenderFilterChange.bind(this)}/>
+                <NavigationBar genderFilter={genderFilter}  handleGenderFilterChange={this.handleGenderFilterChange.bind(this)} handleSearchInputChange={this.handleSearchInputChange}/>
                 <div className="wholeMain">
                 {
                     
@@ -90,9 +90,9 @@ export default class Main extends Component
                     //     <Link className="red-button" to={"/ResetDatabase"}>Reset Database</Link>  <br/><br/><br/></div>
                 }
 
-                <div className="search-container">
+                {/* <div className="search-container">
                     <input type="text"  placeholder="Search shirts..." value={searchQuery} onChange={this.handleSearchInputChange} />
-                </div>
+                </div> */}
 
 
                 <div className="sort-container">
@@ -119,8 +119,8 @@ export default class Main extends Component
                 </div>
                 {
                         localStorage.accessLevel >= ACCESS_LEVEL_ADMIN 
-                        ? <div className="add-new-car">
-                            <Link className="blue-button" to={"/AddCar"}>Add New Car</Link>
+                        ? <div className="add-new-shirt">
+                            {/* <Link className="blue-button" to={"/AddCar"}>Add New Car</Link> */}
                             <Link className="green-button" to={"/AddTShirt"}>Add New T-Shirt</Link>
                           </div>
                         : null

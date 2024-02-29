@@ -217,7 +217,9 @@ export default class ShoppingCart extends Component {
             guestEmail: "",
             guestAddress: "",
             guestPhone: "",
-            isGuest:localStorage.accessLevel < ACCESS_LEVEL_NORMAL_USER,
+            isGuest: localStorage.accessLevel < ACCESS_LEVEL_NORMAL_USER,
+            redirectToPaypalButton: false,
+            // redirectToPaypalButton: true,
             haveEnoughData:false
             // totalPrice: 0
         };
@@ -227,7 +229,7 @@ export default class ShoppingCart extends Component {
         // Fetch cart data from the server
         const cartLocalStorage = JSON.parse(localStorage.getItem("itemsInCart") || "[]");
 
-        // console.log(localStorage.getItem("itemsInCart").forEach(item=>{item.shirtPhotoFilename}))
+        // console.log("itemsInCart: ",localStorage.getItem("itemsInCart").forEach(item=>{item.shirtPhotoFilename}))
 
         this.setState({ cart: cartLocalStorage }, () => {
             // Load shirt photos after updating state
@@ -351,19 +353,19 @@ export default class ShoppingCart extends Component {
         // this.setState({ totalPrice: totalPrice });
         return totalPrice.toFixed(2);
     }
-    getIdAndQuantity(){
-let items=[]
-this.state.cart.map(cartItem=>{
-    items.push({shirtID:cartItem.shirtId,quantity:cartItem.quantity})
-});
-return items;
+    getIdAndQuantity() {
+        let items = []
+        this.state.cart.map(cartItem => {
+            items.push({ shirtID: cartItem.shirtId, quantity: cartItem.quantity })
+        });
+        return items;
 
     }
     handleChange = (index, field, value) => {
         const updatedCart = [...this.state.cart];
         updatedCart[index][field] = value;
         this.setState({ cart: updatedCart });
-        
+
         // localStorage.setItem("itemsInCart", JSON.stringify(updatedCart));
         const groupedItems = this.state.cart.reduce((groups, item) => {
             const group = groups.find(g => g.name === item.name);
@@ -372,18 +374,19 @@ return items;
                 group.totalPrice += item.price * item.quantity;
             } else {
                 groups.push({
-                    shirtId:item.shirtId,
+                    shirtId: item.shirtId,
                     name: item.name,
                     size: item.size,
                     quantity: item.quantity,
                     price: item.price,
                     totalPrice: item.price * item.quantity,
-                    shirtPhotoFilename:item.shirtPhotoFilename
+                    shirtPhotoFilename: item.shirtPhotoFilename,
+                    shirtPhotoFilename: item.shirtPhotoFilename
                 });
             }
             return groups;
         }, []);
-        this.setState({cart:groupedItems})
+        this.setState({ cart: groupedItems })
         localStorage.setItem("itemsInCart", JSON.stringify(groupedItems));
         // this.loadShirtPhotos();
     };
@@ -393,6 +396,70 @@ return items;
         this.setState({ cart: updatedCart });
         localStorage.setItem("itemsInCart", JSON.stringify(updatedCart));
         this.loadShirtPhotos();
+    };
+    handlePayment = () => {
+        // Check if all guest details are provided
+        const { guestName, guestEmail, guestAddress, guestPhone } = this.state;
+        const errors = {};
+        if (!guestName.trim()) {
+            errors.guestName = "Name is required";
+        }
+        if (!guestEmail.trim()) {
+            errors.guestEmail = "Email is required";
+        } else if (!/\S+@\S+\.\S+/.test(guestEmail)) {
+            errors.guestEmail = "Email is invalid";
+        }
+        if (!guestAddress.trim()) {
+            errors.guestAddress = "Address is required";
+        }
+        if (!guestPhone.trim()) {
+            errors.guestPhone = "Phone number is required";
+        } else if (!/^\d{10}$/.test(guestPhone)) {
+            errors.guestPhone = "Phone number must be 10 digits";
+        }
+        // if (Object.keys(errors).length === 0) {
+        // if (guestName && guestEmail && guestAddress && guestPhone {
+        if (guestName && guestEmail && guestAddress && guestPhone && Object.keys(errors).length === 0) {
+            // Proceed with payment
+            console.log("Guest details provided. Proceeding with payment...");
+            // Call your payment function or component here
+            this.setState({ redirectToPaypalButton: true })
+        } else {
+            // Display error message or handle accordingly
+            console.log("Please provide all guest details before proceeding with payment.");
+        }
+    };
+    handlePayment = () => {
+        // Check if all guest details are provided
+        const { guestName, guestEmail, guestAddress, guestPhone } = this.state;
+        const errors = {};
+        if (!guestName.trim()) {
+            errors.guestName = "Name is required";
+        }
+        if (!guestEmail.trim()) {
+            errors.guestEmail = "Email is required";
+        } else if (!/\S+@\S+\.\S+/.test(guestEmail)) {
+            errors.guestEmail = "Email is invalid";
+        }
+        if (!guestAddress.trim()) {
+            errors.guestAddress = "Address is required";
+        }
+        if (!guestPhone.trim()) {
+            errors.guestPhone = "Phone number is required";
+        } else if (!/^\d{10}$/.test(guestPhone)) {
+            errors.guestPhone = "Phone number must be 10 digits";
+        }
+        // if (Object.keys(errors).length === 0) {
+        // if (guestName && guestEmail && guestAddress && guestPhone {
+        if (guestName && guestEmail && guestAddress && guestPhone && Object.keys(errors).length === 0) {
+            // Proceed with payment
+            console.log("Guest details provided. Proceeding with payment...");
+            // Call your payment function or component here
+            this.setState({ redirectToPaypalButton: true })
+        } else {
+            // Display error message or handle accordingly
+            console.log("Please provide all guest details before proceeding with payment.");
+        }
     };
 
     // loadShirtPhotos() {
@@ -434,112 +501,133 @@ return items;
                 group.totalPrice += item.price * item.quantity;
             } else {
                 groups.push({
-                    shirtId:item.shirtId,
+                    shirtId: item.shirtId,
                     name: item.name,
                     size: item.size,
                     quantity: item.quantity,
                     price: item.price,
                     totalPrice: item.price * item.quantity,
-                    shirtPhotoFilename:item.shirtPhotoFilename
+                    shirtPhotoFilename: item.shirtPhotoFilename,
+                    shirtPhotoFilename: item.shirtPhotoFilename
                 });
             }
             return groups;
         }, []);
-// console.log(this.state.cart.map(item=>item.shirtPhotoFilename[0]))
+        // console.log(this.state.cart.map(item => item.shirtPhotoFilename[0]))
 
-// this.state.cart.map(item =>
-//     item.shirtPhotoFilename[0].forEach(photo => { // Use forEach to iterate over each object
-//         axios.get(`${SERVER_HOST}/shirts/photo/${photo.filename}`)
-//             .then(res => {
-//                 document.getElementById(photo._id).src = `data:;base64,${res.data.image}`
-//             })
-//             .catch(err => {
-//                 // Handle error
-//                 console.error("Error loading shirt photo:", err);
-//             });
-//     })
-// );
+        // this.state.cart.map(item =>
+        //     item.shirtPhotoFilename[0].forEach(photo => { // Use forEach to iterate over each object
+        //         axios.get(`${SERVER_HOST}/shirts/photo/${photo.filename}`)
+        //             .then(res => {
+        //                 document.getElementById(photo._id).src = `data:;base64,${res.data.image}`
+        //             })
+        //             .catch(err => {
+        //                 // Handle error
+        //                 console.error("Error loading shirt photo:", err);
+        //             });
+        //     })
+        // );
 
         return (
             <div>
                 <NavigationBar />
-                <h2>Shopping Cart</h2>
+                <h2 className="shoppingcarth2">Shopping Cart</h2>
                 <div className="cart-container">
-                {this.state.cart.map((item, index) => (
+                    {this.state.cart.map((item, index) => (
                         <div key={index} className="each-item-cart">
-{item.shirtPhotoFilename.map(photo => (
-                                <img key={photo._id} id={photo._id} alt="" />
-                            ))}
-                            <div>
-                            <h3>{item.name} </h3>
-                            <select
-                                value={item.size}
-                                onChange={e => this.handleChange(index, 'size', e.target.value)}
-                            >
-                                <option value="XS">XS</option>
-                                <option value="S">S</option>
-                                <option value="M">M</option>
-                                <option value="L">L</option>
-                                <option value="XL">XL</option>
-                            </select>
-                            {/* <span>Quantity:</span> */}
-                            
-                            <div>{item.price}</div>
+                            <div className="photoanddetailsSC">
+                                {/* display shirt photo */}
+                                {item.shirtPhotoFilename.map(photo => (
+                                    <img key={photo._id} id={photo._id} alt="" />
+                                ))}
+                                <div className="detailsShoppingCart">
+                                    {/* <img src={`${SERVER_HOST}/shirts/photo/${item.shirtPhotoFilename}`} alt="Shirt" style={{ width: '100px', height: '100px' }} /> */}
+                                    {/* <img src={`${SERVER_HOST}/shirts/photo/${item.shirtPhotoFilename}`} alt="Shirt" /> */}
+                                    {/* {console.log("shirtPhotoFilename: ", item.shirtPhotoFilename)} */}
+                                    <h3>{item.name} </h3>
+                                    <select
+                                        value={item.size}
+                                        onChange={e => this.handleChange(index, 'size', e.target.value)}
+                                    >
+                                        <option value="XS">XS</option>
+                                        <option value="S">S</option>
+                                        <option value="M">M</option>
+                                        <option value="L">L</option>
+                                        <option value="XL">XL</option>
+                                    </select>
+                                    {/* <span>Quantity:</span> */}
 
-                            <button onClick={() => this.handleChange(index, 'quantity', Math.max(1, item.quantity - 1))}>-</button>
-                            <span>{item.quantity}</span>
-                            <button onClick={() => this.handleChange(index, 'quantity', item.quantity + 1)}>+</button>
+                                    <div>€{item.price}</div>
+
+                                    <div className="buttonDivShoppingCart">
+                                        <button onClick={() => this.handleChange(index, 'quantity', Math.max(1, item.quantity - 1))}>-</button>
+                                        <span>{item.quantity}</span>
+                                        <button onClick={() => this.handleChange(index, 'quantity', item.quantity + 1)}>+</button>
+                                    </div>
+                                </div>
                             </div>
-                            <div>
-                            <button onClick={() => this.handleDelete(item.name, item.size)}>Delete</button>
+                            <div className="shoppingcartdeletebutton">
+                                <button onClick={() => this.handleDelete(item.name, item.size)}>Remove</button>
                             </div>
-                            
+
                         </div>
-                        
+
                     ))}
-                    {this.state.isGuest?
-                     <div className="guest-details">
-                     <h3>Guest Details</h3>
-                     <input
-                         type="text"
-                         placeholder="Name"
-                         value={this.state.guestName}
-                         onChange={e => this.handleGuest('guestName', e.target.value)}
-                     />
-                     <input
-                         type="email"
-                         placeholder="Email"
-                         value={this.state.guestEmail}
-                         onChange={e => this.handleGuest('guestEmail', e.target.value)}
-                     />
-                     <input
-                         type="text"
-                         placeholder="Address"
-                         value={this.state.guestAddress}
-                         onChange={e => this.handleGuest('guestAddress', e.target.value)}
-                     />
-                     <input
-                         type="text"
-                         placeholder="Phone"
-                         value={this.state.guestPhone}
-                         onChange={e => this.handleGuest('guestPhone', e.target.value)}
-                     />
-                     <button onClick={this.submitGuestDetail}>Submit</button>
+                    {this.state.isGuest ?
+                        <div className="guest-details">
+                            <h3>Guest Details</h3>
+                            <input
+                                type="text"
+                                placeholder="Name"
+                                value={this.state.guestName}
+                                onChange={e => this.handleChange('guestName', e.target.value)}
+                                required //required
+                            />
+                            <input
+                                type="email"
+                                placeholder="Email"
+                                value={this.state.guestEmail}
+                                onChange={e => this.handleChange('guestEmail', e.target.value)}
+                                required
+                            />
+                            <input
+                                type="text"
+                                placeholder="Address"
+                                value={this.state.guestAddress}
+                                onChange={e => this.handleChange('guestAddress', e.target.value)}
+                                required
+                            />
+                            <input
+                                type="text"
+                                placeholder="Phone"
+                                value={this.state.guestPhone}
+                                onChange={e => this.handleChange('guestPhone', e.target.value)}
+                                required
+                            />
+                            <button onClick={this.submitGuestDetail}>Submit</button>
                  </div>
-                    :null}
+                        : null}
+
+
 {this.state.isGuest?(this.state.haveEnoughData)?<BuyShirt customerEmail={this.state.guestEmail} customerName={this.state.guestName} address={this.state.guestAddress} phone={this.state.guestPhone} items={this.getIdAndQuantity()} price={this.calculateTotalPrice()}/>
 :<h6>You have to fill in personal detail</h6>:((this.state.user.name&&this.state.user.email&&this.state.user.phone&&this.state.user.address)|| this.state.haveEnoughData)?<BuyShirt customerEmail={this.state.user.email} customerName={this.state.user.name} address={this.state.user.address} phone={this.state.user.phone} items={this.getIdAndQuantity()} price={this.calculateTotalPrice()}/>
 :<Link className="green-button" to={{pathname: "/Dashboard", state: { from: "cart" }}}>Please finish your profile</Link>}
 
 {/* {this.state.haveEnoughData?
-<BuyShirt customerEmail={this.state.guestEmail} customerName={this.state.guestName} address={this.state.guestAddress} phone={this.state.guestPhone} items={this.getIdAndQuantity()} price={this.calculateTotalPrice()}/>
+{/* paypalbutton */}
+                    {/* <BuyShirt customerEmail={this.state.guestEmail} customerName={this.state.guestName} address={this.state.guestAddress} phone={this.state.guestPhone} items={this.getIdAndQuantity()} price={this.calculateTotalPrice()} /> */}
+                    <div className="totalPriceShoppingCart">
+                        {this.state.cart !== undefined ? <p>Total Price: ${this.calculateTotalPrice()}</p> : null}
+                    </div>
+                    <button onClick={this.handlePayment}>Proceed to Payment</button>
+                    {this.state.redirectToPaypalButton ? <BuyShirt customerEmail={this.state.guestEmail} customerName={this.state.guestName} address={this.state.guestAddress} phone={this.state.guestPhone} items={this.getIdAndQuantity()} price={this.calculateTotalPrice()} /> : null}
 :null
-} */}
+
                     
                 </div>
-                
+
                 {/* <p>Total Price: €{this.state.totalPrice}</p> */}
-                {this.state.cart !== undefined ? <p>Total Price: {this.calculateTotalPrice()}</p> : null}
+
 
             </div>
         );

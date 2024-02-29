@@ -26,7 +26,7 @@ export default class Contact extends Component {
                 </div>
 
                 <div className="GetInTouchContainer">
-                    <div>
+                    <div className="TouchContainer">
                         <h3>Get In Touch</h3>
                         <p>Got something to share? Fill out our quick and easy contact form. We promise to get back to you promptly.</p>
                                 <div className="FontIcon"> 
@@ -56,9 +56,12 @@ export default class Contact extends Component {
                                 </div>
                                 <div className="TextareaMessage">
                                     <textarea name="message" type="text" id="input-message" placeholder="Some Text...." rows="10" cols="25"></textarea>
+                                    {/* <input type="Submit" value="Submit" id="input-submit" className="blue-button"></input> */}
+                                </div>
+                                <div className="submit">
+                                <input type="Submit" value="Submit" id="input-submit" className="blue-button"></input>
                                 </div>
                             </div>
-                            <input type="Submit" value="Submit" id="input-submit" className="blue-button"></input>
                         </form>
                     </div>
                 </div>
