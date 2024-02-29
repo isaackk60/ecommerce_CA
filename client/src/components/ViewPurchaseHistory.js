@@ -138,7 +138,10 @@ export default class ViewAllUsers extends Component {
                                                     totalPrice: totalPrice 
                                                 }
                                             ]
-                                        }));
+                                        }), () => {
+                                            // Call loadShirtPhotos() after updating state
+                                            this.loadShirtPhotos();
+                                        });
                                     }
                                 })
                                 .catch(err => {
@@ -153,10 +156,36 @@ export default class ViewAllUsers extends Component {
             });
     }
     }
+    loadShirtPhotos() {
+        this.state.allOrders.forEach(order => {
+            order.eachItemsInOrder.forEach(item => {
+                item.shirtPhotoFilename.forEach(photo => {
+                    axios.get(`${SERVER_HOST}/shirts/photo/${photo.filename}`)
+                        .then(res => {
+                            // Update shirt photo in DOM
+                            const elements = document.getElementsByClassName(photo._id);
+                            Array.from(elements).forEach(element => {
+                                element.src = `data:;base64,${res.data.image}`;
+                            });
+                        })
+                        .catch(err => {
+                            // Handle error
+                            console.error("Error loading shirt photo:", err);
+                        });
+                });
+            });
+        });
+    }
+    
+    
+    
 
 
 
     render() {
+        console.log(this.state.purchaseHistory)
+        console.log(this.state.eachItemsInOrder)
+        console.log(this.state.allOrders)
         // console.log(this.state.allOrders.map(order => order.eachItemsInOrder.map(item => item.name)));
         return (
             <>
@@ -185,6 +214,10 @@ export default class ViewAllUsers extends Component {
 
                                         {order.eachItemsInOrder.map(item => (
                                             <tr>
+                                                <td>{item.shirtPhotoFilename.map(photo => (
+                                <img key={photo._id} className={photo._id} alt="" />
+                            ))}
+                            </td>
                                                 <td>{item.name}</td>
                                                 <td>{item.price}</td>
                                                 <td>{item.size}</td>
