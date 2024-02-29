@@ -1,9 +1,9 @@
 import React, { Component } from "react"
 
 import { Link } from "react-router-dom"
-import storeLogo from "./images/tshirtstorelogo.jpg"
 import basketpng from "./images/icons8-basket-100.png"
-import { ACCESS_LEVEL_GUEST, ACCESS_LEVEL_ADMIN, SERVER_HOST } from "../config/global_constants"
+import adminpng from "./images/icons8-admin-48.png"
+import { ACCESS_LEVEL_GUEST, ACCESS_LEVEL_ADMIN, SERVER_HOST, ACCESS_LEVEL_NORMAL_USER } from "../config/global_constants"
 import Logout from "./Logout"
 import ShoppingCart from "./ShoppingCart"
 export default class Down extends Component {
@@ -78,19 +78,25 @@ export default class Down extends Component {
                         {/* <Link to={"/ShoppingCart"}>SHOPPING CART</Link> */}
                         <Link to={"/ShoppingCart"}><img src={basketpng} /></Link>
                     </div>
-                    {/* <Link to={"/Login"}>LOG IN</Link> */}
-                    {
-                        localStorage.accessLevel > ACCESS_LEVEL_GUEST
-                            ? <Link to="/dashboard">
-                                {
-                                    localStorage.profilePhoto !== "null"
-                                        ? <img id="profilePhoto" src={`data:;base64,${localStorage.profilePhoto}`} alt="" />
-                                        : null
-                                }
-                                {/* <Logout /> */}
-                            </Link>
-                            : <Link to={"/Login"}>LOG IN</Link>
-                    }
+                    <div className="navadminorusericon">
+                        {/* if statement in an if statement */}
+                        {
+                            localStorage.accessLevel > ACCESS_LEVEL_NORMAL_USER
+                                ? <Link to={"/viewallusers"}>
+                                    <img src={adminpng} />
+                                </Link>
+                                : (localStorage.accessLevel > ACCESS_LEVEL_GUEST)
+                                    ? <Link to="/dashboard">
+                                        {
+                                            localStorage.profilePhoto !== "null"
+                                                ? <img id="profilePhoto" src={`data:;base64,${localStorage.profilePhoto}`} alt="" />
+                                                : null
+                                        }
+                                        {/* <Logout /> */}
+                                    </Link>
+                                    : <Link to={"/Login"}>LOG IN</Link>
+                        }
+                    </div>
                 </div>
             </nav>
         )
