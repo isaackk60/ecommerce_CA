@@ -544,7 +544,7 @@ export default class ShoppingCart extends Component {
                                     {/* <img src={`${SERVER_HOST}/shirts/photo/${item.shirtPhotoFilename}`} alt="Shirt" style={{ width: '100px', height: '100px' }} /> */}
                                     {/* <img src={`${SERVER_HOST}/shirts/photo/${item.shirtPhotoFilename}`} alt="Shirt" /> */}
                                     {/* {console.log("shirtPhotoFilename: ", item.shirtPhotoFilename)} */}
-                                    <h3>{item.name} </h3>
+                                    <h3 className="h3shoppingcart">{item.name} </h3>
                                     <select
                                         value={item.size}
                                         onChange={e => this.handleChange(index, 'size', e.target.value)}
@@ -557,11 +557,11 @@ export default class ShoppingCart extends Component {
                                     </select>
                                     {/* <span>Quantity:</span> */}
 
-                                    <div>€{item.price}</div>
+                                    <div className="shoppingcartshirtprice">€{item.price}</div>
 
                                     <div className="buttonDivShoppingCart">
                                         <button onClick={() => this.handleChange(index, 'quantity', Math.max(1, item.quantity - 1))}>-</button>
-                                        <span>{item.quantity}</span>
+                                        <span className="shoppingcartspan">{item.quantity}</span>
                                         <button onClick={() => this.handleChange(index, 'quantity', item.quantity + 1)}>+</button>
                                     </div>
                                 </div>

@@ -163,6 +163,8 @@
 }
 .green-button{
     font-size: 1.1em;
+    display: flex;
+    justify-content: center;
 }
 
 //about
@@ -618,6 +620,7 @@ header {
 .each-item-cart {
     font-family: "Montserrat", sans-serif;
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
     // border: solid 2px black;
     border-bottom: solid 1px white;
@@ -704,6 +707,7 @@ header {
 }
 
 .detailsShoppingCart{
+    font-size: 1em;
     display:flex;
     flex-direction: column;
     margin-left: 5%;
@@ -725,16 +729,34 @@ header {
 .detailsShoppingCart h3{
     font-family: "Montserrat", sans-serif;
     font-weight: 300;
+    font-size: 2.5em;
 }
 
+.detailsShoppingCart select{
+    padding: 5%;
+}
+.shoppingcartspan{
+    display: flex;
+    width: 10px;
+    justify-content: center;
+}
+.shoppingcartshirtprice{
+    font-size: 2em;
+}
 .buttonDivShoppingCart{
     display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
 }
 .shoppingcartdeletebutton button {
+    display: flex;
     color : white;
+    font-size: 1.25em;
     background-color: #dc3545;
     border: none;
     border-radius: 10px;
+    padding-top: 15%;
+    padding-bottom: 15%;
 }
 .shoppingcartdeletebutton button:hover{
     background-color: #A82935;
@@ -761,8 +783,8 @@ header {
     margin-top: 2%;
 }
 .logoutbutton {
-    padding: 7px 10px;
-    font-size: 0.875rem;
+    padding: 12px 16px;
+    font-size: 1rem;
     line-height: normal;
     border-radius: 0.2rem;
     color: #fff;
@@ -858,10 +880,13 @@ header {
     flex-direction: row;
     justify-content: center;
     padding-top: 5%;
+    padding:5%;
 }
 .dashboardsavebutton button{
+    padding:20%;
+    font-size: 1.25em;
     border-radius: 5px;
-    border: 107020;
+    border: 1px solid black;
     color: white;
     background-color: #28a745;
 }
@@ -894,6 +919,9 @@ header {
     margin-top: 5%;
     margin-right: 5%;
 }
+
+
+
 //purchasehistory
 .purchasehistorydiv{
     display: flex;
@@ -902,17 +930,26 @@ header {
     // background-color: #7192A3;
 }
 .purchasehistorydiv img{
-    width: 300px;
-    height: 300px;
+    width: 200px;
+    height: 200px;
 }
 .individualpurchasehistorydiv{
+    width: 70%;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 300;
     display: flex;
     flex-direction: column;
     align-items: center;
     background-color: #7192A3;
+    color: white;
+    padding: 1%;
+    border-radius: 5px;
 }
 .tablediv{
     display: flex;
+    flex-direction: row;
+    // justify-content: space-around; release this soon
+    width: 100%;
 }
 .firstdiv{
     display: flex;
@@ -927,4 +964,6 @@ header {
 .tablerowpurchasehistory{
     display: flex;
     flex-direction: row;
+    width:100%;
+
 }
