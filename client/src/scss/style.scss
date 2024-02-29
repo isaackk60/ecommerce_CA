@@ -843,6 +843,7 @@ header {
     background-color: #7192A3;
     padding: 0.5%;
     border-radius: 5px;
+    display: flex;
 }
 // .labelinputdiv{
 //     display: flex;
@@ -872,14 +873,24 @@ header {
     margin-top: 2%;
 }
 .dashboardimage{
+    width: 50%;
     display: flex;
     justify-content: center;
 }
 .theotherhalfdashboard{
+    width: 50%;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-.myphoto{
-    width: 100px;
+#myphoto
+{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: thin solid #aaa;
+    float:right;
+    background-size:contain;
+    margin-top: 5%;
+    margin-right: 5%;
 }
