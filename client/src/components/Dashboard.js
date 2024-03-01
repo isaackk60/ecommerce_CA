@@ -245,7 +245,7 @@ export default class Dashboard extends Component {
                                     <label>Name: </label>
                                 </div>
                                 <div>
-                                    <input type="text" placeholder="Name" name="newName" value={newName || user.name} onChange={this.handleInputChange} />
+                                    <input type="text" placeholder="Name" name="newName" value={newName !== null ? newName : user.name} onChange={this.handleInputChange} />
                                 </div>
                             </div>
                             <div className="labelinputdiv">
@@ -253,7 +253,7 @@ export default class Dashboard extends Component {
                                     <label>Phone: </label>
                                 </div>
                                 <div>
-                                    <input type="text" placeholder="Phone" name="newPhone" value={newPhone || user.phone} onChange={this.handleInputChange} />
+                                    <input type="text" placeholder="Phone" name="newPhone" value={newPhone !== null ? newPhone : user.phone} onChange={this.handleInputChange} />
                                 </div>
                             </div>
                             <div className="labelinputdiv">
@@ -261,7 +261,7 @@ export default class Dashboard extends Component {
                                     <label>Address: </label>
                                 </div>
                                 <div>
-                                    <input type="text" placeholder="Address" name="newAddress" value={newAddress || user.address} onChange={this.handleInputChange} />
+                                    <input type="text" placeholder="Address" name="newAddress" value={newAddress !== null ? newAddress : user.address} onChange={this.handleInputChange} />
                                 </div>
                             </div>
                             <div className="dashboardsavebutton">

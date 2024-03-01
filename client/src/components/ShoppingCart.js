@@ -231,10 +231,25 @@ export default class ShoppingCart extends Component {
 
         // console.log("itemsInCart: ",localStorage.getItem("itemsInCart").forEach(item=>{item.shirtPhotoFilename}))
 
-        this.setState({ cart: cartLocalStorage }, () => {
-            // Load shirt photos after updating state
-            this.loadShirtPhotos();
-        });
+        if (cartLocalStorage.some(item => item.quantity > item.stock)) {
+            // Update quantity to match stock if quantity exceeds stock
+            const updatedCart = cartLocalStorage.map(item => ({
+                ...item,
+                quantity: Math.min(item.quantity, item.stock)
+            }));
+            this.setState({ cart: updatedCart }, () => {
+                // Update localStorage with corrected cart data
+                localStorage.setItem("itemsInCart", JSON.stringify(updatedCart));
+                // Load shirt photos after updating state
+                this.loadShirtPhotos();
+            });
+        } else {
+            // No need to update quantity, proceed with loading shirt photos
+            this.setState({ cart: cartLocalStorage }, () => {
+                // Load shirt photos after updating state
+                this.loadShirtPhotos();
+            });
+        }
 
 
         let userEmail = JSON.parse(localStorage.getItem("userEmail") || null);
@@ -251,6 +266,8 @@ export default class ShoppingCart extends Component {
         if (state && state.haveEnoughData === true) {
             this.setState({ haveEnoughData: true })
         }
+
+
 
         // this.props.shirt.shirtPhotoFilename.map(photo => {
         //     return axios.get(`${SERVER_HOST}/shirts/photo/${photo.filename}`)
@@ -363,11 +380,20 @@ export default class ShoppingCart extends Component {
     }
     handleChange = (index, field, value) => {
         const updatedCart = [...this.state.cart];
+        const currentItem = updatedCart[index];
+    
+        // Check if the new quantity exceeds the stock
+        if (field === 'quantity' && value > currentItem.stock) {
+            // If it does, set the quantity to the maximum available stock
+            value = currentItem.stock;
+        }
+    
+        // Update the quantity or other fields as usual
         updatedCart[index][field] = value;
         this.setState({ cart: updatedCart });
-
+    
         // localStorage.setItem("itemsInCart", JSON.stringify(updatedCart));
-        const groupedItems = this.state.cart.reduce((groups, item) => {
+        const groupedItems = updatedCart.reduce((groups, item) => {
             const group = groups.find(g => g.name === item.name);
             if (group) {
                 group.quantity += item.quantity;
@@ -381,15 +407,15 @@ export default class ShoppingCart extends Component {
                     price: item.price,
                     totalPrice: item.price * item.quantity,
                     shirtPhotoFilename: item.shirtPhotoFilename,
-                    shirtPhotoFilename: item.shirtPhotoFilename
+                    stock: item.stock
                 });
             }
             return groups;
         }, []);
-        this.setState({ cart: groupedItems })
+        this.setState({ cart: groupedItems });
         localStorage.setItem("itemsInCart", JSON.stringify(groupedItems));
-        // this.loadShirtPhotos();
     };
+    
 
     handleDelete = (name, size) => {
         const updatedCart = this.state.cart.filter(item => !(item.name === name && item.size === size));
@@ -490,6 +516,7 @@ export default class ShoppingCart extends Component {
 
     render() {
         console.log(this.state.user)
+        console.log(this.state.cart)
         // console.log(this.state.cart[0])
         // {this.state.cart !== undefined ? this.calculateTotalPrice() : null}
 
@@ -508,7 +535,8 @@ export default class ShoppingCart extends Component {
                     price: item.price,
                     totalPrice: item.price * item.quantity,
                     shirtPhotoFilename: item.shirtPhotoFilename,
-                    shirtPhotoFilename: item.shirtPhotoFilename
+                    shirtPhotoFilename: item.shirtPhotoFilename,
+                    stock:item.stock
                 });
             }
             return groups;

@@ -1,7 +1,11 @@
 import React, { Component } from "react"
+<<<<<<<<< Temporary merge branch 1
+import { Link } from "react-router-dom"
 import Logout from "./Logout"
+=========
 import { Redirect, Link } from "react-router-dom"
 
+>>>>>>>>> Temporary merge branch 2
 import axios from "axios"
 import NavigationBar from "./NavigationBar"
 
@@ -134,7 +138,9 @@ export default class ViewAllUsers extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                            {sortedUsers.map(user => (
+                            {this.state.users.map(user => (
+                                user.accessLevel==ACCESS_LEVEL_ADMIN?null:
+
                                 <tr key={user._id}>
                                     <td>{user.name}</td>
                                     <td>{user.email}</td>
@@ -142,8 +148,10 @@ export default class ViewAllUsers extends Component {
                                     <td>{user.address}</td>
                                     <td>
                                         <button onClick={() => this.handleDelete(user._id)} className="logoutbutton">Delete</button>
+                                        <Link className="green-button" to={`/ViewPurchaseHistory/${user.email}`}>View Purchase History</Link>
                                     </td>
                                 </tr>
+
                             ))}
                         </tbody>
                     </table>

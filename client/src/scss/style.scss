@@ -413,7 +413,9 @@ header {
 #navigationbar-container .splitL {
     // float: left;
     display: flex;
-    justify-content: flex-start
+    justify-content: space-evenly;
+    width: 33.3vw;
+    font-size: 16px;
 }
 
 #navigationbar-container .splitC {
@@ -422,12 +424,14 @@ header {
     color: white;
     display: flex;
     justify-content: center;
+    width: 33.3vw;
 }
 #navigationbar-container .splitR {
     // float: right;
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
+    justify-content: space-around;
+    width: 33.3vw;
 }
 .navsearchbar {
     display: flex;
@@ -674,6 +678,7 @@ header {
     // position: fixed;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
+    width: 100%;
 }
 
 .dropdown-content .select-gender {
