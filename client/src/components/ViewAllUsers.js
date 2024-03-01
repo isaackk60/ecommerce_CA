@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import { Redirect, Link } from "react-router-dom"
-
+import Logout from "./Logout"
 import axios from "axios"
 import NavigationBar from "./NavigationBar"
 
