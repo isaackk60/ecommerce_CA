@@ -68,6 +68,19 @@ const getPurchaseHistoryByEmail = (req, res, next) => {
     });
 };
 
+const updatetSalesDocument = (req, res, next) => 
+{
+    salesModel.findByIdAndUpdate(req.params.id, {$set: req.body}, (err, data) => 
+    {
+        if(err)
+        {
+            return next(err)
+        }  
+        
+        return res.json(data)
+    })        
+}
+
 
 
 // Save a record of each Paypal payment
@@ -76,5 +89,9 @@ const getPurchaseHistoryByEmail = (req, res, next) => {
 // router.post('/sales/:paymentID/:price', createNewSaleDocument)
 // router.post('/sales/:orderID/:price/:items/:customerName/:customerEmail/:address/:phone', createNewSaleDocument)
 router.post('/sales/:orderID/:price', createNewSaleDocument)
+// router.get('/sales/email', getPurchaseHistoryByEmail);
+
+router.put('/sales/:id',updatetSalesDocument)
+
 router.get('/sales/email', getPurchaseHistoryByEmail);
 module.exports = router

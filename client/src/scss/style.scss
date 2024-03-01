@@ -163,7 +163,29 @@
 }
 .green-button{
     font-size: 1.1em;
+    display: flex;
+    justify-content: center;
 }
+.mainaddbutton{
+    padding: 14px 20px;
+    font-size: 1.25rem;
+    line-height: normal;
+    border-radius: 0.2rem;
+    color: #fff;
+    background-color: #28a745;
+    border-color: #28a745;
+    margin-right: 10px;
+    position: relative;
+    top: 1px;  
+    text-decoration: none;
+    cursor:pointer;
+  }
+  .mainaddbutton:hover{
+    text-decoration: none;
+    color: white;
+    background-color: #107020;
+  }
+
 
 //about
 
@@ -190,16 +212,22 @@ p {
 }
 
 .about_main {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 400;
     display: flex;
     flex-direction: column;
     align-items: center;
     background-color: #f1f1f1;
-    color: #002b45;
-    font-family: 'Poppins', sans-serif;
+    // color: #002b45;
+    color: #7192A3;
+    // font-family: 'Poppins', sans-serif;
 
     p {
         margin-top: 0px;
     }
+}
+.about_main h1{
+    color: #002b45;
 }
 
 .about_background_image {
@@ -214,6 +242,7 @@ p {
     min-height: 450px;
     overflow: auto;
     background-attachment: fixed;
+    margin-top: 5%;
 
 
     .about_left_title {
@@ -240,6 +269,8 @@ p {
     display: flex;
     margin: 20px;
     width: 70vw;
+    margin-top: 5%;
+    margin-bottom: 5%;
 
     img {
         width: 55%;
@@ -248,16 +279,16 @@ p {
 
 .about_left_text {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
+    justify-content: center;
     flex-direction: column;
+    // p {
+    //     margin-left: 0px;
+    // }
 
-    p {
-        margin-left: 0px;
-    }
-
-    h2 {
-        padding-left: 0px;
-    }
+    // h2 {
+    //     padding-left: 0px;
+    // }
 }
 
 //login and sign up
@@ -607,12 +638,12 @@ header {
     flex-direction: column;
     width: 80vw;
     margin: 0px 10vw;
-    margin-bottom: 5%;
 }
 
 .each-item-cart {
     font-family: "Montserrat", sans-serif;
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
     // border: solid 2px black;
     border-bottom: solid 1px white;
@@ -689,6 +720,33 @@ header {
 
 //SHOPPINGCART
 
+.guest-details{
+    font-family: "Montserrat", sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2%;
+}
+.gsecond{
+    display: flex;
+    flex-direction: row;
+    margin-top: 1%;;
+    margin-bottom: 1%;;
+}
+.gsecond input{
+    display: flex;
+    flex-direction: row;
+}
+.gthird{
+    margin-bottom: 2%;
+}
+.pleasefillguest{
+    font-family: "Montserrat", sans-serif;
+    font-size: 1.5em;
+    font-weight: 300;
+    display: flex;
+    justify-content: center;
+}
 .each-item-cart img{
     // width: 40vw;
     width: 40vh;
@@ -700,6 +758,7 @@ header {
 }
 
 .detailsShoppingCart{
+    font-size: 1em;
     display:flex;
     flex-direction: column;
     margin-left: 5%;
@@ -721,16 +780,34 @@ header {
 .detailsShoppingCart h3{
     font-family: "Montserrat", sans-serif;
     font-weight: 300;
+    font-size: 2.5em;
 }
 
+.detailsShoppingCart select{
+    padding: 5%;
+}
+.shoppingcartspan{
+    display: flex;
+    width: 10px;
+    justify-content: center;
+}
+.shoppingcartshirtprice{
+    font-size: 2em;
+}
 .buttonDivShoppingCart{
     display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
 }
 .shoppingcartdeletebutton button {
+    display: flex;
     color : white;
+    font-size: 1.25em;
     background-color: #dc3545;
     border: none;
     border-radius: 10px;
+    padding-top: 15%;
+    padding-bottom: 15%;
 }
 .shoppingcartdeletebutton button:hover{
     background-color: #A82935;
@@ -746,6 +823,8 @@ header {
     font-size: 2em; 
     display: flex;
     flex-direction: row-reverse;
+    margin-right: 5%;
+    margin-bottom: 5%;
 }
 .logoutButton{
     font-family: "Montserrat", sans-serif;
@@ -757,8 +836,8 @@ header {
     margin-top: 2%;
 }
 .logoutbutton {
-    padding: 7px 10px;
-    font-size: 0.875rem;
+    padding: 12px 16px;
+    font-size: 1rem;
     line-height: normal;
     border-radius: 0.2rem;
     color: #fff;
@@ -790,7 +869,7 @@ header {
     border-collapse:collapse; //can take this away if broken   
   }
   .viewallusertable th,td{
-    text-transform: capitalize;
+    // text-transform: capitalize;
     // border-right: 1px double white;
     border-bottom: 1px solid white;
   }
@@ -809,6 +888,31 @@ header {
 
 
 //dashboard
+.purchasehistory{
+    // display: flex;
+    // flex-direction: row;
+    // justify-content: center;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 300;
+    margin-left: 8.3%;
+    padding: 7px 10px;
+    font-size: 1.25rem;
+    line-height: normal;
+    border-radius: 0.2rem;
+    color: #fff;
+    background-color: #FFC439;
+    margin-right: 10px;
+    margin-left: 51.5%;
+    // position: relative;
+    // top: 1px;  
+    text-decoration: none;
+    cursor:pointer;
+}
+.purchasehistory:hover{
+    text-decoration: none;
+    background-color: #D1A12F;
+    color: white;
+}
 .userdashboardform{
     font-family: "Montserrat", sans-serif;
     font-weight: 300;
@@ -838,6 +942,8 @@ header {
     color: white;
     background-color: #7192A3;
     padding: 0.5%;
+    border-radius: 5px;
+    display: flex;
 }
 // .labelinputdiv{
 //     display: flex;
@@ -852,10 +958,13 @@ header {
     flex-direction: row;
     justify-content: center;
     padding-top: 5%;
+    padding:5%;
 }
 .dashboardsavebutton button{
+    padding:20%;
+    font-size: 1.25em;
     border-radius: 5px;
-    border: 107020;
+    border: 1px solid black;
     color: white;
     background-color: #28a745;
 }
@@ -865,4 +974,74 @@ header {
 .labelinputdiv label{
     margin-bottom: 0%;
     margin-top: 2%;
+}
+.dashboardimage{
+    width: 50%;
+    display: flex;
+    justify-content: center;
+}
+.theotherhalfdashboard{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#myphoto
+{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: thin solid #aaa;
+    float:right;
+    background-size:contain;
+    margin-top: 5%;
+    margin-right: 5%;
+}
+
+
+
+//purchasehistory
+.purchasehistorydiv{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    // background-color: #7192A3;
+}
+.purchasehistorydiv img{
+    width: 200px;
+    height: 200px;
+}
+.individualpurchasehistorydiv{
+    width: 70%;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 300;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #7192A3;
+    color: white;
+    padding: 1%;
+    border-radius: 5px;
+}
+.tablediv{
+    display: flex;
+    flex-direction: row;
+    // justify-content: space-around; release this soon
+    width: 100%;
+}
+.firstdiv{
+    display: flex;
+}
+.seconddiv{
+    display: flex;
+    flex-direction: column;
+}
+.thirddiv{
+    display: flex;
+}
+.tablerowpurchasehistory{
+    display: flex;
+    flex-direction: row;
+    width:100%;
+
 }
