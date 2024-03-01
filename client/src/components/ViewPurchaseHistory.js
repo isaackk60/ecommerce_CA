@@ -14,10 +14,11 @@ export default class ViewAllUsers extends Component {
 
         this.state = {
             purchaseHistory: [],
-
             eachItemsInOrder: [],
-            allOrders: []
-
+            allOrders: [],
+            searchQuery: "",
+            sortFunction: "name",
+            sizeFilter: ""
         }
     }
 
@@ -177,86 +178,132 @@ export default class ViewAllUsers extends Component {
         });
     }
 
+    handleSearchChange = (event) => {
+        // Update search query state
+        this.setState({ searchQuery: event.target.value });
+        if (event.target.value === "") {
+            // Reload shirt photos when the search query is cleared
+            this.loadShirtPhotos();
+        }
+    };
 
 
+    handleSortByTotalPrice = () => {
+        this.setState({ sortFunction: "totalPrice" });
+    };
 
 
+    handleSortByDefault = () => {
+        this.setState({ sortFunction: "name" }); // Set the default sorting option
+    };
 
-    render() {
-        console.log(this.state.purchaseHistory)
-        console.log(this.state.eachItemsInOrder)
-        console.log(this.state.allOrders)
-        // console.log(this.state.allOrders.map(order => order.eachItemsInOrder.map(item => item.name)));
-        return (
-            <>
-                {localStorage.accessLevel > ACCESS_LEVEL_GUEST ? (
-                    <div>
-                        <NavigationBar />
-                        <h2 className="shoppingcarth2">Ordered Items</h2>
-                        {this.state.allOrders.length === 0 ? <h4>The User didn't purchase anything yet</h4>
+    handleSizeFilterChange = (event) => {
+        this.setState({ sizeFilter: event.target.value });
+    };
 
-                            :
-                            <div className="purchasehistorydiv">
-                                {this.state.allOrders.map(order => (
-                                    <div key={order.orderId} className="individualpurchasehistorydiv">
-                                        <h3>Order ID: {order.orderId}</h3>
-                                        <div className="tablediv">
-                                        <table>
-                                            {/* <thead>
-                                                <tr>
-                                                    <th>Image</th>
-                                                    <th>Name</th>
-                                                    <th>Price</th>
-                                                    <th>Size</th>
-                                                    <th>Quantity</th>
-                                                    <th>Total Price for this t-shirt</th>
-                                                </tr>
-                                            </thead> */}
-                                            <tbody>
+render() {
+    const { allOrders, searchQuery, sortFunction,sizeFilter } = this.state;
+    
+    let filteredOrders = allOrders.filter(order =>
+        order.eachItemsInOrder.some(item => item.name.toLowerCase().includes(searchQuery.toLowerCase()))
+    );
 
-                                                {order.eachItemsInOrder.map(item => (
-                                                    <tr className="tablerowpurchasehistory">
-                                                        <div className="firstdiv">
-                                                            <td>{item.shirtPhotoFilename.map(photo => (
-                                                                <img key={photo._id} className={photo._id} alt="" />
-                                                            ))}
-                                                            </td>
-                                                        </div>
-                                                        <div className="seconddiv">
-                                                            <td>{item.name}</td>
-                                                            <td>{item.price}</td>
-                                                            <td>{item.size}</td>
-                                                            <td>{item.quantity}</td>
-                                                            <td>{item.price * item.quantity}</td>
-                                                        </div>
-                                                        <div className="thirddiv">
-                                                        <td >Total Of The Order Price:</td>
-                                                        <td>{order.totalPrice}</td>
-                                                    </div>
-                                                    </tr>
-                                                ))}
-                                                {/* <tr>
-                                                    <div className="thirddiv">
-                                                        <td >Total Of The Order Price:</td>
-                                                        <td>{order.totalPrice}</td>
-                                                    </div>
-                                                </tr> */}
-                                            </tbody>
-                                        </table>
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-
-                        }
-                    </div>
-                ) : (
-                    <Redirect to={"/main"} />
-                )}
-            </>
+    if (sizeFilter !== "") {
+        filteredOrders = filteredOrders.filter(order =>
+            order.eachItemsInOrder.some(item => item.size.toLowerCase() === sizeFilter.toLowerCase())
         );
     }
 
+    let sortedOrders = [...filteredOrders];
+    if (sortFunction === "totalPrice") {
+        sortedOrders.sort((a, b) => a.totalPrice - b.totalPrice);
+    }else if (sortFunction === "name") {
+        sortedOrders = filteredOrders; 
+    }
 
+    return (
+        <>
+            {localStorage.accessLevel > ACCESS_LEVEL_GUEST ? (
+                <div>
+                    <NavigationBar />
+                    <h2>Ordered Items</h2>
+                    <input
+                        type="text"
+                        placeholder="Search..."
+                        value={searchQuery}
+                        onChange={this.handleSearchChange}
+                    />
+                    <div className="sortInViewPurchaseHistory">
+                        <select value={sortFunction} onChange={(e) => {
+                            if (e.target.value === 'totalPrice') {
+                                this.handleSortByTotalPrice();
+                            }else if (e.target.value === 'name') {
+                                this.handleSortByDefault(); // Handle default sorting option
+                            }
+                        }}>
+                            <option value="name">Default Sorting</option>
+                            <option value="totalPrice">Sort by Total Price</option>
+                        </select>
+                    </div>
 
+                    <div>
+                    {/* <h2>Filter by Size:</h2> */}
+                    <select value={sizeFilter} onChange={this.handleSizeFilterChange}>
+                        <option value="">All Sizes</option>
+                        <option value="XS">XS</option>
+                        <option value="S">S</option>
+                        <option value="M">M</option>
+                        <option value="L">L</option>
+                        <option value="XL">XL</option>
+                    </select>
+                </div>
+                    {this.state.allOrders.length === 0 ? <h4>The User didn't purchase anything yet</h4>
+
+                        :
+                        <div>
+                            {sortedOrders.map(order => (
+                                <div key={order.orderId}>
+                                    <h3>Order ID: {order.orderId}</h3>
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Price</th>
+                                                <th>Size</th>
+                                                <th>Quantity</th>
+                                                <th>Total Price for this t-shirt</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {order.eachItemsInOrder.map(item => (
+                                                <tr key={item._id}>
+                                                    <td>{item.shirtPhotoFilename.map(photo => (
+                                                            <img key={photo._id} className={photo._id} alt="" src={`data:;base64,${photo.image}`} />
+                                                        ))}
+                                                        </td>
+                                                    <td>{item.name}</td>
+                                                    <td>{item.price}</td>
+                                                    <td>{item.size}</td>
+                                                    <td>{item.quantity}</td>
+                                                    <td>{item.price * item.quantity}</td>
+                                                </tr>
+                                            ))}
+                                            <tr>
+                                                <td>Total Of The Order Price:</td>
+                                                <td>{order.totalPrice}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            ))}
+                        </div>
+
+                    }
+                </div>
+            ) : (
+                <Redirect to={"/main"} />
+            )}
+        </>
+    );
+}
 }
