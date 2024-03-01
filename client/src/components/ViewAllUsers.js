@@ -62,6 +62,7 @@ export default class ViewAllUsers extends Component {
                                 <th>Phone</th>
                                 <th>Address</th>
                                 <th>Configure</th>
+                                
                             </tr>
                         </thead>
                         <tbody>
