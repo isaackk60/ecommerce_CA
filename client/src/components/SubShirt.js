@@ -263,8 +263,11 @@ export default class SubShirt extends Component {
             <div>
                 <NavigationBar />
                 {this.state.redirectBackToMain ? <Redirect to={"/Main/"} /> : null}
-                <div className="subshirtbacktomain">
+                {/* <div className="subshirtbacktomain">
                 <LinkInClass value="Back" className="grey-button" onClick={this.handleBack} />
+                </div> */}
+                <div className="subshirtbacktomain">
+                    <Link to="/main" className="grey-button">Back</Link>
                 </div>
                 <div className="subShirtContainer">
                     {/* {this.state.redirectToDisplayAllShirtsInCart ? <Redirect to={{ pathname: `/shoppingCart/`+this.state.cart._id, state: { itemsInCart: this.state.itemsInCart } }}  /> : null} */}

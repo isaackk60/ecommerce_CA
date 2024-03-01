@@ -2,9 +2,9 @@ import React, { Component } from "react"
 import { Link } from "react-router-dom"
 
 import axios from "axios"
-
+import {Redirect} from "react-router-dom"
 import NavigationBar from "./NavigationBar"
-
+import Logout from "./Logout"
 import { ACCESS_LEVEL_GUEST, ACCESS_LEVEL_ADMIN,ACCESS_LEVEL_NORMAL_USER, SERVER_HOST } from "../config/global_constants"
 
 
