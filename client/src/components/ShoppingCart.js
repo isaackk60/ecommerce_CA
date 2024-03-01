@@ -200,7 +200,6 @@ import { ACCESS_LEVEL_NORMAL_USER, SERVER_HOST } from "../config/global_constant
 import axios from "axios";
 import BuyShirt from "./BuyShirt";
 import { Link } from "react-router-dom"
-import { Link } from "react-router-dom"
 
 
 export default class ShoppingCart extends Component {

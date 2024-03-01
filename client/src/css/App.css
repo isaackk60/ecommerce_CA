@@ -96,7 +96,7 @@ color:pink;
 
 
 
-/* table of cars */
+/* table */
 .table-container table
 {
     width:100%;
@@ -131,11 +131,7 @@ color:pink;
     background-color: #ffa;
 }
 
-.add-new-car
-{
-    margin-top:1em;
-}
-/*end of table of cars */
+/*end of table */
 
 
 /* logged in user's profile photo */
@@ -149,26 +145,6 @@ color:pink;
     background-size:contain;
 }
 /* end of logged in user's profile photo */
-
-
-.carPhotos
-{
-    overflow-x: auto;
-    white-space: nowrap;
-    min-width:18em;
-    max-width:18em;
-}
-
-.carPhotos img
-{
-    width:5em;
-    height:5em;
-    padding:0em;
-    margin:0em;
-    margin-right:0.5em;
-    border:thin solid #ccc;
-}
-
 
 .payPalMessage
 {

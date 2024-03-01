@@ -4,8 +4,6 @@ import { Link } from "react-router-dom"
 import basketpng from "./images/icons8-basket-100.png"
 import adminpng from "./images/icons8-admin-48.png"
 import { ACCESS_LEVEL_GUEST, ACCESS_LEVEL_ADMIN, SERVER_HOST, ACCESS_LEVEL_NORMAL_USER } from "../config/global_constants"
-import Logout from "./Logout"
-import ShoppingCart from "./ShoppingCart"
 export default class Down extends Component {
     constructor(props) {
         super(props);
@@ -64,17 +62,11 @@ export default class Down extends Component {
 
                 </div>
                 <div class="splitC">
-                    {/* <Link to={"/DisplayAllCars"} img src={require('./.public/tshirtstorelogo.jpg')}>test</Link> */}
-                    {/* <Link to={"/DisplayAllCars"} img src="../tshirtstorelogo.jpg"></Link> */}
-                    {/* <img id="logo" src={storeLogo} /> */}
                     <Link to={"/main"} className="linktomainpagestorelogo"><h1>T-SHIRT STORE</h1></Link>
-                    {/* <h1>T-SHIRT STORE</h1> */}
-                    {/* <Link to={"/main"}>T-SHIRT STORE</Link> */}
                 </div>
                 <div class="splitR">
                     
                     <div className="navbasket">
-                        {/* <Link to={"/ShoppingCart"}>SHOPPING CART</Link> */}
                         <Link to={"/ShoppingCart"}><img src={basketpng} /></Link>
                     </div>
                     <div className="navadminorusericon">
