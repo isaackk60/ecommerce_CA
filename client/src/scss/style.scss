@@ -719,6 +719,7 @@ header {
 }
 
 //SHOPPINGCART
+
 .guest-details{
     font-family: "Montserrat", sans-serif;
     display: flex;
@@ -887,6 +888,31 @@ header {
 
 
 //dashboard
+.purchasehistory{
+    // display: flex;
+    // flex-direction: row;
+    // justify-content: center;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 300;
+    margin-left: 8.3%;
+    padding: 7px 10px;
+    font-size: 1.25rem;
+    line-height: normal;
+    border-radius: 0.2rem;
+    color: #fff;
+    background-color: #FFC439;
+    margin-right: 10px;
+    margin-left: 51.5%;
+    // position: relative;
+    // top: 1px;  
+    text-decoration: none;
+    cursor:pointer;
+}
+.purchasehistory:hover{
+    text-decoration: none;
+    background-color: #D1A12F;
+    color: white;
+}
 .userdashboardform{
     font-family: "Montserrat", sans-serif;
     font-weight: 300;

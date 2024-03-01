@@ -271,7 +271,7 @@ export default class Dashboard extends Component {
                     </div>
                 </form>
                 <div className="subshirtbacktomain">
-                    <Link to="/viewpurchasehistory" className="grey-button">Purchase History</Link>
+                    <Link to="/viewpurchasehistory" className="purchasehistory">Purchase History</Link>
                 </div>
                 <div className="logoutButton">
                     <button className="logoutbutton"><Logout /></button>
