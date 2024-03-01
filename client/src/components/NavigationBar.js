@@ -33,9 +33,9 @@ export default class Down extends Component {
         return (
             <nav id="navigationbar-container">
                 <div class="splitL">
-                    <div>
+                    {/* <div>
                         <Link to={"/main"} >BUY T-SHIRT</Link>
-                    </div>
+                    </div> */}
                     <div>
                         <div className="dropdown" onMouseOver={this.showSelect} onMouseLeave={this.closeSelect}> {/* onMouseLeave={this.closeSelect} */}
                             <Link to={"/main"} className="dropbtn">CATEGORIES</Link>
@@ -47,7 +47,7 @@ export default class Down extends Component {
                                 <option value="unisex">Unisex</option>
                             </select> */}
                             <div className="dropdown-content" id="select-container">
-                                <Link className="select-gender" to={"/main"} onClick={() => this.handleGenderFilterChange("")}>ALL GENDERS</Link>
+                                {/* <Link className="select-gender" to={"/main"} onClick={() => this.handleGenderFilterChange("")}>ALL GENDERS</Link> */}
                                 <Link className="select-gender" to={"/main"} onClick={() => this.handleGenderFilterChange("male")}>MALE</Link>
                                 <Link className="select-gender" to={"/main"} onClick={() => this.handleGenderFilterChange("female")}>FEMALE</Link>
                                 <Link className="select-gender" to={"/main"} onClick={() => this.handleGenderFilterChange("unisex")}>UNISEX</Link>

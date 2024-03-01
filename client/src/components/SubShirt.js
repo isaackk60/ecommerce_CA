@@ -105,9 +105,17 @@ export default class SubShirt extends Component {
 
 
 
-        handleChange = (e) => {
-            this.setState({ [e.target.name]: e.target.value })
+    handleChange = (e) => {
+        const { name, value } = e.target;
+        if (name === 'quantity') {
+            const quantity = Math.max(1, Math.min(parseInt(value), this.state.stock));
+            this.setState({ quantity });
+        } else {
+            this.setState({ [name]: value });
         }
+    }
+    
+    
 
 
 
@@ -148,7 +156,7 @@ export default class SubShirt extends Component {
         //                 console.log(2)
         //             }
         //         }
-        this.state.itemsInCart.push({ shirtId: this.state.shirtId, name: this.state.name, size: this.state.size, price: this.state.price, quantity: this.state.quantity, shirtPhotoFilename: this.state.shirtPhotoFilename, shirtPhotoFilename: this.state.shirtPhotoFilename })
+        this.state.itemsInCart.push({ shirtId: this.state.shirtId, name: this.state.name, size: this.state.size, price: this.state.price, quantity: this.state.quantity, shirtPhotoFilename: this.state.shirtPhotoFilename, shirtPhotoFilename: this.state.shirtPhotoFilename,stock:this.state.stock })
         // console.log(this.state.itemsInCart)
         if (this.state.itemsInCart !== undefined) {
             const groupedItems = this.state.itemsInCart.reduce((groups, item) => {
@@ -165,7 +173,8 @@ export default class SubShirt extends Component {
                         price: item.price,
                         totalPrice: item.price * item.quantity,
                         shirtPhotoFilename: item.shirtPhotoFilename,
-                        shirtPhotoFilename: item.shirtPhotoFilename
+                        shirtPhotoFilename: item.shirtPhotoFilename,
+                        stock:item.stock
                     });
                 }
                 return groups;
