@@ -2,7 +2,6 @@ import React, { Component } from "react"
 import { Link } from "react-router-dom"
 
 import axios from "axios"
-import {Redirect} from "react-router-dom"
 import NavigationBar from "./NavigationBar"
 import Logout from "./Logout"
 import { ACCESS_LEVEL_GUEST, ACCESS_LEVEL_ADMIN,ACCESS_LEVEL_NORMAL_USER, SERVER_HOST } from "../config/global_constants"
@@ -23,12 +22,12 @@ export default class ViewAllUsers extends Component {
         if (localStorage.accessLevel > ACCESS_LEVEL_NORMAL_USER) {
             axios.get(`${SERVER_HOST}/users`)
                 .then(res => {
-                    this.setState({ users: res.data });
+                    this.setState({ users: res.data })
                 })
                 .catch(err => {
-                    // Handle error
+                    // do nothing
                     console.error("Error fetching users:", err);
-                });
+                })
         }
     }
 
@@ -99,7 +98,8 @@ export default class ViewAllUsers extends Component {
             <div>
                 <NavigationBar  />
                 <h2 className="shoppingcarth2">All Users</h2>
-                <input
+                <div className="viewallusertable">
+                    <input
                     type="text"
                     placeholder="Search..."
                     value={searchQuery}
@@ -122,8 +122,7 @@ export default class ViewAllUsers extends Component {
                     </select>
                 </div>
 
-                <div className="viewallusertable">
-                    <table>
+                <table>
                         <thead>
                             <tr>
                                 <th>Name</th>
@@ -131,6 +130,7 @@ export default class ViewAllUsers extends Component {
                                 <th>Phone</th>
                                 <th>Address</th>
                                 <th>Configure</th>
+                                
                             </tr>
                         </thead>
                         <tbody>
@@ -155,12 +155,13 @@ export default class ViewAllUsers extends Component {
                 <div className="logoutButton">
                     <button className="logoutbutton"><Logout /></button>
                 </div>
-                
+
             </div>
             :<Redirect to={"/main"} />}
             </>
         );
     }
+
 }
 
 

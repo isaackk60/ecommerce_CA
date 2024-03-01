@@ -301,6 +301,7 @@ console.log(userEmail);
 
     handleSortByTotalPrice = () => {
         this.setState({ sortFunction: "totalPrice" });
+        
     };
 
 
@@ -315,7 +316,7 @@ console.log(userEmail);
 
 render() {
     const { allOrders, searchQuery, sortFunction,sizeFilter } = this.state;
-    
+    console.log(searchQuery)
     let filteredOrders = allOrders.filter(order =>
         order.eachItemsInOrder.some(item => item.name.toLowerCase().includes(searchQuery.toLowerCase()))
     );
@@ -400,10 +401,10 @@ render() {
                                                     <td>{item.size}</td>
                                                     <td>{item.quantity}</td>
                                                     <td>{item.price * item.quantity}</td>
-                                                    <td>
+                                                <td>
                                                     <button onClick={() => this.handleDelete(order.orderId, item._id,item.stock,item.quantity,item.price*item.quantity,order.refunded,order.totalPrice)}>Return Product</button>
                                                 </td>
-                                            </tr>
+                                                </tr>
                                             ))}
                                             <tr>
                                                 <td>Total Of The Order Price:</td>
