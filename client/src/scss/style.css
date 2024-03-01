@@ -697,7 +697,6 @@ header {
 }
 
 .viewallusertable th, td {
-  text-transform: capitalize;
   border-bottom: 1px solid white;
 }
 

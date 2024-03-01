@@ -292,15 +292,16 @@ console.log(userEmail);
     handleSearchChange = (event) => {
         // Update search query state
         this.setState({ searchQuery: event.target.value });
-        if (event.target.value === "") {
+        // if (event.target.value === "") {
             // Reload shirt photos when the search query is cleared
             this.loadShirtPhotos();
-        }
+        // }
     };
 
 
     handleSortByTotalPrice = () => {
         this.setState({ sortFunction: "totalPrice" });
+        
     };
 
 
@@ -310,11 +311,12 @@ console.log(userEmail);
 
     handleSizeFilterChange = (event) => {
         this.setState({ sizeFilter: event.target.value });
+        this.loadShirtPhotos();
     };
 
 render() {
     const { allOrders, searchQuery, sortFunction,sizeFilter } = this.state;
-    
+    console.log(searchQuery)
     let filteredOrders = allOrders.filter(order =>
         order.eachItemsInOrder.some(item => item.name.toLowerCase().includes(searchQuery.toLowerCase()))
     );
