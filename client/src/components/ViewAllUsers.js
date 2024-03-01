@@ -3,8 +3,9 @@ import { Redirect, Link } from "react-router-dom"
 
 import axios from "axios"
 import NavigationBar from "./NavigationBar"
-import Logout from "./Logout"
+
 import { ACCESS_LEVEL_GUEST, ACCESS_LEVEL_ADMIN, ACCESS_LEVEL_NORMAL_USER, SERVER_HOST } from "../config/global_constants"
+
 
 
 export default class ViewAllUsers extends Component {
@@ -169,8 +170,7 @@ export default class ViewAllUsers extends Component {
                     : <Redirect to={"/main"} />}
             </>
         );
+            }
     }
-
-}
 
 
