@@ -1,11 +1,7 @@
 import React, { Component } from "react"
-<<<<<<<<< Temporary merge branch 1
-import { Link } from "react-router-dom"
 import Logout from "./Logout"
-=========
 import { Redirect, Link } from "react-router-dom"
 
->>>>>>>>> Temporary merge branch 2
 import axios from "axios"
 import NavigationBar from "./NavigationBar"
 
@@ -138,7 +134,7 @@ export default class ViewAllUsers extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                            {this.state.users.map(user => (
+                            {sortedUsers.map(user => (
                                 user.accessLevel==ACCESS_LEVEL_ADMIN?null:
 
                                 <tr key={user._id}>

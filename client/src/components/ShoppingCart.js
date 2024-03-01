@@ -381,17 +381,17 @@ export default class ShoppingCart extends Component {
     handleChange = (index, field, value) => {
         const updatedCart = [...this.state.cart];
         const currentItem = updatedCart[index];
-    
+
         // Check if the new quantity exceeds the stock
         if (field === 'quantity' && value > currentItem.stock) {
             // If it does, set the quantity to the maximum available stock
             value = currentItem.stock;
         }
-    
+
         // Update the quantity or other fields as usual
         updatedCart[index][field] = value;
         this.setState({ cart: updatedCart });
-    
+
         // localStorage.setItem("itemsInCart", JSON.stringify(updatedCart));
         const groupedItems = updatedCart.reduce((groups, item) => {
             const group = groups.find(g => g.name === item.name);
@@ -415,7 +415,7 @@ export default class ShoppingCart extends Component {
         this.setState({ cart: groupedItems });
         localStorage.setItem("itemsInCart", JSON.stringify(groupedItems));
     };
-    
+
 
     handleDelete = (name, size) => {
         const updatedCart = this.state.cart.filter(item => !(item.name === name && item.size === size));
@@ -536,7 +536,7 @@ export default class ShoppingCart extends Component {
                     totalPrice: item.price * item.quantity,
                     shirtPhotoFilename: item.shirtPhotoFilename,
                     shirtPhotoFilename: item.shirtPhotoFilename,
-                    stock:item.stock
+                    stock: item.stock
                 });
             }
             return groups;
@@ -603,55 +603,61 @@ export default class ShoppingCart extends Component {
                     ))}
                     {this.state.isGuest ?
                         <div className="guest-details">
-                            <h3>Guest Details</h3>
-                            <input
-                                type="text"
-                                placeholder="Name"
-                                value={this.state.guestName}
-                                onChange={e => this.handleChange('guestName', e.target.value)}
-                                required //required
-                            />
-                            <input
-                                type="email"
-                                placeholder="Email"
-                                value={this.state.guestEmail}
-                                onChange={e => this.handleChange('guestEmail', e.target.value)}
-                                required
-                            />
-                            <input
-                                type="text"
-                                placeholder="Address"
-                                value={this.state.guestAddress}
-                                onChange={e => this.handleChange('guestAddress', e.target.value)}
-                                required
-                            />
-                            <input
-                                type="text"
-                                placeholder="Phone"
-                                value={this.state.guestPhone}
-                                onChange={e => this.handleChange('guestPhone', e.target.value)}
-                                required
-                            />
-                            <button onClick={this.submitGuestDetail}>Submit</button>
+                            <div className="gfirst">
+                                <h3>Guest Details</h3>
+                            </div>
+                            <div className="gsecond">
+                                <input
+                                    type="text"
+                                    placeholder="Name"
+                                    value={this.state.guestName}
+                                    onChange={e => this.handleChange('guestName', e.target.value)}
+                                    required //required
+                                />
+                                <input
+                                    type="email"
+                                    placeholder="Email"
+                                    value={this.state.guestEmail}
+                                    onChange={e => this.handleChange('guestEmail', e.target.value)}
+                                    required
+                                />
+                                <input
+                                    type="text"
+                                    placeholder="Address"
+                                    value={this.state.guestAddress}
+                                    onChange={e => this.handleChange('guestAddress', e.target.value)}
+                                    required
+                                />
+                                <input
+                                    type="text"
+                                    placeholder="Phone"
+                                    value={this.state.guestPhone}
+                                    onChange={e => this.handleChange('guestPhone', e.target.value)}
+                                    required
+                                />
+                            </div>
+                            <div className="gthird">
+                                <button onClick={this.submitGuestDetail}>Submit</button>
+                            </div>
                         </div>
                         : null}
 
 
                     {this.state.isGuest ? (this.state.haveEnoughData) ? <BuyShirt customerEmail={this.state.guestEmail} customerName={this.state.guestName} address={this.state.guestAddress} phone={this.state.guestPhone} items={this.getIdAndQuantity()} price={this.calculateTotalPrice()} />
-                        : <h6>You have to fill in personal detail</h6> : ((this.state.user.name && this.state.user.email && this.state.user.phone && this.state.user.address) || this.state.haveEnoughData) ? <BuyShirt customerEmail={this.state.user.email} customerName={this.state.user.name} address={this.state.user.address} phone={this.state.user.phone} items={this.getIdAndQuantity()} price={this.calculateTotalPrice()} />
+                        : <h6 className="pleasefillguest">Please fill in the details above</h6> : ((this.state.user.name && this.state.user.email && this.state.user.phone && this.state.user.address) || this.state.haveEnoughData) ? <BuyShirt customerEmail={this.state.user.email} customerName={this.state.user.name} address={this.state.user.address} phone={this.state.user.phone} items={this.getIdAndQuantity()} price={this.calculateTotalPrice()} />
                         : <Link className="green-button" to={{ pathname: "/Dashboard", state: { from: "cart" } }}>Please finish your profile</Link>}
 
-                    {/* {this.state.haveEnoughData?
-{/* paypalbutton */}
+                    {/* {this.state.haveEnoughData?{/* paypalbutton */}
                     {/* <BuyShirt customerEmail={this.state.guestEmail} customerName={this.state.guestName} address={this.state.guestAddress} phone={this.state.guestPhone} items={this.getIdAndQuantity()} price={this.calculateTotalPrice()} /> */}
-                    <div className="totalPriceShoppingCart">
-                        {this.state.cart !== undefined ? <p>Total Price: ${this.calculateTotalPrice()}</p> : null}
-                    </div>
+
                     {/* <button onClick={this.handlePayment}>Proceed to Payment</button> */}
                     {this.state.redirectToPaypalButton ? <BuyShirt customerEmail={this.state.guestEmail} customerName={this.state.guestName} address={this.state.guestAddress} phone={this.state.guestPhone} items={this.getIdAndQuantity()} price={this.calculateTotalPrice()} /> : null}
-                    
 
 
+
+                </div>
+                <div className="totalPriceShoppingCart">
+                    {this.state.cart !== undefined ? <p>Total Price: €{this.calculateTotalPrice()}</p> : null}
                 </div>
 
                 {/* <p>Total Price: €{this.state.totalPrice}</p> */}

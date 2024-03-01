@@ -150,6 +150,27 @@
   justify-content: center;
 }
 
+.mainaddbutton {
+  padding: 14px 20px;
+  font-size: 1.25rem;
+  line-height: normal;
+  border-radius: 0.2rem;
+  color: #fff;
+  background-color: #28a745;
+  border-color: #28a745;
+  margin-right: 10px;
+  position: relative;
+  top: 1px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.mainaddbutton:hover {
+  text-decoration: none;
+  color: white;
+  background-color: #107020;
+}
+
 h1 {
   font-size: 42px;
   text-align: center;
@@ -545,7 +566,6 @@ header {
   flex-direction: column;
   width: 80vw;
   margin: 0px 10vw;
-  margin-bottom: 5%;
 }
 
 .each-item-cart {
@@ -593,6 +613,38 @@ header {
 
 #select-container {
   display: none;
+}
+
+.guest-details {
+  font-family: "Montserrat", sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2%;
+}
+
+.gsecond {
+  display: flex;
+  flex-direction: row;
+  margin-top: 1%;
+  margin-bottom: 1%;
+}
+
+.gsecond input {
+  display: flex;
+  flex-direction: row;
+}
+
+.gthird {
+  margin-bottom: 2%;
+}
+
+.pleasefillguest {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.5em;
+  font-weight: 300;
+  display: flex;
+  justify-content: center;
 }
 
 .each-item-cart img {
@@ -677,6 +729,8 @@ header {
   font-size: 2em;
   display: flex;
   flex-direction: row-reverse;
+  margin-right: 5%;
+  margin-bottom: 5%;
 }
 
 .logoutButton {
@@ -725,7 +779,6 @@ header {
 }
 
 .viewallusertable th, td {
-  text-transform: capitalize;
   border-bottom: 1px solid white;
 }
 
