@@ -200,6 +200,7 @@ import { ACCESS_LEVEL_NORMAL_USER, SERVER_HOST } from "../config/global_constant
 import axios from "axios";
 import BuyShirt from "./BuyShirt";
 import { Link } from "react-router-dom"
+import { Link } from "react-router-dom"
 
 
 export default class ShoppingCart extends Component {
@@ -545,11 +546,12 @@ export default class ShoppingCart extends Component {
         //             });
         //     })
         // );
-
+console.log(this.state.cart)
         return (
             <div>
                 <NavigationBar />
                 <h2 className="shoppingcarth2">Shopping Cart</h2>
+                {this.state.cart.length === 0 ?<h2>Shopping Cart is currently empty</h2>:
                 <div className="cart-container">
                     {this.state.cart.map((item, index) => (
                         <div key={index} className="each-item-cart">
@@ -641,19 +643,15 @@ export default class ShoppingCart extends Component {
                     {this.state.errors.guestPhone && <h6 className="error">{this.state.errors.guestPhone}</h6>}
                     {/* {this.state.haveEnoughData?{/* paypalbutton */}
                     {/* <BuyShirt customerEmail={this.state.guestEmail} customerName={this.state.guestName} address={this.state.guestAddress} phone={this.state.guestPhone} items={this.getIdAndQuantity()} price={this.calculateTotalPrice()} /> */}
-                    {/* <div className="totalPriceShoppingCart">
-                        {this.state.cart !== undefined ? <p>Total Price: ${this.calculateTotalPrice()}</p> : null}
-                    </div> */}
 
-                    {this.state.redirectToPaypalButton ? <BuyShirt customerEmail={this.state.guestEmail} customerName={this.state.guestName} address={this.state.guestAddress} phone={this.state.guestPhone} items={this.getIdAndQuantity()} price={this.calculateTotalPrice()} /> : null}
 
 
 
                 </div>
+    }
                 <div className="totalPriceShoppingCart">
-                    {this.state.cart !== undefined ? <p>Total Price: €{this.calculateTotalPrice()}</p> : null}
+                    {this.state.cart !== undefined ? <p>Total Price: ${this.calculateTotalPrice()}</p> : null}
                 </div>
-
                 {/* <p>Total Price: €{this.state.totalPrice}</p> */}
 
 

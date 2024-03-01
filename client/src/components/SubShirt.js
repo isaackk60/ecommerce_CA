@@ -240,7 +240,9 @@ export default class SubShirt extends Component {
             }));
         };
 
-
+        redirectToMain=()=>{
+            this.setState({redirectBackToMain:true})
+            }
     render() {
         console.log("shirtId", this.state.shirtId)
         // console.log(this.state.user)
@@ -271,12 +273,13 @@ export default class SubShirt extends Component {
         return (
             <div>
                 <NavigationBar />
-                {this.state.redirectBackToMain ? <Redirect to={"/Main/"} /> : null}
+                {this.state.redirectBackToMain ? <Redirect to={"/Main"} /> : null}
                 {/* <div className="subshirtbacktomain">
                 <LinkInClass value="Back" className="grey-button" onClick={this.handleBack} />
                 </div> */}
                 <div className="subshirtbacktomain">
-                    <Link to="/main" className="grey-button">Back</Link>
+                    <button onClick={this.redirectToMain} className="grey-button"> Back </button>
+                    {/* <Link to="/main" >Back</Link> */}
                 </div>
                 <div className="subShirtContainer">
                     {/* {this.state.redirectToDisplayAllShirtsInCart ? <Redirect to={{ pathname: `/shoppingCart/`+this.state.cart._id, state: { itemsInCart: this.state.itemsInCart } }}  /> : null} */}
@@ -287,10 +290,7 @@ export default class SubShirt extends Component {
                         {this.state.shirtPhotoFilename === null ? null : <div className="shirtPhotos">
                             {this.state.shirtPhotoFilename.map(photo => <img key={photo._id} id={photo._id} alt="" />)}
                         </div>}
-                        <div className="carousel-arrows">
-                        <button onClick={this.handleMoveLeft}>&lt;</button>
-                        <button onClick={this.handleMoveRight}>&gt;</button>
-                     </div>
+
                     </div>
                     <div className="subshirtdetails">
                         <h1>{this.state.name}</h1><br></br>
