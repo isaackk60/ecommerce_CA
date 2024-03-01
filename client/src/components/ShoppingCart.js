@@ -601,28 +601,28 @@ export default class ShoppingCart extends Component {
                                     type="text"
                                     placeholder="Name"
                                     value={this.state.guestName}
-                                    onChange={e => this.handleChange('guestName', e.target.value)}
+                                    onChange={e => this.handleGuest('guestName', e.target.value)}
                                     required //required
                                 />
                                 <input
                                     type="email"
                                     placeholder="Email"
                                     value={this.state.guestEmail}
-                                    onChange={e => this.handleChange('guestEmail', e.target.value)}
+                                    onChange={e => this.handleGuest('guestEmail', e.target.value)}
                                     required
                                 />
                                 <input
                                     type="text"
                                     placeholder="Address"
                                     value={this.state.guestAddress}
-                                    onChange={e => this.handleChange('guestAddress', e.target.value)}
+                                    onChange={e => this.handleGuest('guestAddress', e.target.value)}
                                     required
                                 />
                                 <input
                                     type="text"
                                     placeholder="Phone"
                                     value={this.state.guestPhone}
-                                    onChange={e => this.handleChange('guestPhone', e.target.value)}
+                                    onChange={e => this.handleGuest('guestPhone', e.target.value)}
                                     required
                                 />
                             </div>
