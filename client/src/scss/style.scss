@@ -1,4 +1,10 @@
 // *************main*********************
+.sortandsearch{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-right: 4%;
+}
 .sort-container{
     font-family: "Montserrat", sans-serif;
     font-weight: 300;
@@ -781,15 +787,18 @@ header {
     font-family: "Montserrat", sans-serif;
     font-weight: 300;
     font-size: 2.5em;
+    margin-bottom: 20%;
 }
 
 .detailsShoppingCart select{
     padding: 5%;
+    margin-bottom: 20%;
 }
 .shoppingcartspan{
     display: flex;
     width: 10px;
     justify-content: center;
+    
 }
 .shoppingcartshirtprice{
     font-size: 2em;
@@ -798,6 +807,10 @@ header {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
+    margin-top: 20%;
+}
+.shoppingcartdeletebutton{
+    width: 10vw;
 }
 .shoppingcartdeletebutton button {
     display: flex;
@@ -806,8 +819,13 @@ header {
     background-color: #dc3545;
     border: none;
     border-radius: 10px;
-    padding-top: 15%;
-    padding-bottom: 15%;
+    padding: 10%;
+    margin-left: 25%;
+    // padding-top: 15%;
+    // padding-bottom: 15%;
+    // padding-left: 20%;
+    // padding-right: 20%;
+    // margin-right: 40%;
 }
 .shoppingcartdeletebutton button:hover{
     background-color: #A82935;

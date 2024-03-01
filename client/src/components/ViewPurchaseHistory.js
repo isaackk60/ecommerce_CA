@@ -113,7 +113,7 @@ export default class ViewAllUsers extends Component {
             else {
                 userEmail = JSON.parse(localStorage.getItem("userEmail"));
             }
-            console.log(userEmail);
+            console.log("User Email: ", userEmail);
 
             axios.get(`${SERVER_HOST}/sales/email?email=${userEmail}`)
                 .then(res => {
@@ -294,15 +294,15 @@ export default class ViewAllUsers extends Component {
         // Update search query state
         this.setState({ searchQuery: event.target.value });
         // if (event.target.value === "") {
-            // Reload shirt photos when the search query is cleared
-            this.loadShirtPhotos();
+        // Reload shirt photos when the search query is cleared
+        this.loadShirtPhotos();
         // }
     };
 
 
     handleSortByTotalPrice = () => {
         this.setState({ sortFunction: "totalPrice" });
-        
+
     };
 
 
@@ -315,18 +315,19 @@ export default class ViewAllUsers extends Component {
         this.loadShirtPhotos();
     };
 
-render() {
-    const { allOrders, searchQuery, sortFunction,sizeFilter } = this.state;
-    console.log(searchQuery)
-    let filteredOrders = allOrders.filter(order =>
-        order.eachItemsInOrder.some(item => item.name.toLowerCase().includes(searchQuery.toLowerCase()))
-    );
-
-    if (sizeFilter !== "") {
-        filteredOrders = filteredOrders.filter(order =>
-            order.eachItemsInOrder.some(item => item.size.toLowerCase() === sizeFilter.toLowerCase())
+    render() {
+        const { allOrders, searchQuery, sortFunction, sizeFilter } = this.state;
+        console.log(searchQuery)
+        console.log("Alloders: ", allOrders)
+        let filteredOrders = allOrders.filter(order =>
+            order.eachItemsInOrder.some(item => item.name.toLowerCase().includes(searchQuery.toLowerCase()))
         );
-    }
+
+        if (sizeFilter !== "") {
+            filteredOrders = filteredOrders.filter(order =>
+                order.eachItemsInOrder.some(item => item.size.toLowerCase() === sizeFilter.toLowerCase())
+            );
+        }
 
         let sortedOrders = [...filteredOrders];
         if (sortFunction === "totalPrice") {
@@ -381,14 +382,14 @@ render() {
                                         <table>
                                             <thead>
                                                 <tr>
-                                        <th>Photo</th>
+                                                    <th>Photo</th>
                                                     <th>Photo</th>
                                                     <th>Name</th>
                                                     <th>Price</th>
                                                     <th>Size</th>
                                                     <th>Quantity</th>
                                                     <th>Total Price for this t-shirt</th>
-                                            <th>Return</th>
+                                                    <th>Return</th>
                                                     <th>Return</th>
                                                 </tr>
                                             </thead>
@@ -397,7 +398,7 @@ render() {
                                                 {order.eachItemsInOrder.map(item => (
                                                     <tr>
                                                         <td>{item.shirtPhotoFilename.map(photo => (
-                                                            <img key={photo._id} className={photo._id} alt="" src={`data:;base64,${photo.image}`}/>
+                                                            <img key={photo._id} className={photo._id} alt="" src={`data:;base64,${photo.image}`} />
                                                         ))}
                                                         </td>
                                                         <td>{item.name}</td>

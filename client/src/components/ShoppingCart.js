@@ -563,7 +563,7 @@ export default class ShoppingCart extends Component {
                                     {/* <img src={`${SERVER_HOST}/shirts/photo/${item.shirtPhotoFilename}`} alt="Shirt" /> */}
                                     {/* {console.log("shirtPhotoFilename: ", item.shirtPhotoFilename)} */}
                                     <h3 className="h3shoppingcart">{item.name} </h3>
-                                    <select
+                                    <select className="selectshoppingcart"
                                         value={item.size}
                                         onChange={e => this.handleChange(index, 'size', e.target.value)}
                                     >
