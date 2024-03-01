@@ -181,6 +181,10 @@ export default class ViewAllUsers extends Component {
     handleSearchChange = (event) => {
         // Update search query state
         this.setState({ searchQuery: event.target.value });
+        if (event.target.value === "") {
+            // Reload shirt photos when the search query is cleared
+            this.loadShirtPhotos();
+        }
     };
 
 
@@ -194,7 +198,6 @@ export default class ViewAllUsers extends Component {
     };
 
     handleSizeFilterChange = (event) => {
-        // Update size filter state
         this.setState({ sizeFilter: event.target.value });
     };
 
