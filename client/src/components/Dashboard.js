@@ -172,10 +172,10 @@ export default class Dashboard extends Component {
             redirectToCart: false,
             // redirectToLogout: false,
             from: "",
-            errors: { 
-                newName: "", 
+            errors: {
+                newName: "",
                 newPhone: "",
-                newAddress: "" 
+                newAddress: ""
             }
         };
     }
@@ -205,7 +205,7 @@ export default class Dashboard extends Component {
     updateUser = (e) => {
         e.preventDefault();
         const { newName, newPhone, newAddress } = this.state;
-    
+
         // Validation
         const errors = {};
         if (!newName.trim()) {
@@ -219,12 +219,12 @@ export default class Dashboard extends Component {
         if (!newAddress.trim()) {
             errors.newAddress = "Address is required";
         }
-    
+
         // Check if there are any errors
         if (Object.keys(errors).length === 0) {
             // No errors, proceed with submission
             const userEmail = JSON.parse(localStorage.getItem("userEmail") || null);
-    
+
             axios.put(`${SERVER_HOST}/users/update`, { email: userEmail, newName, newPhone, newAddress })
                 .then(res => {
                     // Handle success
@@ -244,7 +244,7 @@ export default class Dashboard extends Component {
             this.setState({ errors });
         }
     }
-    
+
     // handleLogout = (e) => {
     //     this.setState({ redirectToLogout: true })
     // }
@@ -262,39 +262,46 @@ export default class Dashboard extends Component {
                 <h2 className="shoppingcarth2">Welcome, {user.name}</h2>
                 <form onSubmit={this.updateUser} className="userdashboardform">
                     <div className="biggestdashboard">
-                        <div className="labelinputdiv">
-                            <div>
-                                <label>Name: </label>
-                            </div>
-                            <div>
-                                <input type="text" placeholder="Name" name="newName"  value={newName !== null ? newName : user.name} onChange={this.handleInputChange} />
-                                {errors.newName && <h6 className="error">{errors.newName}</h6>}
-                            </div>
+                        <div className="dashboardimage">
+                            <img id="myphoto" src={`data:;base64,${localStorage.profilePhoto}`} alt="" />
                         </div>
-                        <div className="labelinputdiv">
-                            <div>
-                                <label>Phone: </label>
+                        <div className="theotherhalfdashboard">
+                            <div className="labelinputdiv">
+                                <div>
+                                    <label>Name: </label>
+                                </div>
+                                <div>
+                                    <input type="text" placeholder="Name" name="newName" value={newName !== null ? newName : user.name} onChange={this.handleInputChange} />
+                                    {errors.newName && <h6 className="error">{errors.newName}</h6>}
+                                </div>
                             </div>
-                            <div>
-                                <input type="text" placeholder="Phone" name="newPhone" value={newPhone !== null ? newPhone : user.phone} onChange={this.handleInputChange} />
-                                {errors.newPhone && <h6 className="error">{errors.newPhone}</h6>}
+                            <div className="labelinputdiv">
+                                <div>
+                                    <label>Phone: </label>
+                                </div>
+                                <div>
+                                    <input type="text" placeholder="Phone" name="newPhone" value={newPhone !== null ? newPhone : user.phone} onChange={this.handleInputChange} />
+                                    {errors.newPhone && <h6 className="error">{errors.newPhone}</h6>}
+                                </div>
                             </div>
-                        </div>
-                        <div className="labelinputdiv">
-                            <div>
-                                <label>Address: </label>
+                            <div className="labelinputdiv">
+                                <div>
+                                    <label>Address: </label>
+                                </div>
+                                <div>
+                                    <input type="text" placeholder="Address" name="newAddress" value={newAddress !== null ? newAddress : user.address} onChange={this.handleInputChange} />
+                                    {errors.newAddress && <h6 className="error">{errors.newAddress}</h6>}
+                                </div>
                             </div>
-                            <div>
-                                <input type="text" placeholder="Address" name="newAddress" value={newAddress !== null ? newAddress : user.address} onChange={this.handleInputChange} />
-                                {errors.newAddress && <h6 className="error">{errors.newAddress}</h6>}
+                            <div className="dashboardsavebutton">
+                                <button type="submit">Save</button>
                             </div>
-                        </div>
-                        <div className="dashboardsavebutton">
-                            <button type="submit">Save</button>
                         </div>
                     </div>
-
                 </form>
+                <div className="subshirtbacktomain">
+                    <Link to="/viewpurchasehistory" className="purchasehistory">Purchase History</Link>
+                </div>
                 <div className="logoutButton">
                     <button className="logoutbutton"><Logout /></button>
                 </div>

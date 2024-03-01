@@ -3,8 +3,8 @@ import { Redirect, Link } from "react-router-dom"
 import Logout from "./Logout"
 import axios from "axios"
 import NavigationBar from "./NavigationBar"
-
 import { ACCESS_LEVEL_GUEST, ACCESS_LEVEL_ADMIN, ACCESS_LEVEL_NORMAL_USER, SERVER_HOST } from "../config/global_constants"
+
 
 
 export default class ViewAllUsers extends Component {
@@ -98,8 +98,7 @@ export default class ViewAllUsers extends Component {
             <div>
                 <NavigationBar  />
                 <h2 className="shoppingcarth2">All Users</h2>
-                <div className="viewallusertable">
-                    <input
+                <input
                     type="text"
                     placeholder="Search..."
                     value={searchQuery}
@@ -122,7 +121,8 @@ export default class ViewAllUsers extends Component {
                     </select>
                 </div>
 
-                <table>
+                <div className="viewallusertable">
+                    <table>
                         <thead>
                             <tr>
                                 <th>Name</th>
@@ -130,7 +130,6 @@ export default class ViewAllUsers extends Component {
                                 <th>Phone</th>
                                 <th>Address</th>
                                 <th>Configure</th>
-                                
                             </tr>
                         </thead>
                         <tbody>
@@ -155,13 +154,12 @@ export default class ViewAllUsers extends Component {
                 <div className="logoutButton">
                     <button className="logoutbutton"><Logout /></button>
                 </div>
-
+                
             </div>
             :<Redirect to={"/main"} />}
             </>
         );
+            }
     }
-
-}
 
 

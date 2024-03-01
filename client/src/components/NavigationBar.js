@@ -47,7 +47,7 @@ export default class Down extends Component {
                                 <option value="unisex">Unisex</option>
                             </select> */}
                             <div className="dropdown-content" id="select-container">
-                                {/* <Link className="select-gender" to={"/main"} onClick={() => this.handleGenderFilterChange("")}>ALL GENDERS</Link> */}
+                                <Link className="select-gender" to={"/main"} onClick={() => this.handleGenderFilterChange("")}>DEFAULT</Link>
                                 <Link className="select-gender" to={"/main"} onClick={() => this.handleGenderFilterChange("male")}>MALE</Link>
                                 <Link className="select-gender" to={"/main"} onClick={() => this.handleGenderFilterChange("female")}>FEMALE</Link>
                                 <Link className="select-gender" to={"/main"} onClick={() => this.handleGenderFilterChange("unisex")}>UNISEX</Link>
@@ -69,11 +69,7 @@ export default class Down extends Component {
                     {/* <Link to={"/main"}>T-SHIRT STORE</Link> */}
                 </div>
                 <div class="splitR">
-                    <div className="navsearchbar">
-                        {/* <Link to={"/main"}>SEARCH HERE</Link> */}
-                        <input type="text" placeholder="Search shirts..." onChange={this.handleSearchInputChange}
-                        />
-                    </div>
+                    
                     <div className="navbasket">
                         {/* <Link to={"/ShoppingCart"}>SHOPPING CART</Link> */}
                         <Link to={"/ShoppingCart"}><img src={basketpng} /></Link>
