@@ -218,9 +218,13 @@ export default class ShoppingCart extends Component {
             guestAddress: "",
             guestPhone: "",
             isGuest: localStorage.accessLevel < ACCESS_LEVEL_NORMAL_USER,
-            redirectToPaypalButton: false,
-            // redirectToPaypalButton: true,
-            haveEnoughData:false
+            haveEnoughData:false,
+            errors: { 
+                guestName: "", 
+                guestEmail: "", 
+                guestAddress: "",
+                guestPhone: "" 
+            }
             // totalPrice: 0
         };
     }
@@ -423,96 +427,82 @@ export default class ShoppingCart extends Component {
         localStorage.setItem("itemsInCart", JSON.stringify(updatedCart));
         this.loadShirtPhotos();
     };
-    handlePayment = () => {
-        // Check if all guest details are provided
-        const { guestName, guestEmail, guestAddress, guestPhone } = this.state;
-        const errors = {};
-        if (!guestName.trim()) {
-            errors.guestName = "Name is required";
-        }
-        if (!guestEmail.trim()) {
-            errors.guestEmail = "Email is required";
-        } else if (!/\S+@\S+\.\S+/.test(guestEmail)) {
-            errors.guestEmail = "Email is invalid";
-        }
-        if (!guestAddress.trim()) {
-            errors.guestAddress = "Address is required";
-        }
-        if (!guestPhone.trim()) {
-            errors.guestPhone = "Phone number is required";
-        } else if (!/^\d{10}$/.test(guestPhone)) {
-            errors.guestPhone = "Phone number must be 10 digits";
-        }
-        // if (Object.keys(errors).length === 0) {
-        // if (guestName && guestEmail && guestAddress && guestPhone {
-        if (guestName && guestEmail && guestAddress && guestPhone && Object.keys(errors).length === 0) {
-            // Proceed with payment
-            console.log("Guest details provided. Proceeding with payment...");
-            // Call your payment function or component here
-            this.setState({ redirectToPaypalButton: true })
-        } else {
-            // Display error message or handle accordingly
-            console.log("Please provide all guest details before proceeding with payment.");
-        }
-    };
-    handlePayment = () => {
-        // Check if all guest details are provided
-        const { guestName, guestEmail, guestAddress, guestPhone } = this.state;
-        const errors = {};
-        if (!guestName.trim()) {
-            errors.guestName = "Name is required";
-        }
-        if (!guestEmail.trim()) {
-            errors.guestEmail = "Email is required";
-        } else if (!/\S+@\S+\.\S+/.test(guestEmail)) {
-            errors.guestEmail = "Email is invalid";
-        }
-        if (!guestAddress.trim()) {
-            errors.guestAddress = "Address is required";
-        }
-        if (!guestPhone.trim()) {
-            errors.guestPhone = "Phone number is required";
-        } else if (!/^\d{10}$/.test(guestPhone)) {
-            errors.guestPhone = "Phone number must be 10 digits";
-        }
-        // if (Object.keys(errors).length === 0) {
-        // if (guestName && guestEmail && guestAddress && guestPhone {
-        if (guestName && guestEmail && guestAddress && guestPhone && Object.keys(errors).length === 0) {
-            // Proceed with payment
-            console.log("Guest details provided. Proceeding with payment...");
-            // Call your payment function or component here
-            this.setState({ redirectToPaypalButton: true })
-        } else {
-            // Display error message or handle accordingly
-            console.log("Please provide all guest details before proceeding with payment.");
-        }
-    };
 
-    // loadShirtPhotos() {
-    //     // Loop through each cart item and load its shirt photos
-
-    //     this.state.cart.forEach(item => {
-    //         item.cartItems[0].shirtPhotoFilename.forEach(photo => {
-    //             axios.get(`${SERVER_HOST}/shirts/photo/${photo.filename}`)
-    //                 .then(res => {
-    //                     // Update shirt photo in DOM
-    //                     document.getElementById(photo._id).src = `data:;base64,${res.data.image}`;
-    //                 })
-    //                 .catch(err => {
-    //                     // Handle error
-    //                     console.error("Error loading shirt photo:", err);
-    //                 });
-    //         });
-    //     });
-    // }
     handleGuest = (field, value) => {
         this.setState({ [field]: value });
     };
-    submitGuestDetail=()=>{
-        if(this.state.guestName&&this.state.guestEmail&&this.state.guestAddress&&this.state.guestEmail){
-            this.setState({haveEnoughData:true})
+    
+    // handlePayment = () => {
+    //     // Check if all guest details are provided
+    //     const { guestName, guestEmail, guestAddress, guestPhone } = this.state;
+    //     const errors = {};
+    //     if (!guestName.trim()) {
+    //         errors.guestName = "Name is required";
+    //     }
+    //     if (!guestEmail.trim()) {
+    //         errors.guestEmail = "Email is required";
+    //     } else if (!/\S+@\S+\.\S+/.test(guestEmail)) {
+    //         errors.guestEmail = "Email is invalid";
+    //     }
+    //     if (!guestAddress.trim()) {
+    //         errors.guestAddress = "Address is required";
+    //     }
+    //     if (!guestPhone.trim()) {
+    //         errors.guestPhone = "Phone number is required";
+    //     } else if (!/^\d{10}$/.test(guestPhone)) {
+    //         errors.guestPhone = "Phone number must be 10 digits";
+    //     }
+    //     // if (Object.keys(errors).length === 0) {
+    //     // if (guestName && guestEmail && guestAddress && guestPhone {
+    //     if (guestName && guestEmail && guestAddress && guestPhone && Object.keys(errors).length === 0) {
+    //         // Proceed with payment
+    //         console.log("Guest details provided. Proceeding with payment...");
+    //         // Call your payment function or component here
+    //         this.setState({ haveEnoughData: true })
+    //     } else {
+    //         // Display error message or handle accordingly
+    //         console.log("Please provide all guest details before proceeding with payment.");
+    //     }
+    // };
+
+    // submitGuestDetail=()=>{
+    //     if(this.state.guestName&&this.state.guestEmail&&this.state.guestAddress&&this.state.guestPhone){
+    //         this.setState({haveEnoughData:true})
+    //     }
+    // }
+    submitGuestDetail = () => {
+        const { guestName, guestEmail, guestAddress, guestPhone } = this.state;
+        const errors = {};
+    
+        // Validate guestEmail
+        if (!guestEmail.trim()) {
+            errors.guestEmail = "Email is required";
+        } else if (!/\S+@\S+\.\S+/.test(guestEmail)) {
+            errors.guestEmail = "Email is invalid";
         }
-    }
+    
+        // Validate guestAddress
+        if (!guestAddress.trim()) {
+            errors.guestAddress = "Address is required";
+        }
+    
+        // Validate guestPhone
+        if (!guestPhone.trim()) {
+            errors.guestPhone = "Phone number is required";
+        } else if (!/^\d{8,15}$/.test(guestPhone)) {
+            errors.guestPhone = "Phone number must be between 8 and 15 digits";
+        }
+    
+        // Check if there are any errors
+        if (Object.keys(errors).length === 0) {
+            // No errors, proceed with submission
+            this.setState({ haveEnoughData: true, errors: {} }); // Reset errors
+        } else {
+            // Errors found, update state with error messages
+            this.setState({ errors });
+        }
+    };
+    
 
     render() {
         console.log(this.state.user)
@@ -601,35 +591,35 @@ export default class ShoppingCart extends Component {
                         </div>
 
                     ))}
-                    {this.state.isGuest ?
+                    {this.state.isGuest&&this.state.haveEnoughData==false ?
                         <div className="guest-details">
                             <h3>Guest Details</h3>
                             <input
                                 type="text"
                                 placeholder="Name"
                                 value={this.state.guestName}
-                                onChange={e => this.handleChange('guestName', e.target.value)}
+                                onChange={e => this.handleGuest('guestName', e.target.value)}
                                 required //required
                             />
                             <input
                                 type="email"
                                 placeholder="Email"
                                 value={this.state.guestEmail}
-                                onChange={e => this.handleChange('guestEmail', e.target.value)}
+                                onChange={e => this.handleGuest('guestEmail', e.target.value)}
                                 required
                             />
                             <input
                                 type="text"
                                 placeholder="Address"
                                 value={this.state.guestAddress}
-                                onChange={e => this.handleChange('guestAddress', e.target.value)}
+                                onChange={e => this.handleGuest('guestAddress', e.target.value)}
                                 required
                             />
                             <input
                                 type="text"
                                 placeholder="Phone"
                                 value={this.state.guestPhone}
-                                onChange={e => this.handleChange('guestPhone', e.target.value)}
+                                onChange={e => this.handleGuest('guestPhone', e.target.value)}
                                 required
                             />
                             <button onClick={this.submitGuestDetail}>Submit</button>
@@ -640,16 +630,15 @@ export default class ShoppingCart extends Component {
 {this.state.isGuest?(this.state.haveEnoughData)?<BuyShirt customerEmail={this.state.guestEmail} customerName={this.state.guestName} address={this.state.guestAddress} phone={this.state.guestPhone} items={this.getIdAndQuantity()} price={this.calculateTotalPrice()}/>
 :<h6>You have to fill in personal detail</h6>:((this.state.user.name&&this.state.user.email&&this.state.user.phone&&this.state.user.address)|| this.state.haveEnoughData)?<BuyShirt customerEmail={this.state.user.email} customerName={this.state.user.name} address={this.state.user.address} phone={this.state.user.phone} items={this.getIdAndQuantity()} price={this.calculateTotalPrice()}/>
 :<Link className="green-button" to={{pathname: "/Dashboard", state: { from: "cart" }}}>Please finish your profile</Link>}
-
+          {this.state.errors.guestEmail && <h6 className="error">{this.state.errors.guestEmail}</h6>}
+            {this.state.errors.guestAddress && <h6 className="error">{this.state.errors.guestAddress}</h6>}
+            {this.state.errors.guestPhone && <h6 className="error">{this.state.errors.guestPhone}</h6>}
 {/* {this.state.haveEnoughData?
 {/* paypalbutton */}
                     {/* <BuyShirt customerEmail={this.state.guestEmail} customerName={this.state.guestName} address={this.state.guestAddress} phone={this.state.guestPhone} items={this.getIdAndQuantity()} price={this.calculateTotalPrice()} /> */}
                     <div className="totalPriceShoppingCart">
                         {this.state.cart !== undefined ? <p>Total Price: ${this.calculateTotalPrice()}</p> : null}
                     </div>
-
-                    {this.state.redirectToPaypalButton ? <BuyShirt customerEmail={this.state.guestEmail} customerName={this.state.guestName} address={this.state.guestAddress} phone={this.state.guestPhone} items={this.getIdAndQuantity()} price={this.calculateTotalPrice()} /> : null}
-
 
                     
                 </div>
