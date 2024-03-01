@@ -567,8 +567,8 @@ header {
 
 /*                        Cart                    */
 .cart-container {
-  background-color: #7192A3;
-  color: white;
+  background-color: white;
+  color: black;
   display: flex;
   flex-direction: column;
   width: 80vw;
@@ -679,8 +679,8 @@ header {
   background: white;
 }
 .detailsShoppingCart span {
-  padding-left: 20%;
-  padding-right: 20%;
+  padding-left: 30%;
+  padding-right: 30%;
 }
 
 .detailsShoppingCart h3 {
@@ -699,6 +699,7 @@ header {
   display: flex;
   width: 10px;
   justify-content: center;
+  font-size: 1.25em;
 }
 
 .shoppingcartshirtprice {
