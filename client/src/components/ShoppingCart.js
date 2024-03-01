@@ -199,7 +199,7 @@ import NavigationBar from "./NavigationBar";
 import { ACCESS_LEVEL_NORMAL_USER, SERVER_HOST } from "../config/global_constants"
 import axios from "axios";
 import BuyShirt from "./BuyShirt";
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom"
 
 
 export default class ShoppingCart extends Component {
@@ -212,18 +212,18 @@ export default class ShoppingCart extends Component {
             // quantity:"",
             // size:"",
             cart: [],
-            user:{},
+            user: {},
             guestName: "",
             guestEmail: "",
             guestAddress: "",
             guestPhone: "",
             isGuest: localStorage.accessLevel < ACCESS_LEVEL_NORMAL_USER,
-            haveEnoughData:false,
-            errors: { 
-                guestName: "", 
-                guestEmail: "", 
+            haveEnoughData: false,
+            errors: {
+                guestName: "",
+                guestEmail: "",
                 guestAddress: "",
-                guestPhone: "" 
+                guestPhone: ""
             }
             // totalPrice: 0
         };
@@ -260,16 +260,16 @@ export default class ShoppingCart extends Component {
 
         axios.get(`${SERVER_HOST}/users/email?email=${userEmail}`)
             .then(res => {
-                this.setState({ user: res.data});
+                this.setState({ user: res.data });
             })
             .catch(err => {
                 console.error("Error fetching user data:", err);
             });
 
-            const { state } = this.props.location;
-            if (state && state.haveEnoughData === true) {
-                this.setState({haveEnoughData:true})
-            }
+        const { state } = this.props.location;
+        if (state && state.haveEnoughData === true) {
+            this.setState({ haveEnoughData: true })
+        }
 
 
 
@@ -385,17 +385,17 @@ export default class ShoppingCart extends Component {
     handleChange = (index, field, value) => {
         const updatedCart = [...this.state.cart];
         const currentItem = updatedCart[index];
-    
+
         // Check if the new quantity exceeds the stock
         if (field === 'quantity' && value > currentItem.stock) {
             // If it does, set the quantity to the maximum available stock
             value = currentItem.stock;
         }
-    
+
         // Update the quantity or other fields as usual
         updatedCart[index][field] = value;
         this.setState({ cart: updatedCart });
-    
+
         // localStorage.setItem("itemsInCart", JSON.stringify(updatedCart));
         const groupedItems = updatedCart.reduce((groups, item) => {
             const group = groups.find(g => g.name === item.name);
@@ -419,7 +419,7 @@ export default class ShoppingCart extends Component {
         this.setState({ cart: groupedItems });
         localStorage.setItem("itemsInCart", JSON.stringify(groupedItems));
     };
-    
+
 
     handleDelete = (name, size) => {
         const updatedCart = this.state.cart.filter(item => !(item.name === name && item.size === size));
@@ -431,7 +431,7 @@ export default class ShoppingCart extends Component {
     handleGuest = (field, value) => {
         this.setState({ [field]: value });
     };
-    
+
     // handlePayment = () => {
     //     // Check if all guest details are provided
     //     const { guestName, guestEmail, guestAddress, guestPhone } = this.state;
@@ -473,26 +473,26 @@ export default class ShoppingCart extends Component {
     submitGuestDetail = () => {
         const { guestName, guestEmail, guestAddress, guestPhone } = this.state;
         const errors = {};
-    
+
         // Validate guestEmail
         if (!guestEmail.trim()) {
             errors.guestEmail = "Email is required";
         } else if (!/\S+@\S+\.\S+/.test(guestEmail)) {
             errors.guestEmail = "Email is invalid";
         }
-    
+
         // Validate guestAddress
         if (!guestAddress.trim()) {
             errors.guestAddress = "Address is required";
         }
-    
+
         // Validate guestPhone
         if (!guestPhone.trim()) {
             errors.guestPhone = "Phone number is required";
         } else if (!/^\d{8,15}$/.test(guestPhone)) {
             errors.guestPhone = "Phone number must be between 8 and 15 digits";
         }
-    
+
         // Check if there are any errors
         if (Object.keys(errors).length === 0) {
             // No errors, proceed with submission
@@ -502,7 +502,7 @@ export default class ShoppingCart extends Component {
             this.setState({ errors });
         }
     };
-    
+
 
     render() {
         console.log(this.state.user)
@@ -526,7 +526,7 @@ export default class ShoppingCart extends Component {
                     totalPrice: item.price * item.quantity,
                     shirtPhotoFilename: item.shirtPhotoFilename,
                     shirtPhotoFilename: item.shirtPhotoFilename,
-                    stock:item.stock
+                    stock: item.stock
                 });
             }
             return groups;
@@ -545,11 +545,12 @@ export default class ShoppingCart extends Component {
         //             });
         //     })
         // );
-
+console.log(this.state.cart)
         return (
             <div>
                 <NavigationBar />
                 <h2 className="shoppingcarth2">Shopping Cart</h2>
+                {this.state.cart.length === 0 ?<h2>Shopping Cart is currently empty</h2>:
                 <div className="cart-container">
                     {this.state.cart.map((item, index) => (
                         <div key={index} className="each-item-cart">
@@ -591,7 +592,7 @@ export default class ShoppingCart extends Component {
                         </div>
 
                     ))}
-                    {this.state.isGuest&&this.state.haveEnoughData==false ?
+                    {this.state.isGuest && this.state.haveEnoughData == false ?
                         <div className="guest-details">
                             <h3>Guest Details</h3>
                             <input
@@ -623,26 +624,26 @@ export default class ShoppingCart extends Component {
                                 required
                             />
                             <button onClick={this.submitGuestDetail}>Submit</button>
-                 </div>
+                        </div>
                         : null}
 
 
-{this.state.isGuest?(this.state.haveEnoughData)?<BuyShirt customerEmail={this.state.guestEmail} customerName={this.state.guestName} address={this.state.guestAddress} phone={this.state.guestPhone} items={this.getIdAndQuantity()} price={this.calculateTotalPrice()}/>
-:<h6>You have to fill in personal detail</h6>:((this.state.user.name&&this.state.user.email&&this.state.user.phone&&this.state.user.address)|| this.state.haveEnoughData)?<BuyShirt customerEmail={this.state.user.email} customerName={this.state.user.name} address={this.state.user.address} phone={this.state.user.phone} items={this.getIdAndQuantity()} price={this.calculateTotalPrice()}/>
-:<Link className="green-button" to={{pathname: "/Dashboard", state: { from: "cart" }}}>Please finish your profile</Link>}
-          {this.state.errors.guestEmail && <h6 className="error">{this.state.errors.guestEmail}</h6>}
-            {this.state.errors.guestAddress && <h6 className="error">{this.state.errors.guestAddress}</h6>}
-            {this.state.errors.guestPhone && <h6 className="error">{this.state.errors.guestPhone}</h6>}
-{/* {this.state.haveEnoughData?
-{/* paypalbutton */}
+                    {this.state.isGuest ? (this.state.haveEnoughData) ? <BuyShirt customerEmail={this.state.guestEmail} customerName={this.state.guestName} address={this.state.guestAddress} phone={this.state.guestPhone} items={this.getIdAndQuantity()} price={this.calculateTotalPrice()} />
+                        : <h6>You have to fill in personal detail</h6> : ((this.state.user.name && this.state.user.email && this.state.user.phone && this.state.user.address) || this.state.haveEnoughData) ? <BuyShirt customerEmail={this.state.user.email} customerName={this.state.user.name} address={this.state.user.address} phone={this.state.user.phone} items={this.getIdAndQuantity()} price={this.calculateTotalPrice()} />
+                        : <Link className="green-button" to={{ pathname: "/Dashboard", state: { from: "cart" } }}>Please finish your profile</Link>}
+                    {this.state.errors.guestEmail && <h6 className="error">{this.state.errors.guestEmail}</h6>}
+                    {this.state.errors.guestAddress && <h6 className="error">{this.state.errors.guestAddress}</h6>}
+                    {this.state.errors.guestPhone && <h6 className="error">{this.state.errors.guestPhone}</h6>}
+                    {/* {this.state.haveEnoughData?
                     {/* <BuyShirt customerEmail={this.state.guestEmail} customerName={this.state.guestName} address={this.state.guestAddress} phone={this.state.guestPhone} items={this.getIdAndQuantity()} price={this.calculateTotalPrice()} /> */}
-                    <div className="totalPriceShoppingCart">
-                        {this.state.cart !== undefined ? <p>Total Price: ${this.calculateTotalPrice()}</p> : null}
-                    </div>
 
-                    
+
+
                 </div>
-
+    }
+                <div className="totalPriceShoppingCart">
+                    {this.state.cart !== undefined ? <p>Total Price: ${this.calculateTotalPrice()}</p> : null}
+                </div>
                 {/* <p>Total Price: €{this.state.totalPrice}</p> */}
 
 

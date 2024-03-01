@@ -175,7 +175,9 @@ export default class BuyShirt extends Component {
             <div>
                 {this.state.redirectToPayPalMessage ? <Redirect to={`/PayPalMessage/${this.state.payPalMessageType}/${this.state.payPalOrderID}`} /> : null}
                 <PayPalScriptProvider options={{ currency: "EUR", "client-id": SANDBOX_CLIENT_ID }}>
+<div className="paypal-outer-container">
                     <PayPalButtons style={{ layout: "horizontal" }} createOrder={this.createOrder} onApprove={this.onApprove} onError={this.onError} onCancel={this.onCancel} />
+</div>                
                 </PayPalScriptProvider>
             </div>
         )

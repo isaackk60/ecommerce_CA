@@ -749,4 +749,10 @@ header {
 .labelinputdiv label {
   margin-bottom: 0%;
   margin-top: 2%;
+}
+
+.paypal-outer-container {
+  display: flex;
+  justify-content: flex-end;
+  margin: 20px;
 }/*# sourceMappingURL=style.css.map */
