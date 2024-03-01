@@ -740,6 +740,7 @@ header {
     font-weight: 300;
     font-size: 3em;
     color: #7192A3;
+    margin: 20px 0 20px 0;
 }
 .totalPriceShoppingCart{
     font-family: "Montserrat", sans-serif;
@@ -774,20 +775,23 @@ header {
     background-color: #a01020;
   }
 
-  //viewallusers
+/*********************** viewallusers page *********************/
   .viewallusertable{
     font-family: "Montserrat", sans-serif;
     font-weight: 300;
     display: flex;
-    flex-direction: row;
-    justify-content: center;
+    // flex-direction: row;
+    // justify-content: center;
     color: white;
     text-align: left;
+    flex-direction: column;
+    align-items: center;
   }
   .viewallusertable table{
     background-color: #7192A3;
-    width:70%;
-    border-collapse:collapse; //can take this away if broken   
+    // width:70%;
+    border-collapse:collapse; //can take this away if broken  
+    width: 90vw; 
   }
   .viewallusertable th,td{
     // text-transform: capitalize;
@@ -807,6 +811,41 @@ header {
     background-color: #8FB9CF;
 }
 
+input[type="text"] {
+        padding: 8px;
+        margin-bottom: 10px;
+        width: 20vw;
+        margin-right: 10px;
+      }
+
+    select {
+    padding: 8px;
+    margin-bottom: 10px;
+    width: 20vw;
+    margin-right: 20px;
+    margin-left: 20px;
+    border-radius: 0.35em;
+    background-color: #fff;
+
+    
+  }
+
+ .sortAndFilterContainer{
+    display: flex;
+    // margin: 20px;
+  }
+
+.FunctionContainer{
+    display: flex;
+    flex-direction: row-reverse;
+    // justify-content: space-around;
+    justify-content: space-between;
+    align-items: center;
+    width: 95vw;
+    // margin-bottom: 30px;
+    margin: 30px 0 20px 0;
+}
+/*********************** viewallusers page end *********************/
 
 //dashboard
 .userdashboardform{

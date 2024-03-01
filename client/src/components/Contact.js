@@ -52,7 +52,7 @@ export default class Contact extends Component {
                                 <div className="inputContainer">
                                     <input type="text" id="input-fname" placeholder="First Name" />
                                     <input type="text" id="input-lname" placeholder="Last Name" />
-                                    <input type="email" id="input-email" placeholder="Email Address" />
+                                    <input type="text" id="input-email" placeholder="Email Address" />
                                 </div>
                                 <div className="TextareaMessage">
                                     <textarea name="message" type="text" id="input-message" placeholder="Some Text...." rows="10" cols="25"></textarea>

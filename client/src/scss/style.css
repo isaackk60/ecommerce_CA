@@ -642,6 +642,7 @@ header {
   font-weight: 300;
   font-size: 3em;
   color: #7192A3;
+  margin: 20px 0 20px 0;
 }
 
 .totalPriceShoppingCart {
@@ -684,16 +685,16 @@ header {
   font-family: "Montserrat", sans-serif;
   font-weight: 300;
   display: flex;
-  flex-direction: row;
-  justify-content: center;
   color: white;
   text-align: left;
+  flex-direction: column;
+  align-items: center;
 }
 
 .viewallusertable table {
   background-color: #7192A3;
-  width: 70%;
   border-collapse: collapse;
+  width: 90vw;
 }
 
 .viewallusertable th, td {
@@ -712,6 +713,36 @@ header {
 
 .viewallusertable tr:hover {
   background-color: #8FB9CF;
+}
+
+input[type=text] {
+  padding: 8px;
+  margin-bottom: 10px;
+  width: 20vw;
+  margin-right: 10px;
+}
+
+select {
+  padding: 8px;
+  margin-bottom: 10px;
+  width: 20vw;
+  margin-right: 20px;
+  margin-left: 20px;
+  border-radius: 0.35em;
+  background-color: #fff;
+}
+
+.sortAndFilterContainer {
+  display: flex;
+}
+
+.FunctionContainer {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  align-items: center;
+  width: 95vw;
+  margin: 30px 0 20px 0;
 }
 
 .userdashboardform {
@@ -749,4 +780,6 @@ header {
 .labelinputdiv label {
   margin-bottom: 0%;
   margin-top: 2%;
-}/*# sourceMappingURL=style.css.map */
+}
+
+/* styles.css *//*# sourceMappingURL=style.css.map */
