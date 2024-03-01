@@ -95,16 +95,24 @@ export default class ViewAllUsers extends Component {
 
     componentDidMount() {
         if (localStorage.accessLevel > ACCESS_LEVEL_GUEST) {
-            let userEmail;
-            // const currentUrl = window.location.pathname;
-            if(localStorage.accessLevel === ACCESS_LEVEL_NORMAL_USER){
-            userEmail = JSON.parse(localStorage.getItem("userEmail"));
-            console.log(userEmail)
-            }else if(localStorage.accessLevel ===ACCESS_LEVEL_ADMIN){
-                userEmail = this.props.match.params.email;
-                console.log(userEmail)
-            }
-console.log(userEmail)
+//             let userEmail;
+//             // const currentUrl = window.location.pathname;
+//             if(localStorage.accessLevel === ACCESS_LEVEL_NORMAL_USER){
+//             userEmail = JSON.parse(localStorage.getItem("userEmail"));
+//             console.log(userEmail)
+//             }else if(localStorage.accessLevel ===ACCESS_LEVEL_ADMIN){
+//                 userEmail = this.props.match.params.email;
+//                 console.log(userEmail)
+//             }
+// console.log(userEmail)
+let userEmail='';
+if(localStorage.accessLevel>ACCESS_LEVEL_NORMAL_USER){
+    userEmail = this.props.match.params.email;
+}else{
+ userEmail = JSON.parse(localStorage.getItem("userEmail"));
+}
+console.log(userEmail);
+
             axios.get(`${SERVER_HOST}/sales/email?email=${userEmail}`)
             .then(res => {
                 // Update purchase history state
@@ -124,7 +132,7 @@ console.log(userEmail)
                                     if (eachItemsInOrder.length === itemsInArray.items.length) {
                                         // Add the price of the item to the total price
                                         eachItemsInOrder.map(item=>totalPrice += item.price * item.quantity)
-                                    
+
                                         // Update state after all items are fetched
                                         this.setState(prevState => ({
                                             allOrders: [
@@ -154,6 +162,7 @@ console.log(userEmail)
             });
     }
     }
+    
     loadShirtPhotos() {
         this.state.allOrders.forEach(order => {
             order.eachItemsInOrder.forEach(item => {
