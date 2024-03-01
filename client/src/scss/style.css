@@ -681,6 +681,7 @@ header {
   background-color: #a01020;
 }
 
+/*********************** viewallusers page *********************/
 .viewallusertable {
   font-family: "Montserrat", sans-serif;
   font-weight: 300;
@@ -745,6 +746,7 @@ select {
   margin: 30px 0 20px 0;
 }
 
+/*********************** viewallusers page end *********************/
 .userdashboardform {
   font-family: "Montserrat", sans-serif;
   font-weight: 300;
@@ -780,6 +782,4 @@ select {
 .labelinputdiv label {
   margin-bottom: 0%;
   margin-top: 2%;
-}
-
-/* styles.css *//*# sourceMappingURL=style.css.map */
+}/*# sourceMappingURL=style.css.map */
