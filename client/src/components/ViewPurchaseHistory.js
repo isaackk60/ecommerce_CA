@@ -97,17 +97,14 @@ export default class ViewAllUsers extends Component {
         if (localStorage.accessLevel > ACCESS_LEVEL_GUEST) {
             let userEmail;
             // const currentUrl = window.location.pathname;
-            if(localStorage.accessLevel == ACCESS_LEVEL_NORMAL_USER){
+            if(localStorage.accessLevel === ACCESS_LEVEL_NORMAL_USER){
             userEmail = JSON.parse(localStorage.getItem("userEmail"));
-            }else if(localStorage.accessLevel ==ACCESS_LEVEL_ADMIN){
-                // if (currentUrl === "/ViewPurchaseHistory") {
-                //     userEmail = JSON.parse(localStorage.getItem("userEmail"));
-                // } else if (currentUrl.startsWith("/ViewPurchaseHistory/")) {
-                //     userEmail = this.props.match.params.email;
-                // }
+            console.log(userEmail)
+            }else if(localStorage.accessLevel ===ACCESS_LEVEL_ADMIN){
                 userEmail = this.props.match.params.email;
+                console.log(userEmail)
             }
-
+console.log(userEmail)
             axios.get(`${SERVER_HOST}/sales/email?email=${userEmail}`)
             .then(res => {
                 // Update purchase history state
@@ -134,6 +131,7 @@ export default class ViewAllUsers extends Component {
                                                 ...prevState.allOrders,
                                                 {
                                                     orderId: itemsInArray._id,
+                                                    refunded:itemsInArray.refunded,
                                                     eachItemsInOrder: eachItemsInOrder,
                                                     totalPrice: totalPrice 
                                                 }
@@ -178,6 +176,109 @@ export default class ViewAllUsers extends Component {
         });
     }
     
+    handleDelete = (orderId, itemId,stockBeforeReturn,itemQuantity,refundMoney,refundedMoney,totalPrice) => {
+        let newItems = [];
+        let saleObject;
+    
+        // Map through purchase history to find the order with the given orderId
+        const updatedPurchaseHistory = this.state.purchaseHistory.map(order => {
+            if (order._id === orderId) {
+                // Iterate over the items in the order
+                order.items.forEach(item => {
+                    if (item.shirtID === itemId) {
+                        // If the item matches the itemId, subtract the returned quantity from the item's quantity
+                        item.quantity -= itemQuantity;
+                        
+                        // If the updated quantity is zero or less, don't add it to newItems
+                        if (item.quantity > 0) {
+                            newItems.push(item); // Add the updated item to newItems
+                        }
+                    } else {
+                        newItems.push(item); // Add unchanged items to newItems
+                    }
+                });
+    
+                // Create the saleObject with updated refund and price
+                saleObject = {
+                    refunded: refundedMoney + refundMoney,
+                    price: totalPrice - refundMoney,
+                    items: newItems // Set the newItems array
+                };
+            }
+            return order;
+        });
+    
+        // Update the purchase history in the state
+        this.setState({ purchaseHistory: updatedPurchaseHistory }, () => {
+            this.updateAllOrders(updatedPurchaseHistory);
+        });
+
+        axios.put(`${SERVER_HOST}/sales/${orderId}`, saleObject, { headers: { "authorization": localStorage.token } })
+        .then(res => {
+            // Handle success if needed
+            console.log(`Updated Sales with ID: ${orderId}`);
+            localStorage.removeItem("itemsInCart");
+        })
+        .catch(err => {
+            // Handle error if needed
+            console.error(`Error updating Sales with ID: ${orderId}`, err);
+        });
+
+        let shirtObject = {
+            stock: stockBeforeReturn +itemQuantity,
+            sold:false
+        };
+        axios.put(`${SERVER_HOST}/shirts/${itemId}`, shirtObject, { headers: { "authorization": localStorage.token } })
+        .then(res => {
+            // Handle success if needed
+            console.log(`Stock updated for shirt with ID: ${itemId}`);
+            localStorage.removeItem("itemsInCart");
+        })
+        .catch(err => {
+            // Handle error if needed
+            console.error(`Error updating stock for shirt with ID: ${itemId}`, err);
+        });
+    }
+
+
+    updateAllOrders = (purchaseHistory) => {
+        let allOrders = [];
+        purchaseHistory.forEach((itemsInArray, index) => {
+            let eachItemsInOrder = [];
+            let totalPrice = 0; // Initialize total price for the order
+            itemsInArray.items.forEach(item => {
+                // Fetch shirt details and calculate total price for each item
+                axios.get(`${SERVER_HOST}/shirts/${item.shirtID}`, { headers: { "authorization": localStorage.token } })
+                    .then(res => {
+                        const updatedItem = { ...res.data, quantity: item.quantity };
+                        eachItemsInOrder.push(updatedItem);
+    
+                        // Check if all items are fetched
+                        if (eachItemsInOrder.length === itemsInArray.items.length) {
+                            // Add the price of the item to the total price
+                            eachItemsInOrder.forEach(item => totalPrice += item.price * item.quantity);
+    
+                            // Push the order details to the allOrders array
+                            allOrders.push({
+                                orderId: itemsInArray._id,
+                                refunded: itemsInArray.refunded,
+                                eachItemsInOrder: eachItemsInOrder,
+                                totalPrice: totalPrice
+                            });
+    
+                            // Update state after all items are fetched
+                            this.setState({ allOrders: allOrders }, () => {
+                                // Call loadShirtPhotos() after updating state
+                                this.loadShirtPhotos();
+                            });
+                        }
+                    })
+                    .catch(err => {
+                        console.error("Error fetching shirt data:", err);
+                    });
+            });
+        });
+    }
     
     
 
@@ -204,12 +305,13 @@ export default class ViewAllUsers extends Component {
                                 <table>
                                     <thead>
                                         <tr>
+                                        <th>Photo</th>
                                             <th>Name</th>
                                             <th>Price</th>
                                             <th>Size</th>
                                             <th>Quantity</th>
                                             <th>Total Price for this t-shirt</th>
-                                            <th>Photo</th>
+                                            <th>Return</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -225,6 +327,9 @@ export default class ViewAllUsers extends Component {
                                                 <td>{item.size}</td>
                                                 <td>{item.quantity}</td>
                                                 <td>{item.price*item.quantity}</td>
+                                                <td>
+                                                    <button onClick={() => this.handleDelete(order.orderId, item._id,item.stock,item.quantity,item.price*item.quantity,order.refunded,order.totalPrice)}>Return Product</button>
+                                                </td>
                                             </tr>
                                         ))}
                                         <tr>

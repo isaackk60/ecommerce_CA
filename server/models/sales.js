@@ -29,7 +29,8 @@ let salesSchema = new mongoose.Schema(
         customerName: {type: String,required:true},
         customerEmail: {type: String,required:true},
         phone:{type:Number,required:true},
-        address:{type:String,required:true}
+        address:{type:String,required:true},
+        refunded: { type: Number, default: 0 }
    },
    {
        collection: `sales`
