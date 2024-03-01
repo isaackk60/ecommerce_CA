@@ -88,10 +88,10 @@ export default class Login extends Component
                     value={this.state.password} 
                     onChange={this.handleChange}
                 /><br/><br/>
-                <span>
+                <div className="login-bottom-button">
                 <LinkInClass value="Login" className="green-button" onClick={this.handleSubmit}/> 
                 <Link className="red-button" to={"/main"}>Cancel</Link>  
-                </span>
+                </div>
             </form>
             </div>
             </main>

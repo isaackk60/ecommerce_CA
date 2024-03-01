@@ -279,10 +279,10 @@ export default class Register extends Component
                 onChange = {this.handleFileChange}
             /><br/><br/>
             
-            <span>
+            <div className="login-bottom-button">
             <LinkInClass value="Register New User" className="green-button" onClick={this.handleSubmit} />
             <Link className="red-button" to={"/main"}>Cancel</Link>   
-            </span>
+            </div>
         </form>
         </div>
         </main>

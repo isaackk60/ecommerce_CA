@@ -41,9 +41,13 @@
 }
 .main-container .shirtPhotos {
   width: 28vw;
+  transition: transform 0.2s;
 }
 .main-container .shirtPhotos img {
   width: 28vw;
+}
+.main-container .shirtPhotos:hover { /* IE 9 */ /* Safari 3-8 */
+  transform: scale(1.05);
 }
 .main-container .shirt-container {
   padding-top: 10px;
@@ -444,21 +448,24 @@ header {
 }
 
 .contact {
+  font-family: "Montserrat", sans-serif;
   margin-top: 100px;
   text-align: center;
+  text-decoration: none;
 }
 
 .contact h1 {
   font-size: 50px;
-  text-decoration: underline;
+  text-decoration: none;
   font-family: "Montserrat", sans-serif;
+  font-weight: 300;
 }
 
 .contact p {
   font-size: 20px;
   margin: auto;
   font-family: "Montserrat", sans-serif;
-  font-weight: 400;
+  font-weight: 300;
 }
 
 .GetInTouchContainer {
@@ -473,11 +480,13 @@ header {
 
 .GetInTouchContainer h3 {
   font-family: "Montserrat", sans-serif;
-  font-size: 35px;
+  font-weight: 300;
+  font-size: 2em;
+  text-align: center;
 }
 
 .GetInTouchContainer p {
-  font-size: 12px;
+  font-size: 1em;
   font-family: "Montserrat", sans-serif;
   font-weight: 400;
   font-style: normal;
@@ -485,15 +494,23 @@ header {
 
 .GetInTouchContainer .FontIcon {
   margin: 10px;
-  font-size: 20px;
+  font-size: 1em;
 }
 
 .GetInTouchContainer .Icon {
   padding: 10px;
 }
 
+.ContainerInForm {
+  display: flex;
+  flex-direction: column;
+}
+
 .fromContainer {
   background-color: #f0d6d6;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 300;
+  border-radius: 10px;
   width: 40vw;
   display: flex;
   flex-direction: column;
@@ -503,7 +520,7 @@ header {
 
 .fromContainer h2 {
   font-family: "Montserrat", sans-serif;
-  font-weight: 600;
+  font-weight: 400;
   font-size: 40px;
   color: white;
   text-align: center;
@@ -544,6 +561,7 @@ header {
 .submit {
   justify-content: center;
   display: flex;
+  margin-bottom: 5%;
 }
 
 #input-submit {
@@ -551,10 +569,14 @@ header {
   padding: 10px;
   border: none;
   border-radius: 5px;
-  background-color: #007bff;
+  background-color: rgba(164, 164, 164, 0.9882352941);
   color: white;
   font-size: 18px;
   cursor: pointer;
+}
+
+#input-submit:hover {
+  background-color: rgba(129, 129, 129, 0.9882352941);
 }
 
 /* Map */
@@ -582,6 +604,10 @@ header {
   justify-content: space-between;
   border-bottom: solid 1px white;
   padding: 20px;
+}
+
+.login-bottom-button {
+  display: flex;
 }
 
 .dropdown {
@@ -788,13 +814,18 @@ header {
 }
 
 .viewallusertable table {
-  background-color: #7192A3;
+  background-color: #0C405F;
+  color: white;
   width: 70%;
   border-collapse: collapse;
 }
 
 .viewallusertable th, td {
   border-bottom: 1px solid white;
+}
+
+.configure {
+  text-align: center;
 }
 
 .viewallusertable thead th,
@@ -808,7 +839,13 @@ header {
 }
 
 .viewallusertable tr:hover {
-  background-color: #8FB9CF;
+  background-color: #7192A3;
+}
+
+.tddd {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
 }
 
 .purchasehistory {
@@ -946,4 +983,45 @@ header {
   display: flex;
   flex-direction: row;
   width: 100%;
+}
+
+/* For devices with a maximum width of 500px (mobile phones) */
+@media screen and (max-width: 500px) {
+  /* Add your responsive styles here */
+  .main-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  .shirtPhotos img {
+    width: 80vw; /* Adjust the width for better fit on smaller screens */
+  }
+}
+/* For devices with a minimum width of 501px and maximum width of 1000px (tablets) */
+@media screen and (min-width: 501px) and (max-width: 1000px) {
+  /* Add your responsive styles here */
+  .main-container {
+    justify-content: center;
+  }
+  .shirtPhotos {
+    width: 45%; /* Adjust the width for better fit on tablets */
+    margin: 1%; /* Add margin for spacing between items */
+  }
+}
+.paypal-outer-container {
+  display: flex;
+  justify-content: flex-end;
+  margin: 20px;
+}
+.paypal-outer-container div {
+  width: 20vw;
+}
+
+.map-container {
+  display: flex;
+  justify-content: center;
+}
+.map-container .map {
+  width: 90vw;
+  border-radius: 10px;
+  border: 1px solid black;
 }/*# sourceMappingURL=style.css.map */
