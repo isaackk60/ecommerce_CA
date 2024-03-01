@@ -218,12 +218,12 @@ export default class ShoppingCart extends Component {
             guestAddress: "",
             guestPhone: "",
             isGuest: localStorage.accessLevel < ACCESS_LEVEL_NORMAL_USER,
-            haveEnoughData:false,
-            errors: { 
-                guestName: "", 
-                guestEmail: "", 
+            haveEnoughData: false,
+            errors: {
+                guestName: "",
+                guestEmail: "",
                 guestAddress: "",
-                guestPhone: "" 
+                guestPhone: ""
             }
             // totalPrice: 0
         };
@@ -431,7 +431,7 @@ export default class ShoppingCart extends Component {
     handleGuest = (field, value) => {
         this.setState({ [field]: value });
     };
-    
+
     // handlePayment = () => {
     //     // Check if all guest details are provided
     //     const { guestName, guestEmail, guestAddress, guestPhone } = this.state;
@@ -473,26 +473,26 @@ export default class ShoppingCart extends Component {
     submitGuestDetail = () => {
         const { guestName, guestEmail, guestAddress, guestPhone } = this.state;
         const errors = {};
-    
+
         // Validate guestEmail
         if (!guestEmail.trim()) {
             errors.guestEmail = "Email is required";
         } else if (!/\S+@\S+\.\S+/.test(guestEmail)) {
             errors.guestEmail = "Email is invalid";
         }
-    
+
         // Validate guestAddress
         if (!guestAddress.trim()) {
             errors.guestAddress = "Address is required";
         }
-    
+
         // Validate guestPhone
         if (!guestPhone.trim()) {
             errors.guestPhone = "Phone number is required";
         } else if (!/^\d{8,15}$/.test(guestPhone)) {
             errors.guestPhone = "Phone number must be between 8 and 15 digits";
         }
-    
+
         // Check if there are any errors
         if (Object.keys(errors).length === 0) {
             // No errors, proceed with submission
@@ -502,7 +502,7 @@ export default class ShoppingCart extends Component {
             this.setState({ errors });
         }
     };
-    
+
 
     render() {
         console.log(this.state.user)
@@ -591,7 +591,7 @@ export default class ShoppingCart extends Component {
                         </div>
 
                     ))}
-                    {this.state.isGuest&&this.state.haveEnoughData==false ?
+                    {this.state.isGuest && this.state.haveEnoughData == false ?
                         <div className="guest-details">
                             <div className="gfirst">
                                 <h3>Guest Details</h3>
@@ -636,9 +636,9 @@ export default class ShoppingCart extends Component {
                     {this.state.isGuest ? (this.state.haveEnoughData) ? <BuyShirt customerEmail={this.state.guestEmail} customerName={this.state.guestName} address={this.state.guestAddress} phone={this.state.guestPhone} items={this.getIdAndQuantity()} price={this.calculateTotalPrice()} />
                         : <h6 className="pleasefillguest">Please fill in the details above</h6> : ((this.state.user.name && this.state.user.email && this.state.user.phone && this.state.user.address) || this.state.haveEnoughData) ? <BuyShirt customerEmail={this.state.user.email} customerName={this.state.user.name} address={this.state.user.address} phone={this.state.user.phone} items={this.getIdAndQuantity()} price={this.calculateTotalPrice()} />
                         : <Link className="green-button" to={{ pathname: "/Dashboard", state: { from: "cart" } }}>Please finish your profile</Link>}
-          {this.state.errors.guestEmail && <h6 className="error">{this.state.errors.guestEmail}</h6>}
-            {this.state.errors.guestAddress && <h6 className="error">{this.state.errors.guestAddress}</h6>}
-            {this.state.errors.guestPhone && <h6 className="error">{this.state.errors.guestPhone}</h6>}
+                    {this.state.errors.guestEmail && <h6 className="error">{this.state.errors.guestEmail}</h6>}
+                    {this.state.errors.guestAddress && <h6 className="error">{this.state.errors.guestAddress}</h6>}
+                    {this.state.errors.guestPhone && <h6 className="error">{this.state.errors.guestPhone}</h6>}
                     {/* {this.state.haveEnoughData?{/* paypalbutton */}
                     {/* <BuyShirt customerEmail={this.state.guestEmail} customerName={this.state.guestName} address={this.state.guestAddress} phone={this.state.guestPhone} items={this.getIdAndQuantity()} price={this.calculateTotalPrice()} /> */}
                     {/* <div className="totalPriceShoppingCart">
