@@ -1,11 +1,20 @@
 import React, { Component } from "react"
-import Logout from "./Logout"
-import { Redirect, Link } from "react-router-dom"
+<<<<<<<<< Temporary merge branch 1
+import { Link } from "react-router-dom"
 
+=========
+import { Redirect, Link } from "react-router-dom"
+import Logout from "./Logout"
+>>>>>>>>> Temporary merge branch 2
 import axios from "axios"
 import NavigationBar from "./NavigationBar"
-
+<<<<<<<<< Temporary merge branch 1
+import Logout from "./Logout"
 import { ACCESS_LEVEL_GUEST, ACCESS_LEVEL_ADMIN,ACCESS_LEVEL_NORMAL_USER, SERVER_HOST } from "../config/global_constants"
+=========
+
+import { ACCESS_LEVEL_GUEST, ACCESS_LEVEL_ADMIN, ACCESS_LEVEL_NORMAL_USER, SERVER_HOST } from "../config/global_constants"
+>>>>>>>>> Temporary merge branch 2
 
 
 export default class ViewAllUsers extends Component {
@@ -23,12 +32,12 @@ export default class ViewAllUsers extends Component {
         if (localStorage.accessLevel > ACCESS_LEVEL_NORMAL_USER) {
             axios.get(`${SERVER_HOST}/users`)
                 .then(res => {
-                    this.setState({ users: res.data });
+                    this.setState({ users: res.data })
                 })
                 .catch(err => {
-                    // Handle error
+                    // do nothing
                     console.error("Error fetching users:", err);
-                });
+                })
         }
     }
 
@@ -99,7 +108,8 @@ export default class ViewAllUsers extends Component {
             <div>
                 <NavigationBar  />
                 <h2 className="shoppingcarth2">All Users</h2>
-                <input
+                <div className="viewallusertable">
+                    <input
                     type="text"
                     placeholder="Search..."
                     value={searchQuery}
@@ -131,9 +141,11 @@ export default class ViewAllUsers extends Component {
                                 <th>Phone</th>
                                 <th>Address</th>
                                 <th>Configure</th>
+>>>>>>>>> Temporary merge branch 2
                             </tr>
                         </thead>
                         <tbody>
+                            {sortedUsers.map(user => (
                             {sortedUsers.map(user => (
                                 user.accessLevel==ACCESS_LEVEL_ADMIN?null:
 
@@ -155,13 +167,16 @@ export default class ViewAllUsers extends Component {
                 <div className="logoutButton">
                     <button className="logoutbutton"><Logout /></button>
                 </div>
-                
+<<<<<<<<< Temporary merge branch 1
+=========
+
+>>>>>>>>> Temporary merge branch 2
             </div>
             :<Redirect to={"/main"} />}
             </>
         );
     }
-    
+<<<<<<<<< Temporary merge branch 1
 }
 
 

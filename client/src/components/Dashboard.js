@@ -172,6 +172,11 @@ export default class Dashboard extends Component {
             redirectToCart: false,
             // redirectToLogout: false,
             from: "",
+            errors: {
+                newName: "",
+                newPhone: "",
+                newAddress: ""
+            }
         };
     }
 
@@ -200,31 +205,52 @@ export default class Dashboard extends Component {
     updateUser = (e) => {
         e.preventDefault();
         const { newName, newPhone, newAddress } = this.state;
-        const userEmail = JSON.parse(localStorage.getItem("userEmail") || null);
 
-        axios.put(`${SERVER_HOST}/users/update`, { email: userEmail, newName, newPhone, newAddress })
-            .then(res => {
-                // Handle success
-                console.log("User updated successfully");
-                // // Redirect to "/main"
-                // this.props.history.push("/main");
-            })
-            .catch(err => {
-                // Handle error
-                console.error("Error updating user:", err);
-            });
-        if (this.state.from == "cart" && newName && newPhone && newAddress) {
-            this.setState({ redirectToCart: true })
-        } else if (this.state.from != "cart") {
-            this.setState({ redirectToMain: true })
+        // Validation
+        const errors = {};
+        if (!newName.trim()) {
+            errors.newName = "Name is required";
+        }
+        if (!newPhone.trim()) {
+            errors.newPhone = "Phone number is required";
+        } else if (!/^\d{8,15}$/.test(newPhone)) {
+            errors.newPhone = "Phone number must be between 8 and 15 digits";
+        }
+        if (!newAddress.trim()) {
+            errors.newAddress = "Address is required";
+        }
+
+        // Check if there are any errors
+        if (Object.keys(errors).length === 0) {
+            // No errors, proceed with submission
+            const userEmail = JSON.parse(localStorage.getItem("userEmail") || null);
+
+            axios.put(`${SERVER_HOST}/users/update`, { email: userEmail, newName, newPhone, newAddress })
+                .then(res => {
+                    // Handle success
+                    console.log("User updated successfully");
+                    if (this.state.from === "cart") {
+                        this.setState({ redirectToCart: true });
+                    } else {
+                        this.setState({ redirectToMain: true });
+                    }
+                })
+                .catch(err => {
+                    // Handle error
+                    console.error("Error updating user:", err);
+                });
+        } else {
+            // Errors found, update state with error messages
+            this.setState({ errors });
         }
     }
+
     // handleLogout = (e) => {
     //     this.setState({ redirectToLogout: true })
     // }
 
     render() {
-        const { user, newName, newPhone, newAddress } = this.state;
+        const { user, newName, newPhone, newAddress, errors } = this.state;
 
         return (
 
@@ -246,6 +272,7 @@ export default class Dashboard extends Component {
                                 </div>
                                 <div>
                                     <input type="text" placeholder="Name" name="newName" value={newName !== null ? newName : user.name} onChange={this.handleInputChange} />
+                                    {errors.newName && <h6 className="error">{errors.newName}</h6>}
                                 </div>
                             </div>
                             <div className="labelinputdiv">
@@ -254,6 +281,7 @@ export default class Dashboard extends Component {
                                 </div>
                                 <div>
                                     <input type="text" placeholder="Phone" name="newPhone" value={newPhone !== null ? newPhone : user.phone} onChange={this.handleInputChange} />
+                                    {errors.newPhone && <h6 className="error">{errors.newPhone}</h6>}
                                 </div>
                             </div>
                             <div className="labelinputdiv">
@@ -262,6 +290,7 @@ export default class Dashboard extends Component {
                                 </div>
                                 <div>
                                     <input type="text" placeholder="Address" name="newAddress" value={newAddress !== null ? newAddress : user.address} onChange={this.handleInputChange} />
+                                    {errors.newAddress && <h6 className="error">{errors.newAddress}</h6>}
                                 </div>
                             </div>
                             <div className="dashboardsavebutton">
