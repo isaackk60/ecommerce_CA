@@ -19,7 +19,7 @@ export default class EditTShirt extends Component {
             description: ``,
             // quantity: ``,
             stock: ``,
-            gender:``,
+            gender: ``,
             shirtPhotoFilename: null,
             redirectToDisplayAllShirts: localStorage.accessLevel < ACCESS_LEVEL_NORMAL_USER,
             wasSubmittedAtLeastOnce: false
@@ -39,7 +39,7 @@ export default class EditTShirt extends Component {
                     description: res.data.description,
                     // quantity: res.data.quantity
                     stock: res.data.stock,
-                    gender:res.data.gender
+                    gender: res.data.gender
                 })
             })
             .catch(err => {
@@ -66,10 +66,10 @@ export default class EditTShirt extends Component {
             description: this.state.description,
             // quantity: this.state.quantity
             stock: this.state.stock,
-            gender:this.state.gender
+            gender: this.state.gender
         }
 
-        if (this.state.stock> 0) {
+        if (this.state.stock > 0) {
             shirtObject = {
                 ...shirtObject,
                 sold: false

@@ -14,7 +14,7 @@ export default class About extends Component {
     render() {
         return (
             <div>
-                <NavigationBar/>
+                <NavigationBar />
                 <main className="about_main">
                     <h1>ABOUT US</h1>
 

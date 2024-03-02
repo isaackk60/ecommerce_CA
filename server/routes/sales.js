@@ -4,11 +4,10 @@ const salesModel = require(`../models/sales`)
 const shirtsModel = require(`../models/shirts`)
 
 
-const createNewSaleDocument = (req, res, next) => 
-{           
+const createNewSaleDocument = (req, res, next) => {
     // Use the PayPal details to create a new sale document                
     let saleDetails = new Object()
-           
+
     // saleDetails.paypalPaymentID = req.params.orderID
     // saleDetails.carID = req.params.carID
     // saleDetails.price = req.params.price
@@ -21,7 +20,7 @@ const createNewSaleDocument = (req, res, next) =>
     saleDetails.paypalPaymentID = req.params.orderID
     saleDetails.price = req.params.price
 
-    saleDetails.items=req.body.items
+    saleDetails.items = req.body.items
     saleDetails.customerName = req.body.customerName
     saleDetails.customerEmail = req.body.customerEmail
     saleDetails.address = req.body.address
@@ -33,7 +32,7 @@ const createNewSaleDocument = (req, res, next) =>
     // saleDetails.customerEmail = req.params.customerEmail
     // saleDetails.phone = req.params.phone
     // saleDetails.address = req.params.address
-        
+
     // shirtsModel.findByIdAndUpdate({_id:req.params.shirtID}, {sold: true}, (err, data) => 
     // {
     //     if(err)
@@ -41,16 +40,14 @@ const createNewSaleDocument = (req, res, next) =>
     //         return next(err)
     //     }  
     // }) 
-    
-    salesModel.create(saleDetails, (err, data) => 
-    {
-        if(err)
-        {
+
+    salesModel.create(saleDetails, (err, data) => {
+        if (err) {
             return next(err)
-        }                        
-    })   
-    
-    return res.json({success:true})
+        }
+    })
+
+    return res.json({ success: true })
 }
 const getPurchaseHistoryByEmail = (req, res, next) => {
     const userEmail = req.query.email; // Extract email from query parameters
@@ -68,17 +65,14 @@ const getPurchaseHistoryByEmail = (req, res, next) => {
     });
 };
 
-const updatetSalesDocument = (req, res, next) => 
-{
-    salesModel.findByIdAndUpdate(req.params.id, {$set: req.body}, (err, data) => 
-    {
-        if(err)
-        {
+const updatetSalesDocument = (req, res, next) => {
+    salesModel.findByIdAndUpdate(req.params.id, { $set: req.body }, (err, data) => {
+        if (err) {
             return next(err)
-        }  
-        
+        }
+
         return res.json(data)
-    })        
+    })
 }
 
 
@@ -91,7 +85,7 @@ const updatetSalesDocument = (req, res, next) =>
 router.post('/sales/:orderID/:price', createNewSaleDocument)
 // router.get('/sales/email', getPurchaseHistoryByEmail);
 
-router.put('/sales/:id',updatetSalesDocument)
+router.put('/sales/:id', updatetSalesDocument)
 
 router.get('/sales/email', getPurchaseHistoryByEmail);
 module.exports = router

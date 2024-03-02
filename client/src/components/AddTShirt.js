@@ -22,7 +22,7 @@ export default class AddTShirt extends Component {
             stock: "",
             description: "",
             shirtPhotoFilename: null,
-            gender:"",
+            gender: "",
             redirectToDisplayAllShirts: localStorage.accessLevel < ACCESS_LEVEL_ADMIN,
             wasSubmittedAtLeastOnce: false
         }
@@ -170,7 +170,7 @@ export default class AddTShirt extends Component {
                         <Form.Label>Quantity</Form.Label>
                         <Form.Control type="text" name="quantity" value={this.state.quantity} onChange={this.handleChange} />
                     </Form.Group> */}
-                                        <Form.Group controlId="stock">
+                    <Form.Group controlId="stock">
                         <Form.Label>Stock</Form.Label>
                         <Form.Control type="text" name="stock" value={this.state.stock} onChange={this.handleChange} />
                     </Form.Group>
@@ -182,7 +182,7 @@ export default class AddTShirt extends Component {
 
                     <Form.Group controlId="shirtPhotoFilename">
                         <Form.Label>Photos</Form.Label>
-                        <Form.Control type="file" multiple onChange={this.handleFileChange}/>
+                        <Form.Control type="file" multiple onChange={this.handleFileChange} />
                     </Form.Group> <br /><br />
 
                     <LinkInClass value="Add" className="green-button" onClick={this.handleSubmit} />

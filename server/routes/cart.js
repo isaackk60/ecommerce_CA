@@ -89,7 +89,7 @@ const createNewcartDocument = (req, res, next) => {
                 quantity: item.quantity,
                 // shirtPhotoFilename: item.shirtPhotoFilename.map(filename => ({ filename }))
                 // shirtPhotoFilename = []
-                
+
                 // req.files.map((file, index) =>
                 // {
                 //     tShirtDetails.shirtPhotoFilename[index] = {filename:`${file.filename}`}

@@ -39,38 +39,38 @@ export default class SubShirt extends Component {
     //     }
     //   }
 
-        componentDidMount() {// use link to hold state
-            // this.inputToFocus.focus();
-            // axios.get(`${SERVER_HOST}/users/:id`)
-            // .then(res => 
-            // { 
-            //     this.setState({user: res.data})                                         
-            // })
-            // .catch(err =>
-            // {
-            //     // do nothing
-            // })
-            // axios.get(`${SERVER_HOST}/cart`)
-            // .then(res => 
-            // { 
-            //     this.setState({cart: res.data})    
+    componentDidMount() {// use link to hold state
+        // this.inputToFocus.focus();
+        // axios.get(`${SERVER_HOST}/users/:id`)
+        // .then(res => 
+        // { 
+        //     this.setState({user: res.data})                                         
+        // })
+        // .catch(err =>
+        // {
+        //     // do nothing
+        // })
+        // axios.get(`${SERVER_HOST}/cart`)
+        // .then(res => 
+        // { 
+        //     this.setState({cart: res.data})    
 
-            // })
-            // .catch(err =>
-            // {
-            //     // do nothing
-            // })
-            // console.log(this.state.cart._id)
+        // })
+        // .catch(err =>
+        // {
+        //     // do nothing
+        // })
+        // console.log(this.state.cart._id)
 
-            // axios.get(`${SERVER_HOST}/users`, { headers: { "authorization": localStorage.token } })
-            // .then(res => {
-            //     const userData = res.data._id;
-            //     this.setState({ user: userData });
-            // })
-            // .catch(error => {
-            //     console.error('Error fetching user data:', error);
-            // });
-            // localStorage.setItem("itemsInCart", JSON.stringify(this.state.itemsInCart));
+        // axios.get(`${SERVER_HOST}/users`, { headers: { "authorization": localStorage.token } })
+        // .then(res => {
+        //     const userData = res.data._id;
+        //     this.setState({ user: userData });
+        // })
+        // .catch(error => {
+        //     console.error('Error fetching user data:', error);
+        // });
+        // localStorage.setItem("itemsInCart", JSON.stringify(this.state.itemsInCart));
 
         const { state } = this.props.location;
         // console.log(this.props.location)
@@ -96,12 +96,12 @@ export default class SubShirt extends Component {
                         });
                 });
 
-                });
+            });
 
-
-            }
 
         }
+
+    }
 
 
 
@@ -114,27 +114,27 @@ export default class SubShirt extends Component {
             this.setState({ [name]: value });
         }
     }
-    
-    
 
 
 
 
-        // handleSubmit = (e) => {
-        //     e.preventDefault()
 
-        //     const shirtObject = {
-        //         name: this.state.name,
-        //         // colour: this.state.colour,
-        //         size: this.state.size,
-        //         price: this.state.price,
-        //         description: this.state.description,
-        //         quantity: this.state.quantity,
-        //         stock: this.state.stock
 
-        //     }
+    // handleSubmit = (e) => {
+    //     e.preventDefault()
 
-        // }
+    //     const shirtObject = {
+    //         name: this.state.name,
+    //         // colour: this.state.colour,
+    //         size: this.state.size,
+    //         price: this.state.price,
+    //         description: this.state.description,
+    //         quantity: this.state.quantity,
+    //         stock: this.state.stock
+
+    //     }
+
+    // }
 
 
     handleSubmit = (e) => {
@@ -156,7 +156,7 @@ export default class SubShirt extends Component {
         //                 console.log(2)
         //             }
         //         }
-        this.state.itemsInCart.push({ shirtId: this.state.shirtId, name: this.state.name, size: this.state.size, price: this.state.price, quantity: this.state.quantity, shirtPhotoFilename: this.state.shirtPhotoFilename, shirtPhotoFilename: this.state.shirtPhotoFilename,stock:this.state.stock })
+        this.state.itemsInCart.push({ shirtId: this.state.shirtId, name: this.state.name, size: this.state.size, price: this.state.price, quantity: this.state.quantity, shirtPhotoFilename: this.state.shirtPhotoFilename, shirtPhotoFilename: this.state.shirtPhotoFilename, stock: this.state.stock })
         // console.log(this.state.itemsInCart)
         if (this.state.itemsInCart !== undefined) {
             const groupedItems = this.state.itemsInCart.reduce((groups, item) => {
@@ -174,7 +174,7 @@ export default class SubShirt extends Component {
                         totalPrice: item.price * item.quantity,
                         shirtPhotoFilename: item.shirtPhotoFilename,
                         shirtPhotoFilename: item.shirtPhotoFilename,
-                        stock:item.stock
+                        stock: item.stock
                     });
                 }
                 return groups;
@@ -187,62 +187,62 @@ export default class SubShirt extends Component {
         // this.setState({ wasSubmittedAtLeastOnce: true })
 
 
-            // axios.post(`${SERVER_HOST}/cart`, formData, { headers: { "authorization": localStorage.token, "Content-type": "multipart/form-data" } })
-            //     .then(res => {
-            //         const cartId = res.data._id;
-            //         this.setState({ cartId: cartId });
-            //         this.setState({ redirectToDisplayAllShirtsInCart: true })
-            //     })
-            //     .catch(err => {
-            //         this.setState({ wasSubmittedAtLeastOnce: true })
-            //     })
-        }
+        // axios.post(`${SERVER_HOST}/cart`, formData, { headers: { "authorization": localStorage.token, "Content-type": "multipart/form-data" } })
+        //     .then(res => {
+        //         const cartId = res.data._id;
+        //         this.setState({ cartId: cartId });
+        //         this.setState({ redirectToDisplayAllShirtsInCart: true })
+        //     })
+        //     .catch(err => {
+        //         this.setState({ wasSubmittedAtLeastOnce: true })
+        //     })
+    }
 
 
 
 
 
-        // handleQuantityChange = (e) => {
-        //     const quantity = parseInt(e.target.value);
-        //     this.setState({ quantity });
-        // };
+    // handleQuantityChange = (e) => {
+    //     const quantity = parseInt(e.target.value);
+    //     this.setState({ quantity });
+    // };
 
-        // addToCart = () => {
-        //     // Add the selected shirt to the shopping cart
-        //     const { name, size, price, quantity,shirtPhotoFilename } = this.state;
-        //     const item = {
-        //         name,
-        //         size,
-        //         price,
-        //         quantity,
-        //         shirtPhotoFilename
-        //     };
-        //     console.log("Added to cart:", item);
+    // addToCart = () => {
+    //     // Add the selected shirt to the shopping cart
+    //     const { name, size, price, quantity,shirtPhotoFilename } = this.state;
+    //     const item = {
+    //         name,
+    //         size,
+    //         price,
+    //         quantity,
+    //         shirtPhotoFilename
+    //     };
+    //     console.log("Added to cart:", item);
 
-        //     const updatedItemsInCart = [...this.state.itemsInCart, item];
-        //     this.setState({ redirectToCart: true, itemsInCart: updatedItemsInCart });
-        //     // this.setState({ redirectToCart: true });
-        // };
-        // handleClick=()=>{
-        //     // this.addToCart();
-        //     this.handleSubmit();
+    //     const updatedItemsInCart = [...this.state.itemsInCart, item];
+    //     this.setState({ redirectToCart: true, itemsInCart: updatedItemsInCart });
+    //     // this.setState({ redirectToCart: true });
+    // };
+    // handleClick=()=>{
+    //     // this.addToCart();
+    //     this.handleSubmit();
 
-        // }
-        handleMoveLeft = () => {
-            this.setState((prevState) => ({
-                currentSlideIndex: prevState.currentSlideIndex > 0 ? prevState.currentSlideIndex - 1 : prevState.currentSlideIndex
-            }))
-        };
-    
-        handleMoveRight = () => {
-            this.setState((prevState) => ({
-                currentSlideIndex: prevState.currentSlideIndex < this.state.totalSlides - 1 ? prevState.currentSlideIndex + 1 : prevState.currentSlideIndex
-            }));
-        };
+    // }
+    handleMoveLeft = () => {
+        this.setState((prevState) => ({
+            currentSlideIndex: prevState.currentSlideIndex > 0 ? prevState.currentSlideIndex - 1 : prevState.currentSlideIndex
+        }))
+    };
 
-        redirectToMain=()=>{
-            this.setState({redirectBackToMain:true})
-            }
+    handleMoveRight = () => {
+        this.setState((prevState) => ({
+            currentSlideIndex: prevState.currentSlideIndex < this.state.totalSlides - 1 ? prevState.currentSlideIndex + 1 : prevState.currentSlideIndex
+        }));
+    };
+
+    redirectToMain = () => {
+        this.setState({ redirectBackToMain: true })
+    }
     render() {
         console.log("shirtId", this.state.shirtId)
         // console.log(this.state.user)
@@ -260,15 +260,15 @@ export default class SubShirt extends Component {
         console.log("shirtPhotosFilename", this.state.shirtPhotoFilename)
         console.log("cartId", this.state.cartId)
 
-            let soldOrForSale = null
-            // if (localStorage.accessLevel <= ACCESS_LEVEL_GUEST) {
-            //     if (this.props.shirt.sold !== true) {
-            //         soldOrForSale = <BuyShirt shirtID={this.props.shirt._id} price={this.props.shirt.price} />
-            //     }
-            //     else {
-            //         soldOrForSale = "SOLD"
-            //     }
-            // }
+        let soldOrForSale = null
+        // if (localStorage.accessLevel <= ACCESS_LEVEL_GUEST) {
+        //     if (this.props.shirt.sold !== true) {
+        //         soldOrForSale = <BuyShirt shirtID={this.props.shirt._id} price={this.props.shirt.price} />
+        //     }
+        //     else {
+        //         soldOrForSale = "SOLD"
+        //     }
+        // }
 
         return (
             <div>
@@ -291,9 +291,9 @@ export default class SubShirt extends Component {
                             {this.state.shirtPhotoFilename.map(photo => <img key={photo._id} id={photo._id} alt="" />)}
                         </div>}
                         <div className="carousel-arrows">
-                        <button onClick={this.handleMoveLeft}>&lt;</button>
-                        <button onClick={this.handleMoveRight}>&gt;</button>
-                     </div>
+                            <button onClick={this.handleMoveLeft}>&lt;</button>
+                            <button onClick={this.handleMoveRight}>&gt;</button>
+                        </div>
                     </div>
                     <div className="subshirtdetails">
                         <h1>{this.state.name}</h1><br></br>

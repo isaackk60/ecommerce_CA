@@ -37,7 +37,7 @@ export default class Contact extends Component {
                         <div className="FontIcon">
                             {/* <FontAwesomeIcon icon={faEnvelope} className="Icon"/> */}
                             <p> > info@shirtstore.com</p>
-                        </div>  
+                        </div>
                         <div className="FontIcon">
 
                             {/* <FontAwesomeIcon icon={faPhone} className="Icon"/> */}

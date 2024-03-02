@@ -7,16 +7,13 @@ const jwt = require('jsonwebtoken')
 const fs = require('fs')
 const JWT_PRIVATE_KEY = fs.readFileSync(process.env.JWT_PRIVATE_KEY_FILENAME, 'utf8')
 
-const multer  = require('multer')
-var upload = multer({dest: `${process.env.UPLOADED_FILES_FOLDER}`})
+const multer = require('multer')
+var upload = multer({ dest: `${process.env.UPLOADED_FILES_FOLDER}` })
 
 
-const verifyUsersJWTPassword = (req, res, next) =>
-{
-    jwt.verify(req.headers.authorization, JWT_PRIVATE_KEY, {algorithm: "HS256"}, (err, decodedToken) => 
-    {
-        if (err) 
-        { 
+const verifyUsersJWTPassword = (req, res, next) => {
+    jwt.verify(req.headers.authorization, JWT_PRIVATE_KEY, { algorithm: "HS256" }, (err, decodedToken) => {
+        if (err) {
             return next(err)
         }
 
@@ -26,24 +23,20 @@ const verifyUsersJWTPassword = (req, res, next) =>
 }
 
 
-const checkThatUserIsAnAdministrator = (req, res, next) =>
-{
-    if(req.decodedToken.accessLevel >= process.env.ACCESS_LEVEL_ADMIN)
-    {    
+const checkThatUserIsAnAdministrator = (req, res, next) => {
+    if (req.decodedToken.accessLevel >= process.env.ACCESS_LEVEL_ADMIN) {
         return next()
     }
-    else
-    {
+    else {
         return next(createError(401))
     }
 }
 
 
-const createNewtShirtDocument = (req, res, next) => 
-{           
+const createNewtShirtDocument = (req, res, next) => {
     // Use the new tShirt details to create a new tShirt document                
     let tShirtDetails = new Object()
-                
+
     tShirtDetails.name = req.body.name
     // tShirtDetails.colour = req.body.colour
     tShirtDetails.size = req.body.size
@@ -54,99 +47,79 @@ const createNewtShirtDocument = (req, res, next) =>
     tShirtDetails.gender = req.body.gender
     // add the tShirt's photos to the tShirtDetails JSON object
     tShirtDetails.shirtPhotoFilename = []
-                
-    req.files.map((file, index) =>
-    {
-        tShirtDetails.shirtPhotoFilename[index] = {filename:`${file.filename}`}
+
+    req.files.map((file, index) => {
+        tShirtDetails.shirtPhotoFilename[index] = { filename: `${file.filename}` }
     })
-        
-    tShirtsModel.create(tShirtDetails, (err, data) => 
-    {
-        if(err)
-        {
+
+    tShirtsModel.create(tShirtDetails, (err, data) => {
+        if (err) {
             return next(err)
         }
-        
-        return res.json(data)        
+
+        return res.json(data)
     })
 }
 
 
-const getAlltShirtDocuments = (req, res, next) => 
-{   
-    
+const getAlltShirtDocuments = (req, res, next) => {
+
     //user does not have to be logged in to see tShirt details
-    tShirtsModel.find((err, data) => 
-    {       
-        if(err)
-        {
+    tShirtsModel.find((err, data) => {
+        if (err) {
             return next(err)
-        }     
-        return res.json(data)
-    })
-}
-
-
-const gettShirtPhotoAsBase64 = (req, res, next) => 
-{   
-    fs.readFile(`${process.env.UPLOADED_FILES_FOLDER}/${req.params.filename}`, 'base64', (err, fileData) => 
-    {     
-        if(err)
-        {
-            return next(err)
-        }  
-        
-        if(fileData)
-        {  
-            return res.json({image:fileData})                           
-        }   
-        else
-        {
-            return res.json({image:null})
         }
-    })             
-}
-
-
-const gettShirtDocument = (req, res, next) => 
-{
-    tShirtsModel.findById(req.params.id, (err, data) => 
-    {
-        if(err)
-        {
-            return next(err)
-        }  
-        
         return res.json(data)
     })
 }
 
 
-const updatetShirtDocument = (req, res, next) => 
-{
-    tShirtsModel.findByIdAndUpdate(req.params.id, {$set: req.body}, (err, data) => 
-    {
-        if(err)
-        {
+const gettShirtPhotoAsBase64 = (req, res, next) => {
+    fs.readFile(`${process.env.UPLOADED_FILES_FOLDER}/${req.params.filename}`, 'base64', (err, fileData) => {
+        if (err) {
             return next(err)
-        }  
-        
-        return res.json(data)
-    })        
+        }
+
+        if (fileData) {
+            return res.json({ image: fileData })
+        }
+        else {
+            return res.json({ image: null })
+        }
+    })
 }
 
 
-const deletetShirtDocument = (req, res, next) => 
-{
-    tShirtsModel.findByIdAndRemove(req.params.id, (err, data) => 
-    {
-        if(err)
-        {
+const gettShirtDocument = (req, res, next) => {
+    tShirtsModel.findById(req.params.id, (err, data) => {
+        if (err) {
             return next(err)
-        }  
-        
+        }
+
         return res.json(data)
-    })      
+    })
+}
+
+
+const updatetShirtDocument = (req, res, next) => {
+    tShirtsModel.findByIdAndUpdate(req.params.id, { $set: req.body }, (err, data) => {
+        if (err) {
+            return next(err)
+        }
+
+        return res.json(data)
+    })
+}
+
+
+const deletetShirtDocument = (req, res, next) => {
+    tShirtsModel.findByIdAndRemove(req.params.id, (err, data) => {
+        if (err) {
+            return next(err)
+        }
+
+        return res.json(data)
+    })
 }
 
 

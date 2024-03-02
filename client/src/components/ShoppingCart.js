@@ -603,7 +603,7 @@ export default class ShoppingCart extends Component {
                                         placeholder="Name"
                                         value={this.state.guestName}
                                         onChange={e => this.handleGuest('guestName', e.target.value)}
-                                        required //required
+                                        required //required/*  */
                                     />
                                     <input
                                         type="email"

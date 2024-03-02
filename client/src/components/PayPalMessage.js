@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import { Redirect, Link } from "react-router-dom"
 import axios from "axios"
-import { SERVER_HOST} from "../config/global_constants"
+import { SERVER_HOST } from "../config/global_constants"
 
 export default class PayPalMessage extends Component {
     static messageType = {
@@ -16,7 +16,7 @@ export default class PayPalMessage extends Component {
         this.state = {
             redirectToDisplayAllShirts: false,
             buttonColour: "red-button",
-            cart:[]
+            cart: []
         }
     }
 
@@ -37,14 +37,14 @@ export default class PayPalMessage extends Component {
                     let shirtObject = {
                         stock: item.stock - item.quantity
                     };
-        
+
                     if (item.stock - item.quantity === 0) {
                         shirtObject = {
                             ...shirtObject,
                             sold: true
                         };
                     }
-                    
+
                     axios.put(`${SERVER_HOST}/shirts/sales/${item.shirtId}`, shirtObject, { headers: { "authorization": localStorage.token } })
                         .then(res => {
                             // Handle success if needed
@@ -58,10 +58,10 @@ export default class PayPalMessage extends Component {
                 });
             });
 
-            
-    
-    
-            
+
+
+
+
         }
         else if (this.props.match.params.messageType === PayPalMessage.messageType.CANCEL) {
             this.setState({

@@ -60,7 +60,7 @@ export default class Main extends Component {
             filteredShirtsName = filteredShirtsName.filter(shirt => shirt.gender === "default");
         } else if (genderFilter === "male") {
             filteredShirtsName = filteredShirtsName.filter(shirt => shirt.gender === "male");
-        }else if (genderFilter === "female") {
+        } else if (genderFilter === "female") {
             filteredShirtsName = filteredShirtsName.filter(shirt => shirt.gender === "female");
         } else if (genderFilter === "unisex") {
             filteredShirtsName = filteredShirtsName.filter(shirt => shirt.gender === "unisex");
