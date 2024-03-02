@@ -1,21 +1,7 @@
 import React, { Component } from "react"
-import { Link } from "react-router-dom"
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-// import { faEnvelope,faMapPin,faPhone} from '@fortawesome/free-solid-svg-icons'
-// import Map from './images/map.png'
 import NavigationBar from "./NavigationBar"
 
-import axios from "axios"
-// import DisplayAllCars from "./DisplayAllCars"
-// import Contact from "./Contact"
-
 export default class Contact extends Component {
-    // constructor(props)
-    // {
-
-    //     super(props)
-    // }
-
     render() {
         return (
             <div className="Contactpage">
@@ -30,18 +16,13 @@ export default class Contact extends Component {
                         <h3>Get In Touch</h3>
                         <p>Got something to share? Fill out our quick and easy contact form. We promise to get back to you promptly.</p>
                         <div className="FontIcon">
-                            {/* <img src={Map} className="Icon" alt="map-icon"/> */}
-                            {/* <FontAwesomeIcon icon={faMapPin} className="Icon"/> */}
-                            <p> > 123 T-Shirt Avenue, Dundalk City, Ireland</p>
+                            <p> -- 123 T-Shirt Avenue, Dundalk City, Ireland</p>
                         </div>
                         <div className="FontIcon">
-                            {/* <FontAwesomeIcon icon={faEnvelope} className="Icon"/> */}
-                            <p> > info@shirtstore.com</p>
+                            <p> -- info@shirtstore.com</p>
                         </div>
                         <div className="FontIcon">
-
-                            {/* <FontAwesomeIcon icon={faPhone} className="Icon"/> */}
-                            <p> > +353 (555) 123-4567</p>
+                            <p> -- +353 (555) 123-4567</p>
                         </div>
                     </div>
 
@@ -56,7 +37,6 @@ export default class Contact extends Component {
                                 </div>
                                 <div className="TextareaMessage">
                                     <textarea name="message" type="text" id="input-message" placeholder="Some Text...." rows="10" cols="25"></textarea>
-                                    {/* <input type="Submit" value="Submit" id="input-submit" className="blue-button"></input> */}
                                 </div>
                                 <div className="submit">
                                     <input type="Submit" value="Submit" id="input-submit" className="blue-button"></input>

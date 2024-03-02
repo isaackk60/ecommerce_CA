@@ -179,67 +179,6 @@ const logout = (req, res, next) => {
     return res.json({})
 }
 
-// const getUserById = (req, res, next) => {
-//     const token = jwt.sign({email: req.data.email, accessLevel:req.data.accessLevel}, JWT_PRIVATE_KEY, {algorithm: 'HS256', expiresIn:process.env.JWT_EXPIRY})     
-
-//     if(req.data.profilePhotoFilename)
-//     {
-//         fs.readFile(`${process.env.UPLOADED_FILES_FOLDER}/${req.data.profilePhotoFilename}`, 'base64', (err, data) => 
-//         {        
-//             if(err)
-//             {
-//                 return next(err)
-//             }
-
-//             if(data)
-//             {  
-//                 return res.json({_id:req.data._id,name: req.data.name, accessLevel:req.data.accessLevel, profilePhoto:data, token:token})                           
-//             }   
-//             else
-//             {
-//                 return res.json({_id:req.data._id,name: req.data.name, accessLevel:req.data.accessLevel, profilePhoto:null, token:token})  
-//             }
-//         })     
-//     }
-//     else
-//     {
-//         return res.json({_id:req.data._id,name: req.data.name, accessLevel:req.data.accessLevel, profilePhoto:null, token:token})  
-//     }  
-// }
-// const getUserByEmail = (req, res, next) => {
-//     // Extract email from request parameters
-//     const email = req.params.email;
-
-//     // Find user by email in the database
-//     usersModel.findOne({ email: email }, (err, data) => {
-//         if (err) {
-//             return next(err);
-//         }
-
-//         // If user not found, return appropriate response
-//         if (!data) {
-//             return res.status(404).json({ message: 'User not found' });
-//         }
-
-//         // If user found, return user details
-//         const token = jwt.sign({ email: data.email, accessLevel: data.accessLevel }, JWT_PRIVATE_KEY, { algorithm: 'HS256', expiresIn: process.env.JWT_EXPIRY });
-
-//         // Read profile photo from file and send as base64 string
-//         if (data.profilePhotoFilename) {
-//             fs.readFile(`${process.env.UPLOADED_FILES_FOLDER}/${data.profilePhotoFilename}`, 'base64', (err, photoData) => {
-//                 if (err) {
-//                     return next(err);
-//                 }
-
-//                 return res.json({ name: data.name, accessLevel: data.accessLevel, profilePhoto: photoData, token: token });
-//             });
-//         } else {
-//             // If no profile photo, return user details without photo
-//             return res.json({ name: data.name, accessLevel: data.accessLevel, profilePhoto: null, token: token });
-//         }
-//     });
-// };
-
 const getUserByEmail = (req, res) => {
     const userEmail = req.query.email; // Extract email from query parameters
 
@@ -328,8 +267,6 @@ router.post(`/users/login/:email/:password`, checkThatUserExistsInUsersCollectio
 
 router.post(`/users/logout`, logout)
 
-// router.get(`/users/email/:email`,verifyUsersJWTPassword,checkThatUserExistsInUsersCollection, getUserByEmail)
-
 router.get('/users/email', getUserByEmail)
 
 router.put('/users/update', updateUserData);
@@ -338,29 +275,6 @@ router.put('/users/update', updateUserData);
 router.get('/users', getAllUserData);
 
 router.delete('/users/:id', deleteUser);
-
-
-// router.get('/users', getUserById);
-// router.get('/users/:id', getUserDocument,verifyUsersJWTPassword);
-// router.get('/users/current', (req, res) => {
-//     // Assuming the JWT token is sent in the Authorization header as a Bearer token
-//     const token = req.headers.authorization.split(' ')[1]; // Extract the token from the header
-
-//     // Verify the JWT token to ensure it's valid and retrieve the payload (which includes the user ID)
-//     jwt.verify(token, JWT_PRIVATE_KEY, (err, decoded) => {
-//         if (err) {
-//             // Handle token verification error
-//             return res.status(401).json({ message: 'Unauthorized' });
-//         }
-
-//         // Extract the user ID from the decoded payload
-//         const userId = decoded._id; // Assuming the user ID is stored as 'userId' in the JWT payload
-
-//         // Now you have the user ID, you can use it as needed (e.g., to fetch user data from the database)
-//         // For demonstration purposes, let's just send the user ID back in the response
-//         res.json({ userId });
-//     });
-// });
 
 
 module.exports = router

@@ -1,10 +1,8 @@
 import React, { Component } from "react"
 import { Link } from "react-router-dom"
-
 import axios from "axios"
 import NavigationBar from "./NavigationBar"
 import ShirtBlock from "./ShirtBlock"
-
 import { ACCESS_LEVEL_GUEST, ACCESS_LEVEL_ADMIN, SERVER_HOST } from "../config/global_constants"
 
 
@@ -69,27 +67,6 @@ export default class Main extends Component {
             <div>
                 <NavigationBar genderFilter={genderFilter} handleGenderFilterChange={this.handleGenderFilterChange.bind(this)} handleSearchInputChange={this.handleSearchInputChange} />
                 <div className="wholeMain">
-                    {
-
-                        // localStorage.accessLevel > ACCESS_LEVEL_GUEST 
-                        // ? <div className="logout">
-                        //     {
-                        //         localStorage.profilePhoto !== "null" 
-                        //         ? <img id="profilePhoto" src={`data:;base64,${localStorage.profilePhoto}`} alt=""/>
-                        //         : null
-                        //     }                        
-                        //     <Logout/>
-                        //   </div>
-                        // : <div>
-                        //     <Link className="green-button" to={"/Login"}>Login</Link>
-                        //     <Link className="blue-button" to={"/Register"}>Register</Link>  
-                        //     <Link className="red-button" to={"/ResetDatabase"}>Reset Database</Link>  <br/><br/><br/></div>
-                    }
-
-                    {/* <div className="search-container">
-                    <input type="text"  placeholder="Search shirts..." value={searchQuery} onChange={this.handleSearchInputChange} />
-                </div> */}
-
                     <div className="sortandsearch">
                         <div className="sort-container">
                             <select value={sortType} onChange={this.handleSortChange}>
@@ -97,15 +74,8 @@ export default class Main extends Component {
                                 <option value="PriceHighToLow">Price: High to Low</option>
                                 <option value="PriceLowToHigh">Price: Low to High</option>
                             </select>
-                            {/* <select value={genderFilter} onChange={this.handleGenderFilterChange}>
-                        <option value="">All Genders</option>
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                        <option value="unisex">Unisex</option>
-                    </select> */}
                         </div>
                         <div className="navsearchbar">
-                            {/* <Link to={"/main"}>SEARCH HERE</Link> */}
                             <input type="text" placeholder="Search shirts..." onChange={this.handleSearchInputChange} />
                         </div>
                     </div>
@@ -113,8 +83,6 @@ export default class Main extends Component {
 
 
                     <div className="main-container">
-
-                        {/* {this.state.shirts.map((shirt)=><ShirtBlock key={shirt._id} shirt={shirt} />)}  */}
                         {filteredShirtsName.map((shirt) => <ShirtBlock key={shirt._id} shirt={shirt} gender={shirt.gender} />)}
 
                     </div>

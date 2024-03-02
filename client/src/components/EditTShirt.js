@@ -2,7 +2,6 @@ import React, { Component } from "react"
 import Form from "react-bootstrap/Form"
 import { Redirect, Link } from "react-router-dom"
 import axios from "axios"
-
 import LinkInClass from "../components/LinkInClass"
 
 import { ACCESS_LEVEL_NORMAL_USER, SERVER_HOST } from "../config/global_constants"
@@ -13,11 +12,9 @@ export default class EditTShirt extends Component {
 
         this.state = {
             name: ``,
-            // colour: ``,
             size: ``,
             price: ``,
             description: ``,
-            // quantity: ``,
             stock: ``,
             gender: ``,
             shirtPhotoFilename: null,
@@ -33,11 +30,9 @@ export default class EditTShirt extends Component {
             .then(res => {
                 this.setState({
                     name: res.data.name,
-                    // colour: res.data.colour,
                     size: res.data.size,
                     price: res.data.price,
                     description: res.data.description,
-                    // quantity: res.data.quantity
                     stock: res.data.stock,
                     gender: res.data.gender
                 })
@@ -60,11 +55,9 @@ export default class EditTShirt extends Component {
 
         let shirtObject = {
             name: this.state.name,
-            // colour: this.state.colour,
             size: this.state.size,
             price: this.state.price,
             description: this.state.description,
-            // quantity: this.state.quantity
             stock: this.state.stock,
             gender: this.state.gender
         }
@@ -105,11 +98,6 @@ export default class EditTShirt extends Component {
                         <Form.Label>Name</Form.Label>
                         <Form.Control ref={(input) => { this.inputToFocus = input }} type="text" name="name" value={this.state.name} onChange={this.handleChange} />
                     </Form.Group>
-
-                    {/* <Form.Group controlId="colour">
-                        <Form.Label>Colour</Form.Label>
-                        <Form.Control type="text" name="colour" value={this.state.colour} onChange={this.handleChange} />
-                    </Form.Group> */}
 
                     <Form.Group controlId="size">
                         <Form.Label>Size</Form.Label>
@@ -176,11 +164,6 @@ export default class EditTShirt extends Component {
                         <Form.Label>Price</Form.Label>
                         <Form.Control type="text" name="price" value={this.state.price} onChange={this.handleChange} />
                     </Form.Group>
-
-                    {/* <Form.Group controlId="quantity">
-                        <Form.Label>Quantity</Form.Label>
-                        <Form.Control type="text" name="quantity" value={this.state.quantity} onChange={this.handleChange} />
-                    </Form.Group> */}
 
                     <Form.Group controlId="stock">
                         <Form.Label>Stock</Form.Label>

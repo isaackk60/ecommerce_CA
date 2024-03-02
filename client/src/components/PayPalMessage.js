@@ -29,9 +29,6 @@ export default class PayPalMessage extends Component {
                 buttonColour: "green-button"
             })
             const cartLocalStorage = JSON.parse(localStorage.getItem("itemsInCart") || "[]");
-
-            // console.log("itemsInCart: ",localStorage.getItem("itemsInCart").forEach(item=>{item.shirtPhotoFilename}))
-
             this.setState({ cart: cartLocalStorage }, () => {
                 this.state.cart.forEach((item, index) => {
                     let shirtObject = {

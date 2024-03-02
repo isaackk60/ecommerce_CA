@@ -1,12 +1,6 @@
 import React, { Component } from "react"
 import { Redirect, Link } from "react-router-dom"
-import axios from "axios"
 import NavigationBar from "./NavigationBar"
-import LinkInClass from "../components/LinkInClass"
-
-import { SERVER_HOST } from "../config/global_constants"
-
-// import TFooter from "./TFooter"
 import image_about from "./images/image_about.jpg"
 
 export default class About extends Component {
@@ -18,10 +12,8 @@ export default class About extends Component {
                 <main className="about_main">
                     <h1>ABOUT US</h1>
 
-                    {/* <h2>Welcome to T-Shirt Store!</h2>
-                    <p>At T-Shirt Store, we believe that fashion is an expression of individuality, and what better way to showcase your unique style than through the canvas of a comfortable and stylish t-shirt? Established with a passion for quality and creativity, our store is a haven for those who appreciate the perfect blend of comfort, design, and self-expression.</p> */}
-
                     <h2>Our Story</h2>
+
                     <p>T-Shirt Store was born out of a desire to bring together a curated collection of t-shirts that not only elevate your wardrobe but also tell a story. With a team of dedicated fashion enthusiasts, we scour the globe for the latest trends, timeless classics, and quirky designs that reflect the diverse tastes of our customers.</p>
 
                     <div className="about_background_image">

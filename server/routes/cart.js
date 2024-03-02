@@ -32,33 +32,6 @@ const checkThatUserIsAnAdministrator = (req, res, next) => {
     }
 }
 
-
-// const createNewcartDocument = (req, res, next) => {
-//     // Use the new cart details to create a new cart document                
-//     let cartDetails = new Object()
-
-//     cartDetails.cartItems=[]
-//     // cartDetails.userId = req.body.userId
-//     cartDetails.name = req.body.name
-//     cartDetails.size = req.body.size
-//     cartDetails.price = req.body.price
-//     cartDetails.quantity = req.body.quantity
-
-//     // add the cart's photos to the cartDetails JSON object
-//     cartDetails.shirtPhotoFilename = []
-
-//     req.files.map((file, index) => {
-//         cartDetails.shirtPhotoFilename[index] = { filename: `${file.filename}` }
-//     })
-
-//     cartModel.create(cartDetails, (err, data) => {
-//         if (err) {
-//             return next(err)
-//         }
-
-//         return res.json(data)
-//     })
-// }
 const createNewcartDocument = (req, res, next) => {
     // Use the new cart details to create a new cart document
     let cartDetails = {}
@@ -87,13 +60,6 @@ const createNewcartDocument = (req, res, next) => {
                 size: item.size,
                 price: item.price,
                 quantity: item.quantity,
-                // shirtPhotoFilename: item.shirtPhotoFilename.map(filename => ({ filename }))
-                // shirtPhotoFilename = []
-
-                // req.files.map((file, index) =>
-                // {
-                //     tShirtDetails.shirtPhotoFilename[index] = {filename:`${file.filename}`}
-                // })
             }
             cartDetails.cartItems.push(additionalCartItem)
         })
