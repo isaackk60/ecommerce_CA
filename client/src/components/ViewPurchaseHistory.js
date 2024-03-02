@@ -815,42 +815,48 @@ export default class ViewAllUsers extends Component {
                                 <div className="orderContainer">
                                     {sortedOrders.map(order => (
                                         <div key={order.orderId}>
-                                            <h3 className="OrderId">Order ID- {order.orderId}</h3>
-                                            <table>
-                                                <thead>
-                                                    <tr>
-                                                        <th>Photo</th>
-                                                        <th>Name</th>
-                                                        <th>Price</th>
-                                                        <th>Size</th>
-                                                        <th>Quantity</th>
-                                                        <th>Total Price for this t-shirt</th>
-                                                        <th>Return</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    {order.eachItemsInOrder.map(item => (
-                                                        <tr key={item._id}>
-                                                            <td>{item.shirtPhotoFilename.map(photo => (
-                                                                <img key={photo._id} className={photo._id} alt="" src={`data:;base64,${photo.image}`} />
+                                            <div className="wholediv">
+                                                <div className="orderiddiv">
+                                                    <h3 className="OrderId">Order ID- {order.orderId}</h3>
+                                                </div>
+                                                <div className="abovetable">
+                                                    <table className="viewhistorytable">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Photo</th>
+                                                                <th>Name</th>
+                                                                <th>Price</th>
+                                                                <th>Size</th>
+                                                                <th>Quantity</th>
+                                                                <th>Total Price for this t-shirt</th>
+                                                                <th>Return</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            {order.eachItemsInOrder.map(item => (
+                                                                <tr key={item._id}>
+                                                                    <td>{item.shirtPhotoFilename.map(photo => (
+                                                                        <img key={photo._id} className={photo._id} alt="" src={`data:;base64,${photo.image}`} />
+                                                                    ))}
+                                                                    </td>
+                                                                    <td>{item.name}</td>
+                                                                    <td>{item.price}</td>
+                                                                    <td>{item.size}</td>
+                                                                    <td>{item.quantity}</td>
+                                                                    <td>{item.price * item.quantity}</td>
+                                                                    <td>
+                                                                        <button className="returnButton" onClick={() => this.handleDelete(order.orderId, item._id, item.stock, item.quantity, item.price * item.quantity, order.refunded, order.totalPrice)}>Return Product</button>
+                                                                    </td>
+                                                                </tr>
                                                             ))}
-                                                            </td>
-                                                            <td>{item.name}</td>
-                                                            <td>{item.price}</td>
-                                                            <td>{item.size}</td>
-                                                            <td>{item.quantity}</td>
-                                                            <td>{item.price * item.quantity}</td>
-                                                            <td>
-                                                                <button className="returnButton" onClick={() => this.handleDelete(order.orderId, item._id, item.stock, item.quantity, item.price * item.quantity, order.refunded, order.totalPrice)}>Return Product</button>
-                                                            </td>
-                                                        </tr>
-                                                    ))}
-                                                    <tr>
-                                                        <td>Total Of The Order Price:</td>
-                                                        <td>€:{order.totalPrice}</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
+                                                            <tr>
+                                                                <td>Total Of The Order Price:</td>
+                                                                <td>€:{order.totalPrice}</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
                                         </div>
                                     ))}
                                 </div>

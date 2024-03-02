@@ -763,7 +763,6 @@ header {
   font-weight: 300;
   font-size: 3em;
   color: #7192A3;
-  margin: 20px 0 20px 0;
 }
 
 .totalPriceShoppingCart {
@@ -815,10 +814,10 @@ header {
   font-family: "Montserrat", sans-serif;
   font-weight: 300;
   display: flex;
+  flex-direction: row;
+  justify-content: center;
   color: white;
   text-align: left;
-  flex-direction: column;
-  align-items: center;
 }
 
 .viewallusertable table {
@@ -856,37 +855,6 @@ header {
   justify-content: center;
 }
 
-input[type=text] {
-  padding: 8px;
-  margin-bottom: 10px;
-  width: 20vw;
-  margin-right: 10px;
-}
-
-.sortAndFilterContainer select {
-  padding: 8px;
-  margin-bottom: 10px;
-  width: 20vw;
-  margin-right: 20px;
-  margin-left: 20px;
-  border-radius: 0.35em;
-  background-color: #fff;
-}
-
-.sortAndFilterContainer {
-  display: flex;
-}
-
-.FunctionContainer {
-  display: flex;
-  flex-direction: row-reverse;
-  justify-content: space-between;
-  align-items: center;
-  width: 95vw;
-  margin: 30px 0 20px 0;
-}
-
-/*********************** viewallusers page end *********************/
 .purchasehistory {
   font-family: "Montserrat", sans-serif;
   font-weight: 300;
@@ -1024,102 +992,6 @@ input[type=text] {
   width: 100%;
 }
 
-.PurchaseHistoryPage h2 {
-  font-family: "Montserrat", sans-serif;
-  font-size: 3em;
-  color: #7192A3;
-  font-weight: 300;
-  margin: 20px 0 20px 0;
-}
-
-.HistoryPageFunction {
-  display: flex;
-  flex-direction: row-reverse;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin: 20px;
-}
-
-.Historpagesortandfilter {
-  display: flex;
-}
-
-.HistoryPageFunction input[type=text] {
-  padding: 8px;
-  width: 100%;
-  max-width: 300px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-}
-
-.Historpagesortandfilter select {
-  padding: 8px;
-  margin-right: 10px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-  background-color: #fff;
-}
-
-.purchaseFunctionAndTableContainer {
-  display: flex;
-  flex-direction: column;
-}
-
-.orderContainer {
-  margin-bottom: 40px;
-  display: flex;
-  flex-direction: column;
-}
-
-.orderContainer h3 {
-  margin-bottom: 10px;
-}
-
-.orderContainer table {
-  width: 100%;
-  background-color: #EFECEC;
-  border-collapse: inherit;
-}
-
-.orderContainer th,
-.orderContainer td {
-  padding: 8px;
-  text-align: center;
-  border-bottom: 3px solid #EFECEC;
-  letter-spacing: 1px;
-  text-align: center;
-  vertical-align: middle;
-}
-
-.orderContainer th:first-child,
-.orderContainer td:first-child {
-  padding-left: 16px;
-}
-
-.orderContainer img {
-  width: 200px;
-  height: 200px;
-  margin-right: 10px;
-}
-
-.returnButton {
-  background-color: #AA3A3A;
-  color: #fff;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.returnButton:hover {
-  background-color: #f44336;
-}
-
-.OrderId {
-  margin-top: 40px;
-  font-family: "Montserrat", sans-serif;
-}
-
 /* For devices with a maximum width of 500px (mobile phones) */
 @media screen and (max-width: 500px) {
   /* Add your responsive styles here */
@@ -1159,4 +1031,131 @@ input[type=text] {
   width: 90vw;
   border-radius: 10px;
   border: 1px solid black;
+}
+
+.PurchaseHistoryPage h2 {
+  font-family: "Montserrat", sans-serif;
+  font-size: 3em;
+  color: #7192A3;
+  font-weight: 300;
+  margin: 20px 0 20px 0;
+}
+
+.HistoryPageFunction {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin: 20px;
+  margin-right: 5%;
+  margin-left: 5%;
+}
+
+.Historpagesortandfilter {
+  display: flex;
+}
+
+.HistoryPageFunction input[type=text] {
+  padding: 8px;
+  width: 100%;
+  max-width: 300px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.Historpagesortandfilter select {
+  padding: 8px;
+  margin-right: 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+}
+
+.purchaseFunctionAndTableContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.orderContainer {
+  margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+}
+
+.orderContainer h3 {
+  margin-bottom: 10px;
+}
+
+.orderContainer table {
+  width: 100%;
+  border-collapse: inherit;
+}
+
+.orderContainer th,
+.orderContainer td {
+  padding: 8px;
+  text-align: center;
+  letter-spacing: 1px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.orderContainer th:first-child,
+.orderContainer td:first-child {
+  padding-left: 16px;
+}
+
+.orderContainer img {
+  width: 200px;
+  height: 200px;
+  margin-right: 10px;
+}
+
+.returnButton {
+  background-color: #f44336;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.returnButton:hover {
+  background-color: #AA3A3A;
+}
+
+.OrderId {
+  margin-top: 40px;
+  font-family: "Montserrat", sans-serif;
+}
+
+.viewhistorytable {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 300;
+}
+
+.abovetable {
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+.orderiddiv {
+  display: flex;
+  justify-content: center;
+}
+
+.wholediv {
+  background-color: #0C405F;
+  margin-right: 5%;
+  margin-left: 5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: white;
+  border-radius: 10px;
+}
+
+.viewhistorytable th {
+  font-weight: 400;
+  font-size: 1.25em;
 }/*# sourceMappingURL=style.css.map */
