@@ -1,6 +1,6 @@
 {
-  "short_name": "Error_handling",
-  "name": "Middlewear example",
+  "short_name": "paypal",
+  "name": "PayPal example",
   "icons": [
     {
       "src": "favicon.ico",

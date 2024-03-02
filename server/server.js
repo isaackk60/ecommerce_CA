@@ -14,6 +14,15 @@ const app = express()
 app.use(require(`body-parser`).json())
 app.use(require(`cors`)({credentials: true, origin: process.env.LOCAL_HOST}))
 
+const path = require("path")
+const appPath = path.join(__dirname,"..","client","build")
+app.use(express.static(appPath))
+
+app.get('/', (req, res) => 
+{
+    res.sendFile(path.resolve(appPath, "index.html"))
+})
+
 //app.all("*", function(req, res, next) {
 //    res.header("Access-Control-Allow-Origin", "*")
 //    res.header("Access-Control-Allow-Headers", "X-Requested-With")
