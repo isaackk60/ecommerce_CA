@@ -545,109 +545,109 @@ export default class ShoppingCart extends Component {
         //             });
         //     })
         // );
-console.log(this.state.cart)
+        console.log(this.state.cart)
         return (
             <div>
                 <NavigationBar />
                 <h2 className="shoppingcarth2">Shopping Cart</h2>
-                {this.state.cart.length === 0 ?<h2>Shopping Cart is currently empty</h2>:
-                <div className="cart-container">
-                    {this.state.cart.map((item, index) => (
-                        <div key={index} className="each-item-cart">
-                            <div className="photoanddetailsSC">
-                                {/* display shirt photo */}
-                                {item.shirtPhotoFilename.map(photo => (
-                                    <img key={photo._id} id={photo._id} alt="" />
-                                ))}
-                                <div className="detailsShoppingCart">
-                                    {/* <img src={`${SERVER_HOST}/shirts/photo/${item.shirtPhotoFilename}`} alt="Shirt" style={{ width: '100px', height: '100px' }} /> */}
-                                    {/* <img src={`${SERVER_HOST}/shirts/photo/${item.shirtPhotoFilename}`} alt="Shirt" /> */}
-                                    {/* {console.log("shirtPhotoFilename: ", item.shirtPhotoFilename)} */}
-                                    <h3 className="h3shoppingcart">{item.name} </h3>
-                                    <select className="selectshoppingcart"
-                                        value={item.size}
-                                        onChange={e => this.handleChange(index, 'size', e.target.value)}
-                                    >
-                                        <option value="XS">XS</option>
-                                        <option value="S">S</option>
-                                        <option value="M">M</option>
-                                        <option value="L">L</option>
-                                        <option value="XL">XL</option>
-                                    </select>
-                                    {/* <span>Quantity:</span> */}
+                {this.state.cart.length === 0 ? <h2>Shopping Cart is currently empty</h2> :
+                    <div className="cart-container">
+                        {this.state.cart.map((item, index) => (
+                            <div key={index} className="each-item-cart">
+                                <div className="photoanddetailsSC">
+                                    {/* display shirt photo */}
+                                    {item.shirtPhotoFilename.map(photo => (
+                                        <img key={photo._id} id={photo._id} alt="" />
+                                    ))}
+                                    <div className="detailsShoppingCart">
+                                        {/* <img src={`${SERVER_HOST}/shirts/photo/${item.shirtPhotoFilename}`} alt="Shirt" style={{ width: '100px', height: '100px' }} /> */}
+                                        {/* <img src={`${SERVER_HOST}/shirts/photo/${item.shirtPhotoFilename}`} alt="Shirt" /> */}
+                                        {/* {console.log("shirtPhotoFilename: ", item.shirtPhotoFilename)} */}
+                                        <h3 className="h3shoppingcart">{item.name} </h3>
+                                        <select className="selectshoppingcart"
+                                            value={item.size}
+                                            onChange={e => this.handleChange(index, 'size', e.target.value)}
+                                        >
+                                            <option value="XS">XS</option>
+                                            <option value="S">S</option>
+                                            <option value="M">M</option>
+                                            <option value="L">L</option>
+                                            <option value="XL">XL</option>
+                                        </select>
+                                        {/* <span>Quantity:</span> */}
 
-                                    <div className="shoppingcartshirtprice">€{item.price}</div>
+                                        <div className="shoppingcartshirtprice">€{item.price}</div>
 
-                                    <div className="buttonDivShoppingCart">
-                                        <button onClick={() => this.handleChange(index, 'quantity', Math.max(1, item.quantity - 1))}>-</button>
-                                        <span className="shoppingcartspan">{item.quantity}</span>
-                                        <button onClick={() => this.handleChange(index, 'quantity', item.quantity + 1)}>+</button>
+                                        <div className="buttonDivShoppingCart">
+                                            <button onClick={() => this.handleChange(index, 'quantity', Math.max(1, item.quantity - 1))}>-</button>
+                                            <span className="shoppingcartspan">{item.quantity}</span>
+                                            <button onClick={() => this.handleChange(index, 'quantity', item.quantity + 1)}>+</button>
+                                        </div>
                                     </div>
                                 </div>
+                                <div className="shoppingcartdeletebutton">
+                                    <button onClick={() => this.handleDelete(item.name, item.size)}>Remove</button>
+                                </div>
+
                             </div>
-                            <div className="shoppingcartdeletebutton">
-                                <button onClick={() => this.handleDelete(item.name, item.size)}>Remove</button>
+
+                        ))}
+                        {this.state.isGuest && this.state.haveEnoughData == false ?
+                            <div className="guest-details">
+                                <div className="gfirst">
+                                    <h3>Guest Details</h3>
+                                </div>
+                                <div className="gsecond">
+                                    <input
+                                        type="text"
+                                        placeholder="Name"
+                                        value={this.state.guestName}
+                                        onChange={e => this.handleGuest('guestName', e.target.value)}
+                                        required //required
+                                    />
+                                    <input
+                                        type="email"
+                                        placeholder="Email"
+                                        value={this.state.guestEmail}
+                                        onChange={e => this.handleGuest('guestEmail', e.target.value)}
+                                        required
+                                    />
+                                    <input
+                                        type="text"
+                                        placeholder="Address"
+                                        value={this.state.guestAddress}
+                                        onChange={e => this.handleGuest('guestAddress', e.target.value)}
+                                        required
+                                    />
+                                    <input
+                                        type="text"
+                                        placeholder="Phone"
+                                        value={this.state.guestPhone}
+                                        onChange={e => this.handleGuest('guestPhone', e.target.value)}
+                                        required
+                                    />
+                                </div>
+                                <div className="gthird">
+                                    <button onClick={this.submitGuestDetail}>Submit</button>
+                                </div>
                             </div>
-
-                        </div>
-
-                    ))}
-                    {this.state.isGuest && this.state.haveEnoughData == false ?
-                        <div className="guest-details">
-                            <div className="gfirst">
-                                <h3>Guest Details</h3>
-                            </div>
-                            <div className="gsecond">
-                                <input
-                                    type="text"
-                                    placeholder="Name"
-                                    value={this.state.guestName}
-                                    onChange={e => this.handleGuest('guestName', e.target.value)}
-                                    required //required
-                                />
-                                <input
-                                    type="email"
-                                    placeholder="Email"
-                                    value={this.state.guestEmail}
-                                    onChange={e => this.handleGuest('guestEmail', e.target.value)}
-                                    required
-                                />
-                                <input
-                                    type="text"
-                                    placeholder="Address"
-                                    value={this.state.guestAddress}
-                                    onChange={e => this.handleGuest('guestAddress', e.target.value)}
-                                    required
-                                />
-                                <input
-                                    type="text"
-                                    placeholder="Phone"
-                                    value={this.state.guestPhone}
-                                    onChange={e => this.handleGuest('guestPhone', e.target.value)}
-                                    required
-                                />
-                            </div>
-                            <div className="gthird">
-                                <button onClick={this.submitGuestDetail}>Submit</button>
-                            </div>
-                        </div>
-                        : null}
+                            : null}
 
 
-                    {this.state.isGuest ? (this.state.haveEnoughData) ? <BuyShirt customerEmail={this.state.guestEmail} customerName={this.state.guestName} address={this.state.guestAddress} phone={this.state.guestPhone} items={this.getIdAndQuantity()} price={this.calculateTotalPrice()} />
-                        : <h6 className="pleasefillguest">Please fill in the details above</h6> : ((this.state.user.name && this.state.user.email && this.state.user.phone && this.state.user.address) || this.state.haveEnoughData) ? <BuyShirt customerEmail={this.state.user.email} customerName={this.state.user.name} address={this.state.user.address} phone={this.state.user.phone} items={this.getIdAndQuantity()} price={this.calculateTotalPrice()} />
-                        : <Link className="green-button" to={{ pathname: "/Dashboard", state: { from: "cart" } }}>Please finish your profile</Link>}
-                    {this.state.errors.guestEmail && <h6 className="error">{this.state.errors.guestEmail}</h6>}
-                    {this.state.errors.guestAddress && <h6 className="error">{this.state.errors.guestAddress}</h6>}
-                    {this.state.errors.guestPhone && <h6 className="error">{this.state.errors.guestPhone}</h6>}
-                    {/* {this.state.haveEnoughData?{/* paypalbutton */}
-                    {/* <BuyShirt customerEmail={this.state.guestEmail} customerName={this.state.guestName} address={this.state.guestAddress} phone={this.state.guestPhone} items={this.getIdAndQuantity()} price={this.calculateTotalPrice()} /> */}
+                        {this.state.isGuest ? (this.state.haveEnoughData) ? <BuyShirt customerEmail={this.state.guestEmail} customerName={this.state.guestName} address={this.state.guestAddress} phone={this.state.guestPhone} items={this.getIdAndQuantity()} price={this.calculateTotalPrice()} />
+                            : <h6 className="pleasefillguest">Please fill in the details above</h6> : ((this.state.user.name && this.state.user.email && this.state.user.phone && this.state.user.address) || this.state.haveEnoughData) ? <BuyShirt customerEmail={this.state.user.email} customerName={this.state.user.name} address={this.state.user.address} phone={this.state.user.phone} items={this.getIdAndQuantity()} price={this.calculateTotalPrice()} />
+                            : <Link className="green-button" to={{ pathname: "/Dashboard", state: { from: "cart" } }}>Please finish your profile</Link>}
+                        {this.state.errors.guestEmail && <h6 className="error">{this.state.errors.guestEmail}</h6>}
+                        {this.state.errors.guestAddress && <h6 className="error">{this.state.errors.guestAddress}</h6>}
+                        {this.state.errors.guestPhone && <h6 className="error">{this.state.errors.guestPhone}</h6>}
+                        {/* {this.state.haveEnoughData?{/* paypalbutton */}
+                        {/* <BuyShirt customerEmail={this.state.guestEmail} customerName={this.state.guestName} address={this.state.guestAddress} phone={this.state.guestPhone} items={this.getIdAndQuantity()} price={this.calculateTotalPrice()} /> */}
 
 
 
 
-                </div>
-    }
+                    </div>
+                }
                 <div className="totalPriceShoppingCart">
                     {this.state.cart !== undefined ? <p>Total Price: ${this.calculateTotalPrice()}</p> : null}
                 </div>

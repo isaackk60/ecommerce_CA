@@ -98,27 +98,29 @@ export default class ViewAllUsers extends Component {
                     <div>
                         <NavigationBar />
                         <h2 className="shoppingcarth2">All Users</h2>
-                        <input
-                            type="text"
-                            placeholder="Search..."
-                            value={searchQuery}
-                            onChange={this.handleSearchChange}
-                        />
+                        <div className="threedivinviewallusers">
+                            <input
+                                type="text"
+                                placeholder="Search..."
+                                value={searchQuery}
+                                onChange={this.handleSearchChange}
+                            />
 
-                        <select value={sortFunction} onChange={this.handleSortChange}>
-                            <option value="name">Sort by Name</option>
-                            <option value="email">Sort by Email</option>
-                            <option value="phone">Sort by Phone</option>
-                            <option value="address">Sort by Address</option>
-                        </select>
-
-                        <div>
-                            <label htmlFor="phoneFilter">Filter by Phone:</label>
-                            <select id="phoneFilter" value={phoneFilter} onChange={(e) => this.handlePhoneFilterChange(e.target.value)}>
-                                <option value="all">All</option>
-                                <option value="irish">Irish</option>
-                                {/* Add more options for other filters if needed */}
+                            <select value={sortFunction} onChange={this.handleSortChange}>
+                                <option value="name">Sort by Name</option>
+                                <option value="email">Sort by Email</option>
+                                <option value="phone">Sort by Phone</option>
+                                <option value="address">Sort by Address</option>
                             </select>
+
+                            <div>
+                                <label htmlFor="phoneFilter">Filter by Phone:</label>
+                                <select id="phoneFilter" value={phoneFilter} onChange={(e) => this.handlePhoneFilterChange(e.target.value)}>
+                                    <option value="all">All</option>
+                                    <option value="irish">Irish</option>
+                                    {/* Add more options for other filters if needed */}
+                                </select>
+                            </div>
                         </div>
 
                         <div className="viewallusertable">

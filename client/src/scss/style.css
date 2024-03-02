@@ -803,6 +803,13 @@ header {
   background-color: #a01020;
 }
 
+.threedivinviewallusers {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-bottom: 2%;
+}
+
 .viewallusertable {
   font-family: "Montserrat", sans-serif;
   font-weight: 300;
