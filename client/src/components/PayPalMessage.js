@@ -45,7 +45,7 @@ export default class PayPalMessage extends Component {
                         };
                     }
                     
-                    axios.put(`${SERVER_HOST}/shirts/${item.shirtId}`, shirtObject, { headers: { "authorization": localStorage.token } })
+                    axios.put(`${SERVER_HOST}/shirts/sales/${item.shirtId}`, shirtObject, { headers: { "authorization": localStorage.token } })
                         .then(res => {
                             // Handle success if needed
                             console.log(`Stock updated for shirt with ID: ${item.shirtId}`);

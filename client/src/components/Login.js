@@ -1,100 +1,93 @@
-import React, {Component} from "react"
-import {Redirect, Link} from "react-router-dom"
+import React, { Component } from "react"
+import { Redirect, Link } from "react-router-dom"
 import axios from "axios"
 import NavigationBar from "./NavigationBar"
 
 import LinkInClass from "../components/LinkInClass"
-import {SERVER_HOST} from "../config/global_constants"
+import { SERVER_HOST } from "../config/global_constants"
 
 
-export default class Login extends Component
-{
-    constructor(props)
-    {
+export default class Login extends Component {
+    constructor(props) {
         super(props)
-        
+
         this.state = {
-            email:"",
-            password:"",
-            isLoggedIn:false,
-            wasSubmittedAtLeastOnce:false
+            email: "",
+            password: "",
+            isLoggedIn: false,
+            wasSubmittedAtLeastOnce: false
         }
     }
-        
-    
-    handleChange = (e) => 
-    {
-        this.setState({[e.target.name]: e.target.value})
+
+
+    handleChange = (e) => {
+        this.setState({ [e.target.name]: e.target.value })
     }
-    
-    
-    handleSubmit = (e) => 
-    {
+
+
+    handleSubmit = (e) => {
         axios.post(`${SERVER_HOST}/users/login/${this.state.email}/${this.state.password}`)
-        .then(res => 
-        {     
-            localStorage.name = res.data.name
-            localStorage.accessLevel = res.data.accessLevel
-            localStorage.profilePhoto = res.data.profilePhoto                        
-            localStorage.token = res.data.token
-                    
-            this.setState({isLoggedIn:true})
-        }) 
-        .catch(err =>
-        {
-            this.setState({wasSubmittedAtLeastOnce: true})
-        })
-        localStorage.setItem("userEmail", JSON.stringify(this.state.email));
+            .then(res => {
+                localStorage.name = res.data.name
+                localStorage.accessLevel = res.data.accessLevel
+                localStorage.profilePhoto = res.data.profilePhoto
+                localStorage.token = res.data.token
+
+                this.setState({ isLoggedIn: true })
+                localStorage.setItem("userEmail", JSON.stringify(this.state.email));
+            })
+            .catch(err => {
+                this.setState({ wasSubmittedAtLeastOnce: true })
+            })
+        // localStorage.setItem("userEmail", JSON.stringify(this.state.email));
     }
 
 
-    render()
-    {   
-            
+    render() {
+
         let errorMessage = "";
-        if(this.state.wasSubmittedAtLeastOnce)
-        {
-            errorMessage = <div className="error">Login Details are incorrect<br/></div>;
+        if (this.state.wasSubmittedAtLeastOnce) {
+            errorMessage = <div className="error">Login Details are incorrect<br /></div>;
         }
-        
+
         return (
             <>
-<NavigationBar />  
-            <main className="login_main">
-            <div className="outside-form-container">
-            <form className="form-container" noValidate = {true} id = "loginOrRegistrationForm">
-            <div className="loginHeaderContainer">
-                        <h2>Login</h2>
-                        <p className="loginHeaderLink">|</p>
-                        <Link className="anotherLoginHeader" to={"/Register"}>Sign Up</Link>
+                <NavigationBar />
+                <main className="login_main">
+                    <div className="outside-form-container">
+                        <form className="form-container" noValidate={true} id="loginOrRegistrationForm">
+                            <div className="loginHeaderContainer">
+                                <h2>Login</h2>
+                                <p className="loginHeaderLink">|</p>
+                                <Link className="anotherLoginHeader" to={"/Register"}>Sign Up</Link>
+                            </div>
+
+                            {this.state.isLoggedIn ? <Redirect to="/main" /> : null}
+                            {errorMessage}
+                            <input
+                                type="email"
+                                name="email"
+                                placeholder="Email"
+                                autoComplete="email"
+                                value={this.state.email}
+                                onChange={this.handleChange}
+                            /><br />
+
+                            <input
+                                type="password"
+                                name="password"
+                                placeholder="Password"
+                                autoComplete="password"
+                                value={this.state.password}
+                                onChange={this.handleChange}
+                            /><br /><br />
+                            <div className="login-bottom-button">
+                                <LinkInClass value="Login" className="green-button" onClick={this.handleSubmit} />
+                                <Link className="red-button" to={"/main"}>Cancel</Link>
+                            </div>
+                        </form>
                     </div>
-                
-                {this.state.isLoggedIn ? <Redirect to="/main"/> : null} 
-                {errorMessage}
-                <input 
-                    type = "email" 
-                    name = "email" 
-                    placeholder = "Email"
-                    autoComplete="email"
-                    value={this.state.email} 
-                    onChange={this.handleChange}
-                /><br/>
-                    
-                <input 
-                    type = "password" 
-                    name = "password" 
-                    placeholder = "Password"
-                    autoComplete="password"
-                    value={this.state.password} 
-                    onChange={this.handleChange}
-                /><br/><br/>
-                <div className="login-bottom-button">
-                <LinkInClass value="Login" className="green-button" onClick={this.handleSubmit}/> 
-                <Link className="red-button" to={"/main"}>Cancel</Link>  
-                </div>
-            </form>
-            </div>
-            </main>
+                </main>
             </>
         )
     }

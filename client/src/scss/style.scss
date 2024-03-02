@@ -962,7 +962,8 @@ header {
     font-size: 1.25rem;
     line-height: normal;
     border-radius: 0.2rem;
-    color: #fff;
+    // color: #fff;
+    color: black;
     background-color: #FFC439;
     margin-right: 10px;
     margin-left: 51.5%;
@@ -1006,8 +1007,8 @@ header {
     background-color: #7192A3;
     padding: 0.5%;
     border-radius: 5px;
-    display: flex;
-}
+    display: flex;                              
+}                                       
 // .labelinputdiv{
 //     display: flex;
 // }
