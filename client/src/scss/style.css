@@ -470,8 +470,20 @@ header {
 .GetInTouchContainer .TouchContainer {
   width: 50vw;
 }
+.GetInTouchContainer .TouchContainer ul {
+  list-style-type: square;
+  padding-left: 0; /* Remove default padding */
+}
+.GetInTouchContainer .TouchContainer li {
+  padding-left: 20px; /* Add some padding for better appearance */
+  font-size: 20px;
+  font-size: 20px;
+  margin: auto;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+}
 
-.GetInTouchContainer h3 {
+h3 {
   font-family: "Montserrat", sans-serif;
   font-size: 35px;
 }
@@ -567,8 +579,8 @@ header {
 
 /*                        Cart                    */
 .cart-container {
-  background-color: #7192A3;
-  color: white;
+  background-color: white;
+  color: black;
   display: flex;
   flex-direction: column;
   width: 80vw;
@@ -669,18 +681,25 @@ header {
   flex-direction: column;
   margin-left: 5%;
 }
+.detailsShoppingCart div {
+  width: 10vw;
+}
 .detailsShoppingCart select {
   border: none;
+  width: 100%;
+  border-color: black;
 }
 .detailsShoppingCart button {
   border-radius: 5px;
   border: none;
   color: black;
   background: white;
+  width: 100%;
 }
 .detailsShoppingCart span {
-  padding-left: 20%;
-  padding-right: 20%;
+  padding-left: 30%;
+  padding-right: 30%;
+  width: 100%;
 }
 
 .detailsShoppingCart h3 {
@@ -699,6 +718,7 @@ header {
   display: flex;
   width: 10px;
   justify-content: center;
+  font-size: 1.25em;
 }
 
 .shoppingcartshirtprice {
@@ -945,4 +965,21 @@ header {
   display: flex;
   flex-direction: row;
   width: 100%;
+}
+
+.paypal-outer-container {
+  display: flex;
+  justify-content: flex-end;
+  margin: 20px;
+}
+.paypal-outer-container div {
+  width: 20vw;
+}
+
+.map-container {
+  display: flex;
+  justify-content: center;
+}
+.map-container .map {
+  width: 90vw;
 }/*# sourceMappingURL=style.css.map */

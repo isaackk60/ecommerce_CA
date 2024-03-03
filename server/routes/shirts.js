@@ -165,6 +165,8 @@ router.post(`/shirts`, verifyUsersJWTPassword, checkThatUserIsAnAdministrator, u
 // Update one record
 router.put(`/shirts/:id`, verifyUsersJWTPassword, updatetShirtDocument)
 
+router.put(`/shirts/sales/:id`, updatetShirtDocument)
+
 // Delete one record
 router.delete(`/shirts/:id`, verifyUsersJWTPassword, checkThatUserIsAnAdministrator, deletetShirtDocument)
 

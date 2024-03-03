@@ -37,6 +37,7 @@ export default class Down extends Component {
                         <Link to={"/main"} >BUY T-SHIRT</Link>
                     </div> */}
                     <div>
+                    {window.location.href.includes('/main')?
                         <div className="dropdown" onMouseOver={this.showSelect} onMouseLeave={this.closeSelect}> {/* onMouseLeave={this.closeSelect} */}
                             <Link to={"/main"} className="dropbtn">CATEGORIES</Link>
                             {/* <div id="select-container"> */}
@@ -46,6 +47,7 @@ export default class Down extends Component {
                                 <option value="female">Female</option>
                                 <option value="unisex">Unisex</option>
                             </select> */}
+                            
                             <div className="dropdown-content" id="select-container">
                                 <Link className="select-gender" to={"/main"} onClick={() => this.handleGenderFilterChange("")}>DEFAULT</Link>
                                 <Link className="select-gender" to={"/main"} onClick={() => this.handleGenderFilterChange("male")}>MALE</Link>
@@ -53,7 +55,7 @@ export default class Down extends Component {
                                 <Link className="select-gender" to={"/main"} onClick={() => this.handleGenderFilterChange("unisex")}>UNISEX</Link>
                             </div>
                             {/* </div> */}
-                        </div>
+                        </div>:<Link to={"/main"} className="dropbtn">CATEGORIES</Link>}
                     </div>
                     <div>
                         <Link to={"/About"}>ABOUT</Link></div>

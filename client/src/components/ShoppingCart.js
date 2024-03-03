@@ -200,7 +200,6 @@ import { ACCESS_LEVEL_NORMAL_USER, SERVER_HOST } from "../config/global_constant
 import axios from "axios";
 import BuyShirt from "./BuyShirt";
 import { Link } from "react-router-dom"
-import { Link } from "react-router-dom"
 
 
 export default class ShoppingCart extends Component {
@@ -565,6 +564,7 @@ console.log(this.state.cart)
                                     {/* <img src={`${SERVER_HOST}/shirts/photo/${item.shirtPhotoFilename}`} alt="Shirt" /> */}
                                     {/* {console.log("shirtPhotoFilename: ", item.shirtPhotoFilename)} */}
                                     <h3 className="h3shoppingcart">{item.name} </h3>
+                                    <div>
                                     <select className="selectshoppingcart"
                                         value={item.size}
                                         onChange={e => this.handleChange(index, 'size', e.target.value)}
@@ -575,6 +575,7 @@ console.log(this.state.cart)
                                         <option value="L">L</option>
                                         <option value="XL">XL</option>
                                     </select>
+                                    </div>
                                     {/* <span>Quantity:</span> */}
 
                                     <div className="shoppingcartshirtprice">€{item.price}</div>

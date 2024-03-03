@@ -39,12 +39,13 @@ export default class Login extends Component
             localStorage.token = res.data.token
                     
             this.setState({isLoggedIn:true})
+            localStorage.setItem("userEmail", JSON.stringify(this.state.email));
         }) 
         .catch(err =>
         {
             this.setState({wasSubmittedAtLeastOnce: true})
         })
-        localStorage.setItem("userEmail", JSON.stringify(this.state.email));
+        // localStorage.setItem("userEmail", JSON.stringify(this.state.email));
     }
 
 

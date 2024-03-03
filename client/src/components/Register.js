@@ -203,13 +203,14 @@ export default class Register extends Component
             localStorage.profilePhoto = res.data.profilePhoto                    
             localStorage.token = res.data.token
                     
-            this.setState({isRegistered:true})               
+            this.setState({isRegistered:true})     
+            localStorage.setItem("userEmail", JSON.stringify(this.state.email));          
         })   
         .catch(err =>
         {
             this.setState({wasSubmittedAtLeastOnce: true})            
         })
-        localStorage.setItem("userEmail", JSON.stringify(this.state.email));
+        // localStorage.setItem("userEmail", JSON.stringify(this.state.email));
     }
 
 
@@ -279,10 +280,10 @@ export default class Register extends Component
                 onChange = {this.handleFileChange}
             /><br/><br/>
             
-            <span>
+            <div className="login-bottom-button">
             <LinkInClass value="Register New User" className="green-button" onClick={this.handleSubmit} />
             <Link className="red-button" to={"/main"}>Cancel</Link>   
-            </span>
+            </div>
         </form>
         </div>
         </main>
