@@ -36,7 +36,6 @@ export default class About extends Component {
                     <p>Thank you for choosing T-Shirt Store, where every t-shirt tells a story, and fashion is a celebration of you.</p>
                     <p>Happy shopping!</p>
 
-
                 </main>
 
             </div>
