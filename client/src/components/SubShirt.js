@@ -142,10 +142,10 @@ export default class SubShirt extends Component {
                         {this.state.shirtPhotoFilename === null ? null : <div className="shirtPhotos">
                             {this.state.shirtPhotoFilename.map(photo => <img key={photo._id} id={photo._id} alt="" />)}
                         </div>}
-                        <div className="carousel-arrows">
+                        {/* <div className="carousel-arrows">
                             <button onClick={this.handleMoveLeft}>&lt;</button>
                             <button onClick={this.handleMoveRight}>&gt;</button>
-                        </div>
+                        </div> */}
                     </div>
                     <div className="subshirtdetails">
                         <h1>{this.state.name}</h1><br></br>
